@@ -46,7 +46,8 @@ export default function Music() {
       description: "Exploring darker, visceral auditory landscapes. Combining aggressive growls, down-tuned crushing riffs, and melancholy guitar lines to paint a stark gothic atmosphere.",
       status: "Side Project - EP Available",
       accent: "purple",
-      tags: ["Melodeath", "Aggressive", "Melancholic"]
+      tags: ["Melodeath", "Aggressive", "Melancholic"],
+      logo: "/images/music/ashwrithe_logo_transparent.png"
     },
     {
       name: "Neon Ronin",
@@ -75,8 +76,20 @@ export default function Music() {
       {/* Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-6 relative z-10">
         {bands.map((band, idx) => (
-          <GlassCard key={idx} accent={band.accent} className="flex flex-col justify-between h-full">
+          <GlassCard key={idx} accent={band.accent} className="flex flex-col justify-between h-full group">
             <div>
+              {/* Brand Logo Banner */}
+              {band.logo && (
+                <div className="w-full h-28 mb-6 rounded-lg bg-obsidian-950/40 border border-white/5 flex items-center justify-center p-4 overflow-hidden relative transition-all duration-300 hover:border-white/10">
+                  <div className="absolute inset-0 bg-gradient-to-b from-white/[0.01] to-transparent pointer-events-none" />
+                  <img
+                    src={band.logo}
+                    alt={`${band.name} logo`}
+                    className="max-h-full max-w-full object-contain filter invert brightness-[1.1] drop-shadow-[0_0_10px_rgba(255,255,255,0.12)] transition-all duration-500 group-hover:scale-[1.03] group-hover:drop-shadow-[0_0_16px_rgba(255,255,255,0.2)]"
+                  />
+                </div>
+              )}
+
               {/* Header */}
               <div className="flex justify-between items-start gap-4 mb-4">
                 <div>
