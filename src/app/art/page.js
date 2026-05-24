@@ -38,7 +38,8 @@ export default function Art() {
       accent: "purple",
       dimensions: "Resin Scale Models & Dioramas",
       placeholderGradient: "from-purple-950/20 via-zinc-950 to-neutral-900",
-      artPieces: ["Dreadnought of Ash", "Lich King Diorama", "Gargoyle Bastion Piece"]
+      image: "/images/art/butcher/The_Butcher-2.jpg",
+      artPieces: ["The Butcher Bust", "Dreadnought of Ash", "Lich King Diorama"]
     }
   ];
 
