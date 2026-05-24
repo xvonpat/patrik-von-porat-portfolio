@@ -62,7 +62,7 @@ export default function Home() {
           }}
         >
           <img 
-            src="/hero-banner.png" 
+            src="/images/art/hero-banner.png" 
             alt="Cinematic Background" 
             className="w-full h-full object-cover object-center scale-105"
           />

@@ -19,7 +19,7 @@ export default function Art() {
       accent: "purple",
       dimensions: "Synthetic Skin & Custom Flashes",
       placeholderGradient: "from-purple-950/20 via-zinc-950 to-neutral-900",
-      image: "/mariotattoo.jpg",
+      image: "/images/tattoos/mariotattoo.jpg",
       artPieces: ["Runic Wolf Flash", "Surtur's Flame Blackwork", "Gothic Archway Study"]
     },
     {
