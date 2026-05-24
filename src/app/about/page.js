@@ -8,7 +8,7 @@ export default function About() {
       {/* Page Header */}
       <div className="flex flex-col items-center text-center gap-4 max-w-2xl mx-auto">
         <span className="text-xs font-mono tracking-[0.3em] text-accent-purple uppercase">The Human Element</span>
-        <h1 className="text-4xl md:text-5xl font-bold uppercase tracking-widest text-white">About Patrik</h1>
+        <h1 className="text-4xl md:text-5xl font-semibold tracking-tight text-white">About Patrik</h1>
         <div className="w-16 h-[2px] bg-accent-purple mt-2" />
       </div>
 

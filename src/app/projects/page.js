@@ -43,7 +43,7 @@ export default function Projects() {
       {/* Page Header */}
       <div className="flex flex-col items-center text-center gap-4 max-w-2xl mx-auto">
         <span className="text-xs font-mono tracking-[0.3em] text-accent-cyan uppercase">Systems & Tools</span>
-        <h1 className="text-4xl md:text-5xl font-bold uppercase tracking-widest text-white">Project Vault</h1>
+        <h1 className="text-4xl md:text-5xl font-semibold tracking-tight text-white">Project Vault</h1>
         <div className="w-16 h-[2px] bg-accent-cyan mt-2" />
         <p className="text-sm text-zinc-400 leading-6 mt-4">
           A showcase of custom software utilities built to optimize creative and logistical workflows. Fusing technology with organization to create streamlined systems.
@@ -60,7 +60,7 @@ export default function Projects() {
                 <span className={`text-[10px] font-mono uppercase tracking-[0.25em] text-accent-${proj.accent}`}>
                   {proj.category}
                 </span>
-                <h2 className="text-2xl font-bold text-white tracking-wide mt-1 font-gothic">
+                <h2 className="text-2xl font-semibold text-white tracking-tight mt-1 font-gothic">
                   {proj.title}
                 </h2>
               </div>

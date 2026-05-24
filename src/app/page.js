@@ -82,7 +82,7 @@ export default function Home() {
           {/* Subtle decorative crest/emblem placeholder */}
           <div className="w-12 h-[1px] bg-gradient-to-r from-transparent via-accent-purple to-transparent mb-2" />
           
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-widest text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-200 to-zinc-400 uppercase drop-shadow-[0_12px_32px_rgba(0,0,0,0.95)]">
+          <h1 className="text-5xl md:text-7xl font-medium tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-100 to-zinc-400 drop-shadow-[0_12px_32px_rgba(0,0,0,0.95)]">
             Patrik von Porat
           </h1>
           
@@ -124,7 +124,7 @@ export default function Home() {
         {/* Feature Cards Grid */}
         <section className="flex flex-col gap-12 relative z-10">
           <div className="flex flex-col items-center md:items-start text-center md:text-left gap-2">
-            <h2 className="text-3xl font-bold uppercase tracking-wider text-white">Creative Columns</h2>
+            <h2 className="text-3xl font-medium tracking-tight text-white">Creative Columns</h2>
             <div className="w-16 h-[2px] bg-accent-orange" />
             <p className="text-sm text-zinc-500 max-w-md mt-2">Click below to venture deeper into each specialized medium.</p>
           </div>

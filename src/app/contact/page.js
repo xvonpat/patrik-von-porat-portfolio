@@ -60,7 +60,7 @@ export default function Contact() {
       {/* Page Header */}
       <div className="flex flex-col items-center text-center gap-4">
         <span className="text-xs font-mono tracking-[0.3em] text-accent-purple uppercase">Connect & Collaborate</span>
-        <h1 className="text-4xl md:text-5xl font-bold uppercase tracking-widest text-white font-gothic">Link Hub</h1>
+        <h1 className="text-4xl md:text-5xl font-semibold tracking-tight text-white font-gothic">Link Hub</h1>
         <div className="w-16 h-[2px] bg-accent-purple mt-2" />
         <p className="text-sm text-zinc-400 leading-6 mt-4 max-w-xl">
           A direct connection dashboard. Choose your platform below to listen to new records, view art processes, review professional portfolios, or send a secure email.
@@ -95,7 +95,7 @@ export default function Contact() {
                 
                 {/* Text details */}
                 <div className="flex flex-col items-start text-left">
-                  <h2 className="text-lg font-bold text-white tracking-wider group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-zinc-300 transition-colors duration-300 font-gothic">
+                  <h2 className="text-lg font-semibold text-white tracking-tight group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-zinc-300 transition-colors duration-300 font-gothic">
                     {link.name}
                   </h2>
                   <p className="text-xs text-zinc-500 mt-1 uppercase tracking-wider font-light">

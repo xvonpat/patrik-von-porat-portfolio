@@ -48,7 +48,7 @@ export default function Art() {
       {/* Page Header */}
       <div className="flex flex-col items-center text-center gap-4 max-w-2xl mx-auto">
         <span className="text-xs font-mono tracking-[0.3em] text-accent-orange uppercase">Visual Expressions</span>
-        <h1 className="text-4xl md:text-5xl font-bold uppercase tracking-widest text-white">Art Portfolio</h1>
+        <h1 className="text-4xl md:text-5xl font-semibold tracking-tight text-white">Art Portfolio</h1>
         <div className="w-16 h-[2px] bg-accent-orange mt-2" />
         <p className="text-sm text-zinc-400 leading-6 mt-4">
           A gallery of traditional and modern visual mediums. Bridging the gap between tactile graphite drawing, ink-on-skin practice, generative neural networks, and physical 3D modeling.
@@ -105,7 +105,7 @@ export default function Art() {
             <div className="col-span-1 lg:col-span-6 flex flex-col gap-6 justify-center">
               <div>
                 <span className={`text-[10px] font-mono uppercase tracking-[0.3em] text-accent-${cat.accent}`}>{cat.subtitle}</span>
-                <h2 className="text-3xl font-bold uppercase tracking-wider text-white mt-2 font-gothic">{cat.title}</h2>
+                <h2 className="text-3xl font-semibold tracking-tight text-white mt-2 font-gothic">{cat.title}</h2>
                 <div className={`w-12 h-[2px] bg-accent-${cat.accent} mt-3`} />
               </div>
               

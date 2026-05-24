@@ -65,7 +65,7 @@ export default function Music() {
       {/* Page Header */}
       <div className="flex flex-col items-center text-center gap-4 max-w-2xl mx-auto">
         <span className="text-xs font-mono tracking-[0.3em] text-accent-purple uppercase">Sonic Manifestations</span>
-        <h1 className="text-4xl md:text-5xl font-bold uppercase tracking-widest text-white">Music Portfolio</h1>
+        <h1 className="text-4xl md:text-5xl font-semibold tracking-tight text-white">Music Portfolio</h1>
         <div className="w-16 h-[2px] bg-accent-purple mt-2" />
         <p className="text-sm text-zinc-400 leading-6 mt-4">
           A chronicle of active bands, studio recording sessions, and solo explorations. From symphonic gothic-metal landscapes to aggressive, cyber-infused riffs.
@@ -80,7 +80,7 @@ export default function Music() {
               {/* Header */}
               <div className="flex justify-between items-start gap-4 mb-4">
                 <div>
-                  <h2 className="text-2xl font-bold text-white tracking-wide font-gothic">{band.name}</h2>
+                  <h2 className="text-2xl font-semibold text-white tracking-tight font-gothic">{band.name}</h2>
                   <p className="text-xs text-accent-purple font-mono uppercase tracking-wider mt-1">{band.genre}</p>
                 </div>
                 {/* Status dot */}
