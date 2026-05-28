@@ -10,7 +10,8 @@ export default function Music() {
       description: "A canvas of epic proportions, weaving sweeping orchestral strings, thundering choir arrangements, and intricate neo-classical lead guitar melodies to craft fantastical sonic worlds.",
       status: "Active - Album in Production",
       accent: "purple",
-      tags: ["Epic", "Orchestral", "Gothic Fantasy"]
+      tags: ["Epic", "Orchestral", "Gothic Fantasy"],
+      logo: "/images/music/realmforged_logo.png"
     },
     {
       name: "Freternia",
@@ -37,7 +38,8 @@ export default function Music() {
       description: "A solo creative sandbox dedicated to technical fretboard wizardry. Merging high-speed sweeping, alternate picking, and complex phrasing with modern heavy grooves.",
       status: "Solo Project - Singles Released",
       accent: "orange",
-      tags: ["Shred", "Instrumental", "Technical"]
+      tags: ["Shred", "Instrumental", "Technical"],
+      logo: "/images/music/shred-eternity_logo.png"
     },
     {
       name: "Ashwrithe",
@@ -47,7 +49,8 @@ export default function Music() {
       status: "Side Project - EP Available",
       accent: "purple",
       tags: ["Melodeath", "Aggressive", "Melancholic"],
-      logo: "/images/music/ashwrithe_logo_transparent.png"
+      logo: "/images/music/ashwrithe_logo_transparent.png",
+      invertLogo: true
     },
     {
       name: "Neon Ronin",
@@ -85,7 +88,9 @@ export default function Music() {
                   <img
                     src={band.logo}
                     alt={`${band.name} logo`}
-                    className="max-h-full max-w-full object-contain filter invert brightness-[1.1] drop-shadow-[0_0_10px_rgba(255,255,255,0.12)] transition-all duration-500 group-hover:scale-[1.03] group-hover:drop-shadow-[0_0_16px_rgba(255,255,255,0.2)]"
+                    className={`max-h-full max-w-full object-contain filter drop-shadow-[0_0_10px_rgba(255,255,255,0.12)] transition-all duration-500 group-hover:scale-[1.03] group-hover:drop-shadow-[0_0_16px_rgba(255,255,255,0.2)] ${
+                      band.invertLogo ? 'invert brightness-[1.1]' : ''
+                    }`}
                   />
                 </div>
               )}

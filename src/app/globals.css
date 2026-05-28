@@ -149,3 +149,26 @@ h1, h2, h3, h4, h5, h6 {
   border-color: rgba(139, 92, 246, 0.2);
   box-shadow: 0 15px 45px 0 rgba(139, 92, 246, 0.06), inset 0 1px 0px 0 rgba(255, 255, 255, 0.08);
 }
+
+/* Premium Navbar & Logo Sizing Treatment (CSS Mask Emblem) */
+.logo-mark {
+  width: clamp(71px, 8vw, 90px);
+  height: 42px;
+  background: linear-gradient(135deg, #ffffff 0%, #d8dce6 55%, #9b8cff 100%);
+  mask-image: url("/images/PvP2.png?v=6");
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+  -webkit-mask-image: url("/images/PvP2.png?v=6");
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: contain;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.08));
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  display: block;
+}
+
+.logo-mark:hover {
+  transform: scale(1.025); /* Elegant micro-scale glide */
+  filter: drop-shadow(0 0 8px rgba(139, 92, 246, 0.45)); /* Gorgeous purple backlight glow on hover */
+}

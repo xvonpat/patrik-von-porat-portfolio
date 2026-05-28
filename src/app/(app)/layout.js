@@ -1,5 +1,5 @@
 import { Cormorant_Garamond, Outfit } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import GlowEffect from "@/components/GlowEffect";
