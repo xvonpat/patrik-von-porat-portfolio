@@ -1,4 +1,6 @@
-export const Posts = {
+import type { CollectionConfig } from 'payload';
+
+export const Posts: CollectionConfig = {
   slug: 'posts',
   admin: {
     useAsTitle: 'title',
@@ -80,15 +82,12 @@ export const Posts = {
         position: 'sidebar',
       },
     },
-
     {
       name: 'featuredImage',
       type: 'upload',
       relationTo: 'media',
       required: false,
     },
-
-
     {
       name: 'excerpt',
       type: 'textarea',
