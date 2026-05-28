@@ -17,7 +17,7 @@ export default function GlassCard({
   return (
     <div 
       onClick={onClick}
-      className={`glass-panel rounded-lg p-6 md:p-8 transition-all duration-500 ease-out transform hover:-translate-y-1 ${selectedAccentClass} ${onClick ? 'cursor-pointer' : ''} ${className}`}
+      className={`relative glass-panel rounded-lg p-6 md:p-8 transition-all duration-500 ease-out transform hover:-translate-y-1 ${selectedAccentClass} ${onClick ? 'cursor-pointer' : ''} ${className}`}
     >
       {/* Decorative inner gothic notch or line */}
       <div className="absolute top-0 left-4 right-4 h-[1px] bg-gradient-to-r from-transparent via-white/5 to-transparent" />
