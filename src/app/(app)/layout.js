@@ -18,8 +18,31 @@ const outfit = Outfit({
 });
 
 export const metadata = {
+  metadataBase: new URL('https://vonporat.com'),
   title: "Patrik von Porat | Creative Hub",
-  description: "Guitarist, Artist, Creator, and Process Improvement Nerd. A gothic-inspired dark portfolio showcasing music projects, visual art, AI tools, and process optimization work.",
+  description: "A creative hub for music, visual art, AI experiments, and process improvement.",
+  openGraph: {
+    title: "Patrik von Porat | Creative Hub",
+    description: "A creative hub for music, visual art, AI experiments, and process improvement.",
+    url: 'https://vonporat.com',
+    siteName: 'Patrik von Porat',
+    images: [
+      {
+        url: '/images/PvP2.png',
+        width: 1200,
+        height: 630,
+        alt: 'Patrik von Porat - Creative Hub',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Patrik von Porat | Creative Hub",
+    description: "A creative hub for music, visual art, AI experiments, and process improvement.",
+    images: ['/images/PvP2.png'],
+  },
 };
 
 export default function RootLayout({ children }) {
