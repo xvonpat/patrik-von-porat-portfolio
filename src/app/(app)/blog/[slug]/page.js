@@ -5,6 +5,8 @@ import { getPayload } from 'payload';
 import configPromise from '../../../../../payload.config.ts';
 import GlassCard from '@/components/GlassCard';
 
+export const revalidate = 60; // Revalidate every 60 seconds
+
 // Recursive Lexical JSON to JSX Parser
 function renderLexical(node) {
   if (!node) return null;
