@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { getPayload } from 'payload';
 import configPromise from '../../../../../payload.config.ts';
 import GlassCard from '@/components/GlassCard';
+import BlogShare from '@/components/BlogShare';
 
 export const revalidate = 60; // Revalidate every 60 seconds
 
@@ -133,6 +134,8 @@ export default async function BlogPostPage({ params }) {
     bgClass: 'bg-accent-purple/10 border-accent-purple/20' 
   };
 
+  const canonicalUrl = `https://vonporat.com/blog/${post.slug}`;
+
   return (
     <>
 
@@ -188,14 +191,17 @@ export default async function BlogPostPage({ params }) {
 
 
         {/* Rich Text content with matching accent glow */}
-        <GlassCard accent={catInfo.accent} className="p-8 md:p-12 mb-12">
+        <GlassCard accent={catInfo.accent} className="p-8 md:p-12 mb-0">
           <div className="prose prose-invert max-w-none">
             {renderLexical(post.content?.root)}
           </div>
         </GlassCard>
 
+        {/* Share Section */}
+        <BlogShare title={post.title} url={canonicalUrl} />
+
         {/* Footer Navigation */}
-        <footer className="pt-8 border-t border-white/5 flex items-center justify-between">
+        <footer className="pt-8 flex items-center justify-between">
           <Link 
             href="/blog" 
             className="text-xs font-mono tracking-widest uppercase text-zinc-400 hover:text-accent-purple transition-colors"
