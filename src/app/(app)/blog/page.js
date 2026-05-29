@@ -6,6 +6,32 @@ import GlassCard from '@/components/GlassCard';
 
 export const revalidate = 60; // Revalidate every 60 seconds
 
+const getMediaUrl = (url) => {
+  if (!url || typeof url !== 'string') return null;
+  
+  // Intercept relative Payload API media URLs and map them directly to the Supabase Public CDN.
+  // This bypasses the slower local proxy and serves the image instantly from the edge.
+  if (url.startsWith('/api/media/file/')) {
+    const filename = url.replace('/api/media/file/', '');
+    return `https://mjsaegfqipbrnapyleop.supabase.co/storage/v1/object/public/payload-media/${filename}`;
+  }
+
+  // Convert Supabase internal S3 API URLs to public browser URLs if present
+  if (url.includes('storage.supabase.co/storage/v1/s3')) {
+    return url.replace('storage.supabase.co/storage/v1/s3', 'supabase.co/storage/v1/object/public');
+  }
+
+  if (url.startsWith('http') || url.startsWith('//')) {
+    return url.startsWith('//') ? `https:${url}` : url;
+  }
+  
+  const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL || '';
+  const cleanServerUrl = serverUrl.endsWith('/') ? serverUrl.slice(0, -1) : serverUrl;
+  const cleanUrl = url.startsWith('/') ? url : `/${url}`;
+  
+  return `${cleanServerUrl}${cleanUrl}`;
+};
+
 export default async function BlogPage() {
   const payload = await getPayload({ config: configPromise });
 
@@ -96,7 +122,8 @@ export default async function BlogPage() {
                 : 'Draft';
 
               const featuredCatInfo = getCategoryInfo(featuredPost.category);
-              const featuredImgUrl = featuredPost.featuredImage?.url;
+              const rawImgUrl = typeof featuredPost.featuredImage === 'object' ? featuredPost.featuredImage?.url : null;
+              const featuredImgUrl = getMediaUrl(rawImgUrl);
               const featuredImgAlt = featuredPost.featuredImage?.alt || featuredPost.title;
 
               return (
@@ -169,6 +196,8 @@ export default async function BlogPage() {
                             <img 
                               src={featuredImgUrl} 
                               alt={featuredImgAlt} 
+                              loading="eager"
+                              fetchPriority="high"
                               className="w-full h-full object-cover object-center grayscale group-hover:grayscale-0 transition-all duration-700 ease-out scale-100 group-hover:scale-[1.03]"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-obsidian-950/60 via-transparent to-transparent opacity-65 pointer-events-none" />
