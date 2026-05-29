@@ -24,7 +24,8 @@ export default function Music() {
       logo: "/images/music/freternia.jpg",
       fullBanner: true,
       bannerPosition: "object-top",
-      bannerZoom: "scale-100"
+      bannerZoom: "scale-100",
+      link: "https://roar-freternia.bandcamp.com/album/the-final-stand"
     },
     {
       name: "Cromonic",
