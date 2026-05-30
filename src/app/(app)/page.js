@@ -82,9 +82,12 @@ export default function Home() {
           {/* Subtle decorative crest/emblem placeholder */}
           <div className="w-12 h-[1px] bg-gradient-to-r from-transparent via-accent-purple to-transparent mb-2" />
           
-          <h1 className="text-5xl md:text-7xl font-medium tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-100 to-zinc-400 drop-shadow-[0_12px_32px_rgba(0,0,0,0.95)]">
-            Patrik von Porat
-          </h1>
+          <h1 className="sr-only">Patrik von Porat</h1>
+          <img 
+            src="/images/pvp_signature.png" 
+            alt="Patrik von Porat Signature" 
+            className="h-24 md:h-36 w-auto object-contain select-none pointer-events-none drop-shadow-[0_8px_24px_rgba(255,255,255,0.1)]"
+          />
           
           <p className="text-sm md:text-lg font-gothic tracking-widest uppercase text-accent-purple flex flex-wrap justify-center gap-x-3 gap-y-1">
             <span>Guitarist</span> 
@@ -106,13 +109,13 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-4 mt-8 w-full sm:w-auto">
             <Link 
               href="/projects" 
-              className="px-8 py-4 rounded-md bg-white text-black font-semibold uppercase tracking-wider text-sm transition-all duration-300 hover:bg-transparent hover:text-white border border-white hover:shadow-[0_0_20px_rgba(255,255,255,0.25)] text-center"
+              className="px-8 py-4 rounded-full bg-white/10 hover:bg-white/15 text-white font-semibold uppercase tracking-wider text-sm border border-white/20 hover:border-white/35 backdrop-blur-md hover:shadow-[0_0_25px_rgba(255,255,255,0.12)] hover:-translate-y-0.5 active:translate-y-0 text-center transition-premium"
             >
               Explore Projects
             </Link>
             <Link 
               href="/contact" 
-              className="px-8 py-4 rounded-md bg-transparent text-white font-semibold uppercase tracking-wider text-sm border border-zinc-700 transition-all duration-300 hover:border-accent-purple hover:text-accent-purple hover:shadow-[0_0_20px_rgba(139,92,246,0.15)] text-center"
+              className="px-8 py-4 rounded-full bg-zinc-950/45 hover:bg-zinc-900/50 text-white font-semibold uppercase tracking-wider text-sm border border-zinc-800 hover:border-accent-purple/35 backdrop-blur-md hover:shadow-[0_0_25px_rgba(139,92,246,0.15)] hover:-translate-y-0.5 active:translate-y-0 text-center transition-premium"
             >
               Contact
             </Link>
