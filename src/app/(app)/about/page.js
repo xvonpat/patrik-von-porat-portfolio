@@ -50,7 +50,7 @@ export default function About() {
               </div>
               <div className="flex justify-between">
                 <span className="text-zinc-500 uppercase">Primary Guitars</span>
-                <span className="text-zinc-300">7 & 8-String Custom</span>
+                <span className="text-zinc-300">Caparison Guitars</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-zinc-500 uppercase">Optimization Framework</span>
