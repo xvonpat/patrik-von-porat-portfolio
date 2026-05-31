@@ -76,7 +76,7 @@ export default function About() {
         <div className="lg:col-span-8 flex flex-col gap-8 leading-7 text-zinc-300 font-light text-sm md:text-base">
           <div className="flex flex-col gap-6">
             <p className="first-letter:text-5xl first-letter:font-extrabold first-letter:text-accent-purple first-letter:mr-3 first-letter:float-left first-letter:font-gothic">
-              I am a guitarist, visual artist, and a systems optimizer. 
+              am a guitarist, visual artist, and a systems optimizer. 
               My life operates at the crossroads of two seemingly disparate worlds: the thundering, viscously creative universe of heavy metal and dark illustration, and the highly analytical, structured discipline of process engineering and continuous improvement.
             </p>
 
