@@ -76,20 +76,19 @@ export default function About() {
         <div className="lg:col-span-8 flex flex-col gap-8 leading-7 text-zinc-300 font-light text-sm md:text-base">
           <div className="flex flex-col gap-6">
             <p className="first-letter:text-5xl first-letter:font-extrabold first-letter:text-accent-purple first-letter:mr-3 first-letter:float-left first-letter:font-gothic">
-              am a guitarist, visual artist, and a systems optimizer. 
-              My life operates at the crossroads of two seemingly disparate worlds: the thundering, viscously creative universe of heavy metal and dark illustration, and the highly analytical, structured discipline of process engineering and continuous improvement.
+              I am a guitarist, visual artist, and systems-minded creator. My work moves between heavy metal, dark visual art, AI-assisted experimentation, and a deep interest in structure, workflows, and continuous improvement.
             </p>
 
             <p>
-              By day, I study processes, map cycles, and build structural frameworks. As a process improvement nerd, I lean heavily on Lean Six Sigma methodology, DMAIC workflows, and data pipelines to solve complex organizational knots. I enjoy taking convoluted, chaotic processes and carving them into clean, predictable, high-yield systems.
+              By day, I work with processes and practical improvement. I am a certified Lean Six Sigma Green Belt, and I am genuinely interested in how data, structure, and clear workflows can make complex work easier to understand. I like turning scattered ideas, unclear routines, or inefficient processes into something more visual, organized, and useful.
             </p>
 
             <p>
-              By night, that same focus and meticulous attention to detail is channeled directly into my creative endeavors. Whether I am writing complex guitar riffs for symphonic power metal projects like <span className="text-white font-normal">Realmforged</span>, tracking twin-leads for <span className="text-white font-normal">Freternia</span>, drawing detailed portraits in graphite, or curing 3D resin prints, the core drive remains the same: an obsessive search for expression and refinement.
+              By night, that same mindset carries into my creative work. I write music, record guitars, build concepts for projects like <span className="text-white font-normal">Realmforged</span> and <span className="text-white font-normal">Ashwrithe</span>, draw in graphite, explore tattoo design, paint miniatures, and experiment with AI-generated visuals. The tools may change, but the core motivation stays the same: to create, refine, and keep improving.
             </p>
 
             <p>
-              I don't see technology and art as rivals. Generative AI, customized sqlite trackers, and barcode systems are just newer, faster brushes. They allow me to organize files, catalogs, and release timelines so I can spend more hours doing what matters: writing heavy riffs and creating deep, evocative visual art.
+              For me, creativity and structure belong together. A song, a drawing, a website, a release plan, or a process map all start as something messy. The challenge — and the fun — is shaping it into something that feels intentional.
             </p>
           </div>
 
