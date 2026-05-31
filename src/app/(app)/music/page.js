@@ -57,7 +57,7 @@ export default function Music() {
       genre: "Melodic Heavy / Power Metal",
       role: "Guitars",
       description: "Classic Swedish melodic metal with powerful vocal hooks, sharp rhythm guitars, soaring melodies and guitar work ranging from tasteful lead lines to classic shred.",
-      status: "Active - Recording Sessions",
+      status: "Active - Album Available",
       accent: "cyan",
       tags: ["Melodic", "Heavy Metal", "Power Metal", "Classic"],
       link: "https://open.spotify.com/artist/6Lj1yeMDpsRQO8ai5VnZLn?si=D67mevHWSRuAdHo2pAvdTA"
