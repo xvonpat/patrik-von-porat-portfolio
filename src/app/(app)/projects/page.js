@@ -1,6 +1,16 @@
 import React from 'react';
 import GlassCard from '@/components/GlassCard';
 
+export const metadata = {
+  title: "Projects & Tools Vault | Patrik von Porat",
+  description: "A vault of custom software tools built to optimize creative and logistical workflows. Exploring DMAIC companions, hobby inventory managers, and AI asset archives.",
+  openGraph: {
+    title: "Projects & Tools Vault | Patrik von Porat",
+    description: "A vault of custom software tools built to optimize creative and logistical workflows. Exploring DMAIC companions, hobby inventory managers, and AI asset archives.",
+    url: 'https://vonporat.com/projects',
+  }
+};
+
 export default function Projects() {
   const projects = [
     {

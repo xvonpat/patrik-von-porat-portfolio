@@ -1,6 +1,16 @@
 import React from 'react';
 import GlassCard from '@/components/GlassCard';
 
+export const metadata = {
+  title: "Music Portfolio | Patrik von Porat",
+  description: "Explore the dark, symphonic, and progressive music of Patrik von Porat. Lead guitar and orchestration works featuring Realmforged, Freternia, Cromonic, and Ashwrithe.",
+  openGraph: {
+    title: "Music Portfolio | Patrik von Porat",
+    description: "Explore the dark, symphonic, and progressive music of Patrik von Porat. Lead guitar and orchestration works featuring Realmforged, Freternia, Cromonic, and Ashwrithe.",
+    url: 'https://vonporat.com/music',
+  }
+};
+
 export default function Music() {
   const bands = [
     {

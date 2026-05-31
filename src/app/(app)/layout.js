@@ -46,11 +46,42 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Patrik von Porat",
+    "url": "https://vonporat.com",
+    "image": "https://vonporat.com/images/PvP2.png",
+    "sameAs": [
+      "https://open.spotify.com/artist/1w5nRV4hbOrPFuYRYuvgnB?si=8IEsYIjORUi6ubXK_daH3g",
+      "https://www.youtube.com/@creativeoverdrive",
+      "https://realmforged.bandcamp.com/",
+      "https://www.instagram.com/patrikvonporat/",
+      "https://www.patreon.com/c/realmforgedguild",
+      "https://www.linkedin.com/in/patrikvonporat/"
+    ],
+    "jobTitle": "Lead Guitarist, Visual Artist & Process Engineer",
+    "knowsAbout": [
+      "Symphonic Power Metal",
+      "Guitar Orchestration",
+      "Graphite Drawing",
+      "Generative AI",
+      "Lean Six Sigma",
+      "DMAIC Workflow Optimization"
+    ]
+  };
+
   return (
     <html
       lang="en"
       className={`${cormorant.variable} ${outfit.variable} h-full antialiased`}
     >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className="min-h-full flex flex-col bg-obsidian-950 font-sans text-zinc-200">
         {/* Background ambient animations */}
         <GlowEffect />

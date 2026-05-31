@@ -1,6 +1,16 @@
 import React from 'react';
 import GlassCard from '@/components/GlassCard';
 
+export const metadata = {
+  title: "Link Hub & Contact | Patrik von Porat",
+  description: "Connect with Patrik von Porat. Portals to Spotify, YouTube, Bandcamp, Instagram, Patreon, LinkedIn, and direct email contact.",
+  openGraph: {
+    title: "Link Hub & Contact | Patrik von Porat",
+    description: "Connect with Patrik von Porat. Portals to Spotify, YouTube, Bandcamp, Instagram, Patreon, LinkedIn, and direct email contact.",
+    url: 'https://vonporat.com/contact',
+  }
+};
+
 export default function Contact() {
   const groupedLinks = [
     {

@@ -1,6 +1,16 @@
 import React from 'react';
 import GlassCard from '@/components/GlassCard';
 
+export const metadata = {
+  title: "About | Patrik von Porat",
+  description: "The systems, philosophies, and dual-world creative life of Patrik von Porat — combining heavy metal orchestration, dark traditional art, and Six Sigma workflow systems.",
+  openGraph: {
+    title: "About Patrik von Porat",
+    description: "The systems, philosophies, and dual-world creative life of Patrik von Porat — combining heavy metal orchestration, dark traditional art, and Six Sigma workflow systems.",
+    url: 'https://vonporat.com/about',
+  }
+};
+
 export default function About() {
   return (
     <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16 md:py-24 flex flex-col gap-12 relative">
