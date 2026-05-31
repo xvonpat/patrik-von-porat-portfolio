@@ -30,8 +30,8 @@ export default function About() {
           {/* Cinematic Guitar Portrait */}
           <div className="w-full aspect-[2/3] rounded-lg overflow-hidden border border-white/5 shadow-2xl relative group hover:border-accent-purple/30 transition-premium">
             <img 
-              src="/images/avatar/IMG_1360-2.jpg" 
-              alt="Patrik von Porat" 
+              src="/images/avatar/Patrik.png" 
+              alt="Patrik von Porat Portrait" 
               className="w-full h-full object-cover object-center grayscale hover:grayscale-0 transition-all duration-700 ease-out scale-100 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-obsidian-950/80 via-transparent to-transparent opacity-60 pointer-events-none" />
