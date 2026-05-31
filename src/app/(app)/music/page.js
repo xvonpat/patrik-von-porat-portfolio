@@ -54,12 +54,12 @@ export default function Music() {
     },
     {
       name: "Cromonic",
-      genre: "Progressive Melodic Metal",
+      genre: "Melodic Heavy / Power Metal",
       role: "Guitars",
-      description: "Where complexity meets accessibility. Combining syncopated rhythms, time signature changes, and soaring vocal melodies with rich synthesizer soundscapes.",
+      description: "Classic Swedish melodic metal with powerful vocal hooks, sharp rhythm guitars, soaring melodies and guitar work ranging from tasteful lead lines to classic shred.",
       status: "Active - Recording Sessions",
       accent: "cyan",
-      tags: ["Progressive", "Harmonic", "Atmospheric"],
+      tags: ["Melodic", "Heavy Metal", "Power Metal", "Classic"],
       link: "https://open.spotify.com/artist/6Lj1yeMDpsRQO8ai5VnZLn?si=D67mevHWSRuAdHo2pAvdTA"
     }
   ];
