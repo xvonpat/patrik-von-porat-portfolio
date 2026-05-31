@@ -11,6 +11,21 @@ export default function Art() {
 
   const artCategories = [
     {
+      title: "Miniatures & 3D Prints",
+      subtitle: "Intricate dark fantasy modeling and precision painting",
+      description: "Curing SLA resin prints and applying high-end acrylic washes, dry-brushing, and airbrushing techniques. Bringing physical dark-fantasy monsters, metal warriors, and elaborate gaming environments to life.",
+      accent: "purple",
+      dimensions: "Resin Scale Models & Dioramas",
+      placeholderGradient: "from-purple-950/20 via-zinc-950 to-neutral-900",
+      image: "/images/art/butcher/The_Butcher-2.jpg",
+      gallery: [
+        { src: "/images/art/butcher/The_Butcher-2.jpg", title: "The Butcher Bust - Front", caption: "SLA resin print. Applied heavy layers of acrylic washes, custom skin-tone blending, and weathering.", category: "Miniatures & 3D Prints", alt: "Butcher front view" },
+        { src: "/images/art/butcher/The_Butcher-1.jpg", title: "The Butcher Bust - Back Detail", caption: "Precision detailing on spine segments, muscle textures, and copper harness.", category: "Miniatures & 3D Prints", alt: "Butcher spine details" },
+        { src: "/images/art/butcher/The_Butcher-3.jpg", title: "The Butcher Bust - Side Profile", caption: "Contrast highlight check on tusks, horns, and skin contours.", category: "Miniatures & 3D Prints", alt: "Butcher side view" },
+        { src: "/images/art/butcher/The_Butcher-4.jpg", title: "The Butcher Bust - Face Close-up", caption: "Precision detail check on teeth, glowing green eyes, and blood splatters.", category: "Miniatures & 3D Prints", alt: "Butcher head close-up" }
+      ]
+    },
+    {
       title: "Graphite Drawing",
       subtitle: "High-contrast dark realism and pencil portraits",
       description: "Exploring dark fantasy themes, deep shadows, and classical anatomy. Focused on texture, light falloff, and traditional high-detail rendering of gothic and Norse mythological figures.",
@@ -48,21 +63,6 @@ export default function Art() {
         { src: "/images/art/hero-banner.png", title: "Obsidian Citadel", caption: "Surreal, high-contrast dark oil-painting neural synthesis.", category: "AI Generated Art", alt: "Obsidian citadel digital" },
         { src: "", title: "Biomech Cathedral", caption: "Generative model study on architectural metal textures.", category: "AI Generated Art", alt: "Biomech cathedral" },
         { src: "", title: "The Ash Wraith", caption: "Tactile dark concepts and texture metadata prompt pipelines.", category: "AI Generated Art", alt: "Ash wraith concept" }
-      ]
-    },
-    {
-      title: "Miniatures & 3D Prints",
-      subtitle: "Intricate dark fantasy modeling and precision painting",
-      description: "Curing SLA resin prints and applying high-end acrylic washes, dry-brushing, and airbrushing techniques. Bringing physical dark-fantasy monsters, metal warriors, and elaborate gaming environments to life.",
-      accent: "purple",
-      dimensions: "Resin Scale Models & Dioramas",
-      placeholderGradient: "from-purple-950/20 via-zinc-950 to-neutral-900",
-      image: "/images/art/butcher/The_Butcher-2.jpg",
-      gallery: [
-        { src: "/images/art/butcher/The_Butcher-2.jpg", title: "The Butcher Bust - Front", caption: "SLA resin print. Applied heavy layers of acrylic washes, custom skin-tone blending, and weathering.", category: "Miniatures & 3D Prints", alt: "Butcher front view" },
-        { src: "/images/art/butcher/The_Butcher-1.jpg", title: "The Butcher Bust - Back Detail", caption: "Precision detailing on spine segments, muscle textures, and copper harness.", category: "Miniatures & 3D Prints", alt: "Butcher spine details" },
-        { src: "/images/art/butcher/The_Butcher-3.jpg", title: "The Butcher Bust - Side Profile", caption: "Contrast highlight check on tusks, horns, and skin contours.", category: "Miniatures & 3D Prints", alt: "Butcher side view" },
-        { src: "/images/art/butcher/The_Butcher-4.jpg", title: "The Butcher Bust - Face Close-up", caption: "Precision detail check on teeth, glowing green eyes, and blood splatters.", category: "Miniatures & 3D Prints", alt: "Butcher head close-up" }
       ]
     }
   ];
