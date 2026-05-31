@@ -17,10 +17,10 @@ export default function Art() {
       accent: "purple",
       dimensions: "Resin Scale Models & Dioramas",
       placeholderGradient: "from-purple-950/20 via-zinc-950 to-neutral-900",
-      image: "/images/art/butcher/The_Butcher-2.jpg",
+      image: "/images/art/butcher/The_Butcher-1.jpg",
       gallery: [
-        { src: "/images/art/butcher/The_Butcher-2.jpg", title: "The Butcher Bust - Front", caption: "SLA resin print. Applied heavy layers of acrylic washes, custom skin-tone blending, and weathering.", category: "Miniatures & 3D Prints", alt: "Butcher front view" },
-        { src: "/images/art/butcher/The_Butcher-1.jpg", title: "The Butcher Bust - Back Detail", caption: "Precision detailing on spine segments, muscle textures, and copper harness.", category: "Miniatures & 3D Prints", alt: "Butcher spine details" },
+        { src: "/images/art/butcher/The_Butcher-1.jpg", title: "The Butcher Bust - Front", caption: "SLA resin print. Applied heavy layers of acrylic washes, custom skin-tone blending, and weathering.", category: "Miniatures & 3D Prints", alt: "Butcher front view" },
+        { src: "/images/art/butcher/The_Butcher-2.jpg", title: "The Butcher Bust - Back Detail", caption: "Precision detailing on spine segments, muscle textures, and copper harness.", category: "Miniatures & 3D Prints", alt: "Butcher spine details" },
         { src: "/images/art/butcher/The_Butcher-3.jpg", title: "The Butcher Bust - Side Profile", caption: "Contrast highlight check on tusks, horns, and skin contours.", category: "Miniatures & 3D Prints", alt: "Butcher side view" },
         { src: "/images/art/butcher/The_Butcher-4.jpg", title: "The Butcher Bust - Face Close-up", caption: "Precision detail check on teeth, glowing green eyes, and blood splatters.", category: "Miniatures & 3D Prints", alt: "Butcher head close-up" }
       ]
@@ -48,8 +48,8 @@ export default function Art() {
       image: "/images/tattoos/mariotattoo.jpg",
       gallery: [
         { src: "/images/tattoos/mariotattoo.jpg", title: "Mario Shading Practice", caption: "Honing precision linework and whip-shading on synthetic skin.", category: "Tattoo Practice", alt: "Mario tattoo Synthetic skin" },
-        { src: "/images/avatar/IMG_1360-2.jpg", title: "Runic Wolf Flash", caption: "Norse woodcarving runes flash template.", category: "Tattoo Practice", alt: "Runic wolf" },
-        { src: "/images/avatar/Patrik.png", title: "Gothic Archway Study", caption: "Intricate blackwork lining study of architectural curves.", category: "Tattoo Practice", alt: "Gothic archway" }
+        { src: "", title: "Runic Wolf Flash", caption: "Norse woodcarving runes flash template.", category: "Tattoo Practice", alt: "Runic wolf" },
+        { src: "", title: "Gothic Archway Study", caption: "Intricate blackwork lining study of architectural curves.", category: "Tattoo Practice", alt: "Gothic archway" }
       ]
     },
     {
