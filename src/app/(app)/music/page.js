@@ -36,16 +36,7 @@ export default function Music() {
       accent: "cyan",
       tags: ["Progressive", "Harmonic", "Atmospheric"]
     },
-    {
-      name: "Shred Eternity",
-      genre: "Instrumental Guitar Metal",
-      role: "All Instruments & Composition",
-      description: "A solo creative sandbox dedicated to technical fretboard wizardry. Merging high-speed sweeping, alternate picking, and complex phrasing with modern heavy grooves.",
-      status: "Solo Project - Singles Released",
-      accent: "orange",
-      tags: ["Shred", "Instrumental", "Technical"],
-      logo: "/images/music/shred-eternity_logo.png"
-    },
+
     {
       name: "Ashwrithe",
       genre: "Blackened Melodic Death",
