@@ -59,7 +59,8 @@ export default function Music() {
       description: "Where complexity meets accessibility. Combining syncopated rhythms, time signature changes, and soaring vocal melodies with rich synthesizer soundscapes.",
       status: "Active - Recording Sessions",
       accent: "cyan",
-      tags: ["Progressive", "Harmonic", "Atmospheric"]
+      tags: ["Progressive", "Harmonic", "Atmospheric"],
+      link: "https://open.spotify.com/artist/6Lj1yeMDpsRQO8ai5VnZLn?si=D67mevHWSRuAdHo2pAvdTA"
     }
   ];
 
