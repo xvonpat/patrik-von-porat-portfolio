@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import GlassCard from '@/components/GlassCard';
 
 export default function Home() {
   const [scrollY, setScrollY] = useState(0);
@@ -18,37 +17,6 @@ export default function Home() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const categories = [
-    {
-      title: "Music",
-      description: "Guitar work and orchestration spanning melodic power metal, symphonic epic metal, and dark melodeath. Crafting razor-sharp riffs and rich atmospheric layers.",
-      href: "/music",
-      accent: "purple",
-      tag: "VIBRANT & VISCERAL",
-    },
-    {
-      title: "Visual Art",
-      description: "From traditional high-contrast graphite realism and raw tattoo work to hybrid human-neural AI synthesis and intricate 3D miniature painting.",
-      href: "/art",
-      accent: "orange",
-      tag: "DARK & MYSTICAL",
-    },
-    {
-      title: "AI Projects",
-      description: "Exploring the boundary where neural architectures meet creative tooling. Synthesizing models, texturing workflows, and generative pipelines.",
-      href: "/projects",
-      accent: "cyan",
-      tag: "DIGITAL & FRONTIER",
-    },
-    {
-      title: "Process Improvement",
-      description: "Applying DMAIC, lean mechanics, and systematic optimization to creative and organizational workflows. Continuous improvement as a philosophy.",
-      href: "/projects",
-      accent: "purple",
-      tag: "STRUCTURED & SHARP",
-    }
-  ];
 
   return (
     <>
@@ -124,40 +92,6 @@ export default function Home() {
           <div className="w-12 h-[1px] bg-gradient-to-r from-transparent via-accent-purple to-transparent mt-8" />
         </section>
 
-        {/* Feature Cards Grid */}
-        <section className="flex flex-col gap-12 relative z-10">
-          <div className="flex flex-col items-center md:items-start text-center md:text-left gap-2">
-            <h2 className="text-3xl font-medium tracking-tight text-white">Creative Columns</h2>
-            <div className="w-16 h-[2px] bg-accent-orange" />
-            <p className="text-sm text-zinc-500 max-w-md mt-2">Click below to venture deeper into each specialized medium.</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {categories.map((cat, idx) => (
-              <Link key={idx} href={cat.href} className="group block h-full">
-                <GlassCard accent={cat.accent} className="h-full flex flex-col justify-between">
-                  <div>
-                    <span className="text-[10px] tracking-[0.25em] font-bold text-zinc-500 uppercase block mb-3 font-mono">
-                      {cat.tag}
-                    </span>
-                    <h3 className="text-2xl font-semibold text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-zinc-400 transition-all duration-300 mb-4">
-                      {cat.title}
-                    </h3>
-                    <p className="text-sm leading-6 text-zinc-400 font-light">
-                      {cat.description}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-2 mt-8 text-xs font-semibold uppercase tracking-widest text-zinc-400 group-hover:text-white transition-colors duration-300">
-                    <span>Enter Segment</span>
-                    <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-                    </svg>
-                  </div>
-                </GlassCard>
-              </Link>
-            ))}
-          </div>
-        </section>
         
       </div>
     </>
