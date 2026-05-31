@@ -93,17 +93,17 @@ export default function LightboxGallery({
 
         {/* Counter and Close Button */}
         <div className="flex items-center gap-6">
-          <span className="text-xs font-mono text-zinc-400 tracking-widest bg-white/5 border border-white/10 px-3 py-1 rounded-full">
+          <span className="text-xs font-mono text-zinc-400 tracking-widest bg-white/5 border border-white/10 px-3 py-1 rounded-full select-none">
             {currentIndex + 1} / {images.length}
           </span>
           
           <button 
             onClick={onClose}
-            className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-zinc-400 hover:text-white hover:bg-white/10 hover:border-white/20 transition-premium"
+            className="w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white hover:text-white hover:bg-accent-purple/20 hover:border-accent-purple/50 transition-premium shadow-[0_0_15px_rgba(0,0,0,0.5)] hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] active:scale-95"
             aria-label="Close Lightbox"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
         </div>
