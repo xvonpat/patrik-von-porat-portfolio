@@ -90,7 +90,7 @@ export default function RootLayout({ children }) {
         <Navbar />
         
         {/* Main interactive content */}
-        <main className="flex-grow relative z-10">
+        <main className="flex-grow relative">
           {children}
         </main>
         
