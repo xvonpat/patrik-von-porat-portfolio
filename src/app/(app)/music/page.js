@@ -14,6 +14,21 @@ export default function Music() {
       logo: "/images/music/realmforged_logo.png"
     },
     {
+      name: "Ashwrithe",
+      genre: "Blackened Melodic Death",
+      role: "Guitars & Co-Composition",
+      description: "A developing extreme metal project shaped by frostbitten melodies, soot-black atmosphere, crushing guitars and ritualistic darkness.",
+      status: "In Development - Debut Material In Progress",
+      accent: "purple",
+      tags: ["Blackened", "Melodic Death", "Frostbitten", "Cinematic"],
+      logo: "/images/music/Ashwrithe.webp",
+      fullBanner: true,
+      bannerPosition: "object-[center_10%]",
+      bannerZoom: "scale-100",
+      ctaText: "Enter Ashwrithe",
+      link: "https://ashwrithe.com"
+    },
+    {
       name: "Freternia",
       genre: "Melodic Power Metal",
       role: "Guitars",
@@ -35,22 +50,6 @@ export default function Music() {
       status: "Active - Recording Sessions",
       accent: "cyan",
       tags: ["Progressive", "Harmonic", "Atmospheric"]
-    },
-
-    {
-      name: "Ashwrithe",
-      genre: "Blackened Melodic Death",
-      role: "Guitars & Co-Composition",
-      description: "A developing extreme metal project shaped by frostbitten melodies, soot-black atmosphere, crushing guitars and ritualistic darkness.",
-      status: "In Development - Debut Material In Progress",
-      accent: "purple",
-      tags: ["Blackened", "Melodic Death", "Frostbitten", "Cinematic"],
-      logo: "/images/music/Ashwrithe.webp",
-      fullBanner: true,
-      bannerPosition: "object-[center_10%]",
-      bannerZoom: "scale-100",
-      ctaText: "Enter Ashwrithe",
-      link: "https://ashwrithe.com"
     }
   ];
 
