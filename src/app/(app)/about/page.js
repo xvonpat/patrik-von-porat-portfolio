@@ -4,6 +4,9 @@ import GlassCard from '@/components/GlassCard';
 export const metadata = {
   title: "About | Patrik von Porat",
   description: "The systems, philosophies, and dual-world creative life of Patrik von Porat — combining heavy metal orchestration, dark traditional art, and Six Sigma workflow systems.",
+  alternates: {
+    canonical: '/about',
+  },
   openGraph: {
     title: "About Patrik von Porat",
     description: "The systems, philosophies, and dual-world creative life of Patrik von Porat — combining heavy metal orchestration, dark traditional art, and Six Sigma workflow systems.",

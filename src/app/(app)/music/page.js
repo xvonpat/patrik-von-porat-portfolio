@@ -4,6 +4,9 @@ import GlassCard from '@/components/GlassCard';
 export const metadata = {
   title: "Music Portfolio | Patrik von Porat",
   description: "Explore the dark, symphonic, and progressive music of Patrik von Porat. Lead guitar and orchestration works featuring Realmforged, Freternia, Cromonic, and Ashwrithe.",
+  alternates: {
+    canonical: '/music',
+  },
   openGraph: {
     title: "Music Portfolio | Patrik von Porat",
     description: "Explore the dark, symphonic, and progressive music of Patrik von Porat. Lead guitar and orchestration works featuring Realmforged, Freternia, Cromonic, and Ashwrithe.",

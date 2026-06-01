@@ -78,6 +78,52 @@ function renderLexical(node) {
   }
 }
 
+// Dynamic metadata generator for search engines and dynamic canonical links
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const payload = await getPayload({ config: configPromise });
+
+  const response = await payload.find({
+    collection: 'posts',
+    where: {
+      and: [
+        {
+          slug: {
+            equals: slug,
+          },
+        },
+        {
+          status: {
+            equals: 'published',
+          },
+        },
+      ],
+    },
+  });
+
+  const post = response.docs[0];
+
+  if (!post) {
+    return {
+      title: 'Article Not Found | Patrik von Porat',
+    };
+  }
+
+  return {
+    title: `${post.title} | Chronicles`,
+    description: post.excerpt || 'Read the latest chronicle by Patrik von Porat.',
+    alternates: {
+      canonical: `/blog/${post.slug}`,
+    },
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      url: `https://vonporat.com/blog/${post.slug}`,
+      type: 'article',
+    },
+  };
+}
+
 // Single Article Server Component
 export default async function BlogPostPage({ params }) {
   const { slug } = await params;

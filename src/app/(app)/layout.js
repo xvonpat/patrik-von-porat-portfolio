@@ -3,6 +3,8 @@ import "../globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import GlowEffect from "@/components/GlowEffect";
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
@@ -21,6 +23,12 @@ export const metadata = {
   metadataBase: new URL('https://vonporat.com'),
   title: "Patrik von Porat | Creative Hub",
   description: "A creative hub for music, visual art, AI experiments, and process improvement.",
+  alternates: {
+    canonical: '/',
+  },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || '',
+  },
   openGraph: {
     title: "Patrik von Porat | Creative Hub",
     description: "A creative hub for music, visual art, AI experiments, and process improvement.",
@@ -96,6 +104,8 @@ export default function RootLayout({ children }) {
         
         {/* Shared Footer */}
         <Footer />
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

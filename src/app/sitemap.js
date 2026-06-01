@@ -1,5 +1,5 @@
 import { getPayload } from 'payload';
-import configPromise from '../../../payload.config';
+import configPromise from '../../payload.config';
 
 export default async function sitemap() {
   let dynamicRoutes = [];
@@ -38,7 +38,6 @@ export default async function sitemap() {
     '/about',
     '/music',
     '/art',
-    '/projects',
     '/blog',
     '/contact',
   ].map((route) => ({
