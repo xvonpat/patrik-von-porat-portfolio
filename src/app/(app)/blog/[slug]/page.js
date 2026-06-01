@@ -78,6 +78,29 @@ function renderLexical(node) {
   }
 }
 
+const getMediaUrl = (url) => {
+  if (!url || typeof url !== 'string') return null;
+  
+  if (url.startsWith('/api/media/file/')) {
+    const filename = url.replace('/api/media/file/', '');
+    return `https://mjsaegfqipbrnapyleop.supabase.co/storage/v1/object/public/payload-media/${filename}`;
+  }
+
+  if (url.includes('storage.supabase.co/storage/v1/s3')) {
+    return url.replace('storage.supabase.co/storage/v1/s3', 'supabase.co/storage/v1/object/public');
+  }
+
+  if (url.startsWith('http') || url.startsWith('//')) {
+    return url.startsWith('//') ? `https:${url}` : url;
+  }
+  
+  const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL || '';
+  const cleanServerUrl = serverUrl.endsWith('/') ? serverUrl.slice(0, -1) : serverUrl;
+  const cleanUrl = url.startsWith('/') ? url : `/${url}`;
+  
+  return `${cleanServerUrl}${cleanUrl}`;
+};
+
 // Dynamic metadata generator for search engines and dynamic canonical links
 export async function generateMetadata({ params }) {
   const { slug } = await params;
@@ -109,18 +132,45 @@ export async function generateMetadata({ params }) {
     };
   }
 
+  // Safe SEO fallback mappings
+  const seoTitle = post.seo?.seoTitle || post.title;
+  const seoDescription = post.seo?.metaDescription || post.excerpt || 'Read the latest chronicle by Patrik von Porat.';
+  
+  // Custom canonical URL or dynamic fallback URL
+  const customCanonical = post.seo?.canonicalUrl;
+  const canonicalUrl = customCanonical 
+    ? (customCanonical.startsWith('http') ? customCanonical : `https://vonporat.com${customCanonical.startsWith('/') ? '' : '/'}${customCanonical}`)
+    : `https://vonporat.com/blog/${post.slug}`;
+
+  // Custom OG Image or fallback to featuredImage
+  const seoImage = post.seo?.ogImage || post.featuredImage;
+  const rawImgUrl = typeof seoImage === 'object' && seoImage !== null ? seoImage.url : null;
+  const resolvedImgUrl = rawImgUrl ? getMediaUrl(rawImgUrl) : 'https://vonporat.com/images/PvP2.png';
+
   return {
-    title: `${post.title} | Chronicles`,
-    description: post.excerpt || 'Read the latest chronicle by Patrik von Porat.',
+    title: `${seoTitle} | Chronicles`,
+    description: seoDescription,
     alternates: {
-      canonical: `/blog/${post.slug}`,
+      canonical: canonicalUrl,
     },
     openGraph: {
-      title: post.title,
-      description: post.excerpt,
+      title: seoTitle,
+      description: seoDescription,
       url: `https://vonporat.com/blog/${post.slug}`,
       type: 'article',
+      images: [
+        {
+          url: resolvedImgUrl,
+          alt: post.title,
+        }
+      ],
     },
+    twitter: {
+      card: 'summary_large_image',
+      title: seoTitle,
+      description: seoDescription,
+      images: [resolvedImgUrl],
+    }
   };
 }
 

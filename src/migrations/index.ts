@@ -4,6 +4,7 @@ import * as migration_20260527_204729 from './20260527_204729';
 import * as migration_20260527_205225 from './20260527_205225';
 import * as migration_20260527_205507 from './20260527_205507';
 import * as migration_20260527_205655 from './20260527_205655';
+import * as migration_20260601_210827_add_seo_fields_to_posts from './20260601_210827_add_seo_fields_to_posts';
 
 export const migrations = [
   {
@@ -34,6 +35,11 @@ export const migrations = [
   {
     up: migration_20260527_205655.up,
     down: migration_20260527_205655.down,
-    name: '20260527_205655'
+    name: '20260527_205655',
+  },
+  {
+    up: migration_20260601_210827_add_seo_fields_to_posts.up,
+    down: migration_20260601_210827_add_seo_fields_to_posts.down,
+    name: '20260601_210827_add_seo_fields_to_posts'
   },
 ];

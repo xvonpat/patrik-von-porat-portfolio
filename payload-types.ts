@@ -198,6 +198,12 @@ export interface Post {
     };
     [k: string]: unknown;
   };
+  seo?: {
+    seoTitle?: string | null;
+    metaDescription?: string | null;
+    ogImage?: (number | null) | Media;
+    canonicalUrl?: string | null;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -339,6 +345,14 @@ export interface PostsSelect<T extends boolean = true> {
   featuredImage?: T;
   excerpt?: T;
   content?: T;
+  seo?:
+    | T
+    | {
+        seoTitle?: T;
+        metaDescription?: T;
+        ogImage?: T;
+        canonicalUrl?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }

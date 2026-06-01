@@ -98,5 +98,36 @@ export const Posts: CollectionConfig = {
       type: 'richText',
       required: true,
     },
+    {
+      name: 'seo',
+      type: 'group',
+      label: 'SEO Settings',
+      admin: {
+        initCollapsed: true,
+      },
+      fields: [
+        {
+          name: 'seoTitle',
+          type: 'text',
+          label: 'SEO Title',
+        },
+        {
+          name: 'metaDescription',
+          type: 'textarea',
+          label: 'Meta Description',
+        },
+        {
+          name: 'ogImage',
+          type: 'upload',
+          relationTo: 'media',
+          label: 'Open Graph Image',
+        },
+        {
+          name: 'canonicalUrl',
+          type: 'text',
+          label: 'Canonical URL',
+        },
+      ],
+    },
   ],
 };
