@@ -27,7 +27,7 @@ export const metadata = {
     canonical: '/',
   },
   verification: {
-    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || '',
+    google: 'LpX34lV-qH05p85GS5PZIDg6gvKQyvjm3UaBwsF-hDc',
   },
   openGraph: {
     title: "Patrik von Porat | Creative Hub",
