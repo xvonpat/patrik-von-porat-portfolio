@@ -102,9 +102,6 @@ export const Posts: CollectionConfig = {
       name: 'seo',
       type: 'group',
       label: 'SEO Settings',
-      admin: {
-        initCollapsed: true,
-      },
       fields: [
         {
           name: 'seoTitle',
