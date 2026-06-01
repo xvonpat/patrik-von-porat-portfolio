@@ -12,6 +12,8 @@ export const metadata = {
 };
 
 export default function Projects() {
+  // TODO: This page is temporarily hidden from the public navigation/navbar 
+  // until the project content and custom software tools are fully developed and ready to showcase.
   const projects = [
     {
       title: "DMAIC Companion",

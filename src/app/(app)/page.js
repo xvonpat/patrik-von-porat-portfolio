@@ -76,10 +76,10 @@ export default function Home() {
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-4 mt-8 w-full sm:w-auto">
             <Link 
-              href="/projects" 
+              href="/blog" 
               className="px-8 py-4 rounded-full bg-white/10 hover:bg-white/15 text-white font-semibold uppercase tracking-wider text-sm border border-white/20 hover:border-white/35 backdrop-blur-md hover:shadow-[0_0_25px_rgba(255,255,255,0.12)] hover:-translate-y-0.5 active:translate-y-0 text-center transition-premium"
             >
-              Explore Projects
+              Read Chronicles
             </Link>
             <Link 
               href="/contact" 
