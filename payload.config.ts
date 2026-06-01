@@ -5,6 +5,7 @@ import { buildConfig } from 'payload';
 import { fileURLToPath } from 'url';
 import { s3Storage } from '@payloadcms/storage-s3';
 import { Posts } from './src/collections/Posts';
+import { AdminLinks } from './src/collections/AdminLinks';
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -34,6 +35,7 @@ export default buildConfig({
       ],
     },
     Posts,
+    AdminLinks,
   ],
   editor: lexicalEditor({}),
   secret: process.env.PAYLOAD_SECRET || 'a-very-secure-secret-placeholder-change-this',

@@ -70,6 +70,7 @@ export interface Config {
     users: User;
     media: Media;
     posts: Post;
+    'admin-links': AdminLink;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -80,6 +81,7 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
+    'admin-links': AdminLinksSelect<false> | AdminLinksSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -209,6 +211,56 @@ export interface Post {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "admin-links".
+ */
+export interface AdminLink {
+  id: number;
+  /**
+   * A descriptive name for this admin link (e.g., Vercel Dashboard).
+   */
+  title: string;
+  /**
+   * The full URL, including https:// (e.g., https://vercel.com).
+   */
+  url: string;
+  /**
+   * Choose the operational category for this tool.
+   */
+  category:
+    | 'hosting-deployment'
+    | 'analytics-seo'
+    | 'cms-database'
+    | 'domains-dns'
+    | 'creative-platforms'
+    | 'music-platforms'
+    | 'social-media'
+    | 'tools'
+    | 'other';
+  /**
+   * Optional notes, usage instructions, or login details.
+   */
+  description?: string | null;
+  /**
+   * Current status of this link or tool.
+   */
+  status?: ('active' | 'occasional' | 'archived') | null;
+  /**
+   * Operational priority / importance for quick access.
+   */
+  priority?: ('high' | 'medium' | 'low') | null;
+  /**
+   * Lower numbers will appear first in default sorting.
+   */
+  sortOrder?: number | null;
+  /**
+   * When clicked in the admin panel, should the link open in a new tab?
+   */
+  openInNewTab?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -242,6 +294,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'posts';
         value: number | Post;
+      } | null)
+    | ({
+        relationTo: 'admin-links';
+        value: number | AdminLink;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -353,6 +409,22 @@ export interface PostsSelect<T extends boolean = true> {
         ogImage?: T;
         canonicalUrl?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "admin-links_select".
+ */
+export interface AdminLinksSelect<T extends boolean = true> {
+  title?: T;
+  url?: T;
+  category?: T;
+  description?: T;
+  status?: T;
+  priority?: T;
+  sortOrder?: T;
+  openInNewTab?: T;
   updatedAt?: T;
   createdAt?: T;
 }
