@@ -5,7 +5,7 @@ export const AdminLinks: CollectionConfig = {
   defaultSort: 'sortOrder',
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'category', 'status', 'priority', 'sortOrder'],
+    defaultColumns: ['title', 'url', 'category', 'status', 'priority', 'sortOrder'],
   },
   access: {
     read: ({ req: { user } }) => Boolean(user),
@@ -29,6 +29,9 @@ export const AdminLinks: CollectionConfig = {
       required: true,
       label: 'URL',
       admin: {
+        components: {
+          Cell: '/src/components/ExternalLinkCell.js',
+        },
         description: 'The full URL, including https:// (e.g., https://vercel.com).',
       },
     },
