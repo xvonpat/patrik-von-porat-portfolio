@@ -12,6 +12,7 @@ export default function Navbar() {
     { name: 'Home', href: '/' },
     { name: 'Music', href: '/music' },
     { name: 'Art', href: '/art' },
+    { name: 'Projects', href: '/projects' },
     { name: 'Blog', href: '/blog' },
     { name: 'About', href: '/about' },
     { name: 'Contact', href: '/contact' },
