@@ -55,6 +55,34 @@ const PROJECTS = [
     cta: 'Enter Ashwrithe',
     link: 'https://ashwrithe.com',
     accent: 'zinc'
+  },
+  {
+    id: 'realmforged_music',
+    title: 'Realmforged',
+    category: 'Music Projects',
+    status: 'Active',
+    typeLabel: 'Story-Driven Power Metal Project',
+    description: 'A cinematic power metal project built around dark fantasy storytelling, melodic guitar work and a growing world of interconnected songs, visuals and lore.',
+    manifest: 'A symphonic power metal lore-concept designed for digital staging, physical media layouts, and cinematic lyric distribution.',
+    role: 'Founder, songwriter, guitars, bass, keyboards, programming, lyrics, visual direction and website development.',
+    tags: ['Power Metal', 'Dark Fantasy', 'Storytelling', 'Independent Release', 'Website'],
+    cta: 'Visit Realmforged',
+    link: 'https://realmforgedofficial.com',
+    accent: 'purple'
+  },
+  {
+    id: 'ashwrithe_music',
+    title: 'Ashwrithe',
+    category: 'Music Projects',
+    status: 'In Development',
+    typeLabel: 'Blackened Melodic Death Metal Project',
+    description: 'A developing extreme metal project shaped by frostbitten melodies, soot-black atmosphere, crushing guitars and ritualistic darkness.',
+    manifest: 'An atmospheric extreme metal concept engineered to establish design aesthetics, dark visuals, and raw sonic characteristics before physical release.',
+    role: 'Concept, guitars, co-composition, visual direction, worldbuilding and website development.',
+    tags: ['Blackened Metal', 'Melodic Death', 'Frostbitten', 'Visual Identity', 'Website'],
+    cta: 'Enter Ashwrithe',
+    link: 'https://ashwrithe.com',
+    accent: 'zinc'
   }
 ];
 
@@ -64,11 +92,6 @@ const UPCOMING_PROJECTS = {
     title: 'CMS Control Center',
     label: 'Payload & Supabase Infrastructure',
     description: 'Production schema designs, robust access control policies, automated PostgreSQL backup solutions, and custom S3 storage adapters.'
-  },
-  'Music Projects': {
-    title: 'Ashwrithe Soundscapes',
-    label: 'Sonic Environment Index',
-    description: 'Interactive audio manifest managing synth patches, digital release metadata pipelines, and distribution schedules.'
   },
   'Creative Workflows': {
     title: 'Realmforged Systems',
@@ -95,7 +118,10 @@ export default function ProjectsClient() {
     activeFilter === 'All' || proj.category === activeFilter
   );
 
-  const upcomingProject = CATEGORIES.includes(activeFilter) && activeFilter !== 'All' && activeFilter !== 'Websites' 
+  const upcomingProject = CATEGORIES.includes(activeFilter) && 
+    activeFilter !== 'All' && 
+    activeFilter !== 'Websites' && 
+    activeFilter !== 'Music Projects'
     ? UPCOMING_PROJECTS[activeFilter] 
     : null;
 
