@@ -17,15 +17,44 @@ const PROJECTS = [
   {
     id: 'vonporat',
     title: 'vonporat.com',
-    category: 'Websites', // Maps to Websites filter
+    category: 'Websites',
     status: 'Live',
     typeLabel: 'Personal Creative Hub',
-    description: 'A personal creative hub connecting music, visual art, blog posts, AI experiments and process improvement. Built with Next.js, Payload CMS, Supabase and Vercel.',
+    description: 'A personal creative hub connecting music, visual art, blog posts, AI experiments and process improvement.',
+    manifest: 'Built with Next.js, Payload CMS, Supabase and Vercel. Connects modular content pipelines into a fast, unified digital workspace.',
     role: 'Concept, design direction, content, CMS structure and iterative development with AI-assisted coding.',
     tags: ['Website', 'Payload CMS', 'Supabase', 'Vercel', 'Creative Hub'],
     cta: 'View Site',
     link: 'https://vonporat.com',
     accent: 'cyan'
+  },
+  {
+    id: 'realmforged',
+    title: 'realmforgedofficial.com',
+    category: 'Websites',
+    status: 'Live',
+    typeLabel: 'Story-Driven Metal Website',
+    description: 'A dedicated website for Realmforged, built as a central hub for the project’s music, lore, releases, press material and visual identity.',
+    manifest: 'The site supports the cinematic power metal concept behind Realmforged, combining dark fantasy atmosphere with practical release information, streaming links and press-facing content.',
+    role: 'Concept, content direction, visual direction, website structure and ongoing project development.',
+    tags: ['Website', 'Music Project', 'Power Metal', 'EPK', 'Dark Fantasy'],
+    cta: 'View Site',
+    link: 'https://realmforgedofficial.com',
+    accent: 'purple'
+  },
+  {
+    id: 'ashwrithe',
+    title: 'ashwrithe.com',
+    category: 'Websites',
+    status: 'In Development',
+    typeLabel: 'Extreme Metal Project Site',
+    description: 'A dark project website for Ashwrithe, created to establish the visual identity, atmosphere and conceptual foundation of the band before the first official release.',
+    manifest: 'The site presents Ashwrithe as a developing blackened melodic death metal project shaped by frostbitten visuals, soot-dark atmosphere and ritualistic extreme metal aesthetics.',
+    role: 'Concept, visual direction, content direction, website structure and project worldbuilding.',
+    tags: ['Website', 'Music Project', 'Blackened Metal', 'Visual Identity', 'In Development'],
+    cta: 'Enter Ashwrithe',
+    link: 'https://ashwrithe.com',
+    accent: 'zinc'
   }
 ];
 
@@ -97,7 +126,7 @@ export default function ProjectsClient() {
               }
               className={`text-[10px] md:text-xs font-mono px-3 py-1.5 rounded transition-all duration-300 tracking-wider uppercase font-medium active:scale-[0.98] ${
                 isActive
-                  ? 'hover:brightness-125 hover:shadow-[0_0_24px_rgba(0,229,255,0.18)]'
+                  ? 'hover:border-accent-cyan/50 hover:shadow-[0_0_20px_rgba(0,229,255,0.12)]'
                   : 'hover:text-white hover:border-white/10 hover:shadow-[0_0_12px_rgba(255,255,255,0.03)]'
               }`}
             >
@@ -121,8 +150,8 @@ export default function ProjectsClient() {
                   <span className="text-[10px] font-mono tracking-widest text-zinc-500 uppercase">
                     {proj.typeLabel}
                   </span>
-                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                  <span className="text-[9px] font-mono tracking-wider text-emerald-400 uppercase font-bold">
+                  <span className={`h-1.5 w-1.5 rounded-full ${proj.status === 'Live' ? 'bg-emerald-500' : 'bg-amber-500'} animate-pulse`} />
+                  <span className={`text-[9px] font-mono tracking-wider ${proj.status === 'Live' ? 'text-emerald-400' : 'text-amber-400'} uppercase font-bold`}>
                     {proj.status}
                   </span>
                 </div>
@@ -140,10 +169,14 @@ export default function ProjectsClient() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
               
               {/* Left Column: Specifications */}
-              <div className="md:col-span-1 flex flex-col gap-4 text-xs font-mono">
-                <div className="flex flex-col gap-1">
+              <div className="md:col-span-1 flex flex-col gap-6 text-xs font-mono">
+                <div className="flex flex-col gap-1.5">
+                  <span className="text-zinc-500 uppercase tracking-widest text-[9px]">Overview</span>
+                  <p className="text-zinc-300 font-light leading-5 normal-case font-sans">{proj.description}</p>
+                </div>
+                <div className="flex flex-col gap-1.5">
                   <span className="text-zinc-500 uppercase tracking-widest text-[9px]">Role</span>
-                  <p className="text-zinc-300 font-light leading-5">{proj.role}</p>
+                  <p className="text-zinc-300 font-light leading-5 normal-case font-sans">{proj.role}</p>
                 </div>
               </div>
 
@@ -152,7 +185,7 @@ export default function ProjectsClient() {
                 <div className="flex flex-col gap-4">
                   <span className="text-zinc-500 font-mono uppercase tracking-widest text-[9px]">Manifest</span>
                   <p className="text-sm leading-6 text-zinc-400 font-light">
-                    {proj.description}
+                    {proj.manifest}
                   </p>
                 </div>
 
