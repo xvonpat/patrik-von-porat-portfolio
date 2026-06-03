@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import GlowEffect from "@/components/GlowEffect";
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import Script from 'next/script';
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
@@ -106,6 +107,20 @@ export default function RootLayout({ children }) {
         <Footer />
         <Analytics />
         <SpeedInsights />
+        
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-GKF3NL1Y43"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-GKF3NL1Y43');
+          `}
+        </Script>
       </body>
     </html>
   );
