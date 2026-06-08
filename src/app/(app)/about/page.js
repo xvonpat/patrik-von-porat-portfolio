@@ -115,6 +115,62 @@ export default function About() {
 
       </div>
 
+      {/* Creative Operating System Section */}
+      <div className="flex flex-col gap-8 mt-12 pt-12 border-t border-white/5 relative z-10">
+        <div className="flex flex-col gap-2">
+          <h2 className="text-2xl font-semibold text-white tracking-tight font-gothic">Creative Operating System</h2>
+          <p className="text-sm text-zinc-400 font-light leading-relaxed max-w-xl">
+            A curated stack of tools and methods I use to turn creative chaos into music, visuals, websites and structured systems.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {[
+            {
+              title: "Music & Audio",
+              accent: "purple",
+              skills: ["Guitar", "Pro Tools", "Kemper", "Songwriting", "Recording", "MIDI Programming"]
+            },
+            {
+              title: "Visual Art",
+              accent: "purple",
+              skills: ["Graphite Drawing", "Tattoo Design", "Photoshop", "AI Image Workflows", "Miniature Painting", "3D Printing"]
+            },
+            {
+              title: "Systems & Data",
+              accent: "cyan",
+              skills: ["Power BI", "Excel", "Lean Six Sigma Green Belt", "DMAIC", "Process Mapping", "Workflow Optimization"]
+            },
+            {
+              title: "Web & AI",
+              accent: "cyan",
+              skills: ["Payload CMS", "Supabase", "Vercel", "Next.js", "ComfyUI", "AI-Assisted Coding"]
+            }
+          ].map((group, idx) => {
+            const isPurple = group.accent === 'purple';
+            const accentClass = isPurple ? 'text-accent-purple font-semibold' : 'text-accent-cyan font-semibold';
+            const hoverBorderClass = isPurple ? 'hover:border-accent-purple/30' : 'hover:border-accent-cyan/30';
+            return (
+              <GlassCard key={idx} accent={group.accent} className="p-6 flex flex-col gap-4">
+                <span className={`text-xs font-mono uppercase tracking-widest ${accentClass}`}>
+                  {group.title}
+                </span>
+                <div className="flex flex-wrap gap-2">
+                  {group.skills.map((skill, sIdx) => (
+                    <span 
+                      key={sIdx} 
+                      className={`text-[10px] font-mono px-2.5 py-1 rounded bg-zinc-900/60 border border-white/5 text-zinc-400 uppercase tracking-wider transition-all duration-300 ${hoverBorderClass} hover:text-white`}
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </GlassCard>
+            );
+          })}
+        </div>
+      </div>
+
     </div>
   );
 }
