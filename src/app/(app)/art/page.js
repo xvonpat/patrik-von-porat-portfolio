@@ -20,9 +20,12 @@ export default function Art() {
       image: "/images/art/butcher/The_Butcher-1.jpg",
       gallery: [
         { src: "/images/art/butcher/The_Butcher-1.jpg", title: "The Butcher Bust - Front", caption: "SLA resin print. Applied heavy layers of acrylic washes, custom skin-tone blending, and weathering.", category: "Miniatures & 3D Prints", alt: "Butcher front view" },
+        { src: "/images/art/conan/Conan.webp", title: "Conan the Barbarian - Heroic Stance", caption: "SLA resin print. Showcasing detailed flesh tones, metallic steel drybrushing, and hand-finished stone terrain base.", category: "Miniatures & 3D Prints", alt: "Conan front view" },
+        { src: "/images/art/spacemarine/SpaceMarine.webp", title: "Space Marine Warhammer 40k", caption: "Deep blue power armor painting practice, featuring battle-damage weathering, airbrush transitions, and micro-decals.", category: "Miniatures & 3D Prints", alt: "Space Marine miniature" },
         { src: "/images/art/butcher/The_Butcher-2.jpg", title: "The Butcher Bust - Back Detail", caption: "Precision detailing on spine segments, muscle textures, and copper harness.", category: "Miniatures & 3D Prints", alt: "Butcher spine details" },
         { src: "/images/art/butcher/The_Butcher-3.jpg", title: "The Butcher Bust - Side Profile", caption: "Contrast highlight check on tusks, horns, and skin contours.", category: "Miniatures & 3D Prints", alt: "Butcher side view" },
-        { src: "/images/art/butcher/The_Butcher-4.jpg", title: "The Butcher Bust - Face Close-up", caption: "Precision detail check on teeth, glowing green eyes, and blood splatters.", category: "Miniatures & 3D Prints", alt: "Butcher head close-up" }
+        { src: "/images/art/butcher/The_Butcher-4.jpg", title: "The Butcher Bust - Face Close-up", caption: "Precision detail check on teeth, glowing green eyes, and blood splatters.", category: "Miniatures & 3D Prints", alt: "Butcher head close-up" },
+        { src: "/images/art/conan/Conan-2.webp", title: "Conan the Barbarian - Profile Close-up", caption: "Macro view emphasizing skin shading, leather straps, and hair highlights.", category: "Miniatures & 3D Prints", alt: "Conan close-up view" }
       ]
     },
     {

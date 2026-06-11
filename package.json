@@ -17,6 +17,7 @@
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
     "graphql": "^16.14.0",
+    "jsonwebtoken": "^9.0.3",
     "next": "16.2.6",
     "payload": "^3.85.0",
     "pg": "^8.21.0",
