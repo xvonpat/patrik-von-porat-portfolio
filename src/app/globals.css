@@ -129,6 +129,15 @@ h1, h2, h3, h4, h5, h6 {
   animation-delay: 6s;
 }
 
+/* Pause heavy animations on mobile to reduce GPU pressure */
+@media (max-width: 767px) {
+  .animate-drift,
+  .animate-drift-delayed,
+  .animate-drift-slow {
+    animation: none;
+  }
+}
+
 /* Custom premium transition easing utility */
 .transition-premium {
   transition-property: all;
