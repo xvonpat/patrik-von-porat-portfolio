@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Home() {
   return (
@@ -9,14 +10,17 @@ export default function Home() {
       <section className="flex flex-col items-center text-center justify-center min-h-[50vh] gap-8 max-w-4xl mx-auto relative py-12 md:py-20">
         {/* Subtle backing purple glow to lift the text off the dark background */}
         <div className="absolute top-[15%] left-1/2 -translate-x-1/2 w-[70%] h-[40%] bg-accent-purple/5 blur-[90px] rounded-full pointer-events-none -z-10" />
-
+ 
         {/* Subtle decorative crest/emblem placeholder */}
         <div className="w-12 h-[1px] bg-gradient-to-r from-transparent via-accent-purple to-transparent mb-2" />
         
         <h1 className="sr-only">Patrik von Porat</h1>
-        <img 
+        <Image 
           src="/images/pvp_signature.png" 
           alt="Patrik von Porat Signature" 
+          width={400}
+          height={144}
+          priority
           className="h-24 md:h-36 w-auto object-contain select-none pointer-events-none drop-shadow-[0_8px_24px_rgba(255,255,255,0.1)]"
         />
         

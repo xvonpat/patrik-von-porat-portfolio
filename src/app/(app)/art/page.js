@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import GlassCard from '@/components/GlassCard';
 import LightboxGallery from '@/components/LightboxGallery';
 
@@ -17,14 +18,14 @@ export default function Art() {
       accent: "purple",
       dimensions: "Resin Scale Models & Dioramas",
       placeholderGradient: "from-purple-950/20 via-zinc-950 to-neutral-900",
-      image: "/images/art/butcher/The_Butcher-1.jpg",
+      image: "/images/art/butcher/The_Butcher-1.webp",
       gallery: [
-        { src: "/images/art/butcher/The_Butcher-1.jpg", title: "The Butcher Bust - Front", caption: "SLA resin print. Applied heavy layers of acrylic washes, custom skin-tone blending, and weathering.", category: "Miniatures & 3D Prints", alt: "Butcher front view" },
+        { src: "/images/art/butcher/The_Butcher-1.webp", title: "The Butcher Bust - Front", caption: "SLA resin print. Applied heavy layers of acrylic washes, custom skin-tone blending, and weathering.", category: "Miniatures & 3D Prints", alt: "Butcher front view" },
         { src: "/images/art/conan/Conan.webp", title: "Conan the Barbarian - Heroic Stance", caption: "SLA resin print. Showcasing detailed flesh tones, metallic steel drybrushing, and hand-finished stone terrain base.", category: "Miniatures & 3D Prints", alt: "Conan front view" },
         { src: "/images/art/spacemarine/SpaceMarine.webp", title: "Space Marine Warhammer 40k", caption: "Deep blue power armor painting practice, featuring battle-damage weathering, airbrush transitions, and micro-decals.", category: "Miniatures & 3D Prints", alt: "Space Marine miniature" },
-        { src: "/images/art/butcher/The_Butcher-2.jpg", title: "The Butcher Bust - Back Detail", caption: "Precision detailing on spine segments, muscle textures, and copper harness.", category: "Miniatures & 3D Prints", alt: "Butcher spine details" },
-        { src: "/images/art/butcher/The_Butcher-3.jpg", title: "The Butcher Bust - Side Profile", caption: "Contrast highlight check on tusks, horns, and skin contours.", category: "Miniatures & 3D Prints", alt: "Butcher side view" },
-        { src: "/images/art/butcher/The_Butcher-4.jpg", title: "The Butcher Bust - Face Close-up", caption: "Precision detail check on teeth, glowing green eyes, and blood splatters.", category: "Miniatures & 3D Prints", alt: "Butcher head close-up" },
+        { src: "/images/art/butcher/The_Butcher-2.webp", title: "The Butcher Bust - Back Detail", caption: "Precision detailing on spine segments, muscle textures, and copper harness.", category: "Miniatures & 3D Prints", alt: "Butcher spine details" },
+        { src: "/images/art/butcher/The_Butcher-3.webp", title: "The Butcher Bust - Side Profile", caption: "Contrast highlight check on tusks, horns, and skin contours.", category: "Miniatures & 3D Prints", alt: "Butcher side view" },
+        { src: "/images/art/butcher/The_Butcher-4.webp", title: "The Butcher Bust - Face Close-up", caption: "Precision detail check on teeth, glowing green eyes, and blood splatters.", category: "Miniatures & 3D Prints", alt: "Butcher head close-up" },
         { src: "/images/art/conan/Conan-2.webp", title: "Conan the Barbarian - Profile Close-up", caption: "Macro view emphasizing skin shading, leather straps, and hair highlights.", category: "Miniatures & 3D Prints", alt: "Conan close-up view" }
       ]
     },
@@ -48,9 +49,9 @@ export default function Art() {
       accent: "purple",
       dimensions: "Synthetic Skin & Custom Flashes",
       placeholderGradient: "from-purple-950/20 via-zinc-950 to-neutral-900",
-      image: "/images/tattoos/mariotattoo.jpg",
+      image: "/images/tattoos/mariotattoo.webp",
       gallery: [
-        { src: "/images/tattoos/mariotattoo.jpg", title: "Mario Shading Practice", caption: "Honing precision linework and whip-shading on synthetic skin.", category: "Tattoo Practice", alt: "Mario tattoo Synthetic skin" },
+        { src: "/images/tattoos/mariotattoo.webp", title: "Mario Shading Practice", caption: "Honing precision linework and whip-shading on synthetic skin.", category: "Tattoo Practice", alt: "Mario tattoo Synthetic skin" },
         { src: "", title: "Runic Wolf Flash", caption: "Norse woodcarving runes flash template.", category: "Tattoo Practice", alt: "Runic wolf" },
         { src: "", title: "Gothic Archway Study", caption: "Intricate blackwork lining study of architectural curves.", category: "Tattoo Practice", alt: "Gothic archway" }
       ]
@@ -62,8 +63,9 @@ export default function Art() {
       accent: "cyan",
       dimensions: "Digital - Ultra High-Resolution Outputs",
       placeholderGradient: "from-cyan-950/20 via-zinc-950 to-neutral-900",
+      image: "/images/art/hero-banner.webp",
       gallery: [
-        { src: "/images/art/hero-banner.png", title: "Obsidian Citadel", caption: "Surreal, high-contrast dark oil-painting neural synthesis.", category: "AI Generated Art", alt: "Obsidian citadel digital" },
+        { src: "/images/art/hero-banner.webp", title: "Obsidian Citadel", caption: "Surreal, high-contrast dark oil-painting neural synthesis.", category: "AI Generated Art", alt: "Obsidian citadel digital" },
         { src: "", title: "Biomech Cathedral", caption: "Generative model study on architectural metal textures.", category: "AI Generated Art", alt: "Biomech cathedral" },
         { src: "", title: "The Ash Wraith", caption: "Tactile dark concepts and texture metadata prompt pipelines.", category: "AI Generated Art", alt: "Ash wraith concept" }
       ]
@@ -103,9 +105,11 @@ export default function Art() {
                 >
                   {cat.image ? (
                     <>
-                      <img 
+                      <Image 
                         src={cat.image} 
                         alt={cat.title} 
+                        fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
                         className="absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-out scale-100 group-hover:scale-105"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-obsidian-950/80 via-transparent to-transparent opacity-75 pointer-events-none" />
@@ -138,9 +142,11 @@ export default function Art() {
                       className="aspect-video bg-zinc-950/40 border border-white/5 rounded-lg flex flex-col items-center justify-center text-center group hover:border-accent-purple/30 transition-premium relative overflow-hidden focus:outline-none"
                     >
                       {item.src && !item.src.includes("...") ? (
-                        <img 
+                        <Image 
                           src={item.src} 
                           alt={item.title} 
+                          fill
+                          sizes="(max-width: 768px) 33vw, 15vw"
                           className="absolute inset-0 w-full h-full object-cover transition-all duration-500 scale-100 group-hover:scale-105"
                         />
                       ) : (

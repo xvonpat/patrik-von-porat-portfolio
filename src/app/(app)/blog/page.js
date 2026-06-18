@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { getPayload } from 'payload';
 import configPromise from '../../../../payload.config.ts';
 import GlassCard from '@/components/GlassCard';
@@ -193,11 +194,12 @@ export default async function BlogPage() {
                           <div className={`absolute -inset-1 rounded-lg bg-gradient-to-r from-accent-${featuredCatInfo.accent}/20 to-transparent blur-xl opacity-75 group-hover:opacity-100 transition duration-1000 -z-10`} />
                           
                           <div className="relative aspect-[16/10] lg:aspect-[4/3] rounded-lg overflow-hidden border border-white/5 bg-obsidian-900/60 shadow-2xl">
-                            <img 
+                            <Image 
                               src={featuredImgUrl} 
                               alt={featuredImgAlt} 
-                              loading="eager"
-                              fetchPriority="high"
+                              fill
+                              priority
+                              sizes="(max-width: 768px) 100vw, 40vw"
                               className="w-full h-full object-cover object-center grayscale group-hover:grayscale-0 transition-all duration-700 ease-out scale-100 group-hover:scale-[1.03]"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-obsidian-950/60 via-transparent to-transparent opacity-65 pointer-events-none" />

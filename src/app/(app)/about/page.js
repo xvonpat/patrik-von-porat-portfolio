@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import GlassCard from '@/components/GlassCard';
 
 export const metadata = {
@@ -32,9 +33,11 @@ export default function About() {
         <div className="lg:col-span-4 flex flex-col gap-6">
           {/* Cinematic Guitar Portrait */}
           <div className="w-full aspect-[2/3] rounded-lg overflow-hidden border border-white/5 shadow-2xl relative group hover:border-accent-purple/30 transition-premium">
-            <img 
-              src="/images/patrik_portrait.jpg" 
+            <Image 
+              src="/images/patrik_portrait.webp" 
               alt="Patrik von Porat Portrait" 
+              fill
+              sizes="(max-width: 768px) 100vw, 33vw"
               className="w-full h-full object-cover object-center grayscale hover:grayscale-0 transition-all duration-700 ease-out scale-100 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-obsidian-950/80 via-transparent to-transparent opacity-60 pointer-events-none" />

@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import GlassCard from '@/components/GlassCard';
 
 export const metadata = {
@@ -24,7 +25,7 @@ export default function Music() {
       status: "Active - Album in Production",
       accent: "purple",
       tags: ["Epic", "Orchestral", "Gothic Fantasy"],
-      logo: "/images/music/realmforged_logo.png"
+      logo: "/images/music/realmforged_logo.webp"
     },
     {
       name: "Ashwrithe",
@@ -49,7 +50,7 @@ export default function Music() {
       status: "Active - Touring & Writing",
       accent: "orange",
       tags: ["Swedish", "Anthemic", "Speed"],
-      logo: "/images/music/freternia.jpg",
+      logo: "/images/music/freternia.webp",
       fullBanner: true,
       bannerPosition: "object-top",
       bannerZoom: "scale-100",
@@ -89,9 +90,11 @@ export default function Music() {
               {band.logo && (
                 <div className={`w-full h-28 mb-6 rounded-lg bg-obsidian-950/40 border border-white/5 flex items-center justify-center overflow-hidden relative transition-all duration-300 hover:border-white/10 ${band.fullBanner ? 'p-0' : 'p-4'}`}>
                   <div className="absolute inset-0 bg-gradient-to-b from-white/[0.01] to-transparent pointer-events-none z-10" />
-                  <img
+                  <Image
                     src={band.logo}
                     alt={`${band.name} logo`}
+                    width={band.fullBanner ? 600 : 300}
+                    height={112}
                     className={`${band.fullBanner ? `w-full h-full object-cover ${band.bannerPosition || 'object-center'} ${band.bannerZoom || 'scale-100'}` : 'max-h-full max-w-full object-contain filter drop-shadow-[0_0_10px_rgba(255,255,255,0.12)]'} transition-all duration-500 group-hover:scale-[1.03] group-hover:drop-shadow-[0_0_16px_rgba(255,255,255,0.2)] ${
                       band.invertLogo ? 'invert brightness-[1.1]' : ''
                     }`}
