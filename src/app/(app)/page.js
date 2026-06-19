@@ -11,8 +11,10 @@ export default function Home() {
         {/* Subtle backing purple glow to lift the text off the dark background */}
         <div className="absolute top-[15%] left-1/2 -translate-x-1/2 w-[70%] h-[40%] bg-accent-purple/5 blur-[90px] rounded-full pointer-events-none -z-10" />
  
-        {/* Subtle decorative crest/emblem placeholder */}
-        <div className="w-12 h-[1px] bg-gradient-to-r from-transparent via-accent-purple to-transparent mb-2" />
+        {/* Tagline */}
+        <p className="text-[10px] md:text-xs font-mono tracking-[0.3em] uppercase text-zinc-500">
+          Creative Work &amp; Structured Thinking
+        </p>
         
         <h1 className="sr-only">Patrik von Porat</h1>
         <Image 
@@ -24,35 +26,27 @@ export default function Home() {
           className="h-24 md:h-36 w-auto object-contain select-none pointer-events-none drop-shadow-[0_8px_24px_rgba(255,255,255,0.1)]"
         />
         
-        <p className="text-sm md:text-lg font-gothic tracking-widest uppercase text-accent-purple flex flex-wrap justify-center gap-x-3 gap-y-1">
-          <span>Guitarist</span> 
-          <span className="text-zinc-600">&middot;</span> 
-          <span>Artist</span> 
-          <span className="text-zinc-600">&middot;</span> 
-          <span>Creator</span> 
-          <span className="text-zinc-600">&middot;</span> 
-          <span className="text-accent-cyan">Process Improvement Nerd</span>
+        <p className="text-sm md:text-lg font-gothic tracking-widest uppercase text-accent-purple text-center">
+          Guitarist, visual artist and systems-minded creator
         </p>
         
         <p className="text-base md:text-lg leading-8 text-zinc-400 font-light max-w-2xl mt-4">
-          A creative hub where raw gothic-metal aesthetics meet precise systems thinking. 
-          Exploring the synergy between guitar orchestration, dark traditional art, 
-          generative AI frontiers, and continuous workflow optimization.
+          I build music, visual art, websites and structured workflows &mdash; connecting heavy metal, dark aesthetics, AI-assisted creation and process improvement.
         </p>
         
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row gap-4 mt-8 w-full sm:w-auto">
           <Link 
-            href="/blog" 
+            href="/projects" 
             className="px-8 py-4 rounded-full bg-white/10 hover:bg-white/15 text-white font-semibold uppercase tracking-wider text-sm border border-white/20 hover:border-white/35 backdrop-blur-md hover:shadow-[0_0_25px_rgba(255,255,255,0.12)] hover:-translate-y-0.5 active:translate-y-0 text-center transition-premium"
           >
-            Read Chronicles
+            Explore Work
           </Link>
           <Link 
-            href="/contact" 
+            href="/blog" 
             className="px-8 py-4 rounded-full bg-zinc-950/45 hover:bg-zinc-900/50 text-white font-semibold uppercase tracking-wider text-sm border border-zinc-800 hover:border-accent-purple/35 backdrop-blur-md hover:shadow-[0_0_25px_rgba(139,92,246,0.15)] hover:-translate-y-0.5 active:translate-y-0 text-center transition-premium"
           >
-            Contact
+            Read Blog
           </Link>
         </div>
         
