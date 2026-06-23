@@ -47,10 +47,11 @@ export default function Art() {
       subtitle: "Inkwork, heavy linework, and dark-art iconography",
       description: "Honing precision linework and whip-shading on synthetic skin. Developing custom dark-art templates incorporating traditional Norse woodcarving aesthetics, modern heavy blackwork, and runic designs.",
       accent: "purple",
-      dimensions: "Synthetic Skin & Custom Flashes",
+      dimensions: "Reelskin / Black & Grey Practice",
       placeholderGradient: "from-purple-950/20 via-zinc-950 to-neutral-900",
-      image: "/images/tattoos/mariotattoo.webp",
+      image: "/images/art/tattoo/skull-flow-study.webp",
       gallery: [
+        { src: "/images/art/tattoo/skull-flow-study.webp", title: "Skull & Flow Study", caption: "Black and grey reelskin practice focused on skull structure, flowing ornamental shapes, pepper shading and contrast control.", category: "Tattoo Practice", alt: "Black and grey reelskin tattoo practice of a skull with flowing ornamental shapes and pepper shading." },
         { src: "/images/tattoos/mariotattoo.webp", title: "Mario Shading Practice", caption: "Honing precision linework and whip-shading on synthetic skin.", category: "Tattoo Practice", alt: "Mario tattoo Synthetic skin" },
         { src: "", title: "Runic Wolf Flash", caption: "Norse woodcarving runes flash template.", category: "Tattoo Practice", alt: "Runic wolf" },
         { src: "", title: "Gothic Archway Study", caption: "Intricate blackwork lining study of architectural curves.", category: "Tattoo Practice", alt: "Gothic archway" }
