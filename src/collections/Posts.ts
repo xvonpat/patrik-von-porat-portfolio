@@ -1,14 +1,14 @@
 import type { CollectionConfig } from 'payload';
 
 function extractFirstParagraph(content: any): string {
-  if (!content || !content.root || !Array.isArray(content.root.children)) {
+  if (!content || typeof content !== 'object' || !content.root || !Array.isArray(content.root.children)) {
     return '';
   }
 
   for (const child of content.root.children) {
-    if (child.type === 'paragraph' && Array.isArray(child.children)) {
+    if (child && typeof child === 'object' && child.type === 'paragraph' && Array.isArray(child.children)) {
       const text = child.children
-        .filter((c: any) => c.type === 'text')
+        .filter((c: any) => c && typeof c === 'object' && c.type === 'text')
         .map((c: any) => c.text || '')
         .join('')
         .trim();
@@ -29,7 +29,7 @@ function truncateText(text: string, length: number): string {
 }
 
 function getLexicalText(node: any): string {
-  if (!node) return '';
+  if (!node || typeof node !== 'object') return '';
   if (Array.isArray(node)) {
     return node.map(getLexicalText).join(' ');
   }
@@ -53,7 +53,7 @@ export const Posts: CollectionConfig = {
       ({ data }) => {
         if (data) {
           // 1. Slug auto-generation from title if empty
-          if (data.title && (!data.slug || data.slug.trim() === '')) {
+          if (data.title && (!data.slug || typeof data.slug !== 'string' || data.slug.trim() === '')) {
             data.slug = data.title
               .toLowerCase()
               .replace(/[^a-z0-9\s-]/g, '') // remove special characters except spaces/hyphens
@@ -63,7 +63,7 @@ export const Posts: CollectionConfig = {
           }
 
           // 2. Excerpt auto-generation from content if empty
-          if (data.content && (!data.excerpt || data.excerpt.trim() === '')) {
+          if (data.content && (!data.excerpt || typeof data.excerpt !== 'string' || data.excerpt.trim() === '')) {
             const firstParagraph = extractFirstParagraph(data.content);
             if (firstParagraph) {
               data.excerpt = truncateText(firstParagraph, 150);
@@ -85,7 +85,7 @@ export const Posts: CollectionConfig = {
       type: 'text',
       unique: true,
       validate: (val: any, { data }: { data?: any }) => {
-        if (data?.status === 'published' && (!val || val.trim() === '')) {
+        if (data?.status === 'published' && (!val || typeof val !== 'string' || val.trim() === '')) {
           return 'A slug is required when the post is published.';
         }
         return true;
@@ -172,7 +172,7 @@ export const Posts: CollectionConfig = {
       name: 'excerpt',
       type: 'textarea',
       validate: (val: any, { data }: { data?: any }) => {
-        if (data?.status === 'published' && (!val || val.trim() === '')) {
+        if (data?.status === 'published' && (!val || typeof val !== 'string' || val.trim() === '')) {
           return 'An excerpt is required when the post is published.';
         }
         return true;
