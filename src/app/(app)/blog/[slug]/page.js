@@ -216,11 +216,15 @@ export default async function BlogPostPage({ params }) {
   // Category mapping to premium theme colors
   const categoryMap = {
     'music': { label: 'Music', accent: 'purple', textClass: 'text-accent-purple', bgClass: 'bg-accent-purple/10 border-accent-purple/20' },
+    'visual-art': { label: 'Visual Art', accent: 'orange', textClass: 'text-accent-orange', bgClass: 'bg-accent-orange/10 border-accent-orange/20' },
     'art': { label: 'Visual Art', accent: 'orange', textClass: 'text-accent-orange', bgClass: 'bg-accent-orange/10 border-accent-orange/20' },
-    'ai': { label: 'AI Projects', accent: 'cyan', textClass: 'text-accent-cyan', bgClass: 'bg-accent-cyan/10 border-accent-cyan/20' },
-    'process-improvement': { label: 'Process Improvement', accent: 'purple', textClass: 'text-accent-purple', bgClass: 'bg-accent-purple/10 border-accent-purple/20' },
-    'behind-the-scenes': { label: 'Behind The Scenes', accent: 'orange', textClass: 'text-accent-orange', bgClass: 'bg-accent-orange/10 border-accent-orange/20' },
-    'website-build-log': { label: 'Website / Build Log', accent: 'cyan', textClass: 'text-accent-cyan', bgClass: 'bg-accent-cyan/10 border-accent-cyan/20' },
+    'technology': { label: 'Technology', accent: 'cyan', textClass: 'text-accent-cyan', bgClass: 'bg-accent-cyan/10 border-accent-cyan/20' },
+    'ai': { label: 'Technology', accent: 'cyan', textClass: 'text-accent-cyan', bgClass: 'bg-accent-cyan/10 border-accent-cyan/20' },
+    'website-build-log': { label: 'Technology', accent: 'cyan', textClass: 'text-accent-cyan', bgClass: 'bg-accent-cyan/10 border-accent-cyan/20' },
+    'process': { label: 'Process', accent: 'cyan', textClass: 'text-accent-cyan', bgClass: 'bg-accent-cyan/10 border-accent-cyan/20' },
+    'process-improvement': { label: 'Process', accent: 'cyan', textClass: 'text-accent-cyan', bgClass: 'bg-accent-cyan/10 border-accent-cyan/20' },
+    'personal': { label: 'Personal', accent: 'purple', textClass: 'text-accent-purple', bgClass: 'bg-accent-purple/10 border-accent-purple/20' },
+    'behind-the-scenes': { label: 'Personal', accent: 'purple', textClass: 'text-accent-purple', bgClass: 'bg-accent-purple/10 border-accent-purple/20' },
   };
 
   const catInfo = categoryMap[post.category] || { 

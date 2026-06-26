@@ -162,9 +162,9 @@ export const Posts: CollectionConfig = {
             }
           }
 
-          // 8. Category default fallback: If category is empty, default to behind-the-scenes
+          // 8. Category default fallback: If category is empty, default to personal
           if (!data.category && !originalDoc?.category) {
-            data.category = 'behind-the-scenes';
+            data.category = 'personal';
           }
 
           // 9. Tags auto-suggestion: If tags array is empty, generate from content keywords
@@ -254,11 +254,10 @@ export const Posts: CollectionConfig = {
       type: 'select',
       options: [
         { label: 'Music', value: 'music' },
-        { label: 'Art', value: 'art' },
-        { label: 'AI', value: 'ai' },
-        { label: 'Process Improvement', value: 'process-improvement' },
-        { label: 'Behind the Scenes', value: 'behind-the-scenes' },
-        { label: 'Website / Build Log', value: 'website-build-log' },
+        { label: 'Visual Art', value: 'visual-art' },
+        { label: 'Technology', value: 'technology' },
+        { label: 'Process', value: 'process' },
+        { label: 'Personal', value: 'personal' },
       ],
       required: false,
       validate: (val: any, { data }: { data?: any }) => {

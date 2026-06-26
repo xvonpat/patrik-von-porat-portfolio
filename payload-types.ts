@@ -176,7 +176,7 @@ export interface Post {
    * Slug is generated from the title if left empty.
    */
   slug?: string | null;
-  category?: ('music' | 'art' | 'ai' | 'process-improvement' | 'behind-the-scenes' | 'website-build-log') | null;
+  category?: ('music' | 'visual-art' | 'technology' | 'process' | 'personal') | null;
   /**
    * Published Date is set automatically when publishing if left empty.
    */
