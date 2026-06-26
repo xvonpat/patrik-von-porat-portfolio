@@ -50,7 +50,7 @@ export const Posts: CollectionConfig = {
   },
   hooks: {
     beforeValidate: [
-      ({ data }) => {
+      ({ data, originalDoc }: any) => {
         if (data) {
           // 1. Slug auto-generation from title if empty
           if (data.title && (!data.slug || typeof data.slug !== 'string' || data.slug.trim() === '')) {
@@ -69,6 +69,65 @@ export const Posts: CollectionConfig = {
               data.excerpt = truncateText(firstParagraph, 150);
             }
           }
+
+          // Initialize data.seo if it doesn't exist
+          if (!data.seo || typeof data.seo !== 'object') {
+            data.seo = {};
+          }
+
+          const resolvedTitle = data.title || originalDoc?.title;
+          const resolvedSlug = data.slug || originalDoc?.slug;
+          const resolvedExcerpt = data.excerpt || originalDoc?.excerpt;
+          const resolvedContent = data.content || originalDoc?.content;
+          const resolvedFeaturedImage = data.featuredImage || originalDoc?.featuredImage;
+
+          const resolvedSeo = {
+            ...(originalDoc?.seo || {}),
+            ...(data.seo || {}),
+          };
+
+          // 3. SEO Title: If SEO Title is empty, use the post title as default.
+          if (!resolvedSeo.seoTitle || typeof resolvedSeo.seoTitle !== 'string' || resolvedSeo.seoTitle.trim() === '') {
+            if (resolvedTitle) {
+              resolvedSeo.seoTitle = resolvedTitle;
+            }
+          }
+
+          // 4. Meta Description: If Meta Description is empty, use the excerpt.
+          // If excerpt is empty, generate it from the first meaningful paragraph of the post body.
+          // Limit to around 150–160 characters.
+          if (!resolvedSeo.metaDescription || typeof resolvedSeo.metaDescription !== 'string' || resolvedSeo.metaDescription.trim() === '') {
+            if (resolvedExcerpt) {
+              resolvedSeo.metaDescription = truncateText(resolvedExcerpt, 150);
+            } else if (resolvedContent) {
+              const firstParagraph = extractFirstParagraph(resolvedContent);
+              if (firstParagraph) {
+                resolvedSeo.metaDescription = truncateText(firstParagraph, 150);
+              }
+            }
+          }
+
+          // 5. Open Graph Image: If Open Graph Image is empty, use the post featured image as default.
+          // If no featured image exists, leave it empty.
+          if (!resolvedSeo.ogImage) {
+            if (resolvedFeaturedImage) {
+              const imageId = typeof resolvedFeaturedImage === 'object' && resolvedFeaturedImage !== null && 'id' in resolvedFeaturedImage
+                ? (resolvedFeaturedImage as any).id
+                : resolvedFeaturedImage;
+              if (imageId) {
+                resolvedSeo.ogImage = imageId;
+              }
+            }
+          }
+
+          // 6. Canonical URL: If Canonical URL is empty and slug exists, generate: https://vonporat.com/blog/[slug]
+          if (!resolvedSeo.canonicalUrl || typeof resolvedSeo.canonicalUrl !== 'string' || resolvedSeo.canonicalUrl.trim() === '') {
+            if (resolvedSlug) {
+              resolvedSeo.canonicalUrl = `https://vonporat.com/blog/${resolvedSlug}`;
+            }
+          }
+
+          data.seo = resolvedSeo;
         }
         return data;
       },
@@ -206,22 +265,52 @@ export const Posts: CollectionConfig = {
           name: 'seoTitle',
           type: 'text',
           label: 'SEO Title',
+          validate: (val: any, { data }: { data?: any }) => {
+            if (data?.status === 'published' && (!val || typeof val !== 'string' || val.trim() === '')) {
+              return 'SEO Title is required when the post is published.';
+            }
+            return true;
+          },
+          admin: {
+            description: 'SEO Title defaults to the post title if left empty. Recommended max length: 50–60 characters.',
+          },
         },
         {
           name: 'metaDescription',
           type: 'textarea',
           label: 'Meta Description',
+          validate: (val: any, { data }: { data?: any }) => {
+            if (data?.status === 'published' && (!val || typeof val !== 'string' || val.trim() === '')) {
+              return 'Meta Description is required when the post is published.';
+            }
+            return true;
+          },
+          admin: {
+            description: 'Meta Description defaults to the excerpt or first paragraph if left empty. Recommended max length: 150–160 characters.',
+          },
         },
         {
           name: 'ogImage',
           type: 'upload',
           relationTo: 'media',
           label: 'Open Graph Image',
+          admin: {
+            description: 'Open Graph Image defaults to the featured image if left empty.',
+          },
         },
         {
           name: 'canonicalUrl',
           type: 'text',
           label: 'Canonical URL',
+          validate: (val: any, { data }: { data?: any }) => {
+            if (data?.status === 'published' && (!val || typeof val !== 'string' || val.trim() === '')) {
+              return 'Canonical URL is required when the post is published.';
+            }
+            return true;
+          },
+          admin: {
+            description: 'Canonical URL defaults to the public blog URL (https://vonporat.com/blog/[slug]) if left empty.',
+          },
         },
       ],
     },

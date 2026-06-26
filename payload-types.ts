@@ -172,20 +172,29 @@ export interface Media {
 export interface Post {
   id: number;
   title: string;
-  slug: string;
+  /**
+   * Slug is generated from the title if left empty.
+   */
+  slug?: string | null;
   category: 'music' | 'art' | 'ai' | 'process-improvement' | 'behind-the-scenes' | 'website-build-log';
-  publishedDate: string;
+  publishedDate?: string | null;
   tags?:
     | {
         tag: string;
         id?: string | null;
       }[]
     | null;
+  /**
+   * Drafts can be saved incomplete. Published posts require slug, excerpt, content, and date.
+   */
   status: 'draft' | 'published';
   featured?: boolean | null;
   featuredImage?: (number | null) | Media;
-  excerpt: string;
-  content: {
+  /**
+   * Excerpt is generated from the first paragraph if left empty.
+   */
+  excerpt?: string | null;
+  content?: {
     root: {
       type: string;
       children: {
@@ -199,11 +208,23 @@ export interface Post {
       version: number;
     };
     [k: string]: unknown;
-  };
+  } | null;
   seo?: {
+    /**
+     * SEO Title defaults to the post title if left empty. Recommended max length: 50–60 characters.
+     */
     seoTitle?: string | null;
+    /**
+     * Meta Description defaults to the excerpt or first paragraph if left empty. Recommended max length: 150–160 characters.
+     */
     metaDescription?: string | null;
+    /**
+     * Open Graph Image defaults to the featured image if left empty.
+     */
     ogImage?: (number | null) | Media;
+    /**
+     * Canonical URL defaults to the public blog URL (https://vonporat.com/blog/[slug]) if left empty.
+     */
     canonicalUrl?: string | null;
   };
   updatedAt: string;
