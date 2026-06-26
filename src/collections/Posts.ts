@@ -36,10 +36,30 @@ function getLexicalText(node: any): string {
   if (node.type === 'text') {
     return node.text || '';
   }
+  if (node.root) {
+    return getLexicalText(node.root);
+  }
   if (node.children) {
     return getLexicalText(node.children);
   }
   return '';
+}
+
+function hasLexicalContent(node: any): boolean {
+  if (!node || typeof node !== 'object') return false;
+  if (Array.isArray(node)) {
+    return node.some(hasLexicalContent);
+  }
+  if (node.type === 'text') {
+    return typeof node.text === 'string' && node.text.trim().length > 0;
+  }
+  if (node.root) {
+    return hasLexicalContent(node.root);
+  }
+  if (node.children) {
+    return hasLexicalContent(node.children);
+  }
+  return false;
 }
 
 export const Posts: CollectionConfig = {
@@ -328,11 +348,7 @@ export const Posts: CollectionConfig = {
       type: 'richText',
       validate: (val: any, { data }: { data?: any }) => {
         if (data?.status === 'published') {
-          if (!val) {
-            return 'Content is required when the post is published.';
-          }
-          const text = getLexicalText(val);
-          if (!text.trim()) {
+          if (!hasLexicalContent(val)) {
             return 'Content is required when the post is published.';
           }
         }
