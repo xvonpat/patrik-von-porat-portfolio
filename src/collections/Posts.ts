@@ -75,11 +75,18 @@ export const Posts: CollectionConfig = {
             data.seo = {};
           }
 
+          const getRelationId = (val: any) => {
+            if (val && typeof val === 'object') {
+              return val.id !== undefined ? val.id : val;
+            }
+            return val;
+          };
+
           const resolvedTitle = data.title || originalDoc?.title;
           const resolvedSlug = data.slug || originalDoc?.slug;
           const resolvedExcerpt = data.excerpt || originalDoc?.excerpt;
           const resolvedContent = data.content || originalDoc?.content;
-          const resolvedFeaturedImage = data.featuredImage || originalDoc?.featuredImage;
+          const resolvedFeaturedImage = getRelationId(data.featuredImage || originalDoc?.featuredImage);
 
           const resolvedSeo = {
             ...(originalDoc?.seo || {}),
@@ -111,13 +118,10 @@ export const Posts: CollectionConfig = {
           // If no featured image exists, leave it empty.
           if (!resolvedSeo.ogImage) {
             if (resolvedFeaturedImage) {
-              const imageId = typeof resolvedFeaturedImage === 'object' && resolvedFeaturedImage !== null && 'id' in resolvedFeaturedImage
-                ? (resolvedFeaturedImage as any).id
-                : resolvedFeaturedImage;
-              if (imageId) {
-                resolvedSeo.ogImage = imageId;
-              }
+              resolvedSeo.ogImage = resolvedFeaturedImage;
             }
+          } else {
+            resolvedSeo.ogImage = getRelationId(resolvedSeo.ogImage);
           }
 
           // 6. Canonical URL: If Canonical URL is empty and slug exists, generate: https://vonporat.com/blog/[slug]
