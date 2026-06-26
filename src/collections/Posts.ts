@@ -1,10 +1,78 @@
 import type { CollectionConfig } from 'payload';
 
+function extractFirstParagraph(content: any): string {
+  if (!content || !content.root || !Array.isArray(content.root.children)) {
+    return '';
+  }
+
+  for (const child of content.root.children) {
+    if (child.type === 'paragraph' && Array.isArray(child.children)) {
+      const text = child.children
+        .filter((c: any) => c.type === 'text')
+        .map((c: any) => c.text || '')
+        .join('')
+        .trim();
+      if (text) return text;
+    }
+  }
+  return '';
+}
+
+function truncateText(text: string, length: number): string {
+  if (text.length <= length) return text;
+  const truncated = text.slice(0, length).trim();
+  const lastSpace = truncated.lastIndexOf(' ');
+  if (lastSpace > length * 0.7) {
+    return truncated.slice(0, lastSpace) + '...';
+  }
+  return truncated + '...';
+}
+
+function getLexicalText(node: any): string {
+  if (!node) return '';
+  if (Array.isArray(node)) {
+    return node.map(getLexicalText).join(' ');
+  }
+  if (node.type === 'text') {
+    return node.text || '';
+  }
+  if (node.children) {
+    return getLexicalText(node.children);
+  }
+  return '';
+}
+
 export const Posts: CollectionConfig = {
   slug: 'posts',
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'category', 'slug', 'publishedDate'],
+  },
+  hooks: {
+    beforeValidate: [
+      ({ data }) => {
+        if (data) {
+          // 1. Slug auto-generation from title if empty
+          if (data.title && (!data.slug || data.slug.trim() === '')) {
+            data.slug = data.title
+              .toLowerCase()
+              .replace(/[^a-z0-9\s-]/g, '') // remove special characters except spaces/hyphens
+              .trim()
+              .replace(/\s+/g, '-')       // spaces to hyphens
+              .replace(/-+/g, '-');        // duplicate hyphens to single
+          }
+
+          // 2. Excerpt auto-generation from content if empty
+          if (data.content && (!data.excerpt || data.excerpt.trim() === '')) {
+            const firstParagraph = extractFirstParagraph(data.content);
+            if (firstParagraph) {
+              data.excerpt = truncateText(firstParagraph, 150);
+            }
+          }
+        }
+        return data;
+      },
+    ],
   },
   fields: [
     {
@@ -15,10 +83,16 @@ export const Posts: CollectionConfig = {
     {
       name: 'slug',
       type: 'text',
-      required: true,
       unique: true,
+      validate: (val: any, { data }: { data?: any }) => {
+        if (data?.status === 'published' && (!val || val.trim() === '')) {
+          return 'A slug is required when the post is published.';
+        }
+        return true;
+      },
       admin: {
         position: 'sidebar',
+        description: 'Slug is generated from the title if left empty.',
       },
     },
     {
@@ -40,7 +114,12 @@ export const Posts: CollectionConfig = {
     {
       name: 'publishedDate',
       type: 'date',
-      required: true,
+      validate: (val: any, { data }: { data?: any }) => {
+        if (data?.status === 'published' && !val) {
+          return 'A publication date is required when the post is published.';
+        }
+        return true;
+      },
       admin: {
         position: 'sidebar',
       },
@@ -71,6 +150,7 @@ export const Posts: CollectionConfig = {
       required: true,
       admin: {
         position: 'sidebar',
+        description: 'Drafts can be saved incomplete. Published posts require slug, excerpt, content, and date.',
       },
     },
     {
@@ -91,12 +171,31 @@ export const Posts: CollectionConfig = {
     {
       name: 'excerpt',
       type: 'textarea',
-      required: true,
+      validate: (val: any, { data }: { data?: any }) => {
+        if (data?.status === 'published' && (!val || val.trim() === '')) {
+          return 'An excerpt is required when the post is published.';
+        }
+        return true;
+      },
+      admin: {
+        description: 'Excerpt is generated from the first paragraph if left empty.',
+      },
     },
     {
       name: 'content',
       type: 'richText',
-      required: true,
+      validate: (val: any, { data }: { data?: any }) => {
+        if (data?.status === 'published') {
+          if (!val) {
+            return 'Content is required when the post is published.';
+          }
+          const text = getLexicalText(val);
+          if (!text.trim()) {
+            return 'Content is required when the post is published.';
+          }
+        }
+        return true;
+      },
     },
     {
       name: 'seo',
