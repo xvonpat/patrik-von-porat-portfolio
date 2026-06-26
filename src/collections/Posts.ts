@@ -132,6 +132,77 @@ export const Posts: CollectionConfig = {
           }
 
           data.seo = resolvedSeo;
+
+          // 7. Published Date auto-generation: If status is published and date is empty, set to current time
+          const resolvedStatus = data.status || originalDoc?.status;
+          if (resolvedStatus === 'published') {
+            const currentPublishedDate = data.publishedDate || originalDoc?.publishedDate;
+            if (!currentPublishedDate) {
+              data.publishedDate = new Date().toISOString();
+            }
+          }
+
+          // 8. Category default fallback: If category is empty, default to behind-the-scenes
+          if (!data.category && !originalDoc?.category) {
+            data.category = 'behind-the-scenes';
+          }
+
+          // 9. Tags auto-suggestion: If tags array is empty, generate from content keywords
+          const rawTags = data.tags || originalDoc?.tags;
+          const existingTags: string[] = [];
+          if (Array.isArray(rawTags)) {
+            for (const item of rawTags) {
+              if (item && typeof item === 'object' && typeof item.tag === 'string') {
+                const trimmed = item.tag.trim();
+                if (trimmed && !existingTags.includes(trimmed)) {
+                  existingTags.push(trimmed);
+                }
+              }
+            }
+          }
+
+          if (existingTags.length === 0) {
+            const resolvedTitleText = (resolvedTitle || '').toLowerCase();
+            const resolvedExcerptText = (resolvedExcerpt || '').toLowerCase();
+            const resolvedCategoryText = (data.category || originalDoc?.category || '').toLowerCase();
+            const resolvedBodyText = resolvedContent ? getLexicalText(resolvedContent).toLowerCase() : '';
+
+            const combinedText = `${resolvedTitleText} ${resolvedExcerptText} ${resolvedCategoryText} ${resolvedBodyText}`;
+
+            const tagSuggestions = [
+              { name: 'Ashwrithe', keywords: ['ashwrithe'] },
+              { name: 'Realmforged', keywords: ['realmforged'] },
+              { name: 'Logo Design', keywords: ['logo', 'design'] },
+              { name: 'Adobe Illustrator', keywords: ['illustrator', 'adobe'] },
+              { name: 'Vector Art', keywords: ['vector'] },
+              { name: 'Music', keywords: ['music', 'guitar', 'metal'] },
+              { name: 'AI Art', keywords: ['ai art', 'midjourney', 'generative ai'] },
+              { name: 'Lean Six Sigma', keywords: ['six sigma', 'lean', 'six-sigma'] },
+              { name: 'Behind the Scenes', keywords: ['behind the scenes', 'behind-the-scenes', 'making of'] },
+              { name: 'Creative Process', keywords: ['creative process', 'concept art', 'workflow'] },
+            ];
+
+            const suggestedNames: string[] = [];
+            for (const suggestion of tagSuggestions) {
+              const hasKeyword = suggestion.keywords.some((keyword) => combinedText.includes(keyword.toLowerCase()));
+              if (hasKeyword && !suggestedNames.includes(suggestion.name)) {
+                suggestedNames.push(suggestion.name);
+              }
+            }
+
+            // Fallback default tag based on category if still empty
+            if (suggestedNames.length === 0) {
+              const category = data.category || originalDoc?.category;
+              if (category === 'music') suggestedNames.push('Music');
+              else if (category === 'art') suggestedNames.push('Vector Art');
+              else if (category === 'ai') suggestedNames.push('AI Art');
+              else if (category === 'process-improvement') suggestedNames.push('Lean Six Sigma');
+              else if (category === 'behind-the-scenes') suggestedNames.push('Behind the Scenes');
+              else if (category === 'website-build-log') suggestedNames.push('Creative Process');
+            }
+
+            data.tags = suggestedNames.map((t) => ({ tag: t }));
+          }
         }
         return data;
       },
@@ -169,7 +240,13 @@ export const Posts: CollectionConfig = {
         { label: 'Behind the Scenes', value: 'behind-the-scenes' },
         { label: 'Website / Build Log', value: 'website-build-log' },
       ],
-      required: true,
+      required: false,
+      validate: (val: any, { data }: { data?: any }) => {
+        if (data?.status === 'published' && (!val || typeof val !== 'string' || val.trim() === '')) {
+          return 'A category is required when the post is published.';
+        }
+        return true;
+      },
       admin: {
         position: 'sidebar',
       },
@@ -185,6 +262,7 @@ export const Posts: CollectionConfig = {
       },
       admin: {
         position: 'sidebar',
+        description: 'Published Date is set automatically when publishing if left empty.',
       },
     },
     {
@@ -193,6 +271,7 @@ export const Posts: CollectionConfig = {
       label: 'Tags',
       admin: {
         position: 'sidebar',
+        description: 'Tags can be suggested automatically if left empty, but remain editable.',
       },
       fields: [
         {
@@ -213,7 +292,7 @@ export const Posts: CollectionConfig = {
       required: true,
       admin: {
         position: 'sidebar',
-        description: 'Drafts can be saved incomplete. Published posts require slug, excerpt, content, and date.',
+        description: 'Drafts can be saved incomplete. Published posts require complete metadata (slug, category, date, excerpt, content, and SEO fields).',
       },
     },
     {

@@ -176,8 +176,14 @@ export interface Post {
    * Slug is generated from the title if left empty.
    */
   slug?: string | null;
-  category: 'music' | 'art' | 'ai' | 'process-improvement' | 'behind-the-scenes' | 'website-build-log';
+  category?: ('music' | 'art' | 'ai' | 'process-improvement' | 'behind-the-scenes' | 'website-build-log') | null;
+  /**
+   * Published Date is set automatically when publishing if left empty.
+   */
   publishedDate?: string | null;
+  /**
+   * Tags can be suggested automatically if left empty, but remain editable.
+   */
   tags?:
     | {
         tag: string;
@@ -185,7 +191,7 @@ export interface Post {
       }[]
     | null;
   /**
-   * Drafts can be saved incomplete. Published posts require slug, excerpt, content, and date.
+   * Drafts can be saved incomplete. Published posts require complete metadata (slug, category, date, excerpt, content, and SEO fields).
    */
   status: 'draft' | 'published';
   featured?: boolean | null;
