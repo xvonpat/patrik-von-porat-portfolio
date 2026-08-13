@@ -20,8 +20,8 @@ export default function Footer() {
         <div className="flex flex-col items-center md:items-end gap-2">
           <div className="flex gap-6 text-xs text-zinc-500 uppercase tracking-widest">
             <Link href="/about" className="hover:text-accent-purple transition-colors duration-200">About</Link>
-            <Link href="/projects" className="hover:text-accent-cyan transition-colors duration-200">Projects</Link>
-            <Link href="/contact" className="hover:text-accent-orange transition-colors duration-200">Contact</Link>
+            <Link href="/blog" className="hover:text-accent-cyan transition-colors duration-200">Blog</Link>
+            <Link href="/contact" className="hover:text-accent-purple transition-colors duration-200">Contact</Link>
           </div>
           <p className="text-xs text-zinc-600 mt-2 font-mono">
             &copy; {currentYear} Patrik von Porat. All rights reserved.

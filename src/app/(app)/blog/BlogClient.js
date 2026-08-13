@@ -56,7 +56,7 @@ export default function BlogClient({ posts = [] }) {
   const filterAccents = {
     'All': 'text-accent-purple border-accent-purple/30 bg-accent-purple/5',
     'Music': 'text-accent-purple border-accent-purple/30 bg-accent-purple/5',
-    'Visual Art': 'text-accent-orange border-accent-orange/30 bg-accent-orange/5',
+    'Visual Art': 'text-accent-purple border-accent-purple/30 bg-accent-purple/5',
     'Technology': 'text-accent-cyan border-accent-cyan/30 bg-accent-cyan/5',
     'Process': 'text-accent-cyan border-accent-cyan/30 bg-accent-cyan/5',
     'Personal': 'text-accent-purple border-accent-purple/30 bg-accent-purple/5'
@@ -64,8 +64,8 @@ export default function BlogClient({ posts = [] }) {
 
   const categoryMap = {
     'music': { label: 'Music', accent: 'purple', textClass: 'text-accent-purple', bgClass: 'bg-accent-purple/10 border-accent-purple/20' },
-    'visual-art': { label: 'Visual Art', accent: 'orange', textClass: 'text-accent-orange', bgClass: 'bg-accent-orange/10 border-accent-orange/20' },
-    'art': { label: 'Visual Art', accent: 'orange', textClass: 'text-accent-orange', bgClass: 'bg-accent-orange/10 border-accent-orange/20' },
+    'visual-art': { label: 'Visual Art', accent: 'purple', textClass: 'text-accent-purple', bgClass: 'bg-accent-purple/10 border-accent-purple/20' },
+    'art': { label: 'Visual Art', accent: 'purple', textClass: 'text-accent-purple', bgClass: 'bg-accent-purple/10 border-accent-purple/20' },
     'technology': { label: 'Technology', accent: 'cyan', textClass: 'text-accent-cyan', bgClass: 'bg-accent-cyan/10 border-accent-cyan/20' },
     'ai': { label: 'Technology', accent: 'cyan', textClass: 'text-accent-cyan', bgClass: 'bg-accent-cyan/10 border-accent-cyan/20' },
     'website-build-log': { label: 'Technology', accent: 'cyan', textClass: 'text-accent-cyan', bgClass: 'bg-accent-cyan/10 border-accent-cyan/20' },
@@ -95,7 +95,6 @@ export default function BlogClient({ posts = [] }) {
   const renderPlaceholder = (accent) => {
     const gradients = {
       purple: 'from-purple-950/20 via-obsidian-900/60 to-obsidian-950',
-      orange: 'from-orange-950/20 via-obsidian-900/60 to-obsidian-950',
       cyan: 'from-cyan-950/20 via-obsidian-900/60 to-obsidian-950'
     };
     const gradient = gradients[accent] || gradients.purple;

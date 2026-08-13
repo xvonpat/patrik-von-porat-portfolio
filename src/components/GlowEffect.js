@@ -11,9 +11,9 @@ export default function GlowEffect() {
         className="absolute top-[-15%] left-[-15%] w-[60vw] h-[60vw] min-w-[400px] min-h-[400px] rounded-full bg-accent-purple/10 blur-[50px] md:blur-[130px] animate-drift"
       />
       
-      {/* Middle Right Ember Orange Ambient Smoke */}
+      {/* Middle Right Muted Atmospheric Smoke */}
       <div 
-        className="absolute top-[30%] right-[-15%] w-[55vw] h-[55vw] min-w-[350px] min-h-[350px] rounded-full bg-accent-orange/8 blur-[50px] md:blur-[140px] animate-drift-delayed"
+        className="absolute top-[30%] right-[-15%] w-[55vw] h-[55vw] min-w-[350px] min-h-[350px] rounded-full bg-accent-purple/5 blur-[50px] md:blur-[140px] animate-drift-delayed"
       />
       
       {/* Bottom Left Soft Cyan Ambient Smoke */}

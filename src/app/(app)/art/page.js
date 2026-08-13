@@ -33,7 +33,7 @@ export default function Art() {
       title: "Graphite Drawing",
       subtitle: "High-contrast dark realism and pencil portraits",
       description: "Exploring dark fantasy themes, deep shadows, and classical anatomy. Focused on texture, light falloff, and traditional high-detail rendering of gothic and Norse mythological figures.",
-      accent: "orange",
+      accent: "purple",
       dimensions: "Traditional Paper & Cardboard - Multi-size",
       placeholderGradient: "from-zinc-900 via-neutral-950 to-zinc-900",
       gallery: [
@@ -85,9 +85,9 @@ export default function Art() {
         
         {/* Page Header */}
         <div className="flex flex-col items-center text-center gap-4 max-w-2xl mx-auto">
-          <span className="text-xs font-mono tracking-[0.3em] text-accent-orange uppercase">Visual Expressions</span>
+          <span className="text-xs font-mono tracking-[0.3em] text-accent-purple uppercase">Visual Expressions</span>
           <h1 className="text-4xl md:text-5xl font-semibold tracking-tight text-white">Art Portfolio</h1>
-          <div className="w-16 h-[2px] bg-accent-orange mt-2" />
+          <div className="w-16 h-[2px] bg-accent-purple mt-2" />
           <p className="text-sm text-zinc-400 leading-6 mt-4">
             A gallery of traditional and modern visual mediums. Bridging the gap between tactile graphite drawing, ink-on-skin practice, generative neural networks, and physical 3D modeling.
           </p>

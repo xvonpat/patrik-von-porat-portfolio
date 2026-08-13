@@ -3,12 +3,11 @@ import React from 'react';
 export default function GlassCard({ 
   children, 
   className = "", 
-  accent = "purple", // "purple", "orange", "cyan"
+  accent = "purple", // "purple", "cyan"
   onClick 
 }) {
   const accentClasses = {
     purple: "hover:border-accent-purple/40 hover:shadow-[0_0_25px_rgba(139,92,246,0.15)]",
-    orange: "hover:border-accent-orange/40 hover:shadow-[0_0_25px_rgba(249,115,22,0.15)]",
     cyan: "hover:border-accent-cyan/40 hover:shadow-[0_0_25px_rgba(6,182,212,0.15)]",
   };
 

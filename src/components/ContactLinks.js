@@ -14,7 +14,7 @@ export default function ContactLinks() {
     {
       name: "YouTube",
       url: "https://www.youtube.com/@creativeoverdrive",
-      accent: "orange",
+      accent: "purple",
       iconPath: "M23.498 6.163c-.272-1.022-1.074-1.826-2.099-2.099C19.544 3.5 12 3.5 12 3.5s-7.544 0-9.4.564C1.576 4.337.773 5.14.502 6.163 0 8.07 0 12 0 12s0 3.93.502 5.837c.271 1.022 1.074 1.826 2.099 2.099 1.856.564 9.4.564 9.4.564s7.544 0 9.4-.564c1.025-.273 1.827-1.077 2.099-2.099.502-1.907.502-5.837.502-5.837s0-3.93-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
     },
     {
@@ -26,7 +26,7 @@ export default function ContactLinks() {
     {
       name: "Patreon",
       url: "https://www.patreon.com/c/realmforgedguild",
-      accent: "orange",
+      accent: "cyan",
       iconPath: "M22.957 7.21c-.004-3.078-2.684-5.554-6.055-5.554-3.7 0-6.711 3.012-6.711 6.712 0 3.678 2.993 6.677 6.711 6.677 3.393 0 6.055-2.476 6.055-5.554v-2.28zM2.08 1.656H5.05v20.688H2.08V1.656z"
     },
     {
@@ -51,7 +51,6 @@ export default function ContactLinks() {
 
   const accentClasses = {
     purple: "hover:border-accent-purple/40 hover:shadow-[0_0_25px_rgba(139,92,246,0.22)]",
-    orange: "hover:border-accent-orange/40 hover:shadow-[0_0_25px_rgba(249,115,22,0.22)]",
     cyan: "hover:border-accent-cyan/40 hover:shadow-[0_0_25px_rgba(6,182,212,0.22)]",
   };
 

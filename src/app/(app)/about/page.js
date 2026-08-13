@@ -71,7 +71,7 @@ export default function About() {
 
           {/* Quick list of traits */}
           <div className="flex flex-col gap-4 bg-zinc-950/40 border border-white/5 rounded-lg p-6">
-            <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-accent-orange">Philosophy of Process</h3>
+            <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-accent-cyan">Philosophy of Process</h3>
             <p className="text-xs leading-5 text-zinc-400 font-light">
               We often treat art as pure inspiration and logic as cold mechanics. But true mastery is systematic: setting up clean pipelines for asset organization or practicing alternate picking with metronome intervals at 0.5% increments. Continuous improvement is simply art in a structured container.
             </p>

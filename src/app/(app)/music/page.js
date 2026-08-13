@@ -48,7 +48,7 @@ export default function Music() {
       role: "Guitars",
       description: "Pioneering Swedish melodic power metal. Fast-paced, driving rhythm lines paired with high-flying anthemic vocals and memorable twin-lead harmonies.",
       status: "Active - Touring & Writing",
-      accent: "orange",
+      accent: "purple",
       tags: ["Swedish", "Anthemic", "Speed"],
       logo: "/images/music/freternia.webp",
       fullBanner: true,
