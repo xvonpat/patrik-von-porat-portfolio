@@ -1,13 +1,16 @@
 'use client'
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import GlassCard from '@/components/GlassCard';
+import BrowserFrame from '@/components/BrowserFrame';
 
 const CATEGORIES = [
   'All',
   'Websites',
-  'CMS & Backend',
   'Music Projects',
+  'Visual Craft',
+  'CMS & Backend',
   'Creative Workflows',
   'Experiments',
   'Concepts'
@@ -26,6 +29,8 @@ const PROJECTS = [
     tags: ['Website', 'Payload CMS', 'Supabase', 'Vercel', 'Creative Hub'],
     cta: 'View Site',
     link: 'https://vonporat.com',
+    url: 'vonporat.com',
+    image: '/images/projects/proof/proof-vonporat.webp',
     accent: 'cyan'
   },
   {
@@ -40,21 +45,25 @@ const PROJECTS = [
     tags: ['Website', 'Music Project', 'Power Metal', 'EPK', 'Dark Fantasy'],
     cta: 'View Site',
     link: 'https://realmforgedofficial.com',
+    url: 'realmforgedofficial.com',
+    image: '/images/projects/proof/proof-realmforged.webp',
     accent: 'purple'
   },
   {
     id: 'ashwrithe',
     title: 'ashwrithe.com',
     category: 'Websites',
-    status: 'In Development',
+    status: 'Live',
     typeLabel: 'Extreme Metal Project Site',
-    description: 'A dark project website for Ashwrithe, created to establish the visual identity, atmosphere and conceptual foundation of the band before the first official release.',
-    manifest: 'The site presents Ashwrithe as a developing blackened melodic death metal project shaped by frostbitten visuals, soot-dark atmosphere and ritualistic extreme metal aesthetics.',
+    description: 'A dark project website for Ashwrithe, establishing the visual identity, atmosphere and conceptual foundation of the band.',
+    manifest: 'The site presents Ashwrithe as an active blackened melodic death metal project shaped by frostbitten visuals, soot-dark atmosphere and ritualistic extreme metal aesthetics.',
     role: 'Concept, visual direction, content direction, website structure and project worldbuilding.',
-    tags: ['Website', 'Music Project', 'Blackened Metal', 'Visual Identity', 'In Development'],
+    tags: ['Website', 'Music Project', 'Blackened Metal', 'Visual Identity', 'Live'],
     cta: 'Enter Ashwrithe',
     link: 'https://ashwrithe.com',
-    accent: 'zinc'
+    url: 'ashwrithe.com',
+    image: '/images/projects/proof/proof-ashwrithe-showcase.webp',
+    accent: 'purple'
   },
   {
     id: 'realmforged_music',
@@ -79,10 +88,40 @@ const PROJECTS = [
     description: 'A developing extreme metal project shaped by frostbitten melodies, soot-black atmosphere, crushing guitars and ritualistic darkness.',
     manifest: 'An atmospheric extreme metal concept engineered to establish design aesthetics, dark visuals, and raw sonic characteristics before physical release.',
     role: 'Concept, guitars, co-composition, visual direction, worldbuilding and website development.',
-    tags: ['Blackened Metal', 'Melodic Death', 'Frostbitten', 'Visual Identity', 'Website'],
+    tags: ['Blackened Metal', 'Melodic Death', 'Frostbitten', 'Visual Identity', 'Live'],
     cta: 'Enter Ashwrithe',
     link: 'https://ashwrithe.com',
-    accent: 'zinc'
+    accent: 'purple'
+  },
+  {
+    id: 'graphite_practice',
+    title: 'Graphite Practice',
+    category: 'Visual Craft',
+    status: 'Active Practice',
+    typeLabel: 'Traditional Pencil & Dark Realism',
+    description: 'High-contrast dark realism, pencil portraits, and mythological anatomy studies exploring shadow, light falloff, and tactile texture.',
+    manifest: 'Traditional physical graphite drawing serving as a tactile counterweight to digital art, 3D pipelines, and software engineering.',
+    role: 'Graphite Artist — Pencil portraiture, anatomical studies, chiaroscuro shading, and physical originals.',
+    tags: ['Traditional Art', 'Graphite', 'Dark Realism', 'Anatomy', 'Portraiture'],
+    cta: 'View Art Gallery',
+    link: '/art',
+    image: '/images/projects/proof/proof-graphite.webp',
+    accent: 'purple'
+  },
+  {
+    id: 'tattoo_practice',
+    title: 'Tattoo Practice',
+    category: 'Visual Craft',
+    status: 'Active Practice',
+    typeLabel: 'Needle Technique & Flash Studies',
+    description: 'Honing precision linework, pepper shading, whip shading, and dark-art ornamental iconography on synthetic Reelskin.',
+    manifest: 'Dedicated technical studies developing clean ink saturation, steady hand control, and enduring black-and-grey skin composition.',
+    role: 'Tattoo Practitioner — Needle control, whip shading, stencil creation, flash design.',
+    tags: ['Tattoo Craft', 'Black & Grey', 'Linework', 'Pepper Shading', 'Flash Art'],
+    cta: 'View Practice',
+    link: '/art',
+    image: '/images/projects/proof/proof-tattoo.webp',
+    accent: 'purple'
   }
 ];
 
@@ -229,6 +268,35 @@ export default function ProjectsClient() {
               </div>
 
             </div>
+
+            {/* Visual Preview for Web Projects */}
+            {proj.category === 'Websites' && (
+              <div className="w-full pt-2">
+                <BrowserFrame 
+                  src={proj.image}
+                  url={proj.url || (proj.link ? proj.link.replace(/^https?:\/\//, '').replace(/\/$/, '') : 'vonporat.com')} 
+                  alt={`${proj.title} website interface preview`} 
+                />
+              </div>
+            )}
+
+            {/* Visual Preview for Non-Web Projects */}
+            {proj.image && proj.category !== 'Websites' && (
+              <div className="w-full pt-2">
+                <div className="w-full overflow-hidden rounded-[12px] border border-white/[0.08] bg-obsidian-950 shadow-[0_8px_30px_rgba(0,0,0,0.5)]">
+                  <div className="relative w-full aspect-[16/10] bg-obsidian-950 overflow-hidden group">
+                    <Image
+                      src={proj.image}
+                      alt={`${proj.title} proof showcase`}
+                      fill
+                      quality={90}
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 95vw, 896px"
+                      className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.01]"
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
 
             {/* Footer Action Area */}
             <div className="pt-4 border-t border-white/5 flex justify-end">

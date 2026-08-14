@@ -32,7 +32,7 @@ export default function Music() {
       genre: "Blackened Melodic Death",
       role: "Guitars & Co-Composition",
       description: "A developing extreme metal project shaped by frostbitten melodies, soot-black atmosphere, crushing guitars and ritualistic darkness.",
-      status: "In Development - Debut Material In Progress",
+      status: "Active - Debut Material In Production",
       accent: "purple",
       tags: ["Blackened", "Melodic Death", "Frostbitten", "Cinematic"],
       logo: "/images/music/Ashwrithe.webp",

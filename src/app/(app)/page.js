@@ -43,10 +43,10 @@ export default async function Home() {
     {
       title: 'Ashwrithe',
       category: 'Extreme Metal Project',
-      status: 'In Development',
+      status: 'Active · Live Site',
       role: 'Guitars, Co-Composition & Visual Direction',
-      description: 'A developing extreme metal project shaped by frostbitten melodies, soot-black atmosphere, crushing guitars, and ritualistic darkness.',
-      proof: 'Visual identity, conceptual foundation, and debut material currently in active development.',
+      description: 'An atmospheric extreme metal project shaped by frostbitten melodies, soot-black atmosphere, crushing guitars, and ritualistic darkness.',
+      proof: 'Live website (ashwrithe.com), visual identity, and debut material currently in active production.',
       link: '/music',
       ctaText: 'Explore Music',
       accent: 'purple'
