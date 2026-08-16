@@ -19,17 +19,17 @@ export default function Navbar() {
 
   const getLinkStyle = (href) => {
     const isActive = pathname === href;
-    return `relative px-4 py-1.5 rounded-full text-xs font-mono tracking-[0.25em] uppercase border transition-premium ${
+    return `relative px-5 py-2 rounded-full text-[13px] font-mono tracking-[0.2em] uppercase border transition-premium ${
       isActive 
-        ? 'text-white bg-white/[0.04] border-white/[0.08] shadow-[0_0_15px_rgba(139,92,246,0.1)] font-semibold' 
-        : 'text-zinc-400 hover:text-zinc-100 bg-transparent border-transparent hover:bg-white/[0.02] hover:border-white/[0.03]'
+        ? 'text-white bg-white/[0.06] border-white/[0.12] shadow-[0_0_20px_rgba(139,92,246,0.15)] font-semibold' 
+        : 'text-zinc-300 hover:text-white bg-transparent border-transparent hover:bg-white/[0.03] hover:border-white/[0.05]'
     }`;
   };
 
   return (
-    <nav className="sticky top-0 w-full z-50 bg-obsidian-950/40 backdrop-blur-lg border-b border-white/[0.03] shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
+    <nav className="sticky top-0 w-full z-50 bg-obsidian-950/60 backdrop-blur-xl border-b border-white/[0.04] shadow-[0_4px_30px_rgba(0,0,0,0.6)]">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-20 md:h-22">
           {/* Logo / Brand Name */}
           <div className="flex-shrink-0 flex items-center">
             <Link href="/" className="flex items-center transition-premium" aria-label="Home">
@@ -38,7 +38,7 @@ export default function Navbar() {
           </div>
 
           {/* Desktop Navigation Links - Floating designed capsule component */}
-          <div className="hidden md:flex space-x-1 items-center bg-obsidian-900/60 border border-white/5 rounded-full p-1 shadow-[inset_0_1px_1px_rgba(255,255,255,0.02),0_8px_32px_rgba(0,0,0,0.5)] backdrop-blur-xl">
+          <div className="hidden md:flex space-x-1.5 items-center bg-obsidian-900/80 border border-white/[0.08] rounded-full p-1.5 shadow-[inset_0_1px_1px_rgba(255,255,255,0.04),0_8px_32px_rgba(0,0,0,0.6)] backdrop-blur-2xl">
             {navLinks.map((link) => (
               <Link key={link.name} href={link.href} className={getLinkStyle(link.href)}>
                 {link.name}

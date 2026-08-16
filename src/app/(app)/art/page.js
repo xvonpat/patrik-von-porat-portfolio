@@ -81,28 +81,28 @@ export default function Art() {
 
   return (
     <>
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16 md:py-24 flex flex-col gap-16 relative">
+      <div className="max-w-5xl xl:max-w-6xl 2xl:max-w-[1240px] mx-auto px-6 lg:px-8 py-8 md:py-12 flex flex-col gap-10 md:gap-14 relative z-10">
         
         {/* Page Header */}
-        <div className="flex flex-col items-center text-center gap-4 max-w-2xl mx-auto">
-          <span className="text-xs font-mono tracking-[0.3em] text-accent-purple uppercase">Visual Expressions</span>
-          <h1 className="text-4xl md:text-5xl font-semibold tracking-tight text-white">Art Portfolio</h1>
-          <div className="w-16 h-[2px] bg-accent-purple mt-2" />
-          <p className="text-sm text-zinc-400 leading-6 mt-4">
+        <div className="flex flex-col items-center text-center gap-2.5 max-w-2xl mx-auto">
+          <span className="text-xs md:text-sm font-mono tracking-[0.3em] text-accent-purple uppercase font-medium">Visual Expressions</span>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-white font-gothic">Art Portfolio</h1>
+          <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-accent-purple to-transparent mt-1" />
+          <p className="text-base md:text-lg text-zinc-300 font-light leading-relaxed md:leading-8 mt-1">
             A gallery of traditional and modern visual mediums. Bridging the gap between tactile graphite drawing, ink-on-skin practice, generative neural networks, and physical 3D modeling.
           </p>
         </div>
 
         {/* Grid of Art Sections */}
-        <div className="flex flex-col gap-24 relative z-10">
+        <div className="flex flex-col gap-12 md:gap-16 relative z-10">
           {artCategories.map((cat, idx) => (
-            <section key={idx} className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <section key={idx} className="grid grid-cols-1 lg:grid-cols-12 gap-7 lg:gap-10 items-center">
               
-              {/* Visual Showcase (5 columns) */}
-              <div className={`col-span-1 lg:col-span-6 flex flex-col gap-4 ${idx % 2 === 1 ? 'lg:order-last' : ''}`}>
+              {/* Visual Showcase (6 columns) */}
+              <div className={`col-span-1 lg:col-span-6 flex flex-col gap-3.5 ${idx % 2 === 1 ? 'lg:order-last' : ''}`}>
                 <div 
                   onClick={() => openLightbox(idx, 0)}
-                  className={`w-full aspect-[4/3] rounded-lg bg-gradient-to-tr ${cat.placeholderGradient} border border-white/5 shadow-2xl relative overflow-hidden flex flex-col items-center justify-center p-8 group hover:border-accent-${cat.accent}/30 transition-premium cursor-pointer`}
+                  className={`w-full aspect-[4/3] rounded-xl bg-gradient-to-tr ${cat.placeholderGradient} border border-white/[0.08] shadow-2xl relative overflow-hidden flex flex-col items-center justify-center p-6 group hover:border-accent-${cat.accent}/40 transition-premium cursor-pointer`}
                 >
                   {cat.image ? (
                     <>
@@ -121,26 +121,26 @@ export default function Art() {
                       <div className="absolute inset-0 bg-radial-gradient(circle_at_center,rgba(0,0,0,0)_20%,rgba(0,0,0,0.85)_100%) pointer-events-none" />
                       
                       {/* Gothic crest graphic placeholder */}
-                      <svg className={`w-12 h-12 text-zinc-700 mb-4 group-hover:text-accent-${cat.accent} transition-colors duration-500`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className={`w-12 h-12 text-zinc-700 mb-3 group-hover:text-accent-${cat.accent} transition-colors duration-500`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                       </svg>
                       
-                      <span className="text-[10px] font-mono text-zinc-500 tracking-[0.2em] uppercase mb-1">Visual Placeholder</span>
-                      <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest">{cat.title} Showcase</span>
+                      <span className="text-xs font-mono text-zinc-400 tracking-[0.2em] uppercase mb-1">Visual Placeholder</span>
+                      <span className="text-sm font-mono text-zinc-300 uppercase tracking-widest font-medium">{cat.title} Showcase</span>
                     </>
                   )}
                   
                   {/* Ambient glow highlight */}
-                  <div className={`absolute bottom-[-50px] w-[80%] h-[40px] bg-accent-${cat.accent}/10 blur-[30px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+                  <div className={`absolute bottom-[-50px] w-[80%] h-[40px] bg-accent-${cat.accent}/15 blur-[35px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
                 </div>
                 
                 {/* Quick pieces list / Gallery Thumbnails */}
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-3 gap-2.5 md:gap-3">
                   {cat.gallery.slice(0, 3).map((item, pIdx) => (
                     <button 
                       key={pIdx} 
                       onClick={() => openLightbox(idx, pIdx)}
-                      className="aspect-video bg-zinc-950/40 border border-white/5 rounded-lg flex flex-col items-center justify-center text-center group hover:border-accent-purple/30 transition-premium relative overflow-hidden focus:outline-none"
+                      className="aspect-video bg-zinc-950/60 border border-white/[0.08] rounded-lg flex flex-col items-center justify-center text-center group hover:border-accent-purple/40 transition-premium relative overflow-hidden focus:outline-none"
                     >
                       {item.src && !item.src.includes("...") ? (
                         <Image 
@@ -151,12 +151,12 @@ export default function Art() {
                           className="absolute inset-0 w-full h-full object-cover transition-all duration-500 scale-100 group-hover:scale-105"
                         />
                       ) : (
-                        <span className="text-[9px] font-mono text-zinc-500 truncate w-full uppercase tracking-wider relative z-10 px-2">{item.title}</span>
+                        <span className="text-[10px] font-mono text-zinc-400 truncate w-full uppercase tracking-wider relative z-10 px-2 font-medium">{item.title}</span>
                       )}
                       
                       {/* Hover Overlay Icon */}
                       <div className="absolute inset-0 bg-obsidian-950/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none z-20">
-                        <svg className={`w-4 h-4 text-white`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className={`w-5 h-5 text-white`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
                       </div>
@@ -165,26 +165,26 @@ export default function Art() {
                 </div>
               </div>
 
-              {/* Description Details (6 columns, 1 offset) */}
-              <div className="col-span-1 lg:col-span-6 flex flex-col gap-6 justify-center">
+              {/* Description Details (6 columns) */}
+              <div className="col-span-1 lg:col-span-6 flex flex-col gap-5 justify-center">
                 <div>
-                  <span className={`text-[10px] font-mono uppercase tracking-[0.3em] text-accent-${cat.accent}`}>{cat.subtitle}</span>
-                  <h2 className="text-3xl font-semibold tracking-tight text-white mt-2 font-gothic">{cat.title}</h2>
-                  <div className={`w-12 h-[2px] bg-accent-${cat.accent} mt-3`} />
+                  <span className={`text-xs md:text-sm font-mono uppercase tracking-[0.25em] text-accent-${cat.accent} font-semibold`}>{cat.subtitle}</span>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-white mt-1.5 font-gothic">{cat.title}</h2>
+                  <div className={`w-16 h-[1px] bg-gradient-to-r from-transparent via-accent-${cat.accent} to-transparent mt-2`} />
                 </div>
                 
-                <p className="text-sm md:text-base leading-7 text-zinc-400 font-light">
+                <p className="text-base md:text-lg leading-relaxed md:leading-8 text-zinc-300 font-light">
                   {cat.description}
                 </p>
 
-                <GlassCard accent={cat.accent} className="p-4! md:p-4!">
-                  <div className="flex items-center gap-4 text-xs font-mono">
-                    <svg className={`w-5 h-5 text-accent-${cat.accent}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <GlassCard accent={cat.accent} className="p-4 md:p-5">
+                  <div className="flex items-center gap-3.5 text-xs md:text-sm font-mono">
+                    <svg className={`w-5 h-5 text-accent-${cat.accent} shrink-0`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                     </svg>
                     <div>
-                      <span className="text-zinc-500 block uppercase tracking-widest text-[9px]">Medium Details</span>
-                      <span className="text-zinc-300">{cat.dimensions}</span>
+                      <span className="text-zinc-400 block uppercase tracking-widest text-[10px] md:text-xs font-semibold mb-0.5">Medium Details</span>
+                      <span className="text-zinc-200">{cat.dimensions}</span>
                     </div>
                   </div>
                 </GlassCard>

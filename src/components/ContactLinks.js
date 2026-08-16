@@ -66,7 +66,7 @@ export default function ContactLinks() {
     <>
       {/* Compact Circular Icon Grid */}
       <div className="w-full max-w-4xl relative z-10">
-        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 gap-6 md:gap-8 justify-items-center justify-center">
+        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 gap-5 sm:gap-6 justify-items-center justify-center">
           {links.map((link, idx) => (
             <a 
               key={idx} 
@@ -74,20 +74,20 @@ export default function ContactLinks() {
               onClick={() => handleLinkClick(link.name)}
               target={link.name === "Email" ? "_self" : "_blank"}
               rel={link.name === "Email" ? "" : "noopener noreferrer"}
-              className="group flex flex-col items-center gap-3 w-full"
+              className="group flex flex-col items-center gap-2.5 w-full"
             >
               <div 
-                className={`w-16 h-16 md:w-20 md:h-20 rounded-full bg-obsidian-950/40 backdrop-blur-md border border-white/5 flex items-center justify-center transition-premium transform hover:-translate-y-1.5 hover:bg-white/[0.02] shadow-[inset_0_1px_1px_rgba(255,255,255,0.01),0_10px_30px_rgba(0,0,0,0.5)] ${accentClasses[link.accent]}`}
+                className={`w-16 h-16 md:w-18 md:h-18 rounded-full bg-obsidian-950/60 backdrop-blur-xl border border-white/[0.08] flex items-center justify-center transition-premium transform hover:-translate-y-1.5 hover:bg-white/[0.04] shadow-[inset_0_1px_1px_rgba(255,255,255,0.03),0_10px_35px_rgba(0,0,0,0.6)] ${accentClasses[link.accent]}`}
               >
                 <svg 
-                  className={`w-6 h-6 md:w-8 md:h-8 text-zinc-400 group-hover:text-accent-${link.accent} transition-premium`} 
+                  className={`w-6 h-6 md:w-7 md:h-7 text-zinc-300 group-hover:text-accent-${link.accent} transition-premium`} 
                   fill="currentColor" 
                   viewBox="0 0 24 24"
                 >
                   <path d={link.iconPath} />
                 </svg>
               </div>
-              <span className="text-[10px] font-mono tracking-widest text-zinc-500 uppercase group-hover:text-zinc-300 transition-colors duration-300">
+              <span className="text-xs font-mono tracking-widest text-zinc-400 uppercase group-hover:text-white transition-colors duration-300 font-medium">
                 {link.name}
               </span>
             </a>
@@ -96,15 +96,15 @@ export default function ContactLinks() {
       </div>
 
       {/* Email CTA */}
-      <div className="flex flex-col items-center gap-6 mt-4 max-w-md relative z-10">
-        <div className="w-12 h-[1px] bg-gradient-to-r from-transparent via-accent-purple to-transparent mb-2" />
-        <p className="text-xs md:text-sm text-zinc-400 font-light leading-relaxed">
+      <div className="flex flex-col items-center gap-5 mt-2 max-w-md relative z-10">
+        <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-accent-purple to-transparent mb-0.5" />
+        <p className="text-sm md:text-base text-zinc-300 font-light leading-relaxed">
           For collaborations, music work, art inquiries or project-related questions, email is the best place to start.
         </p>
         <a 
           href="mailto:xvonpat@gmail.com"
           onClick={() => handleLinkClick('Email CTA Button')}
-          className="px-8 py-3.5 rounded-full bg-white/10 hover:bg-white/15 text-white font-semibold uppercase tracking-wider text-xs border border-white/20 hover:border-white/35 backdrop-blur-md hover:shadow-[0_0_25px_rgba(255,255,255,0.12)] hover:-translate-y-0.5 active:translate-y-0 text-center transition-premium"
+          className="px-8 py-3.5 rounded-full bg-white/10 hover:bg-white/15 text-white font-semibold uppercase tracking-wider text-xs md:text-sm font-mono border border-white/20 hover:border-white/40 backdrop-blur-md hover:shadow-[0_0_25px_rgba(255,255,255,0.15)] hover:-translate-y-0.5 active:translate-y-0 text-center transition-premium"
         >
           Send Email
         </a>

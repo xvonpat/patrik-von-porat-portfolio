@@ -109,10 +109,10 @@ export default function BlogClient({ posts = [] }) {
   };
 
   return (
-    <div className="flex flex-col gap-12 mt-6">
+    <div className="flex flex-col gap-10 mt-4">
       
       {/* Subtle Category Navigation Filter */}
-      <div className="flex flex-wrap justify-center items-center gap-x-3 gap-y-2 text-[10px] md:text-xs font-mono py-2 border-y border-white/5 max-w-4xl mx-auto w-full">
+      <div className="flex flex-wrap justify-center items-center gap-x-3 gap-y-2 text-xs font-mono py-3 border-y border-white/5 max-w-4xl mx-auto w-full">
         {filters.map((filter, idx) => {
           const isActive = activeFilter === filter;
           return (
@@ -120,10 +120,10 @@ export default function BlogClient({ posts = [] }) {
               {idx > 0 && <span className="text-zinc-700 select-none">&middot;</span>}
               <button
                 onClick={() => setActiveFilter(filter)}
-                className={`transition-all duration-300 uppercase tracking-widest px-2.5 py-1 rounded font-medium ${
+                className={`transition-all duration-300 uppercase tracking-widest px-3 py-1.5 rounded font-medium ${
                   isActive 
                     ? `${filterAccents[filter]} border` 
-                    : 'text-zinc-500 hover:text-zinc-300 bg-transparent border border-transparent'
+                    : 'text-zinc-400 hover:text-white bg-transparent border border-transparent'
                 }`}
               >
                 {filter}
@@ -135,16 +135,16 @@ export default function BlogClient({ posts = [] }) {
 
       {filteredPosts.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-20 text-center">
-          <GlassCard accent="purple" className="max-w-md w-full">
-            <p className="text-xs font-mono tracking-widest text-accent-purple uppercase mb-2">Empty Category</p>
-            <h3 className="text-lg font-medium text-zinc-300 mb-4 font-gothic">No Articles Found</h3>
-            <p className="text-sm text-zinc-500 font-light leading-6">
+          <GlassCard accent="purple" className="max-w-md w-full p-8">
+            <p className="text-xs font-mono tracking-widest text-accent-purple uppercase mb-2 font-semibold">Empty Category</p>
+            <h3 className="text-2xl font-medium text-white mb-3 font-gothic">No Articles Found</h3>
+            <p className="text-sm text-zinc-300 font-light leading-relaxed">
               There are currently no published articles under the &quot;{activeFilter}&quot; category.
             </p>
           </GlassCard>
         </div>
       ) : (
-        <div className="flex flex-col gap-16">
+        <div className="flex flex-col gap-12 md:gap-16">
           
           {/* 1. FEATURED ARTICLE */}
           {featuredPost && (() => {
@@ -164,10 +164,10 @@ export default function BlogClient({ posts = [] }) {
 
             return (
               <div className="w-full relative group">
-                <GlassCard accent={catInfo.accent} className="overflow-hidden">
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-10 items-center p-2 md:p-4">
+                <GlassCard accent={catInfo.accent} className="overflow-hidden p-5 md:p-6 lg:p-7">
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 items-center">
                     {/* Image Column */}
-                    <div className="lg:col-span-5 relative w-full aspect-[16/10] rounded-lg overflow-hidden border border-white/5 bg-obsidian-900/60 shadow-2xl">
+                    <div className="lg:col-span-5 relative w-full aspect-[16/10] rounded-xl overflow-hidden border border-white/[0.08] bg-obsidian-900/60 shadow-2xl">
                       {imgUrl ? (
                         <Image 
                           src={imgUrl} 
@@ -185,34 +185,34 @@ export default function BlogClient({ posts = [] }) {
 
                     {/* Content Column */}
                     <div className="lg:col-span-7 flex flex-col justify-center h-full">
-                      <div className="flex items-center gap-3 mb-4">
-                        <span className={`text-[10px] font-mono tracking-widest px-2.5 py-0.5 rounded border uppercase font-semibold ${catInfo.textClass} ${catInfo.bgClass}`}>
+                      <div className="flex items-center gap-3 mb-3">
+                        <span className={`text-[10px] md:text-xs font-mono tracking-widest px-2.5 py-0.5 rounded border uppercase font-semibold ${catInfo.textClass} ${catInfo.bgClass}`}>
                           {catInfo.label}
                         </span>
                         <span className="text-zinc-700 select-none">&middot;</span>
-                        <span className="text-xs font-mono tracking-widest text-zinc-500 uppercase">
+                        <span className="text-xs font-mono tracking-widest text-zinc-400 uppercase font-medium">
                           {dateStr}
                         </span>
                         <span className="text-zinc-700 select-none">&middot;</span>
-                        <span className="text-xs font-mono tracking-widest text-zinc-500 uppercase">
+                        <span className="text-xs font-mono tracking-widest text-zinc-400 uppercase font-medium">
                           {readingTime} min read
                         </span>
                       </div>
 
-                      <h2 className="text-2xl md:text-4xl font-semibold tracking-tight text-white hover:text-accent-purple transition-colors mb-4 font-gothic leading-tight">
+                      <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-white hover:text-accent-purple transition-colors mb-3 font-gothic leading-tight">
                         <Link href={`/blog/${featuredPost.slug}`}>
                           {featuredPost.title}
                         </Link>
                       </h2>
 
-                      <p className="text-zinc-400 font-light leading-7 text-sm md:text-base mb-6 line-clamp-3">
+                      <p className="text-zinc-300 font-light leading-relaxed md:leading-8 text-base md:text-lg mb-5 line-clamp-3">
                         {featuredPost.excerpt}
                       </p>
 
-                      <div className="pt-4 border-t border-white/5">
+                      <div className="pt-3.5 border-t border-white/5">
                         <Link 
                           href={`/blog/${featuredPost.slug}`} 
-                          className="text-xs font-mono tracking-widest uppercase text-zinc-300 hover:text-accent-purple transition-colors inline-flex items-center gap-1.5"
+                          className="text-xs md:text-sm font-mono tracking-widest uppercase text-zinc-200 hover:text-accent-purple transition-colors inline-flex items-center gap-2 font-semibold"
                         >
                           Read Article 
                           <span className="transform group-hover:translate-x-1 transition-transform inline-block">&rarr;</span>
@@ -227,12 +227,12 @@ export default function BlogClient({ posts = [] }) {
 
           {/* 2. LATEST ARTICLES GRID */}
           {gridPosts.length > 0 && (
-            <div className="flex flex-col gap-8">
-              <h3 className="text-sm font-mono uppercase tracking-[0.25em] text-zinc-500 mt-6 pb-2 border-b border-white/5">
+            <div className="flex flex-col gap-6">
+              <h3 className="text-xs md:text-sm font-mono uppercase tracking-[0.25em] text-zinc-400 mt-2 pb-2 border-b border-white/5 font-semibold">
                 Latest Articles
               </h3>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
                 {gridPosts.map((post) => {
                   const dateStr = post.publishedDate 
                     ? new Date(post.publishedDate).toLocaleDateString('en-US', {
@@ -249,11 +249,11 @@ export default function BlogClient({ posts = [] }) {
                   const imgAlt = post.featuredImage?.alt || post.title;
 
                   return (
-                    <Link href={`/blog/${post.slug}`} key={post.id} className="block group">
-                      <GlassCard accent={catInfo.accent} className="flex flex-col h-full justify-between">
+                    <Link href={`/blog/${post.slug}`} key={post.id} className="block group h-full">
+                      <GlassCard accent={catInfo.accent} className="p-5 md:p-6 flex flex-col h-full justify-between">
                         <div>
                           {/* Card Cover Image */}
-                          <div className="relative w-full aspect-[16/10] rounded-lg overflow-hidden border border-white/5 bg-obsidian-900/60 shadow-md mb-6">
+                          <div className="relative w-full aspect-[16/10] rounded-xl overflow-hidden border border-white/[0.08] bg-obsidian-900/60 shadow-md mb-4">
                             {imgUrl ? (
                               <Image 
                                 src={imgUrl} 
@@ -269,25 +269,25 @@ export default function BlogClient({ posts = [] }) {
                           </div>
 
                           {/* Metadata */}
-                          <div className="flex items-center gap-2 mb-3 font-mono text-[10px]">
-                            <span className={`px-2 py-0.5 rounded border uppercase font-semibold ${catInfo.textClass} ${catInfo.bgClass}`}>
+                          <div className="flex items-center gap-2 mb-2.5 font-mono text-[11px]">
+                            <span className={`px-2.5 py-0.5 rounded border uppercase font-semibold ${catInfo.textClass} ${catInfo.bgClass}`}>
                               {catInfo.label}
                             </span>
                             <span className="text-zinc-700 select-none">&middot;</span>
-                            <span className="text-zinc-500 uppercase">
+                            <span className="text-zinc-400 uppercase font-medium">
                               {dateStr}
                             </span>
                             <span className="text-zinc-700 select-none">&middot;</span>
-                            <span className="text-zinc-500 uppercase">
+                            <span className="text-zinc-400 uppercase font-medium">
                               {readingTime} min read
                             </span>
                           </div>
                           
-                          <h4 className="text-lg md:text-xl font-medium tracking-tight text-zinc-100 group-hover:text-white transition-colors mb-3 font-sans">
+                          <h4 className="text-2xl md:text-3xl font-semibold tracking-tight text-white group-hover:text-accent-purple transition-colors mb-2.5 font-gothic leading-snug">
                             {post.title}
                           </h4>
                           
-                          <p className="text-xs leading-6 text-zinc-400 font-light line-clamp-3 mb-4">
+                          <p className="text-sm md:text-[15px] leading-relaxed text-zinc-300 font-light line-clamp-3 mb-3">
                             {post.excerpt}
                           </p>
                         </div>

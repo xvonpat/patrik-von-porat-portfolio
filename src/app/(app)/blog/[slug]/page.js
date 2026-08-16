@@ -47,29 +47,29 @@ function renderLexical(node) {
     case 'root':
       return <div className="space-y-6">{children}</div>;
     case 'paragraph':
-      return <p className="text-base leading-8 text-zinc-300 font-light">{children}</p>;
+      return <p className="text-lg leading-relaxed md:leading-9 text-zinc-300 font-light">{children}</p>;
     case 'heading':
       const level = node.tag || 'h2';
       const headingClasses = {
-        h1: "text-3xl md:text-4xl font-semibold tracking-tight text-white mt-12 mb-4",
-        h2: "text-2xl md:text-3xl font-semibold tracking-tight text-white mt-10 mb-4",
-        h3: "text-xl md:text-2xl font-medium tracking-tight text-white mt-8 mb-3",
-        h4: "text-lg md:text-xl font-medium text-white mt-6 mb-3",
+        h1: "text-4xl sm:text-5xl font-semibold tracking-tight text-white font-gothic mt-12 mb-4",
+        h2: "text-3xl sm:text-4xl font-semibold tracking-tight text-white font-gothic mt-10 mb-4",
+        h3: "text-2xl sm:text-3xl font-semibold tracking-tight text-white font-gothic mt-8 mb-3",
+        h4: "text-xl sm:text-2xl font-semibold text-white font-gothic mt-6 mb-3",
       };
       const Tag = level;
       return <Tag className={headingClasses[level] || headingClasses.h2}>{children}</Tag>;
     case 'list':
       const listTag = node.tag === 'ol' ? 'ol' : 'ul';
       const listClasses = node.tag === 'ol' 
-        ? 'list-decimal pl-6 space-y-3 text-zinc-300 font-light my-4' 
-        : 'list-disc pl-6 space-y-3 text-zinc-300 font-light my-4';
+        ? 'list-decimal pl-6 space-y-3 text-lg text-zinc-300 font-light my-5 leading-relaxed md:leading-8' 
+        : 'list-disc pl-6 space-y-3 text-lg text-zinc-300 font-light my-5 leading-relaxed md:leading-8';
       const ListTag = listTag;
       return <ListTag className={listClasses}>{children}</ListTag>;
     case 'listitem':
-      return <li className="leading-7">{children}</li>;
+      return <li className="leading-relaxed md:leading-8">{children}</li>;
     case 'quote':
       return (
-        <blockquote className="border-l-2 border-accent-purple pl-6 italic text-zinc-400 font-light my-8 bg-white/[0.01] py-5 pr-4 rounded-r">
+        <blockquote className="border-l-2 border-accent-purple pl-6 italic text-zinc-200 font-light my-8 bg-white/[0.02] py-6 pr-6 rounded-r text-lg leading-relaxed md:leading-8">
           {children}
         </blockquote>
       );
@@ -238,49 +238,48 @@ export default async function BlogPostPage({ params }) {
 
   return (
     <>
-
-      <article className="max-w-4xl mx-auto px-6 py-16 md:py-24 relative z-10">
+      <article className="max-w-3xl lg:max-w-4xl mx-auto px-6 py-8 md:py-12 relative z-10">
         
         {/* Navigation Breadcrumb */}
         <Link 
           href="/blog" 
-          className="inline-flex items-center gap-2 text-xs font-mono tracking-widest uppercase text-zinc-400 hover:text-accent-purple mb-8 transition-colors group"
+          className="inline-flex items-center gap-2 text-xs md:text-sm font-mono tracking-widest uppercase text-zinc-400 hover:text-accent-purple mb-6 transition-colors group font-medium"
         >
           <span className="transform group-hover:-translate-x-1 transition-transform inline-block">&larr;</span> 
           Back to Chronicles
         </Link>
 
         {/* Article Header */}
-        <header className="mb-12 relative pb-8 border-b border-white/5">
-          <div className="absolute top-[20%] left-1/4 w-[50%] h-[60%] bg-accent-purple/5 blur-[80px] rounded-full pointer-events-none -z-10" />
+        <header className="mb-8 relative pb-6 border-b border-white/5">
+          <div className="absolute top-[20%] left-1/4 w-[50%] h-[60%] bg-accent-purple/6 blur-[90px] rounded-full pointer-events-none -z-10" />
           
-          <div className="flex items-center gap-3 mb-4">
-            <span className="text-xs font-mono tracking-widest text-zinc-500 uppercase">
+          <div className="flex items-center gap-3 mb-3">
+            <span className="text-xs font-mono tracking-widest text-zinc-400 uppercase font-medium">
               {formattedDate}
             </span>
-            <span className="w-1 h-1 rounded-full bg-zinc-700" />
+            <span className="w-1 h-1 rounded-full bg-zinc-600" />
             
-            {/* Small uppercase category badge */}
-            <span className={`text-[10px] font-mono tracking-widest px-2.5 py-0.5 rounded border uppercase font-semibold ${catInfo.textClass} ${catInfo.bgClass}`}>
+            {/* Category badge */}
+            <span className={`text-[10px] md:text-xs font-mono tracking-widest px-2.5 py-0.5 rounded border uppercase font-semibold ${catInfo.textClass} ${catInfo.bgClass}`}>
               {catInfo.label}
             </span>
           </div>
 
-          <h1 className="text-3xl md:text-5xl font-semibold tracking-tight text-white leading-tight mb-6">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-white font-gothic leading-tight mb-5">
             {post.title}
           </h1>
 
-          <p className="text-base md:text-lg leading-8 text-zinc-400 font-light italic">
+          <p className="text-lg md:text-xl leading-relaxed md:leading-9 text-zinc-300 font-light italic">
             {post.excerpt}
           </p>
 
           {/* Premium Glassy Tag Pills */}
           {post.tags && post.tags.length > 0 && (
-            <div className="flex flex-wrap gap-2 mt-6">
+            <div className="flex flex-wrap gap-2 mt-5">
               {post.tags.map((tagObj, tIdx) => (
                 <span 
                   key={tIdx} 
-                  className="text-[10px] font-mono tracking-wider px-3 py-1 rounded-full bg-white/[0.03] backdrop-blur-sm border border-white/5 text-zinc-400 hover:text-zinc-200 hover:border-white/10 transition-all duration-300 uppercase font-medium cursor-default"
+                  className="text-xs font-mono tracking-wider px-3 py-1 rounded-full bg-white/[0.04] backdrop-blur-sm border border-white/[0.08] text-zinc-300 hover:text-white hover:border-white/20 transition-all duration-300 uppercase font-medium cursor-default"
                 >
                   #{tagObj.tag}
                 </span>
@@ -289,9 +288,8 @@ export default async function BlogPostPage({ params }) {
           )}
         </header>
 
-
         {/* Rich Text content with matching accent glow */}
-        <GlassCard accent={catInfo.accent} className="p-8 md:p-12 mb-0">
+        <GlassCard accent={catInfo.accent} className="p-6 md:p-10 mb-0">
           <div className="prose prose-invert max-w-none">
             {renderLexical(post.content?.root)}
           </div>
@@ -304,11 +302,11 @@ export default async function BlogPostPage({ params }) {
         <footer className="pt-8 flex items-center justify-between">
           <Link 
             href="/blog" 
-            className="text-xs font-mono tracking-widest uppercase text-zinc-400 hover:text-accent-purple transition-colors"
+            className="text-xs md:text-sm font-mono tracking-widest uppercase text-zinc-300 hover:text-accent-purple transition-colors font-semibold"
           >
             &larr; View All Articles
           </Link>
-          <span className="w-2 h-2 rounded-full bg-accent-purple/40" />
+          <span className="w-2.5 h-2.5 rounded-full bg-accent-purple/50" />
         </footer>
 
       </article>

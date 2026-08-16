@@ -10,8 +10,6 @@ const CATEGORIES = [
   'Websites',
   'Music Projects',
   'Visual Craft',
-  'CMS & Backend',
-  'Creative Workflows',
   'Experiments',
   'Concepts'
 ];
@@ -127,16 +125,6 @@ const PROJECTS = [
 
 // Placeholder upcoming projects for other categories to support natural expansion
 const UPCOMING_PROJECTS = {
-  'CMS & Backend': {
-    title: 'CMS Control Center',
-    label: 'Payload & Supabase Infrastructure',
-    description: 'Production schema designs, robust access control policies, automated PostgreSQL backup solutions, and custom S3 storage adapters.'
-  },
-  'Creative Workflows': {
-    title: 'Realmforged Systems',
-    label: 'Asset Generation Pipeline',
-    description: 'Workflow architectures linking generative tooling with structural asset archives, batch prompt executors, and optimization logs.'
-  },
   'Experiments': {
     title: 'AI Assisted Coding Log',
     label: 'Agentic Development Tracker',
@@ -160,15 +148,16 @@ export default function ProjectsClient() {
   const upcomingProject = CATEGORIES.includes(activeFilter) && 
     activeFilter !== 'All' && 
     activeFilter !== 'Websites' && 
-    activeFilter !== 'Music Projects'
+    activeFilter !== 'Music Projects' &&
+    activeFilter !== 'Visual Craft'
     ? UPCOMING_PROJECTS[activeFilter] 
     : null;
 
   return (
-    <div className="flex flex-col gap-12 mt-6">
+    <div className="flex flex-col gap-10 mt-4">
       
       {/* Category Filter Selector Row */}
-      <div className="flex flex-wrap justify-center items-center gap-2 md:gap-3 py-2 border-y border-white/5 max-w-4xl mx-auto w-full">
+      <div className="flex flex-wrap justify-center items-center gap-2 md:gap-3 py-3 border-y border-white/5 max-w-4xl mx-auto w-full">
         {CATEGORIES.map((cat) => {
           const isActive = activeFilter === cat;
           return (
@@ -178,9 +167,9 @@ export default function ProjectsClient() {
               style={
                 isActive
                   ? {
-                      background: 'linear-gradient(135deg, rgba(0, 229, 255, 0.14), rgba(139, 92, 246, 0.12))',
-                      border: '1px solid rgba(0, 229, 255, 0.45)',
-                      boxShadow: '0 0 18px rgba(0, 229, 255, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.08)',
+                      background: 'linear-gradient(135deg, rgba(0, 229, 255, 0.16), rgba(139, 92, 246, 0.14))',
+                      border: '1px solid rgba(0, 229, 255, 0.5)',
+                      boxShadow: '0 0 20px rgba(0, 229, 255, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
                       color: '#e8fbff',
                     }
                   : {
@@ -189,10 +178,10 @@ export default function ProjectsClient() {
                       color: '#a1a1aa',
                     }
               }
-              className={`text-[10px] md:text-xs font-mono px-3 py-1.5 rounded transition-all duration-300 tracking-wider uppercase font-medium active:scale-[0.98] ${
+              className={`text-xs font-mono px-3.5 py-1.5 rounded transition-all duration-300 tracking-wider uppercase font-medium active:scale-[0.98] ${
                 isActive
-                  ? 'hover:border-accent-cyan/50 hover:shadow-[0_0_20px_rgba(0,229,255,0.12)]'
-                  : 'hover:text-white hover:border-white/10 hover:shadow-[0_0_12px_rgba(255,255,255,0.03)]'
+                  ? 'hover:border-accent-cyan/60 hover:shadow-[0_0_22px_rgba(0,229,255,0.18)]'
+                  : 'hover:text-white hover:border-white/10 hover:shadow-[0_0_12px_rgba(255,255,255,0.04)]'
               }`}
             >
               {cat}
@@ -202,64 +191,64 @@ export default function ProjectsClient() {
       </div>
 
       {/* Main Showcase Grid */}
-      <div className="flex flex-col gap-8 max-w-4xl mx-auto w-full z-10 relative">
+      <div className="flex flex-col gap-8 max-w-4xl xl:max-w-[1000px] mx-auto w-full z-10 relative">
         
         {/* Render Live Projects */}
         {filteredProjects.map((proj) => (
-          <GlassCard key={proj.id} accent={proj.accent} className="p-6 md:p-8 flex flex-col gap-6">
+          <GlassCard key={proj.id} accent={proj.accent} className="p-6 md:p-8 flex flex-col gap-5">
             
             {/* Header Metadata Section */}
-            <div className="flex flex-wrap justify-between items-start gap-4 pb-4 border-b border-white/5">
+            <div className="flex flex-wrap justify-between items-start gap-4 pb-3.5 border-b border-white/5">
               <div className="flex flex-col gap-1">
-                <div className="flex items-center gap-3">
-                  <span className="text-[10px] font-mono tracking-widest text-zinc-500 uppercase">
+                <div className="flex items-center gap-2.5">
+                  <span className="text-xs font-mono tracking-widest text-zinc-400 uppercase font-medium">
                     {proj.typeLabel}
                   </span>
-                  <span className={`h-1.5 w-1.5 rounded-full ${proj.status === 'Live' ? 'bg-emerald-500' : 'bg-amber-500'} animate-pulse`} />
-                  <span className={`text-[9px] font-mono tracking-wider ${proj.status === 'Live' ? 'text-emerald-400' : 'text-amber-400'} uppercase font-bold`}>
+                  <span className={`h-2 w-2 rounded-full ${proj.status === 'Live' ? 'bg-emerald-500' : 'bg-amber-500'} animate-pulse`} />
+                  <span className={`text-[10px] md:text-xs font-mono tracking-wider ${proj.status === 'Live' ? 'text-emerald-400' : 'text-amber-400'} uppercase font-bold`}>
                     {proj.status}
                   </span>
                 </div>
-                <h2 className="text-3xl font-semibold text-white tracking-tight font-gothic mt-1">
+                <h2 className="text-3xl sm:text-4xl font-semibold text-white tracking-tight font-gothic mt-0.5">
                   {proj.title}
                 </h2>
               </div>
               
-              <span className="text-[10px] font-mono px-2.5 py-1 rounded-full bg-zinc-800/40 border border-white/5 text-zinc-300 uppercase tracking-wider">
+              <span className="text-xs font-mono px-3 py-1 rounded-full bg-zinc-800/60 border border-white/[0.08] text-zinc-300 uppercase tracking-wider font-medium">
                 {proj.category}
               </span>
             </div>
 
             {/* Content Details Split */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-7">
               
               {/* Left Column: Specifications */}
-              <div className="md:col-span-1 flex flex-col gap-6 text-xs font-mono">
-                <div className="flex flex-col gap-1.5">
-                  <span className="text-zinc-500 uppercase tracking-widest text-[9px]">Overview</span>
-                  <p className="text-zinc-300 font-light leading-5 normal-case font-sans">{proj.description}</p>
+              <div className="md:col-span-1 flex flex-col gap-5 text-xs md:text-sm font-mono">
+                <div className="flex flex-col gap-1">
+                  <span className="text-zinc-400 uppercase tracking-widest text-[10px] md:text-xs font-semibold">Overview</span>
+                  <p className="text-zinc-300 font-light leading-relaxed normal-case font-sans">{proj.description}</p>
                 </div>
-                <div className="flex flex-col gap-1.5">
-                  <span className="text-zinc-500 uppercase tracking-widest text-[9px]">Role</span>
-                  <p className="text-zinc-300 font-light leading-5 normal-case font-sans">{proj.role}</p>
+                <div className="flex flex-col gap-1">
+                  <span className="text-zinc-400 uppercase tracking-widest text-[10px] md:text-xs font-semibold">Role</span>
+                  <p className="text-zinc-300 font-light leading-relaxed normal-case font-sans">{proj.role}</p>
                 </div>
               </div>
 
               {/* Right Column: Case description & Tech */}
-              <div className="md:col-span-2 flex flex-col gap-5 justify-between">
-                <div className="flex flex-col gap-4">
-                  <span className="text-zinc-500 font-mono uppercase tracking-widest text-[9px]">Manifest</span>
-                  <p className="text-sm leading-6 text-zinc-400 font-light">
+              <div className="md:col-span-2 flex flex-col gap-4 justify-between">
+                <div className="flex flex-col gap-2.5">
+                  <span className="text-zinc-400 font-mono uppercase tracking-widest text-[10px] md:text-xs font-semibold">Manifest</span>
+                  <p className="text-base leading-relaxed md:leading-8 text-zinc-300 font-light">
                     {proj.manifest}
                   </p>
                 </div>
 
                 {/* Tech tags */}
-                <div className="flex flex-wrap gap-1.5 pt-2">
+                <div className="flex flex-wrap gap-1.5 pt-1">
                   {proj.tags.map((tag) => (
                     <span 
                       key={tag} 
-                      className="text-[9px] font-mono px-2 py-0.5 rounded bg-zinc-900 border border-white/5 text-zinc-400 uppercase tracking-wider"
+                      className="text-[11px] font-mono px-2.5 py-1 rounded bg-zinc-900/80 border border-white/5 text-zinc-300 uppercase tracking-wider"
                     >
                       {tag}
                     </span>
@@ -271,7 +260,7 @@ export default function ProjectsClient() {
 
             {/* Visual Preview for Web Projects */}
             {proj.category === 'Websites' && (
-              <div className="w-full pt-2">
+              <div className="w-full pt-1">
                 <BrowserFrame 
                   src={proj.image}
                   url={proj.url || (proj.link ? proj.link.replace(/^https?:\/\//, '').replace(/\/$/, '') : 'vonporat.com')} 
@@ -282,15 +271,15 @@ export default function ProjectsClient() {
 
             {/* Visual Preview for Non-Web Projects */}
             {proj.image && proj.category !== 'Websites' && (
-              <div className="w-full pt-2">
-                <div className="w-full overflow-hidden rounded-[12px] border border-white/[0.08] bg-obsidian-950 shadow-[0_8px_30px_rgba(0,0,0,0.5)]">
+              <div className="w-full pt-1">
+                <div className="w-full overflow-hidden rounded-[14px] border border-white/[0.08] bg-obsidian-950 shadow-[0_8px_30px_rgba(0,0,0,0.5)]">
                   <div className="relative w-full aspect-[16/10] bg-obsidian-950 overflow-hidden group">
                     <Image
                       src={proj.image}
                       alt={`${proj.title} proof showcase`}
                       fill
                       quality={90}
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 95vw, 896px"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 95vw, 1024px"
                       className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.01]"
                     />
                   </div>
@@ -299,16 +288,16 @@ export default function ProjectsClient() {
             )}
 
             {/* Footer Action Area */}
-            <div className="pt-4 border-t border-white/5 flex justify-end">
+            <div className="pt-3.5 border-t border-white/5 flex justify-end">
               <a
                 href={proj.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[10px] uppercase font-bold tracking-widest text-zinc-200 hover:text-white transition-colors duration-200 flex items-center gap-2 font-mono group"
+                className="text-xs md:text-sm uppercase font-semibold tracking-widest text-zinc-300 hover:text-white transition-colors duration-200 flex items-center gap-2 font-mono group"
               >
                 <span>{proj.cta}</span>
                 <svg 
-                  className="w-3.5 h-3.5 text-zinc-400 group-hover:text-white transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" 
+                  className="w-4 h-4 text-accent-purple group-hover:text-white transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" 
                   fill="none" 
                   stroke="currentColor" 
                   viewBox="0 0 24 24"
@@ -323,27 +312,27 @@ export default function ProjectsClient() {
 
         {/* Render Upcoming Expansion Placeholder Card */}
         {upcomingProject && (
-          <GlassCard accent="zinc" className="p-6 md:p-8 border border-dashed border-white/10 opacity-60 flex flex-col gap-4">
-            <div className="flex justify-between items-center pb-2 border-b border-white/5">
-              <div className="flex items-center gap-2 text-zinc-500">
-                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <GlassCard accent="zinc" className="p-6 md:p-8 border border-dashed border-white/10 opacity-70 flex flex-col gap-3.5">
+            <div className="flex justify-between items-center pb-2.5 border-b border-white/5">
+              <div className="flex items-center gap-2 text-zinc-400">
+                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
-                <span className="text-[10px] font-mono tracking-widest uppercase">System Encrypted</span>
+                <span className="text-xs font-mono tracking-widest uppercase font-medium">System Encrypted</span>
               </div>
-              <span className="text-[9px] font-mono text-zinc-500 uppercase">{activeFilter}</span>
+              <span className="text-xs font-mono text-zinc-400 uppercase font-medium">{activeFilter}</span>
             </div>
             
             <div className="flex flex-col gap-1">
-              <h3 className="text-xl font-medium text-zinc-300 font-gothic tracking-wide">{upcomingProject.title}</h3>
-              <span className="text-[10px] font-mono text-zinc-500">{upcomingProject.label}</span>
+              <h3 className="text-2xl font-semibold text-white font-gothic tracking-wide">{upcomingProject.title}</h3>
+              <span className="text-xs font-mono text-zinc-400">{upcomingProject.label}</span>
             </div>
             
-            <p className="text-xs leading-5 text-zinc-400 font-light max-w-2xl">
+            <p className="text-sm md:text-base leading-relaxed text-zinc-300 font-light max-w-2xl">
               {upcomingProject.description}
             </p>
             
-            <div className="text-[9px] font-mono text-zinc-600 uppercase pt-2">
+            <div className="text-xs font-mono text-zinc-500 uppercase pt-1">
               Status: Iterative staging scheduled with AI partner
             </div>
           </GlassCard>
@@ -351,9 +340,9 @@ export default function ProjectsClient() {
 
         {/* Empty filter message fallback if no projects/upcoming matched */}
         {filteredProjects.length === 0 && !upcomingProject && (
-          <div className="py-16 text-center flex flex-col items-center justify-center gap-3 border border-dashed border-white/5 rounded-lg bg-white/[0.01]">
-            <span className="text-zinc-500 font-mono text-[10px] tracking-widest uppercase">No Active Nodes</span>
-            <p className="text-zinc-400 text-xs font-light max-w-sm leading-5">
+          <div className="py-16 text-center flex flex-col items-center justify-center gap-3 border border-dashed border-white/5 rounded-xl bg-white/[0.01]">
+            <span className="text-zinc-400 font-mono text-xs tracking-widest uppercase font-semibold">No Active Nodes</span>
+            <p className="text-zinc-300 text-sm font-light max-w-sm leading-relaxed">
               No builds have been staged for category &quot;{activeFilter}&quot; yet. Manifest expansion in progress.
             </p>
           </div>
