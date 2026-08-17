@@ -4,7 +4,7 @@ import React from 'react';
 import { track } from '@vercel/analytics';
 
 export default function ContactLinks() {
-  const links = [
+  const socialLinks = [
     {
       name: "Spotify",
       url: "https://open.spotify.com/artist/1w5nRV4hbOrPFuYRYuvgnB?si=8IEsYIjORUi6ubXK_daH3g",
@@ -40,18 +40,12 @@ export default function ContactLinks() {
       url: "https://www.linkedin.com/in/patrikvonporat/",
       accent: "cyan",
       iconPath: "M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 23.271V1.729C24 .774 23.2 0 22.225 0z"
-    },
-    {
-      name: "Email",
-      url: "mailto:xvonpat@gmail.com",
-      accent: "purple",
-      iconPath: "M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.428 5.268a2 2 0 01-2.144 0L1.5 8.67z M22.5 6.908V6.75a3 3 0 00-3-3H4.5a3 3 0 00-3 3v.158l9.714 6.072a1 1 0 001.072 0L22.5 6.908z"
     }
   ];
 
   const accentClasses = {
-    purple: "hover:border-accent-purple/40 hover:shadow-[0_0_25px_rgba(139,92,246,0.22)]",
-    cyan: "hover:border-accent-cyan/40 hover:shadow-[0_0_25px_rgba(6,182,212,0.22)]",
+    purple: "hover:border-accent-purple/50 hover:shadow-[0_0_25px_rgba(139,92,246,0.22)]",
+    cyan: "hover:border-accent-cyan/50 hover:shadow-[0_0_25px_rgba(6,182,212,0.22)]",
   };
 
   const handleLinkClick = (name) => {
@@ -63,31 +57,64 @@ export default function ContactLinks() {
   };
 
   return (
-    <>
-      {/* Compact Circular Icon Grid */}
-      <div className="w-full max-w-4xl relative z-10">
-        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 gap-5 sm:gap-6 justify-items-center justify-center">
-          {links.map((link, idx) => (
+    <div className="flex flex-col items-center gap-10 md:gap-12 w-full max-w-3xl relative z-10">
+      
+      {/* 1. Primary Email CTA */}
+      <div className="flex flex-col items-center w-full">
+        <a 
+          href="mailto:xvonpat@gmail.com"
+          onClick={() => handleLinkClick('Primary Email CTA')}
+          className="group h-[50px] px-8 sm:px-10 rounded-full bg-white/10 hover:bg-white/15 text-white font-semibold uppercase tracking-wider text-xs md:text-sm font-mono border border-white/20 hover:border-accent-purple/50 backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.3)] hover:shadow-[0_0_30px_rgba(139,92,246,0.25)] hover:-translate-y-0.5 active:translate-y-0 text-center transition-premium flex items-center justify-center gap-2.5"
+          aria-label="Send an email to Patrik von Porat"
+        >
+          <svg 
+            className="w-4 h-4 text-accent-purple group-hover:text-white transition-colors" 
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+          <span>Send an Email</span>
+          <span className="text-accent-purple group-hover:translate-x-0.5 transition-transform" aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+
+      {/* 2. Restrained Divider & Secondary Section Label */}
+      <div className="flex flex-col items-center gap-4 w-full">
+        <div className="w-24 h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+        <span className="text-xs font-mono tracking-[0.3em] text-zinc-400 uppercase font-semibold">
+          Elsewhere
+        </span>
+      </div>
+
+      {/* 3. Secondary Social Links (6 Items in Balanced Row / Grid) */}
+      <div className="w-full">
+        <div className="grid grid-cols-3 sm:grid-cols-6 gap-4 sm:gap-6 md:gap-8 justify-items-center justify-center">
+          {socialLinks.map((link, idx) => (
             <a 
               key={idx} 
               href={link.url}
               onClick={() => handleLinkClick(link.name)}
-              target={link.name === "Email" ? "_self" : "_blank"}
-              rel={link.name === "Email" ? "" : "noopener noreferrer"}
-              className="group flex flex-col items-center gap-2.5 w-full"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex flex-col items-center gap-2.5 sm:gap-3 w-full focus-visible:ring-2 focus-visible:ring-accent-purple focus:outline-none rounded-xl p-1 min-w-[44px] min-h-[44px]"
+              aria-label={`Visit ${link.name} profile`}
             >
               <div 
-                className={`w-16 h-16 md:w-18 md:h-18 rounded-full bg-obsidian-950/60 backdrop-blur-xl border border-white/[0.08] flex items-center justify-center transition-premium transform hover:-translate-y-1.5 hover:bg-white/[0.04] shadow-[inset_0_1px_1px_rgba(255,255,255,0.03),0_10px_35px_rgba(0,0,0,0.6)] ${accentClasses[link.accent]}`}
+                className={`w-13 h-13 sm:w-15 sm:h-15 md:w-16 md:h-16 rounded-full bg-obsidian-950/70 backdrop-blur-xl border border-white/[0.08] flex items-center justify-center transition-premium transform group-hover:-translate-y-1 group-hover:bg-white/[0.04] shadow-[inset_0_1px_1px_rgba(255,255,255,0.03),0_8px_25px_rgba(0,0,0,0.5)] ${accentClasses[link.accent]}`}
               >
                 <svg 
-                  className={`w-6 h-6 md:w-7 md:h-7 text-zinc-300 group-hover:text-accent-${link.accent} transition-premium`} 
+                  className={`w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-zinc-300 group-hover:text-accent-${link.accent} transition-premium`} 
                   fill="currentColor" 
                   viewBox="0 0 24 24"
+                  aria-hidden="true"
                 >
                   <path d={link.iconPath} />
                 </svg>
               </div>
-              <span className="text-xs font-mono tracking-widest text-zinc-400 uppercase group-hover:text-white transition-colors duration-300 font-medium">
+              <span className="text-[11px] sm:text-xs md:text-[13px] font-mono tracking-wider text-zinc-400 uppercase group-hover:text-white transition-colors duration-300 font-medium">
                 {link.name}
               </span>
             </a>
@@ -95,20 +122,6 @@ export default function ContactLinks() {
         </div>
       </div>
 
-      {/* Email CTA */}
-      <div className="flex flex-col items-center gap-5 mt-2 max-w-md relative z-10">
-        <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-accent-purple to-transparent mb-0.5" />
-        <p className="text-sm md:text-base text-zinc-300 font-light leading-relaxed">
-          For collaborations, music work, art inquiries or project-related questions, email is the best place to start.
-        </p>
-        <a 
-          href="mailto:xvonpat@gmail.com"
-          onClick={() => handleLinkClick('Email CTA Button')}
-          className="px-8 py-3.5 rounded-full bg-white/10 hover:bg-white/15 text-white font-semibold uppercase tracking-wider text-xs md:text-sm font-mono border border-white/20 hover:border-white/40 backdrop-blur-md hover:shadow-[0_0_25px_rgba(255,255,255,0.15)] hover:-translate-y-0.5 active:translate-y-0 text-center transition-premium"
-        >
-          Send Email
-        </a>
-      </div>
-    </>
+    </div>
   );
 }
