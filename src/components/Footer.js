@@ -18,7 +18,8 @@ export default function Footer() {
 
         {/* Footer Links & Copyright */}
         <div className="flex flex-col items-center md:items-end gap-2.5">
-          <div className="flex gap-6 text-xs font-mono text-zinc-300 uppercase tracking-widest font-medium">
+          <div className="flex gap-5 sm:gap-6 text-xs font-mono text-zinc-300 uppercase tracking-widest font-medium">
+            <Link href="/projects" className="hover:text-accent-cyan transition-colors duration-200">Projects</Link>
             <Link href="/about" className="hover:text-accent-purple transition-colors duration-200">About</Link>
             <Link href="/blog" className="hover:text-accent-cyan transition-colors duration-200">Blog</Link>
             <Link href="/contact" className="hover:text-accent-purple transition-colors duration-200">Contact</Link>

@@ -268,7 +268,7 @@ export default function About() {
         
         <div className="flex flex-wrap items-center justify-center gap-4">
           <Link
-            href="/#pillars"
+            href="/projects"
             className="px-6 py-3 rounded-full bg-white/10 hover:bg-white/15 text-white font-mono text-xs md:text-sm uppercase tracking-wider font-semibold border border-white/20 hover:border-accent-purple/50 backdrop-blur-md hover:shadow-[0_0_20px_rgba(139,92,246,0.2)] transition-premium flex items-center gap-2"
           >
             <span>Explore Selected Work</span>

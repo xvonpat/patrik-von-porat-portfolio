@@ -177,12 +177,12 @@ export default async function Home() {
         
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row gap-3.5 mt-4 w-full sm:w-auto">
-          <a 
-            href="#selected-work" 
+          <Link 
+            href="/projects" 
             className="px-8 py-3.5 rounded-full bg-white/10 hover:bg-white/15 text-white font-semibold uppercase tracking-wider text-xs md:text-sm font-mono border border-white/20 hover:border-white/40 backdrop-blur-md hover:shadow-[0_0_25px_rgba(255,255,255,0.15)] hover:-translate-y-0.5 active:translate-y-0 text-center transition-premium"
           >
             Explore Selected Work
-          </a>
+          </Link>
           <Link 
             href="/blog" 
             className="px-8 py-3.5 rounded-full bg-zinc-950/60 hover:bg-zinc-900/70 text-white font-semibold uppercase tracking-wider text-xs md:text-sm font-mono border border-zinc-800 hover:border-accent-purple/40 backdrop-blur-md hover:shadow-[0_0_25px_rgba(139,92,246,0.18)] hover:-translate-y-0.5 active:translate-y-0 text-center transition-premium"
@@ -257,12 +257,12 @@ export default async function Home() {
                 Dedicated project websites, custom CMS schemas, and structured continuous improvement frameworks.
               </p>
             </div>
-            <a 
-              href="#selected-work" 
+            <Link 
+              href="/projects" 
               className="text-xs font-mono uppercase tracking-widest text-accent-cyan group-hover:text-white transition-colors flex items-center gap-1 mt-5 font-semibold"
             >
-              View Proof &rarr;
-            </a>
+              Explore Projects &rarr;
+            </Link>
           </GlassCard>
 
           {/* Pillar 4: Blog */}

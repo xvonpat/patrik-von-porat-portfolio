@@ -35,10 +35,11 @@ export default async function sitemap() {
 
   const staticRoutes = [
     '',
-    '/about',
+    '/projects',
     '/music',
     '/art',
     '/blog',
+    '/about',
     '/contact',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
