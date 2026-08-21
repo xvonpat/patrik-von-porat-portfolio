@@ -25,7 +25,9 @@ export default function Music() {
       status: "Active · Album In Production",
       accent: "purple",
       tags: ["Symphonic Power Metal", "Neoclassical Lead", "Fantasy Lore", "Studio Production"],
-      logo: "/images/music/realmforged_logo.webp",
+      logo: "/images/music/realmforged-logo-hero-showcase.webp",
+      fullBanner: true,
+      bannerPosition: "object-center",
       proof: "Debut full-length album currently in active studio recording and symphonic orchestration.",
       ctaText: "Explore Realmforged",
       link: "https://realmforgedofficial.com"
@@ -38,9 +40,9 @@ export default function Music() {
       status: "Active · Live Site",
       accent: "purple",
       tags: ["Blackened Melodic Death", "Atmospheric Darkness", "Visual Identity", "Active Production"],
-      logo: "/images/music/Ashwrithe.webp",
+      logo: "/images/music/qa-ashwrithe.webp",
       fullBanner: true,
-      bannerPosition: "object-[center_12%]",
+      bannerPosition: "object-center",
       proof: "Live standalone web platform at ashwrithe.com. Debut material in active studio production.",
       ctaText: "Enter Ashwrithe",
       link: "https://ashwrithe.com"
