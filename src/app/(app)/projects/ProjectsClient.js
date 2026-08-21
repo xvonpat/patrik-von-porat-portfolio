@@ -76,7 +76,7 @@ const PROJECTS = [
     tags: ['Traditional Art', 'Graphite', 'Dark Realism', 'Anatomy', 'Portraiture'],
     cta: 'View Art Gallery',
     link: '/art',
-    image: '/images/projects/proof/proof-graphite.webp',
+    image: '/images/art/drawings/eye-study.webp',
     accent: 'purple',
     isExternal: false
   },

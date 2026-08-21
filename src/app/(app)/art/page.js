@@ -34,9 +34,17 @@ export default function Art() {
       subtitle: "High-contrast dark realism and pencil portraits",
       description: "Exploring dark fantasy themes, deep shadows, and classical anatomy. Focused on texture, light falloff, and traditional high-detail rendering of gothic and Norse mythological figures.",
       accent: "purple",
-      dimensions: "Traditional Paper & Cardboard - Multi-size",
+      dimensions: "Traditional Paper & Graphite - Multi-size",
       placeholderGradient: "from-zinc-900 via-neutral-950 to-zinc-900",
+      image: "/images/art/drawings/eye-study.webp",
       gallery: [
+        { 
+          src: "/images/art/drawings/eye-study.webp", 
+          title: "Eye Study - Dark Realism", 
+          caption: "High-contrast graphite study exploring iris micro-textures, skin folds, and subtle light reflections on paper.", 
+          category: "Graphite Drawing", 
+          alt: "High-contrast graphite drawing of an eye with detailed skin texture and iris reflections." 
+        },
         { src: "", title: "Odin the Wanderer", caption: "Detailed pencil rendering of Odin in classical Norse style.", category: "Graphite Drawing", alt: "Odin pencil sketch" },
         { src: "", title: "The Crypt Keeper", caption: "High-contrast dark realism and shadow rendering.", category: "Graphite Drawing", alt: "Crypt keeper graphite art" },
         { src: "", title: "Fallen Valkyrie", caption: "Mythological Norse graphite study on card.", category: "Graphite Drawing", alt: "Fallen valkyrie sketch" }
