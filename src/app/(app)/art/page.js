@@ -94,9 +94,9 @@ export default function Art() {
         {/* Page Header */}
         <div className="flex flex-col items-center text-center gap-2.5 max-w-2xl mx-auto">
           <span className="text-xs md:text-sm font-mono tracking-[0.3em] text-accent-purple uppercase font-medium">Visual Expressions</span>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-white font-gothic">Art Portfolio</h1>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-white font-gothic text-balance">Art Portfolio</h1>
           <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-accent-purple to-transparent mt-1" />
-          <p className="text-base md:text-lg text-zinc-300 font-light leading-relaxed md:leading-8 mt-1">
+          <p className="text-base md:text-lg text-zinc-300 font-light leading-relaxed md:leading-8 mt-1 text-balance">
             A gallery of traditional and modern visual mediums. Bridging the gap between tactile graphite drawing, ink-on-skin practice, generative neural networks, and physical 3D modeling.
           </p>
         </div>
@@ -181,7 +181,7 @@ export default function Art() {
                   <div className={`w-16 h-[1px] bg-gradient-to-r from-transparent via-accent-${cat.accent} to-transparent mt-2`} />
                 </div>
                 
-                <p className="text-base md:text-lg leading-relaxed md:leading-8 text-zinc-300 font-light">
+                <p className="text-base md:text-lg leading-relaxed md:leading-8 text-zinc-300 font-light text-pretty">
                   {cat.description}
                 </p>
 

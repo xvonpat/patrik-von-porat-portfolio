@@ -43,7 +43,7 @@ const PROJECTS = [
     cta: 'View Site',
     link: 'https://realmforgedofficial.com',
     url: 'realmforgedofficial.com',
-    image: '/images/projects/proof/proof-realmforged.webp',
+    image: '/images/projects/proof/realmforged-showcase1.webp',
     accent: 'purple',
     isExternal: true
   },
@@ -226,11 +226,11 @@ export default function ProjectsClient() {
                 <div className="md:col-span-5 flex flex-col gap-4 text-xs md:text-sm">
                   <div className="flex flex-col gap-1">
                     <span className="text-zinc-400 uppercase tracking-widest text-[10px] md:text-xs font-mono font-semibold">Overview</span>
-                    <p className="text-zinc-300 font-light leading-relaxed font-sans text-sm md:text-[15px]">{proj.description}</p>
+                    <p className="text-zinc-300 font-light leading-relaxed font-sans text-sm md:text-[15px] text-pretty">{proj.description}</p>
                   </div>
                   <div className="flex flex-col gap-1">
                     <span className="text-zinc-400 uppercase tracking-widest text-[10px] md:text-xs font-mono font-semibold">Role</span>
-                    <p className="text-zinc-300 font-light leading-relaxed font-sans text-sm md:text-[15px]">{proj.role}</p>
+                    <p className="text-zinc-300 font-light leading-relaxed font-sans text-sm md:text-[15px] text-pretty">{proj.role}</p>
                   </div>
                 </div>
 
@@ -238,7 +238,7 @@ export default function ProjectsClient() {
                 <div className="md:col-span-7 flex flex-col gap-4 justify-between">
                   <div className="flex flex-col gap-1">
                     <span className="text-zinc-400 uppercase tracking-widest text-[10px] md:text-xs font-mono font-semibold">Project Intent</span>
-                    <p className="text-sm md:text-[15px] leading-relaxed text-zinc-300 font-light font-sans">
+                    <p className="text-sm md:text-[15px] leading-relaxed text-zinc-300 font-light font-sans text-pretty">
                       {proj.manifest}
                     </p>
                   </div>

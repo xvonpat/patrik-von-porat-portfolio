@@ -48,11 +48,36 @@ body {
   box-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
 }
 
-/* Typography Enhancements */
+/* Typography Enhancements & Semantic Text Measure Rules */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-cormorant), serif;
   letter-spacing: -0.015em;
   line-height: 1.15;
+  text-wrap: balance;
+}
+
+/* Semantic measure classes for reusable layout control */
+.text-page-intro {
+  max-width: 42rem; /* max-w-2xl */
+  text-wrap: balance;
+}
+
+.text-section-intro {
+  max-width: 42rem; /* max-w-2xl */
+  text-wrap: balance;
+}
+
+.text-lead-statement {
+  max-width: 48rem; /* max-w-3xl */
+  text-wrap: balance;
+}
+
+.text-prose-body {
+  text-wrap: pretty;
+}
+
+.text-card-body {
+  text-wrap: pretty;
 }
 
 /* Text selections */

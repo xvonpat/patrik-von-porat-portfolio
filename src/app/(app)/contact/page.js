@@ -23,11 +23,11 @@ export default function Contact() {
         <span className="text-xs md:text-sm font-mono tracking-[0.3em] text-accent-purple uppercase font-medium">
           Connect &amp; Collaborate
         </span>
-        <h1 className="text-3xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-white font-gothic leading-tight">
+        <h1 className="text-3xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-white font-gothic leading-tight text-balance">
           Start a conversation.
         </h1>
         <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-accent-purple to-transparent mt-1 mb-1" />
-        <p className="text-base md:text-[17px] lg:text-lg leading-relaxed md:leading-8 text-zinc-300 font-light max-w-xl">
+        <p className="text-base md:text-[17px] lg:text-lg leading-relaxed md:leading-8 text-zinc-300 font-light max-w-2xl text-pretty">
           For creative collaborations, music-related enquiries, visual work or conversations around systems and process, email is the best place to start. You can also find my work and ongoing projects through the channels below.
         </p>
       </div>

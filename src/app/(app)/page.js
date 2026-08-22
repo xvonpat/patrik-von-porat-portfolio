@@ -166,12 +166,12 @@ export default async function Home() {
         </h1>
         
         {/* Subtitle */}
-        <p className="text-lg sm:text-xl md:text-2xl font-gothic tracking-[0.2em] uppercase text-accent-purple font-medium max-w-3xl text-center">
+        <p className="text-lg sm:text-xl md:text-2xl font-gothic tracking-[0.2em] uppercase text-accent-purple font-medium max-w-3xl text-center text-balance">
           Guitarist, visual artist and systems-minded creator
         </p>
         
         {/* Supporting Copy */}
-        <p className="text-lg md:text-xl leading-relaxed md:leading-9 text-zinc-300 font-light max-w-3xl mt-1">
+        <p className="text-lg md:text-xl leading-relaxed md:leading-9 text-zinc-300 font-light max-w-3xl mt-1 text-balance">
           I build music, images and digital systems &mdash; connecting heavy metal, dark aesthetics, traditional craft and structured continuous improvement.
         </p>
         
@@ -197,10 +197,10 @@ export default async function Home() {
       {/* 2. SHORT INTRODUCTION / ORIENTATION */}
       <section className="max-w-4xl mx-auto w-full text-center flex flex-col items-center gap-3">
         <span className="text-xs font-mono tracking-[0.3em] text-accent-purple uppercase font-semibold">Orientation</span>
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-white font-gothic">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-white font-gothic text-balance">
           One identity, many expressions.
         </h2>
-        <p className="text-base md:text-lg leading-relaxed md:leading-8 text-zinc-300 font-light max-w-3xl">
+        <p className="text-base md:text-lg leading-relaxed md:leading-8 text-zinc-300 font-light max-w-3xl text-balance">
           This site is a living index of selected work, active projects and the processes behind them &mdash; from metal composition and traditional graphite drawing to tattoo practice, digital architectures and continuous process improvement.
         </p>
       </section>
@@ -209,7 +209,7 @@ export default async function Home() {
       <section className="flex flex-col gap-8 max-w-6xl mx-auto w-full">
         <div className="flex flex-col items-center text-center gap-2">
           <span className="text-xs font-mono tracking-[0.3em] text-zinc-400 uppercase font-medium">Core Ecosystem</span>
-          <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight text-white font-gothic">Creative Pillars</h2>
+          <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight text-white font-gothic text-balance">Creative Pillars</h2>
           <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-accent-purple to-transparent mt-1" />
         </div>
 
@@ -219,7 +219,7 @@ export default async function Home() {
             <div className="flex flex-col">
               <span className="text-[10px] md:text-xs font-mono tracking-[0.25em] text-zinc-400 uppercase font-semibold mb-1.5">Pillar 01</span>
               <h3 className="text-2xl md:text-3xl font-semibold tracking-tight text-white font-gothic mb-2.5">Music</h3>
-              <p className="text-sm leading-relaxed text-zinc-300 font-light">
+              <p className="text-sm leading-relaxed text-zinc-300 font-light text-pretty">
                 Symphonic power metal orchestration, twin lead guitar work, and release tracking for Realmforged and Ashwrithe.
               </p>
             </div>
@@ -236,7 +236,7 @@ export default async function Home() {
             <div className="flex flex-col">
               <span className="text-[10px] md:text-xs font-mono tracking-[0.25em] text-zinc-400 uppercase font-semibold mb-1.5">Pillar 02</span>
               <h3 className="text-2xl md:text-3xl font-semibold tracking-tight text-white font-gothic mb-2.5">Visual Art</h3>
-              <p className="text-sm leading-relaxed text-zinc-300 font-light">
+              <p className="text-sm leading-relaxed text-zinc-300 font-light text-pretty">
                 A gallery of traditional graphite drawings, custom synthetic skin tattoo flashes, and digital neural syntheses.
               </p>
             </div>
@@ -253,7 +253,7 @@ export default async function Home() {
             <div className="flex flex-col">
               <span className="text-[10px] md:text-xs font-mono tracking-[0.25em] text-zinc-400 uppercase font-semibold mb-1.5">Pillar 03</span>
               <h3 className="text-2xl md:text-3xl font-semibold tracking-tight text-white font-gothic mb-2.5">Projects</h3>
-              <p className="text-sm leading-relaxed text-zinc-300 font-light">
+              <p className="text-sm leading-relaxed text-zinc-300 font-light text-pretty">
                 Dedicated project websites, custom CMS schemas, and structured continuous improvement frameworks.
               </p>
             </div>
@@ -270,7 +270,7 @@ export default async function Home() {
             <div className="flex flex-col">
               <span className="text-[10px] md:text-xs font-mono tracking-[0.25em] text-zinc-400 uppercase font-semibold mb-1.5">Pillar 04</span>
               <h3 className="text-2xl md:text-3xl font-semibold tracking-tight text-white font-gothic mb-2.5">Journal</h3>
-              <p className="text-sm leading-relaxed text-zinc-300 font-light">
+              <p className="text-sm leading-relaxed text-zinc-300 font-light text-pretty">
                 Chronicles and build logs detailing workflow optimization, creative craft, and behind-the-scenes insights.
               </p>
             </div>
@@ -288,9 +288,9 @@ export default async function Home() {
       <section id="selected-work" className="flex flex-col gap-8 max-w-6xl mx-auto w-full scroll-mt-24">
         <div className="flex flex-col items-center text-center gap-2">
           <span className="text-xs font-mono tracking-[0.3em] text-accent-purple uppercase font-semibold">Concrete Proof</span>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-white font-gothic">Selected Work</h2>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-white font-gothic text-balance">Selected Work</h2>
           <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-accent-purple to-transparent mt-1" />
-          <p className="text-sm md:text-base text-zinc-300 font-light max-w-xl mt-1">
+          <p className="text-sm md:text-base text-zinc-300 font-light max-w-2xl mt-1 text-balance">
             A selection of active projects, creative craft and systems I have built or shaped.
           </p>
         </div>
@@ -310,13 +310,13 @@ export default async function Home() {
                   <h3 className="text-2xl md:text-3xl font-semibold tracking-tight text-white font-gothic">{card.title}</h3>
                   <p className="text-xs md:text-[13px] font-mono text-zinc-300 leading-snug"><span className="text-zinc-400 font-semibold">Role:</span> {card.role}</p>
                   
-                  <p className="text-sm md:text-[15px] text-zinc-300 font-light leading-relaxed">
+                  <p className="text-sm md:text-[15px] text-zinc-300 font-light leading-relaxed text-pretty">
                     {card.description}
                   </p>
 
                   <div className="bg-obsidian-950/70 rounded-lg p-3.5 border border-white/5 mt-1">
                     <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-400 block mb-1 font-semibold">Proof / State</span>
-                    <p className="text-sm text-zinc-200 font-light leading-relaxed">
+                    <p className="text-sm text-zinc-200 font-light leading-relaxed text-pretty">
                       {card.proof}
                     </p>
                   </div>
@@ -340,9 +340,9 @@ export default async function Home() {
       <section className="flex flex-col gap-8 max-w-6xl mx-auto w-full">
         <div className="flex flex-col items-center text-center gap-2">
           <span className="text-xs font-mono tracking-[0.3em] text-accent-cyan uppercase font-semibold">Capabilities in Context</span>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-white font-gothic">Creative Operating System</h2>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-white font-gothic text-balance">Creative Operating System</h2>
           <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-accent-cyan to-transparent mt-1" />
-          <p className="text-sm md:text-base text-zinc-300 font-light max-w-xl mt-1">
+          <p className="text-sm md:text-base text-zinc-300 font-light max-w-2xl mt-1 text-balance">
             A structured breakdown of tools and methods used to turn creative ideas into refined reality.
           </p>
         </div>
@@ -358,7 +358,7 @@ export default async function Home() {
                   <span className={`text-sm md:text-base font-mono uppercase tracking-wider ${accentClass} font-semibold`}>
                     {mode.title}
                   </span>
-                  <p className="text-sm text-zinc-300 font-light leading-relaxed">
+                  <p className="text-sm text-zinc-300 font-light leading-relaxed text-pretty">
                     {mode.description}
                   </p>
                   <div className="flex flex-wrap gap-1.5 mt-1.5">
@@ -382,11 +382,11 @@ export default async function Home() {
       <section className="flex flex-col gap-8 max-w-6xl mx-auto w-full">
         <div className="flex flex-col items-center text-center gap-2">
           <span className="text-xs font-mono tracking-[0.3em] text-accent-purple uppercase font-semibold">Methodology</span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-white font-gothic">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-white font-gothic text-balance">
             Observe &rarr; Structure &rarr; Create &rarr; Refine
           </h2>
           <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-accent-purple to-transparent mt-1" />
-          <p className="text-sm md:text-base text-zinc-300 font-light max-w-xl mt-1">
+          <p className="text-sm md:text-base text-zinc-300 font-light max-w-2xl mt-1 text-balance">
             The conceptual sequence connecting creative composition with structured problem-solving.
           </p>
         </div>
@@ -401,7 +401,7 @@ export default async function Home() {
                 {step.number}
               </span>
               <h3 className="text-2xl font-semibold text-white font-gothic">{step.name}</h3>
-              <p className="text-sm leading-relaxed text-zinc-300 font-light">
+              <p className="text-sm leading-relaxed text-zinc-300 font-light text-pretty">
                 {step.desc}
               </p>
             </div>

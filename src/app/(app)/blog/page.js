@@ -28,13 +28,13 @@ export default async function BlogPage() {
           CHRONICLES &amp; INSIGHTS
         </p>
 
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-white font-gothic mb-1.5 drop-shadow-sm select-none">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-white font-gothic mb-1.5 drop-shadow-sm select-none text-balance">
           Blog
         </h1>
         
         <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-accent-purple to-transparent mt-1 mb-2.5" />
         
-        <p className="text-base md:text-lg leading-relaxed md:leading-8 text-zinc-300 font-light max-w-xl">
+        <p className="text-base md:text-lg leading-relaxed md:leading-8 text-zinc-300 font-light max-w-2xl text-balance">
           Writing about music, visual art, technology and the systems behind my projects.
         </p>
       </div>

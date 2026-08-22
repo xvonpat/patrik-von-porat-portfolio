@@ -23,11 +23,11 @@ export default function Projects() {
         <span className="text-xs md:text-sm font-mono tracking-widest sm:tracking-[0.3em] text-accent-cyan uppercase font-medium">
           Creative Systems &amp; Digital Builds
         </span>
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-white font-gothic">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-white font-gothic text-balance">
           Projects
         </h1>
         <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-accent-cyan to-transparent mt-1" />
-        <p className="text-base md:text-lg text-zinc-300 leading-relaxed md:leading-8 mt-1 font-light max-w-2xl">
+        <p className="text-base md:text-lg text-zinc-300 leading-relaxed md:leading-8 mt-1 font-light max-w-2xl text-balance">
           A collection of websites, visual work, digital systems and creative experiments shaped through design, structure and iterative craft.
         </p>
       </div>

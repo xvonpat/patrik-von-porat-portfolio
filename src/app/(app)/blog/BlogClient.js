@@ -199,13 +199,13 @@ export default function BlogClient({ posts = [] }) {
                         </span>
                       </div>
 
-                      <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-white hover:text-accent-purple transition-colors mb-3 font-gothic leading-tight">
+                      <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-white hover:text-accent-purple transition-colors mb-3 font-gothic leading-tight text-balance">
                         <Link href={`/blog/${featuredPost.slug}`}>
                           {featuredPost.title}
                         </Link>
                       </h2>
 
-                      <p className="text-zinc-300 font-light leading-relaxed md:leading-8 text-base md:text-lg mb-5 line-clamp-3">
+                      <p className="text-zinc-300 font-light leading-relaxed md:leading-8 text-base md:text-lg mb-5 line-clamp-3 text-pretty">
                         {featuredPost.excerpt}
                       </p>
 
@@ -283,11 +283,11 @@ export default function BlogClient({ posts = [] }) {
                             </span>
                           </div>
                           
-                          <h4 className="text-2xl md:text-3xl font-semibold tracking-tight text-white group-hover:text-accent-purple transition-colors mb-2.5 font-gothic leading-snug">
+                          <h4 className="text-2xl md:text-3xl font-semibold tracking-tight text-white group-hover:text-accent-purple transition-colors mb-2.5 font-gothic leading-snug text-balance">
                             {post.title}
                           </h4>
                           
-                          <p className="text-sm md:text-[15px] leading-relaxed text-zinc-300 font-light line-clamp-3 mb-3">
+                          <p className="text-sm md:text-[15px] leading-relaxed text-zinc-300 font-light line-clamp-3 mb-3 text-pretty">
                             {post.excerpt}
                           </p>
                         </div>

@@ -84,9 +84,9 @@ export default function Music() {
       {/* Page Header */}
       <div className="flex flex-col items-center text-center gap-2.5 max-w-3xl xl:max-w-4xl mx-auto">
         <span className="text-xs md:text-sm font-mono tracking-[0.3em] text-accent-purple uppercase font-medium">Sonic Manifestations</span>
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-white font-gothic">Music Portfolio</h1>
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-white font-gothic text-balance">Music Portfolio</h1>
         <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-accent-purple to-transparent mt-1" />
-        <p className="text-base md:text-lg text-zinc-300 font-light leading-relaxed md:leading-8 mt-1">
+        <p className="text-base md:text-lg text-zinc-300 font-light leading-relaxed md:leading-8 mt-1 text-balance">
           A chronicle of active creative bands, studio production sessions, and guitar composition &mdash; from symphonic gothic fantasy arrangements to blackened extreme metal.
         </p>
       </div>
@@ -141,14 +141,14 @@ export default function Music() {
                 </div>
 
                 {/* Body Description */}
-                <p className="text-base leading-relaxed md:leading-8 text-zinc-300 font-light">
+                <p className="text-base leading-relaxed md:leading-8 text-zinc-300 font-light text-pretty">
                   {band.description}
                 </p>
 
                 {/* Proof / State Highlight Box */}
                 <div className="bg-obsidian-950/70 rounded-lg p-3.5 border border-white/5">
                   <span className="text-[10px] md:text-xs font-mono uppercase tracking-widest text-zinc-400 block mb-1 font-semibold">Current State</span>
-                  <p className="text-sm text-zinc-200 font-light leading-relaxed">
+                  <p className="text-sm text-zinc-200 font-light leading-relaxed text-pretty">
                     {band.proof}
                   </p>
                 </div>
@@ -239,7 +239,7 @@ export default function Music() {
                 </div>
 
                 {/* Description */}
-                <p className="text-sm md:text-[15px] leading-relaxed text-zinc-300 font-light">
+                <p className="text-sm md:text-[15px] leading-relaxed text-zinc-300 font-light text-pretty">
                   {band.description}
                 </p>
 

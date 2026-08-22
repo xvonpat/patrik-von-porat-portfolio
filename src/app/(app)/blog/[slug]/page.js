@@ -47,14 +47,14 @@ function renderLexical(node) {
     case 'root':
       return <div className="space-y-6">{children}</div>;
     case 'paragraph':
-      return <p className="text-lg leading-relaxed md:leading-9 text-zinc-300 font-light">{children}</p>;
+      return <p className="text-lg leading-relaxed md:leading-9 text-zinc-300 font-light text-pretty">{children}</p>;
     case 'heading':
       const level = node.tag || 'h2';
       const headingClasses = {
-        h1: "text-4xl sm:text-5xl font-semibold tracking-tight text-white font-gothic mt-12 mb-4",
-        h2: "text-3xl sm:text-4xl font-semibold tracking-tight text-white font-gothic mt-10 mb-4",
-        h3: "text-2xl sm:text-3xl font-semibold tracking-tight text-white font-gothic mt-8 mb-3",
-        h4: "text-xl sm:text-2xl font-semibold text-white font-gothic mt-6 mb-3",
+        h1: "text-4xl sm:text-5xl font-semibold tracking-tight text-white font-gothic mt-12 mb-4 text-balance",
+        h2: "text-3xl sm:text-4xl font-semibold tracking-tight text-white font-gothic mt-10 mb-4 text-balance",
+        h3: "text-2xl sm:text-3xl font-semibold tracking-tight text-white font-gothic mt-8 mb-3 text-balance",
+        h4: "text-xl sm:text-2xl font-semibold text-white font-gothic mt-6 mb-3 text-balance",
       };
       const Tag = level;
       return <Tag className={headingClasses[level] || headingClasses.h2}>{children}</Tag>;
@@ -69,7 +69,7 @@ function renderLexical(node) {
       return <li className="leading-relaxed md:leading-8">{children}</li>;
     case 'quote':
       return (
-        <blockquote className="border-l-2 border-accent-purple pl-6 italic text-zinc-200 font-light my-8 bg-white/[0.02] py-6 pr-6 rounded-r text-lg leading-relaxed md:leading-8">
+        <blockquote className="border-l-2 border-accent-purple pl-6 italic text-zinc-200 font-light my-8 bg-white/[0.02] py-6 pr-6 rounded-r text-lg leading-relaxed md:leading-8 text-pretty">
           {children}
         </blockquote>
       );
@@ -265,11 +265,11 @@ export default async function BlogPostPage({ params }) {
             </span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-white font-gothic leading-tight mb-5">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-white font-gothic leading-tight mb-5 text-balance">
             {post.title}
           </h1>
 
-          <p className="text-lg md:text-xl leading-relaxed md:leading-9 text-zinc-300 font-light italic">
+          <p className="text-lg md:text-xl leading-relaxed md:leading-9 text-zinc-300 font-light italic text-pretty">
             {post.excerpt}
           </p>
 

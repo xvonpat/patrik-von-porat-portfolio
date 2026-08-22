@@ -79,11 +79,11 @@ export default function About() {
         <span className="text-xs md:text-sm font-mono tracking-[0.3em] text-accent-purple uppercase font-medium">
           Behind the Work
         </span>
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-white font-gothic">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-white font-gothic text-balance">
           About Patrik
         </h1>
         <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-accent-purple to-transparent mt-1 mb-1" />
-        <p className="text-base md:text-lg text-zinc-300 font-light leading-relaxed md:leading-8 max-w-lg">
+        <p className="text-base md:text-lg text-zinc-300 font-light leading-relaxed md:leading-8 max-w-xl text-balance">
           Creative work, structured thinking, and the process connecting them.
         </p>
       </div>
@@ -145,24 +145,24 @@ export default function About() {
 
         {/* Right Column: Editorial Biography */}
         <div className="lg:col-span-7 flex flex-col gap-5 justify-center">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-white font-gothic tracking-tight leading-snug">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-white font-gothic tracking-tight leading-snug text-balance">
             Different disciplines. One underlying process.
           </h2>
           
           <div className="flex flex-col gap-4 text-base md:text-lg leading-relaxed md:leading-8 text-zinc-300 font-light">
-            <p>
+            <p className="text-pretty">
               I’m a guitarist, visual artist and systems-minded creator based in Sweden. My work moves between heavy music, dark visual art and practical systems—fields that may appear separate, but all begin with something unformed that needs direction.
             </p>
 
-            <p>
+            <p className="text-pretty">
               Music has been the constant for more than three decades. I write, record and shape the worlds around projects such as Realmforged and Ashwrithe, from guitars and orchestration to visual identity and release structure.
             </p>
 
-            <p>
+            <p className="text-pretty">
               Away from music, I work with graphite, tattoo practice, miniatures and AI-assisted visual experimentation. Professionally, I use Lean Six Sigma, data and process improvement to make complex work clearer, more reliable and easier to navigate.
             </p>
 
-            <p>
+            <p className="text-pretty">
               Whether I am building a song, an image, a website or a workflow, the process is much the same: observe what is there, find the structure, create with intent and refine until it holds together.
             </p>
           </div>
@@ -172,14 +172,14 @@ export default function About() {
 
       {/* 3. Process Section */}
       <section className="flex flex-col gap-7 pt-10 border-t border-white/5 relative z-10">
-        <div className="flex flex-col gap-2 max-w-2xl">
+        <div className="flex flex-col gap-2 max-w-3xl">
           <span className="text-xs md:text-sm font-mono tracking-[0.3em] text-accent-purple uppercase font-semibold">
             How I Work
           </span>
-          <h2 className="text-3xl sm:text-4xl font-semibold text-white tracking-tight font-gothic">
+          <h2 className="text-3xl sm:text-4xl font-semibold text-white tracking-tight font-gothic text-balance">
             From ambiguity to intention.
           </h2>
-          <p className="text-base md:text-lg text-zinc-300 font-light leading-relaxed">
+          <p className="text-base md:text-lg text-zinc-300 font-light leading-relaxed text-balance">
             &ldquo;I move between creative instinct and structured thinking rather than treating them as opposites.&rdquo;
           </p>
         </div>
@@ -204,7 +204,7 @@ export default function About() {
                   {step.title}
                 </h3>
                 
-                <p className="text-sm text-zinc-300 font-light leading-relaxed">
+                <p className="text-sm text-zinc-300 font-light leading-relaxed text-pretty">
                   {step.desc}
                 </p>
               </div>
@@ -215,14 +215,14 @@ export default function About() {
 
       {/* 4. Creative Operating System */}
       <section className="flex flex-col gap-7 pt-10 border-t border-white/5 relative z-10">
-        <div className="flex flex-col gap-2 max-w-2xl">
+        <div className="flex flex-col gap-2 max-w-3xl">
           <span className="text-xs md:text-sm font-mono tracking-[0.3em] text-accent-cyan uppercase font-semibold">
             Capabilities in Context
           </span>
-          <h2 className="text-3xl sm:text-4xl font-semibold text-white tracking-tight font-gothic">
+          <h2 className="text-3xl sm:text-4xl font-semibold text-white tracking-tight font-gothic text-balance">
             Creative Operating System
           </h2>
-          <p className="text-base text-zinc-300 font-light leading-relaxed">
+          <p className="text-base text-zinc-300 font-light leading-relaxed text-balance">
             Four connected areas of practice, supported by a practical and evolving toolset.
           </p>
         </div>
@@ -239,7 +239,7 @@ export default function About() {
                   <span className={`text-sm md:text-base font-mono uppercase tracking-wider ${accentClass}`}>
                     {group.title}
                   </span>
-                  <p className="text-sm text-zinc-300 font-light leading-relaxed">
+                  <p className="text-sm text-zinc-300 font-light leading-relaxed text-pretty">
                     {group.desc}
                   </p>
                 </div>
