@@ -1,6 +1,6 @@
 # vonporat.com — Decision Log
 
-Last reviewed: 2026-08-14
+Last reviewed: 2026-08-25
 
 ## Purpose
 
@@ -26,22 +26,12 @@ It is not a backlog, idea list, changelog, or archive of every discussion. It co
 | Superseded | Replaced by a newer decision. |
 | Retired | No longer relevant because the system or need disappeared. |
 
-## Decision record format
-
-Each decision contains:
-
-- **Status** — current state
-- **Decision** — what is established
-- **Rationale** — why it was chosen
-- **Implications** — what it requires or prevents
-- **Reconsider when** — evidence or event that justifies review
-
 ---
 
 ## D-001 — Site role and positioning
 
 **Status:** Active  
-**Decision date:** Consolidated 2026-08-14
+**Decision date:** Consolidated 2026-08-14; reaffirmed 2026-08-25
 
 ### Decision
 
@@ -53,7 +43,7 @@ Canonical positioning:
 
 Supporting thought:
 
-> **One identity, many expressions.**
+> **One identity. Many expressions.**
 
 Process bridge:
 
@@ -65,81 +55,61 @@ The site needs to connect music, visual craft, technology, writing, and process 
 
 ### Implications
 
-- The site is not a conventional CV.
-- It is not an exhaustive portfolio archive.
-- It is not a social-media feed or Linktree replacement.
-- Pages should show selected evidence and clear destinations.
-- Tools and skills should support the identity rather than replace it.
-
-### Reconsider when
-
-Patrik explicitly changes the purpose of the domain or chooses a substantially narrower public identity.
+- The site is not a conventional CV or portfolio template.
+- It is not an exhaustive archive or a Linktree replacement.
+- Pages show selected evidence and clear destinations.
+- Tools and skills support the identity rather than replace it.
 
 ---
 
 ## D-002 — Public navigation order
 
 **Status:** Active  
-**Decision date:** 2026-06-01
+**Decision date:** Updated 2026-08-25
 
 ### Decision
 
-The intended public navigation order is:
+The current implemented public navigation order (in `src/components/Navbar.js`) is:
 
-1. Home
-2. Music
-3. Art
-4. Projects
-5. Blog
-6. About
-7. Contact
+1. **Home** (`/`)
+2. **Projects** (`/projects`)
+3. **Music** (`/music`)
+4. **Art** (`/art`)
+5. **Blog** (`/blog`)
+6. **About** (`/about`)
+7. **Contact** (`/contact`)
 
 ### Rationale
 
-Music and Art are primary creative pillars. Projects provides proof and systems context before the deeper writing in Blog. About and Contact serve orientation and utility later in the sequence.
+Placing Projects after Home gives visitors immediate access to concrete proof and creative worlds before exploring specific creative disciplines (Music, Art), deeper writing (Blog), full personal narrative (About), and direct contact.
 
 ### Implications
 
 - Do not reorder navigation during unrelated design work.
-- Mobile and desktop navigation should follow the same conceptual order.
-- Route existence and navigation visibility remain separate decisions.
-
-### Reconsider when
-
-User research, content volume, or an explicit strategic change shows that visitors need a different hierarchy.
+- Mobile and desktop navigation follow the same sequence.
+- Projects is public and active in navigation.
 
 ---
 
 ## D-003 — Projects remains hidden until ready
 
-**Status:** Active  
-**Decision date:** 2026-06-01; reaffirmed 2026-08-14
+**Status:** Superseded (by D-018 on 2026-08-25)  
+**Decision date:** 2026-06-01; superseded 2026-08-25
 
-### Decision
+### Decision (Historical)
 
-The `/projects` route may remain implemented, but Projects must stay hidden from public navigation until its descriptions, proof cards, images, links, and overall presentation have been reviewed and approved.
+The `/projects` route was retained in code but kept hidden from public navigation until its descriptions, proof cards, images, and links were reviewed and approved.
 
-### Rationale
+### Rationale for Superseding
 
-An unfinished or inaccurate proof section weakens trust more than a temporarily smaller navigation.
-
-### Implications
-
-- Do not expose Projects because its route exists.
-- Do not add it to header, mobile navigation, footer promotion, sitemap emphasis, or homepage CTA without approval.
-- Initial proof subjects are vonporat.com, Realmforged, Ashwrithe, Graphite Practice, Tattoo Practice, and Power BI / Process Improvement.
-- No invented case studies, metrics, clients, or results.
-
-### Reconsider when
-
-The initial proof-card set is accurate, visually complete, linked correctly, and explicitly approved for public promotion.
+The curated Selected Work proof cards (`Realmforged`, `Ashwrithe`, `Visual Practice`, `vonporat.com`, `Systems & Improvement`), dedicated imagery, and live destinations have been reviewed, approved, and integrated into the public navigation.
 
 ---
 
 ## D-004 — Selected work over exhaustive archive
 
 **Status:** Active  
-**Decision date:** Consolidated 2026-08-14
+**Decision date:** Consolidated 2026-08-14; reaffirmed 2026-08-25
 
 ### Decision
 
@@ -147,51 +117,35 @@ The site presents a curated selection of work rather than everything Patrik has 
 
 ### Rationale
 
-Selection creates a clearer identity, stronger proof, better performance, and a site that remains maintainable.
+Selection creates a clearer identity, stronger proof, better performance, and a maintainable site.
 
 ### Implications
 
-- Art galleries should be curated.
-- Music history should support active work rather than compete equally with it.
-- Homepage sections should feature only the strongest current examples.
-- New filters and archive structures require enough content to justify them.
-
-### Reconsider when
-
-The volume of high-quality published work creates a real discovery problem that a larger archive would solve.
+- Art galleries and project cards are curated.
+- Music history supports active work rather than competing equally with it.
+- Homepage sections feature only the strongest current examples.
 
 ---
 
 ## D-005 — Active music projects receive priority
 
 **Status:** Active  
-**Decision date:** Consolidated 2026-08-14
+**Decision date:** Consolidated 2026-08-14; reaffirmed 2026-08-25
 
 ### Decision
 
-Realmforged and Ashwrithe are the primary active projects on Music. Freternia, Cromonic, and other relevant work are presented as selected history.
+Realmforged (Active) and Ashwrithe (In Development) are the primary active projects on Music. Freternia (1998–2023) and Cromonic (2014–2017) are presented as selected legacy work.
 
 ### Rationale
 
-Visitors should understand what Patrik is building now while still seeing the depth of his musical background.
-
-### Implications
-
-- Active and legacy states must be visibly distinguishable.
-- Patrik's role and current project status should be clear.
-- Real listening and project destinations should be used.
-- Historical projects should not receive equal visual prominence by default.
-
-### Reconsider when
-
-A project changes status or Patrik explicitly changes his active musical priorities.
+Visitors should understand what Patrik is building now while still seeing the depth of his 35+ years of musical experience.
 
 ---
 
 ## D-006 — Independent project identities
 
 **Status:** Active  
-**Decision date:** Consolidated 2026-08-14
+**Decision date:** Consolidated 2026-08-14; reaffirmed 2026-08-25
 
 ### Decision
 
@@ -199,119 +153,68 @@ vonporat.com, Realmforged, and Ashwrithe retain distinct voices and visual ident
 
 ### Rationale
 
-The personal hub needs a broad, human, readable voice. Realmforged and Ashwrithe serve different musical and narrative purposes.
+The personal hub needs a broad, human, readable voice. Realmforged and Ashwrithe serve different musical, narrative, and aesthetic purposes.
 
 ### Implications
 
-- Do not transfer Ashwrithe's ritual language or lore into general personal-site copy.
-- Do not make unrelated personal-site sections sound like Realmforged fantasy copy.
-- The personal site may introduce each project clearly and then link to its dedicated environment.
-- Project-specific colors and imagery should sit within the personal site's overall structure without merging identities.
-
-### Reconsider when
-
-A project is formally absorbed into another identity or Patrik approves a deliberate cross-project campaign.
+- Do not transfer Ashwrithe's ritualistic language into general personal-site copy.
+- Do not make personal-site sections sound like a fantasy campaign.
+- The personal site introduces each project and links to its dedicated external environment.
 
 ---
 
 ## D-007 — Public language and personal-site voice
 
 **Status:** Active  
-**Decision date:** Established 2025; reaffirmed 2026-08-14
+**Decision date:** Established 2025; reaffirmed 2026-08-25
 
 ### Decision
 
-Public-facing website copy is normally written in English.
+Public-facing website copy is written in **English**.
 
 The voice is personal, specific, calm, confident, thoughtful, readable, and grounded in real work.
-
-### Rationale
-
-English supports the site's international creative and professional audience. A clear personal voice connects varied disciplines better than corporate or persona-driven language.
-
-### Implications
-
-- Avoid generic “multidisciplinary creative” filler.
-- Avoid corporate mission language, empty superlatives, inflated expertise, and keyword stuffing.
-- Use first person naturally.
-- Lead with identity and work before tools.
-- Swedish may be used when explicitly requested or for internal material.
-
-### Reconsider when
-
-Patrik chooses bilingual publishing or changes the primary target audience.
 
 ---
 
 ## D-008 — Homepage information hierarchy
 
 **Status:** Active  
-**Decision date:** Consolidated 2026-08-14
+**Decision date:** Updated 2026-08-25
 
 ### Decision
 
-The intended homepage sequence is:
+The approved homepage information hierarchy follows the conceptual journey:
+**Why → Expressions → How → Proof → Now → Journal → Contact**
 
-1. Hero and concise positioning
-2. Short introduction
-3. Creative pillars
-4. Selected Work / Proof Cards
-5. Creative Operating System / capabilities
-6. Observe → Structure → Create → Refine
-7. Now / Current Focus
-8. Latest strong blog content
-9. Restrained contact or link exit
+1. Hero with concise positioning
+2. Short introduction (*The Impulse*)
+3. Three Core Expressions (`Music & Worlds`, `Visual Practice`, `Systems & Digital Work`)
+4. How I Work process (`01 OBSERVE`, `02 STRUCTURE`, `03 CREATE`, `04 REFINE`)
+5. Selected Work proof cards (`Realmforged`, `Ashwrithe`, `Visual Practice`)
+6. Current Focus snapshots (`Music`, `Visual Art`, `Digital & Systems`)
+7. Latest Journal entry points
+8. Restrained contact / link exit
 
 ### Rationale
 
-The sequence moves from rapid orientation to evidence, process, current activity, deeper writing, and a natural next step.
-
-### Implications
-
-- Home should not duplicate About.
-- Hero, introduction, pillars, and capability copy need different jobs.
-- Selected Work should provide proof rather than more abstract positioning.
-- Current Focus should remain short and time-sensitive.
-- Not every section needs equal visual weight.
-
-### Reconsider when
-
-The actual content inventory, visitor behavior, or a deliberate homepage redesign demonstrates a better hierarchy.
+Moves from rapid orientation to evidence, process, current activity, deeper writing, and a natural next step without repeating biography or displaying an oversized software-logo wall.
 
 ---
 
 ## D-009 — Obsidian Noir visual direction
 
 **Status:** Active  
-**Decision date:** 2026-05-11; consolidated 2026-08-14
+**Decision date:** 2026-05-11; consolidated 2026-08-14; reaffirmed 2026-08-25
 
 ### Decision
 
-The current visual direction is **Obsidian Noir**:
-
+The visual direction is **Obsidian Noir**:
 - Obsidian and graphite foundations
 - Bone or warm off-white primary text
-- Purple/amethyst primary accent
-- Controlled turquoise secondary accent
-- Dark editorial materiality
-- Selective smoked glass
-- Subtle grain, depth, shadow, and atmosphere
-- Restrained motion
-
-### Rationale
-
-This direction feels personal, artistic, modern, and premium without becoming corporate, flat, or a neon technology demo.
-
-### Implications
-
-- Purple has greater accent dominance than turquoise.
-- Glass, blur, glow, and gradients remain selective.
-- Mobile performance constrains visual effects.
-- Exact tokens are verified in the repository rather than invented in documentation.
-
-### Reconsider when
-
-Patrik explicitly approves a new visual direction or a systematic redesign process reaches a replacement decision.
+- Purple (`accent-purple`) primary accent
+- Turquoise/cyan (`accent-cyan`) controlled secondary accent
+- Material depth with selective smoked glass
+- Restrained motion respecting `prefers-reduced-motion`
 
 ---
 
@@ -320,240 +223,162 @@ Patrik explicitly approves a new visual direction or a systematic redesign proce
 **Status:** Superseded  
 **Decision date:** Superseded by Obsidian Noir in 2026
 
-### Decision
-
-Earlier warm brown, copper, bronze, and related Crimson Noir concepts are historical exploration, not the current default system.
-
-### Rationale
-
-The later Obsidian Noir direction better reflects the desired graphite, bone, purple, and turquoise identity.
-
-### Implications
-
-- Do not reintroduce copper, bronze, sepia, or warm-brown branding as a primary system from old mockups or notes.
-- Old code or assets using those colors are not automatic authority.
-
-### Reconsider when
-
-Only through an explicit approved visual-direction change.
+Earlier warm brown, copper, and bronze concepts are historical exploration, not the current system.
 
 ---
 
 ## D-011 — Blog-first CMS strategy
 
 **Status:** Active  
-**Decision date:** 2026-05-29
+**Decision date:** 2026-05-29; reaffirmed 2026-08-25
 
 ### Decision
 
-Blog is the primary CMS-driven public section.
-
-Home, Music, Art, Projects, About, and Contact remain static by default until a specific migration is approved.
-
-### Rationale
-
-The blog has a clear recurring publishing need. Broad CMS expansion would add backend complexity before static content and presentation are fully established.
-
-### Implications
-
-- Do not migrate static pages incidentally.
-- Do not add Bands, Artwork, Projects, Site Settings, or Contact Links collections without an observed need and explicit approval.
-- Avoid dual ownership of the same content in code and CMS.
-- Preserve draft/published boundaries.
-
-### Reconsider when
-
-Repeated manual updates to a static content type create measurable friction and a concrete first CMS version is approved.
+Blog is the primary CMS-driven public section. Home, Music, Art, Projects, About, and Contact remain static by default.
 
 ---
 
 ## D-012 — Repository is authoritative for implementation
 
 **Status:** Active  
-**Decision date:** Consolidated 2026-08-14
+**Decision date:** Consolidated 2026-08-14; reaffirmed 2026-08-25
 
-### Decision
-
-The repository and configured runtime services are authoritative for package versions, file paths, commands, schemas, environment-variable names, branch behavior, and current implementation.
-
-### Rationale
-
-Documentation provides durable intent but can become stale. Guessing technical details creates avoidable errors.
-
-### Implications
-
-- Inspect before editing.
-- Do not invent commands, paths, fields, or tokens.
-- Separate Established, Intended, Planned, and repository-specific details.
-- Update documentation when architecture materially changes.
-
-### Reconsider when
-
-Never as a general principle; only the location of technical authority may change if the project adopts another controlled source.
+The repository and runtime services are authoritative for package versions, file paths, commands, schemas, and implementation details.
 
 ---
 
 ## D-013 — Mobile performance is a design constraint
 
 **Status:** Active  
-**Decision date:** 2026-06-12; reaffirmed 2026-08-14
-
-### Decision
+**Decision date:** 2026-06-12; reaffirmed 2026-08-25
 
 Mobile performance is part of design quality and Definition of Done.
-
-### Rationale
-
-The site has experienced perceived slowness from large media, image-heavy pages, blur, and animation. A premium visual experience must also feel responsive and stable.
-
-### Implications
-
-- Audit before broad optimization.
-- Preserve visual identity while simplifying expensive mobile effects.
-- Use purpose-sized media and appropriate formats.
-- Control layout shift, blur, backdrop filters, shadow, animation, and client-side JavaScript.
-- Do not claim improvement without appropriate evidence.
-
-### Reconsider when
-
-The specific techniques may change, but performance remains a permanent quality requirement.
 
 ---
 
 ## D-014 — Security and secret storage
 
 **Status:** Active  
-**Decision date:** Consolidated 2026-08-14
+**Decision date:** Consolidated 2026-08-14; reaffirmed 2026-08-25
 
-### Decision
-
-Secrets belong only in approved environment-variable stores and a password manager. They must not be stored in Git, Markdown, Notion, logs, screenshots, prompts, examples, or public output.
-
-### Rationale
-
-Credentials previously stored in plain text must be treated as exposed. Documentation should describe where a secret is managed, never its value.
-
-### Implications
-
-- Never repeat discovered secret values.
-- Rotate exposed credentials before removing old references.
-- Never weaken authentication, access control, storage policy, or authorization to simplify implementation.
-- Server-only values must not enter browser bundles.
-
-### Reconsider when
-
-The approved secret-management system changes. The non-exposure principle remains permanent.
+Secrets belong exclusively in approved environment-variable stores and password managers. They must never appear in Git, Markdown, logs, screenshots, or user-facing output.
 
 ---
 
 ## D-015 — GitHub and Vercel delivery flow
 
 **Status:** Active  
-**Decision date:** Established 2026
+**Decision date:** Established 2026; reaffirmed 2026-08-25
 
-### Decision
-
-Source changes move through the Git repository and GitHub into the configured Vercel deployment flow for vonporat.com.
-
-### Rationale
-
-Version control and managed deployment provide reviewability, reproducibility, and rollback options.
-
-### Implications
-
-- Local implementation and verification precede release.
-- A push is not proof of successful deployment.
-- Production completion requires deployed-route verification.
-- Deployment, push, merge, migration, and destructive operations require authorization from the user's request.
-
-### Reconsider when
-
-Hosting or source-control architecture changes explicitly.
+Source changes move through Git/GitHub into Vercel production deployments upon push to `main`.
 
 ---
 
 ## D-016 — Tool Stack remains contextual and discreet
 
 **Status:** Active  
-**Decision date:** Consolidated 2026-08-14
+**Decision date:** Consolidated 2026-08-14; reaffirmed 2026-08-25
 
-### Decision
-
-Tools such as Power BI, Pro Tools, Photoshop, Minitab, ComfyUI, Next.js, Payload, Supabase, and Vercel are shown only when they support a capability, project, or real workflow.
-
-### Rationale
-
-Proof and practice communicate more than decorative software logos or generic skill lists.
-
-### Implications
-
-- Avoid large colorful tool walls.
-- Group tools by what they enable.
-- Do not use ratings or skill percentages.
-- Keep About narrative-first.
-
-### Reconsider when
-
-A specific audience or project requires a technical capability matrix with a clear practical purpose.
+Tools are mentioned only in context within capability modes. Avoid large software logo walls or rating systems.
 
 ---
 
 ## D-017 — AI use is transparent but not the whole story
 
 **Status:** Active  
-**Decision date:** Consolidated 2026-08-14
+**Decision date:** Consolidated 2026-08-14; reaffirmed 2026-08-25
 
-### Decision
-
-AI-assisted work should be described honestly and proportionately. The site should also show traditional craft, physical practice, human direction, selection, iteration, and project context.
-
-### Rationale
-
-Patrik uses generative tools as part of a broader practice. Presenting all visual work as either purely manual or purely generated would misrepresent the process.
-
-### Implications
-
-- Use terms such as “AI-assisted” and “generative visuals” accurately.
-- Do not imply prompting alone is the whole creative contribution.
-- Do not hide AI use when it is materially relevant.
-- Keep graphite, tattoo practice, music, and physical making visible as real craft.
-
-### Reconsider when
-
-Tools, public expectations, or Patrik's creative process materially changes.
+AI-assisted work is described honestly and proportionately alongside traditional craft, physical making, and human direction.
 
 ---
 
-## Adding a new decision
+## D-018 — Projects approved for public navigation
 
-Add a record only when the choice is durable and materially changes future work.
+**Status:** Active  
+**Decision date:** 2026-08-25
 
-Good reasons:
+### Decision
 
-- Patrik explicitly resolves a recurring question.
-- A visual, editorial, technical, or publishing direction changes.
-- A safeguard becomes mandatory.
-- A planned system becomes approved.
-- A recurring correction needs to persist.
+The `/projects` route is approved, locked, and active in public navigation.
 
-Do not add:
+### Rationale
 
-- Individual backlog items
-- Temporary release copy
-- One-off implementation details
-- Routine bug fixes
-- Ideas without approval
-- Facts already owned by a more suitable technical source
+The curated proof card set (`Realmforged`, `Ashwrithe`, `Visual Practice`, `vonporat.com`, `Systems & Improvement`) was completed with verified evidence, roles, and destinations.
 
-## Decision update procedure
+---
 
-When replacing a decision:
+## D-019 — Editorial site hierarchy and homepage structure
 
-1. Keep the old record.
-2. Mark it **Superseded**.
-3. Add the replacement as a new record.
-4. Link the two records in their rationale or implications.
-5. Update affected project documentation.
-6. Verify implementation if the decision changes live behavior.
+**Status:** Active  
+**Decision date:** 2026-08-25
 
-Do not silently rewrite history in a way that makes old code or discussions impossible to interpret.
+The site follows the conceptual journey `Why → Expressions → How → Proof → Now → Journal → Contact`. The homepage uses a concise 4-stage process (`Observe → Structure → Create → Refine`) rather than a heavy Creative Operating System or tool-stack feature.
+
+---
+
+## D-020 — Curated Selected Work over filterable catalog
+
+**Status:** Active  
+**Decision date:** 2026-08-25
+
+Projects presents curated proof cards linking creative work and systems thinking rather than a filterable inventory or placeholder case studies.
+
+---
+
+## D-021 — Page-by-page approval and verification workflow
+
+**Status:** Active  
+**Decision date:** 2026-08-25
+
+Page redesigns are executed, verified across standard responsive viewports with screenshots, and approved individually before moving to the next page.
+
+---
+
+## D-022 — About page Background composition with authentic portrait
+
+**Status:** Active  
+**Decision date:** 2026-08-25
+
+The About page Background section uses a spacious 2-column desktop composition (narrative + authentic studio portrait) with a horizontal Core Facts band underneath (`Sweden`, `35+ years`, `Lean Six Sigma Green Belt`, `Realmforged & Ashwrithe`).
+
+---
+
+## D-023 — Contact page is email-led and form-free
+
+**Status:** Active  
+**Decision date:** 2026-08-25
+
+The Contact page provides one primary email action targeting the configured `mailto:` destination and 6 verified external channels (Spotify, YouTube, Instagram, Patreon, Bandcamp, LinkedIn). No contact form, newsletter signup, or booking widget is used.
+
+---
+
+## D-024 — Blog index status remains under review
+
+**Status:** Active  
+**Decision date:** 2026-08-25
+
+The redesigned Blog index (featuring `JOURNAL`, dynamic `LATEST NOTE`, category navigation, and text-led card fallbacks) is implemented but remains under review until explicitly approved.
+
+---
+
+## D-025 — Natural, content-aware responsive typography
+
+**Status:** Active  
+**Decision date:** 2026-08-25
+
+Responsive typography must use natural, content-aware wrapping (`text-pretty`, appropriate readable measures) rather than brittle `white-space: nowrap` or excessively narrow measures that cause orphan words.
+
+---
+
+## D-026 — Global consistency audit and footer tagline review
+
+**Status:** Under review  
+**Decision date:** 2026-08-25
+
+### Decision
+
+A comprehensive global consistency audit is pending. The current footer tagline:
+`GUITARIST · ARTIST · OPTIMIZER`
+is flagged for review to determine whether it should be aligned with the canonical positioning:
+`Guitarist · Visual Artist · Systems-Minded Creator`.
+No code changes are to be made until explicitly directed.

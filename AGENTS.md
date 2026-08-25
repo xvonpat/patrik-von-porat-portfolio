@@ -6,8 +6,8 @@ This repository powers **vonporat.com**, Patrik von Porat's personal creative hu
 
 The site brings together:
 
-- Music and guitar work
-- Active projects such as Realmforged and Ashwrithe
+- Music and guitar work (35+ years)
+- Active projects: Realmforged and Ashwrithe
 - Graphite drawing and visual art
 - Tattoo practice
 - Generative visuals, miniatures, and 3D printing
@@ -15,11 +15,15 @@ The site brings together:
 - Lean Six Sigma, Power BI, process improvement, and systems thinking
 - Long-form writing and behind-the-scenes documentation
 
-The site should present these areas as parts of one coherent identity, not as a disconnected list of hobbies or software skills.
+The site presents these areas as parts of one coherent identity, not as a disconnected list of hobbies or software skills.
 
 Canonical positioning:
 
 > **Patrik von Porat — guitarist, visual artist and systems-minded creator.**
+
+Supporting principle:
+
+> **One identity. Many expressions.**
 
 The conceptual bridge between creative and analytical work is:
 
@@ -49,304 +53,199 @@ Do not treat outdated copy, template content, or an isolated existing component 
 
 Do not rewrite an entire page or system when a focused change will solve the problem.
 
+## Current approved website status
+
+| Area | Current status | Definition |
+| --- | --- | --- |
+| Home | Approved and locked | Structure, copy, and composition locked. Preserve during unrelated work. |
+| Projects | Approved and locked | Publicly visible in navigation; curated Selected Work composition locked. |
+| Music | Approved and locked | Realmforged/Ashwrithe priority and discography locked. |
+| Art | Approved and locked | Curated visual-practice sections and lightbox locked. |
+| About | Approved and locked | Background narrative, studio portrait, and core facts locked. |
+| Contact | Approved and locked | Email-led, form-free layout and verified channels locked. |
+| Blog index | Under review | Redesigned journal layout implemented; pending final user review. |
+| Individual blog articles | Outside scope | Individual post route templates outside recent index redesign. |
+| Global consistency audit | Pending | Cross-page alignment, typography, and footer review pending. |
+| Final QA & performance audit | Pending | Full site-wide accessibility, SEO, and performance audit pending. |
+
+“Locked” means future unrelated work must preserve the approved structure, copy, and composition. It does not prohibit explicitly requested changes.
+
 ## Public information architecture
 
-The intended navigation order is:
+Current implemented navigation order (in `src/components/Navbar.js`):
 
-1. Home
-2. Music
-3. Art
-4. Projects
-5. Blog
-6. About
-7. Contact
+1. **Home** (`/`)
+2. **Projects** (`/projects`)
+3. **Music** (`/music`)
+4. **Art** (`/art`)
+5. **Blog** (`/blog`)
+6. **About** (`/about`)
+7. **Contact** (`/contact`)
 
-### Current visibility rule
-
-The `/projects` route may remain implemented, but **Projects must stay hidden from the public navigation until its descriptions, proof cards, images, and links have been reviewed and approved**.
-
-Do not reveal unfinished pages, placeholder-heavy sections, private tools, admin routes, or experimental features without explicit approval.
+Projects is approved and active in public navigation. Do not hide or remove it.
 
 ## Page responsibilities
 
-### Home
+### Home (`/`)
 
-The homepage should help a new visitor understand Patrik quickly and then guide them toward the strongest work.
+The homepage orientates visitors quickly and guides them toward the strongest work through the conceptual journey:
+**Why → Expressions → How → Proof → Now → Journal → Contact**.
 
-Preferred information order:
+Section order:
+1. Hero with concise positioning (`Patrik von Porat — Guitarist, visual artist and systems-minded creator`)
+2. Short introduction (`The Impulse`)
+3. Three Core Expressions (`Music & Worlds`, `Visual Practice`, `Systems & Digital Work`)
+4. Process (`Observe → Structure → Create → Refine`)
+5. Selected Work proof cards (`Realmforged`, `Ashwrithe`, `Visual Practice`)
+6. Current Focus (`Music`, `Visual Art`, `Digital & Systems`)
+7. Latest Journal entry points (CMS-driven with fallback)
+8. Restrained contact / link exit
 
-1. Hero and concise positioning
-2. Short introduction
-3. Creative pillars
-4. Selected Work / Proof Cards
-5. Creative Operating System / capabilities
-6. Observe → Structure → Create → Refine
-7. Now / Current Focus
-8. Latest strong blog content
-9. Restrained contact or link exit
+Avoid repeating biography across multiple sections. Avoid restoring large tool-stack or software-logo walls.
 
-Avoid repeating the same biography or positioning in the hero, introduction, capability section, and About preview.
+### Projects (`/projects`)
 
-### Music
+Projects is a curated **Selected Work** showcase connecting creative output with systems thinking.
 
-- Prioritize active projects, especially Realmforged and Ashwrithe.
-- Present Freternia, Cromonic, and other relevant history as selected legacy work.
-- Make Patrik's role and each project's current status clear.
-- Use real listening and project destinations.
-- Do not give every historical project equal visual weight.
+Current project set:
+- **Featured**: `Realmforged` (Active), `Ashwrithe` (In Development)
+- **Supporting**: `Visual Practice` (Ongoing Practice), `vonporat.com` (Live · Evolving), `Systems & Improvement` (Professional Practice)
 
-### Art
+Each card must answer: What is it? Why does it exist? What was Patrik's role? What is the proof/current state? Where can the visitor continue? Do not use invented results, fake metrics, or generic placeholder case studies.
 
-Organize selected work into clear groups such as:
+### Music (`/music`)
 
-- Graphite
-- Tattoo Practice
-- Generative Visuals
-- Miniatures & 3D Printing
+- Prioritize active projects: **Realmforged** (Active) and **Ashwrithe** (In Development).
+- Present **Freternia** (1998–2023) and **Cromonic** (2014–2017) as selected legacy work.
+- Make Patrik's role, guitar history (35+ years), and current state clear.
+- Use real listening destinations (Spotify, Bandcamp) and official project sites.
+- Keep Realmforged and Ashwrithe visual and verbal identities distinct.
 
-Prefer a curated selection over a complete archive. Each published image should have useful alt text and, where relevant, a title, category, year or status, and concise caption.
+### Art (`/art`)
 
-### Projects
+Curated visual and physical practice:
+- Traditional Studies (Graphite and charcoal)
+- Tattoo Practice (Reelskin studies and linework/shading)
+- Miniatures & 3D Prints (Resin printing, acrylic painting)
+- Generative Visuals (Visual development and moodboards)
 
-Initial proof-card subjects are:
+Prefer a curated selection over a complete archive. Each image must have descriptive alt text, title, medium, and concise caption.
 
-- vonporat.com
-- Realmforged
-- Ashwrithe
-- Graphite Practice
-- Tattoo Practice
-- Power BI / Process Improvement
+### About (`/about`)
 
-Each card should answer:
+The About page connects music, visual craft, technology, and systems thinking into one coherent personal narrative.
 
-- What is it?
-- Why does it exist?
-- What was Patrik's role?
-- What is the proof, result, or current state?
-- Where can the visitor continue?
+- **Hero**: *“The work changes. The underlying impulse does not.”*
+- **Background Section**: Spacious 2-column desktop layout (narrative + authentic studio portrait) with a horizontal Core Facts band underneath (`Based in Sweden`, `Playing guitar 35+ years`, `Process Lean Six Sigma Green Belt`, `Current projects Realmforged & Ashwrithe`).
+- **How I Work**: Natural, content-aware typography measure (`max-w-3xl md:max-w-4xl text-pretty`).
+- **Capabilities**: Grouped by mode (`Music & Audio`, `Visual Practice`, `Systems & Improvement`, `Web & Digital Systems`).
+- Uses tools contextually rather than as a logo wall.
 
-Do not use invented results, fake metrics, or generic placeholder case studies.
+### Contact (`/contact`)
 
-### Blog
+Deliberately minimal link-exit page:
+- **Hero**: `CONTACT` / `Start a conversation.`
+- **Introductory copy**: Personal and direct.
+- **Primary action**: Send an Email button targeting the configured `mailto:` destination.
+- **Elsewhere channels**: Spotify, YouTube, Instagram, Patreon, Bandcamp, LinkedIn.
+- **No contact form**: Do not add forms, fields, Calendly, or booking widgets.
 
-The blog adds depth through reflections, behind-the-scenes work, technical notes, creative process, and learning.
+### Blog (`/blog` & `/blog/[slug]`)
 
-Preferred category set:
-
-- Behind the Scenes
-- Music
-- Visual Art
-- Process & Systems
-- Tools & Experiments
-- Personal
-
-Keep category values consistent between Payload CMS and the public interface. Visual-art posts, including drawing and tattoo practice, must be able to use **Visual Art**.
-
-### About
-
-The About page must connect music, visual craft, technology, and systems thinking into one personal narrative.
-
-It should be editorial, structured, and scannable rather than a text wall or résumé. Mention tools such as Power BI, Photoshop, Pro Tools, Minitab, or ComfyUI only in context. Use a discreet Tool Stack rather than oversized software logos.
-
-### Contact
-
-Keep Contact concise: one useful paragraph, essential destinations, and a clear collaboration path. Do not repeat the full biography.
+Personal editorial journal:
+- **Active Categories**: `Music`, `Visual Art`, `Technology`, `Process`, `Personal`.
+- **Listing**: Lead entry (`LATEST NOTE`), dynamic category archive headings, text-led card fallbacks for posts without images.
+- **Publishing boundary**: Only published posts are public; draft content remains strictly protected.
+- Status: Blog index is under review; individual article routes remain outside recent redesign.
 
 ## Visual direction
 
-The visual identity should feel:
-
-- Dark
-- Premium
-- Artistic
-- Modern
-- Editorial
-- Personal
-- Cinematic without becoming theatrical
-
-Current palette direction:
+The visual identity is **Obsidian Noir**:
 
 - Obsidian and graphite foundations
 - Bone or warm off-white text
-- Purple as the primary accent
-- Turquoise as a controlled secondary accent
-
-Use texture, depth, shadow, careful typography, and selective glass treatment. The result should feel like a curated artistic identity rather than a generic portfolio template.
+- Purple (`accent-purple`) as primary accent
+- Turquoise/cyan (`accent-cyan`) as controlled secondary accent
+- Subtle borders, smoked glass panels, and material depth
+- Restrained motion respecting `prefers-reduced-motion`
 
 ### Avoid
 
-- Generic corporate portfolio styling
+- Generic corporate portfolio or SaaS styling
 - Flat Linktree-like layouts
-- Bright SaaS glassmorphism
-- Excessive neon glow
-- Decorative gradients without purpose
-- Glow or glass effects on every surface
-- Continuous decorative animation
+- Bright blue/white glassmorphism or excessive neon glow
+- Continuous decorative animation loops
 - Large colorful software-logo walls
-- Generic stock photography
-- Placeholder-heavy grids
-- Visual changes that reduce readability or mobile performance
-
-Do not replace the established visual identity, palette, typography feel, navigation model, or overall tone without explicit approval.
+- Generic stock photography or decorative AI imagery without meaning
+- Forcing narrow text measures or using `white-space: nowrap` to hide wrapping issues
 
 ## Content and copy rules
 
-Public-facing copy should normally be written in **English** unless the user requests another language.
+Public-facing copy must be written in **English**.
 
 Copy should be:
-
-- Personal
-- Specific
-- Calm and confident
-- Thoughtful
+- Personal, calm, confident, specific, and proof-led
 - Concise enough to scan
-- Supported by real work or experience
+- Grounded in real work and verified facts
 
-Prefer concrete proof over broad claims.
+Preserve official names: **Patrik von Porat**, **vonporat.com**, **Realmforged**, **Ashwrithe**.
 
-Avoid:
-
-- Generic “multidisciplinary creative” filler
-- Corporate mission-statement language
-- Empty superlatives
-- Inflated expertise claims
-- Repetitive introductions
-- Long lists of tools without context
-- Copy that makes unrelated disciplines feel arbitrarily combined
-
-Preserve official spellings: **vonporat.com**, **Realmforged**, and **Ashwrithe**.
-
-Ashwrithe and Realmforged have their own identities. Do not silently apply one project's voice, genre language, visual system, or lore to the personal site or to the other project.
+Realmforged and Ashwrithe have independent identities. Do not transfer Ashwrithe's ritualistic language or lore to the personal site.
 
 ## Technical baseline
 
-The current platform is based on:
+- **Framework**: Next.js (App Router, Turbopack)
+- **CMS**: Payload CMS (v3.85+, Lexical rich text, Postgres adapter)
+- **Database**: Supabase / PostgreSQL
+- **Storage**: Configured S3/Supabase storage adapter
+- **Hosting**: Vercel (Analytics & Speed Insights enabled)
+- **Source Control**: GitHub (`main` branch triggers production builds)
 
-- Next.js
-- Payload CMS
-- Supabase / PostgreSQL and media storage
-- Vercel hosting and analytics
-- GitHub source control and deployment flow
-- Google Search Console
+### CMS boundary
 
-Treat the repository as the source of truth for exact versions, paths, package manager, scripts, configuration, and available tests.
-
-### CMS strategy
-
-- Blog is the primary CMS-driven section.
-- Keep Music, Art, Projects, About, and Contact static unless the user approves a specific migration.
-- Add Bands, Artwork, Projects, Site Settings, or Contact Links collections only when a real repeated maintenance problem justifies them.
-- Do not build backend complexity merely because it may be useful later.
-- Preserve draft/published behavior and do not expose draft content publicly.
+- **Blog** is the primary CMS-driven section.
+- **Home, Music, Art, Projects, About, Contact** remain static by default.
+- Do not create dual ownership of content between code and CMS without an explicit synchronization plan.
+- Preserve draft/published behavior and do not expose draft content.
 
 ## Security and privacy
 
-Never place or expose any of the following in source files, Markdown documentation, Notion, logs, screenshots, generated examples, commits, or user-facing output:
-
-- Database passwords
-- Connection strings containing credentials
-- API keys
-- Supabase service or S3 secrets
-- OAuth client secrets
-- Payload secrets
-- Private tokens
+Never expose in source files, Markdown, logs, screenshots, or user-facing output:
+- Database passwords or connection strings
+- API keys, secrets, or service tokens
+- S3/Supabase storage secrets
 - Full environment-variable values
 
-Secrets belong only in approved environment-variable stores and a password manager.
+Secrets belong exclusively in approved environment-variable stores and password managers.
 
-If a secret is found in tracked content or documentation:
+## Quality and QA workflow
 
-1. Do not repeat its value.
-2. Report the affected location.
-3. Treat the credential as exposed.
-4. Recommend rotation before removal.
-5. Update references to name the variable or management location, never the value.
+For page-level design and content work:
+1. Inspect implementation and dependencies.
+2. Make one bounded page change.
+3. Report exact changed files.
+4. Run production build (`npm run build`) and lint (`npm run lint`).
+5. Perform read-only QA and capture screenshots across standard viewports:
+   - `1440 × 900` (Wide Desktop)
+   - `1280 × 800` (Standard Desktop)
+   - `1024 × 768` (Small Desktop / Tablet Landscape)
+   - `768 × 1024` (Tablet Portrait)
+   - `390 × 844` (Mobile)
+   - `360 × 800` (Narrow Mobile)
+6. Visually inspect screenshots for hierarchy, contrast, and overflow.
+7. Store QA screenshots outside `public/` (in agent artifacts directory).
+8. Verify links, keyboard focus, and accessibility.
+9. Obtain explicit user approval before proceeding to the next page.
+10. Commit and deploy only with user authorization.
 
-Never weaken authentication, authorization, Payload access control, Supabase policies, or environment handling to make a feature easier to implement.
+## Detailed project documentation
 
-## Performance requirements
-
-Mobile performance is a design constraint and part of the definition of done.
-
-Known risk areas include:
-
-- Oversized hero and avatar assets
-- Image-heavy Music and Art pages
-- Large photographic PNG files
-- Gallery thumbnails served at full resolution
-- CSS blur, shadow, and backdrop-filter cost
-- Continuous animation loops
-- Layout shift caused by media without reserved dimensions
-
-For visual changes:
-
-- Use appropriate responsive dimensions.
-- Prefer WebP or AVIF for photographic assets when suitable.
-- Separate thumbnail, card, hero, and full-view use cases.
-- Lazy-load below-the-fold media.
-- Prioritize genuine above-the-fold content when needed.
-- Preserve width and height to reduce layout shift.
-- Verify perceived loading and interaction on mobile.
-
-Do not sacrifice the established aesthetic, but achieve it with controlled and measurable implementation choices.
-
-## SEO and accessibility
-
-For public pages and posts, preserve or add as appropriate:
-
-- Unique page title
-- Meta description
-- Canonical URL
-- Open Graph metadata and image
-- Logical heading hierarchy
-- Descriptive image alt text
-- Clear link and button labels
-- Keyboard-usable interactions
-- Visible focus states
-- Appropriate indexing behavior
-
-Do not use SEO text that conflicts with the personal, editorial voice of the site.
-
-## Implementation workflow
-
-1. Inspect the current implementation and related content source.
-2. State any assumption that materially affects the result.
-3. Make the smallest coherent change that fully addresses the request.
-4. Preserve existing patterns unless there is a clear reason to improve them.
-5. Add or update tests when behavior changes and the repository supports them.
-6. Run the relevant existing lint, type-check, test, and build commands.
-7. Review the diff for unrelated edits, exposed secrets, regressions, and accidental rewrites.
-8. Verify the affected page at desktop and mobile sizes.
-9. For deployment work, verify the live result after the approved GitHub/Vercel flow.
-10. Summarize what changed, what was verified, and any remaining risk.
-
-Do not deploy, publish, enable hidden navigation, migrate content models, add production dependencies, or perform destructive data operations unless the user's request clearly authorizes it.
-
-## Definition of done
-
-A change is complete only when:
-
-- The requested outcome is implemented.
-- The result matches the established identity and page purpose.
-- Desktop and mobile behavior have been checked.
-- Links and primary actions work.
-- Images are optimized and accessible where relevant.
-- Relevant lint, type, test, and build checks pass, or any unavailable check is reported.
-- No secrets or private content are exposed.
-- Draft or hidden content remains protected.
-- The final diff contains no unrelated changes.
-- Significant new constraints or durable decisions are documented.
-
-## Decision discipline
-
-Do not reopen established decisions during an unrelated task. If a request conflicts with a documented decision, explain the conflict and ask for direction before implementing a broad change.
-
-Record a new durable rule only when it represents one of the following:
-
-- An explicit user decision
-- A recurring correction
-- A consequential technical constraint
-- A security or publishing safeguard
-- A stable definition of quality
-
-Keep this file concise enough to remain useful. Put detailed project context, architecture, design tokens, content examples, and execution-plan templates in `docs/ai/` rather than expanding `AGENTS.md` indefinitely.
+For detailed architecture, design tokens, content rules, and technical systems, consult:
+- [`docs/ai/PROJECT_CONTEXT.md`](./docs/ai/PROJECT_CONTEXT.md) — Purpose, identity, audience, and pillars
+- [`docs/ai/SITE_ARCHITECTURE.md`](./docs/ai/SITE_ARCHITECTURE.md) — Routes, ownership, and data flow
+- [`docs/ai/DESIGN_SYSTEM.md`](./docs/ai/DESIGN_SYSTEM.md) — Tokens, typography, layout, and visual principles
+- [`docs/ai/CONTENT_GUIDE.md`](./docs/ai/CONTENT_GUIDE.md) — Voice, page copy, CTAs, and terminology
+- [`docs/ai/TECHNICAL_SYSTEM.md`](./docs/ai/TECHNICAL_SYSTEM.md) — Architecture, Payload CMS, database, and deployment
+- [`docs/ai/QUALITY_STANDARDS.md`](./docs/ai/QUALITY_STANDARDS.md) — Acceptance criteria and Definition of Done
+- [`docs/ai/DECISIONS.md`](./docs/ai/DECISIONS.md) — Durable decision log
+- [`docs/ai/PLANS.md`](./docs/ai/PLANS.md) — Execution plans and status tracking

@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { getPayload } from 'payload';
 import configPromise from '../../../../../payload.config.ts';
@@ -236,6 +237,16 @@ export default async function BlogPostPage({ params }) {
 
   const canonicalUrl = `https://vonporat.com/blog/${post.slug}`;
 
+  // Extract featured image from Payload media relationship
+  const rawImgUrl = typeof post.featuredImage === 'object' && post.featuredImage !== null ? post.featuredImage.url : null;
+  const imgUrl = getMediaUrl(rawImgUrl);
+  const imgAlt = (typeof post.featuredImage === 'object' && post.featuredImage !== null ? post.featuredImage.alt : '') || '';
+  const focalX = post.featuredImage?.focalX;
+  const focalY = post.featuredImage?.focalY;
+  const objectPosition = (typeof focalX === 'number' && typeof focalY === 'number') 
+    ? `${focalX}% ${focalY}%` 
+    : 'center';
+
   return (
     <>
       <article className="max-w-3xl lg:max-w-4xl mx-auto px-6 py-8 md:py-12 relative z-10">
@@ -287,6 +298,21 @@ export default async function BlogPostPage({ params }) {
             </div>
           )}
         </header>
+
+        {/* Featured Editorial Image (Rendered only when present in CMS) */}
+        {imgUrl && (
+          <div className="relative w-full aspect-[16/9] rounded-xl md:rounded-2xl overflow-hidden border border-white/[0.08] bg-obsidian-900/60 shadow-2xl mb-8 md:mb-10">
+            <Image
+              src={imgUrl}
+              alt={imgAlt}
+              fill
+              priority
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 896px"
+              style={{ objectPosition }}
+              className="w-full h-full object-cover"
+            />
+          </div>
+        )}
 
         {/* Rich Text content with matching accent glow */}
         <GlassCard accent={catInfo.accent} className="p-6 md:p-10 mb-0">
