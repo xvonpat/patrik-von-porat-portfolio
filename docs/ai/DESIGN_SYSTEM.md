@@ -223,7 +223,7 @@ Curated practice showcases with interactive full-screen lightbox zoom.
 Calm minimal composition: primary email CTA + 6 external channels in a 1-row (desktop) / 3×2 grid (mobile) layout.
 
 ### Blog (`/blog`)
-Editorial journal: `JOURNAL` eyebrow, category filters (`Music`, `Visual Art`, `Technology`, `Process`, `Personal`), dynamic `LATEST NOTE`, and text-led fallback cards.
+Editorial journal: `JOURNAL` eyebrow, category filters (`Music`, `Visual Art`, `Making`, `Technology`, `Process`, `Personal`), dynamic `LATEST NOTE`, and text-led fallback cards.
 
 ## Accessibility
 

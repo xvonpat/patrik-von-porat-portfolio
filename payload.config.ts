@@ -44,25 +44,25 @@ export default buildConfig({
                   return acc;
                 }, {});
                 const token = cookies['payload-token'];
-                console.log('[Strategy Debug] Cookie payload-token present:', !!token);
                 if (!token) return { user: null };
 
                 const decoded = jwt.verify(token, payload.secret);
-                console.log('[Strategy Debug] Decoded JWT:', decoded);
                 if (!decoded || !decoded.id) return { user: null };
 
                 const user = await payload.findByID({
                   collection: 'users',
                   id: decoded.id,
                 });
-                console.log('[Strategy Debug] Found user by ID in strategy:', user ? { id: user.id, email: user.email } : 'None');
 
                 if (user) {
                   user.collection = 'users';
                   return { user };
                 }
               } catch (err) {
-                console.error('[Strategy Debug] Error in custom strategy verification:', err.message);
+                // If token is expired or invalid, treat gracefully as unauthenticated session
+                if (err?.name !== 'TokenExpiredError' && err?.name !== 'JsonWebTokenError') {
+                  console.error('Authentication strategy error:', err);
+                }
               }
               return { user: null };
             }

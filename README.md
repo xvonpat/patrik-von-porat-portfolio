@@ -54,7 +54,7 @@ Home · Projects · Music · Art · Blog · About · Contact
 | **Art** (`/art`) | Approved & locked | Curated Traditional Studies, Tattoo Practice, Miniatures & 3D Prints, Generative Visuals, full lightbox. |
 | **About** (`/about`) | Approved & locked | Personal narrative, studio portrait + Core Facts band in Background, How I Work measure, contextual capabilities. |
 | **Contact** (`/contact`) | Approved & locked | Email-led CTA targeting the configured `mailto:` destination, form-free layout, 6 external channels (Spotify, YouTube, Instagram, Patreon, Bandcamp, LinkedIn). |
-| **Blog index** (`/blog`) | Under review | Redesigned editorial journal with category filters (`Music`, `Visual Art`, `Technology`, `Process`, `Personal`) and text-led cards implemented; awaiting final review. |
+| **Blog index** (`/blog`) | Under review | Redesigned editorial journal with category filters (`Music`, `Visual Art`, `Making`, `Technology`, `Process`, `Personal`) and text-led cards implemented; awaiting final review. |
 | **Blog post** (`/blog/[slug]`) | Outside review | Individual article rendering templates. |
 | **Global consistency audit** | Pending | Footer positioning tagline review, cross-page typography, and link consistency audit. |
 | **Final QA & performance audit** | Pending | Comprehensive site-wide accessibility, SEO, and mobile performance audit. |

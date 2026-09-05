@@ -139,7 +139,7 @@ Deliberately minimal link-exit page:
 
 ### Blog (`/blog` & `/blog/[slug]`)
 Primary CMS-driven journal:
-- **Active Categories**: `Music`, `Visual Art`, `Technology`, `Process`, `Personal`.
+- **Active Categories**: `Music`, `Visual Art`, `Making`, `Technology`, `Process`, `Personal`.
 - **Listing**: Lead entry (`LATEST NOTE`), dynamic category archive headings, and text-led fallback cards for posts without images.
 - **Publishing boundary**: Only published posts are publicly rendered; drafts remain protected.
 

@@ -255,6 +255,7 @@ export const Posts: CollectionConfig = {
       options: [
         { label: 'Music', value: 'music' },
         { label: 'Visual Art', value: 'visual-art' },
+        { label: 'Making', value: 'making' },
         { label: 'Technology', value: 'technology' },
         { label: 'Process', value: 'process' },
         { label: 'Personal', value: 'personal' },

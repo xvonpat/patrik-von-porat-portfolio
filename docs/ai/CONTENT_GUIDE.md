@@ -174,7 +174,7 @@ Curated **Selected Work** showcase:
 ### Blog (`/blog`) — Under Review
 
 - **Hero**: `JOURNAL` / `Notes from the work as it develops.`
-- **Active Categories**: `Music`, `Visual Art`, `Technology`, `Process`, `Personal`.
+- **Active Categories**: `Music`, `Visual Art`, `Making`, `Technology`, `Process`, `Personal`.
 - **Lead Entry**: Dynamic `LATEST NOTE`.
 - **Archive**: Dynamic archive headings (`Latest notes.` or `[Category] notes.`) and text-led cards for posts without images.
 

@@ -195,7 +195,7 @@ Mobile is a first-class layout, not a compressed desktop view.
 
 ### Blog (`/blog` & `/blog/[slug]`) — Under Review
 - [ ] Journal listing with `JOURNAL` eyebrow, category filters, and dynamic `LATEST NOTE`.
-- [ ] Active categories: `Music`, `Visual Art`, `Technology`, `Process`, `Personal`.
+- [ ] Active categories: `Music`, `Visual Art`, `Making`, `Technology`, `Process`, `Personal`.
 - [ ] Clean text-led card fallbacks for posts without featured images.
 - [ ] Published/draft boundary intact (draft posts never exposed publicly).
 - [ ] Lexical rich-text body renders with clean typography.

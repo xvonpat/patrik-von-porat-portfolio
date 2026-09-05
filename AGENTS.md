@@ -153,7 +153,7 @@ Deliberately minimal link-exit page:
 ### Blog (`/blog` & `/blog/[slug]`)
 
 Personal editorial journal:
-- **Active Categories**: `Music`, `Visual Art`, `Technology`, `Process`, `Personal`.
+- **Active Categories**: `Music`, `Visual Art`, `Making`, `Technology`, `Process`, `Personal`.
 - **Listing**: Lead entry (`LATEST NOTE`), dynamic category archive headings, text-led card fallbacks for posts without images.
 - **Publishing boundary**: Only published posts are public; draft content remains strictly protected.
 - Status: Blog index is under review; individual article routes remain outside recent redesign.
