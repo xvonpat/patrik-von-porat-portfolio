@@ -131,6 +131,33 @@ export default function Projects() {
       cta: 'About the Process',
       link: '/about',
       image: null,
+      fallbackBadge: 'Analytical & Systems Practice',
+      fallbackDesc: 'Data-backed continuous improvement, DMAIC problem solving, and structured operational workflows.',
+      accent: 'cyan',
+      isExternal: false
+    },
+    {
+      id: 'workbench',
+      title: 'Workbench',
+      category: 'WEB · PERSONAL TOOLS',
+      status: 'ONGOING',
+      statusType: 'ongoing',
+      intro: 'A local-first project journal and personal tool built to track active work across creative domains, maintain a clear next action, and record chronological project decisions.',
+      role: 'Product design, specification, development, and testing',
+      scopeLabel: 'Stack',
+      scopeItems: [
+        'Vite',
+        'React',
+        'TypeScript',
+        'Vitest',
+        'Playwright'
+      ],
+      evidence: 'v1.0 complete with local persistence, corrupted data safeguards, and comprehensive unit and browser test coverage.',
+      cta: 'View Project Details',
+      link: '/projects/workbench',
+      image: null,
+      fallbackBadge: 'Local-First Web Tool',
+      fallbackDesc: 'Browser-based project journal with zero cloud dependencies, offline localStorage persistence, and test coverage.',
       accent: 'cyan',
       isExternal: false
     }
@@ -154,6 +181,7 @@ export default function Projects() {
           textClass: 'text-amber-400',
         };
       case 'practice':
+      case 'ongoing':
         return {
           dotClass: 'bg-accent-cyan',
           textClass: 'text-accent-cyan',
@@ -333,7 +361,7 @@ export default function Projects() {
           </span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-7">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-7">
           {supportingProjects.map((proj) => {
             const statusBadge = getStatusBadge(proj.status, proj.statusType);
             const isPurple = proj.accent === 'purple';
@@ -373,7 +401,7 @@ export default function Projects() {
                         src={proj.image} 
                         alt={proj.imageAlt} 
                         fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
                         className="w-full h-full object-cover object-center grayscale group-hover:grayscale-0 transition-all duration-700 ease-out scale-100 group-hover:scale-[1.02]"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-obsidian-950/70 via-transparent to-transparent opacity-60 pointer-events-none" />
@@ -384,10 +412,10 @@ export default function Projects() {
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                         </svg>
-                        <span>Analytical &amp; Systems Practice</span>
+                        <span>{proj.fallbackBadge || 'Analytical & Systems Practice'}</span>
                       </div>
                       <p className="text-xs text-zinc-400 font-light leading-relaxed">
-                        Data-backed continuous improvement, DMAIC problem solving, and structured operational workflows.
+                        {proj.fallbackDesc || 'Data-backed continuous improvement, DMAIC problem solving, and structured operational workflows.'}
                       </p>
                     </div>
                   )}
