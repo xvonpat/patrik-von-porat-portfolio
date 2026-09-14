@@ -207,8 +207,8 @@ export default function BlogClient({ posts = [] }) {
                           </span>
                         </div>
 
-                        <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-white group-hover:text-accent-purple transition-colors mb-3.5 font-gothic leading-tight text-balance">
-                          <Link href={`/blog/${leadPost.slug}`} className="hover:underline focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent-purple">
+                        <h2 className="text-2xl sm:text-3xl md:text-4xl font-medium tracking-tight text-white group-hover:text-accent-purple hover:text-accent-purple transition-colors duration-300 mb-3.5 font-sans leading-tight md:leading-snug text-balance">
+                          <Link href={`/blog/${leadPost.slug}`} className="no-underline focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent-purple rounded-sm">
                             {leadPost.title}
                           </Link>
                         </h2>
@@ -250,8 +250,8 @@ export default function BlogClient({ posts = [] }) {
                         </span>
                       </div>
 
-                      <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-white group-hover:text-accent-purple transition-colors font-gothic leading-tight text-balance">
-                        <Link href={`/blog/${leadPost.slug}`} className="hover:underline focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent-purple">
+                      <h2 className="text-2xl sm:text-3xl md:text-4xl font-medium tracking-tight text-white group-hover:text-accent-purple hover:text-accent-purple transition-colors duration-300 font-sans leading-tight md:leading-snug text-balance">
+                        <Link href={`/blog/${leadPost.slug}`} className="no-underline focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent-purple rounded-sm">
                           {leadPost.title}
                         </Link>
                       </h2>

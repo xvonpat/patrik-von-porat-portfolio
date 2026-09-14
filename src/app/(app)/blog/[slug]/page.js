@@ -102,6 +102,26 @@ const getMediaUrl = (url) => {
   return `${cleanServerUrl}${cleanUrl}`;
 };
 
+function getLexicalText(node) {
+  if (!node) return '';
+  if (Array.isArray(node)) {
+    return node.map(getLexicalText).join(' ');
+  }
+  if (node.type === 'text') {
+    return node.text || '';
+  }
+  if (node.children) {
+    return getLexicalText(node.children);
+  }
+  return '';
+}
+
+function getReadingTime(content) {
+  const text = getLexicalText(content?.root);
+  const wordCount = text.split(/\s+/).filter(Boolean).length;
+  return Math.ceil(wordCount / 200) || 1;
+}
+
 // Dynamic metadata generator for search engines and dynamic canonical links
 export async function generateMetadata({ params }) {
   const { slug } = await params;
@@ -206,6 +226,42 @@ export default async function BlogPostPage({ params }) {
     notFound();
   }
 
+  // Fetch adjacent published posts for Next / Previous navigation
+  let prevPost = null;
+  let nextPost = null;
+
+  try {
+    const allPostsResponse = await payload.find({
+      collection: 'posts',
+      where: {
+        status: {
+          equals: 'published',
+        },
+      },
+      sort: '-publishedDate',
+      limit: 100,
+      select: {
+        slug: true,
+        title: true,
+        publishedDate: true,
+        excerpt: true,
+      },
+    });
+
+    const allPosts = allPostsResponse?.docs || [];
+    const currentIndex = allPosts.findIndex((p) => p.slug === post.slug);
+
+    if (currentIndex !== -1) {
+      // In '-publishedDate' order:
+      // index - 1 is newer (next chronicle)
+      // index + 1 is older (previous chronicle)
+      nextPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
+      prevPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
+    }
+  } catch (err) {
+    console.error('Error fetching adjacent posts:', err);
+  }
+
   const formattedDate = post.publishedDate 
     ? new Date(post.publishedDate).toLocaleDateString('en-US', {
         year: 'numeric',
@@ -237,6 +293,7 @@ export default async function BlogPostPage({ params }) {
   };
 
   const canonicalUrl = `https://vonporat.com/blog/${post.slug}`;
+  const readingTime = getReadingTime(post.content);
 
   // Extract featured image from Payload media relationship
   const rawImgUrl = typeof post.featuredImage === 'object' && post.featuredImage !== null ? post.featuredImage.url : null;
@@ -265,7 +322,7 @@ export default async function BlogPostPage({ params }) {
         <header className="mb-8 relative pb-6 border-b border-white/5">
           <div className="absolute top-[20%] left-1/4 w-[50%] h-[60%] bg-accent-purple/6 blur-[90px] rounded-full pointer-events-none -z-10" />
           
-          <div className="flex items-center gap-3 mb-3">
+          <div className="flex flex-wrap items-center gap-3 mb-3">
             <span className="text-xs font-mono tracking-widest text-zinc-400 uppercase font-medium">
               {formattedDate}
             </span>
@@ -274,6 +331,13 @@ export default async function BlogPostPage({ params }) {
             {/* Category badge */}
             <span className={`text-[10px] md:text-xs font-mono tracking-widest px-2.5 py-0.5 rounded border uppercase font-semibold ${catInfo.textClass} ${catInfo.bgClass}`}>
               {catInfo.label}
+            </span>
+
+            <span className="w-1 h-1 rounded-full bg-zinc-600" />
+
+            {/* Reading time */}
+            <span className="text-xs font-mono tracking-widest text-zinc-400 uppercase font-medium">
+              {readingTime} min read
             </span>
           </div>
 
@@ -324,6 +388,213 @@ export default async function BlogPostPage({ params }) {
 
         {/* Share Section */}
         <BlogShare title={post.title} url={canonicalUrl} />
+
+        {/* Adjacent Chronicles Navigation */}
+        {(prevPost || nextPost) && (
+          <section className="flex flex-col gap-6 mt-12 pt-8 border-t border-white/5">
+            <div className="flex items-center justify-between border-b border-white/5 pb-2.5">
+              <div className="flex items-center gap-2.5">
+                <span className="w-2 h-2 rounded-full bg-accent-purple" />
+                <h2 className="text-xl md:text-2xl font-semibold text-zinc-200 font-gothic tracking-wide">
+                  Continue Reading
+                </h2>
+              </div>
+              <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest font-medium">
+                Adjacent Notes
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-7">
+              {/* Previous Chronicle Card */}
+              {prevPost ? (
+                <GlassCard accent="purple" className="p-5 md:p-6 flex flex-col justify-between h-full group">
+                  <div className="flex flex-col gap-4">
+                    {/* Top Metadata */}
+                    <div className="flex flex-col gap-1.5 pb-2.5 border-b border-white/5">
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="text-[10px] md:text-[11px] font-mono uppercase tracking-wider font-semibold text-accent-purple flex items-center gap-1.5">
+                          <span>&larr;</span> Previous Chronicle
+                        </span>
+                        {prevPost.publishedDate && (
+                          <div className="flex items-center gap-1.5 shrink-0">
+                            <span className="h-1.5 w-1.5 rounded-full bg-accent-purple" />
+                            <span className="text-[10px] font-mono uppercase tracking-wider font-medium text-zinc-400">
+                              {new Date(prevPost.publishedDate).toLocaleDateString('en-US', {
+                                year: 'numeric',
+                                month: 'short',
+                                day: 'numeric',
+                              })}
+                            </span>
+                          </div>
+                        )}
+                      </div>
+                      <div className="mt-0.5">
+                        <h3 className="text-2xl md:text-3xl font-semibold text-white tracking-tight font-gothic group-hover:text-accent-purple transition-colors">
+                          <Link href={`/blog/${prevPost.slug}`} className="hover:underline focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent-purple">
+                            {prevPost.title}
+                          </Link>
+                        </h3>
+                      </div>
+                    </div>
+
+                    {/* Excerpt */}
+                    {prevPost.excerpt && (
+                      <p className="text-sm md:text-[15px] leading-relaxed text-zinc-300 font-light text-pretty line-clamp-3">
+                        {prevPost.excerpt}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Footer Action */}
+                  <div className="pt-3.5 mt-5 border-t border-white/5 flex justify-end">
+                    <Link
+                      href={`/blog/${prevPost.slug}`}
+                      className="text-xs font-mono uppercase tracking-widest text-accent-purple group-hover:text-white transition-colors flex items-center gap-1.5 font-semibold"
+                    >
+                      <span>Read Chronicle</span>
+                      <span>&rarr;</span>
+                    </Link>
+                  </div>
+                </GlassCard>
+              ) : (
+                <GlassCard accent="purple" className="p-5 md:p-6 flex flex-col justify-between h-full group">
+                  <div className="flex flex-col gap-4">
+                    {/* Top Metadata */}
+                    <div className="flex flex-col gap-1.5 pb-2.5 border-b border-white/5">
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="text-[10px] md:text-[11px] font-mono uppercase tracking-wider font-semibold text-zinc-400 flex items-center gap-1.5">
+                          <span>&larr;</span> Journal Archive
+                        </span>
+                        <div className="flex items-center gap-1.5 shrink-0">
+                          <span className="h-1.5 w-1.5 rounded-full bg-zinc-500" />
+                          <span className="text-[10px] font-mono uppercase tracking-wider font-medium text-zinc-400">
+                            Collection
+                          </span>
+                        </div>
+                      </div>
+                      <div className="mt-0.5">
+                        <h3 className="text-2xl md:text-3xl font-semibold text-white tracking-tight font-gothic group-hover:text-accent-purple transition-colors">
+                          <Link href="/blog" className="hover:underline focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent-purple">
+                            All Chronicles
+                          </Link>
+                        </h3>
+                      </div>
+                    </div>
+
+                    <p className="text-sm md:text-[15px] leading-relaxed text-zinc-300 font-light text-pretty line-clamp-3">
+                      Writing about music, visual practice, technology, learning and the systems behind the projects.
+                    </p>
+                  </div>
+
+                  {/* Footer Action */}
+                  <div className="pt-3.5 mt-5 border-t border-white/5 flex justify-end">
+                    <Link
+                      href="/blog"
+                      className="text-xs font-mono uppercase tracking-widest text-accent-purple group-hover:text-white transition-colors flex items-center gap-1.5 font-semibold"
+                    >
+                      <span>Explore All Notes</span>
+                      <span>&rarr;</span>
+                    </Link>
+                  </div>
+                </GlassCard>
+              )}
+
+              {/* Next Chronicle Card */}
+              {nextPost ? (
+                <GlassCard accent="cyan" className="p-5 md:p-6 flex flex-col justify-between h-full group">
+                  <div className="flex flex-col gap-4">
+                    {/* Top Metadata */}
+                    <div className="flex flex-col gap-1.5 pb-2.5 border-b border-white/5">
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="text-[10px] md:text-[11px] font-mono uppercase tracking-wider font-semibold text-accent-cyan flex items-center gap-1.5">
+                          Next Chronicle <span>&rarr;</span>
+                        </span>
+                        {nextPost.publishedDate && (
+                          <div className="flex items-center gap-1.5 shrink-0">
+                            <span className="h-1.5 w-1.5 rounded-full bg-accent-cyan" />
+                            <span className="text-[10px] font-mono uppercase tracking-wider font-medium text-zinc-400">
+                              {new Date(nextPost.publishedDate).toLocaleDateString('en-US', {
+                                year: 'numeric',
+                                month: 'short',
+                                day: 'numeric',
+                              })}
+                            </span>
+                          </div>
+                        )}
+                      </div>
+                      <div className="mt-0.5">
+                        <h3 className="text-2xl md:text-3xl font-semibold text-white tracking-tight font-gothic group-hover:text-accent-cyan transition-colors">
+                          <Link href={`/blog/${nextPost.slug}`} className="hover:underline focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent-cyan">
+                            {nextPost.title}
+                          </Link>
+                        </h3>
+                      </div>
+                    </div>
+
+                    {/* Excerpt */}
+                    {nextPost.excerpt && (
+                      <p className="text-sm md:text-[15px] leading-relaxed text-zinc-300 font-light text-pretty line-clamp-3">
+                        {nextPost.excerpt}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Footer Action */}
+                  <div className="pt-3.5 mt-5 border-t border-white/5 flex justify-end">
+                    <Link
+                      href={`/blog/${nextPost.slug}`}
+                      className="text-xs font-mono uppercase tracking-widest text-accent-cyan group-hover:text-white transition-colors flex items-center gap-1.5 font-semibold"
+                    >
+                      <span>Read Chronicle</span>
+                      <span>&rarr;</span>
+                    </Link>
+                  </div>
+                </GlassCard>
+              ) : (
+                <GlassCard accent="cyan" className="p-5 md:p-6 flex flex-col justify-between h-full group">
+                  <div className="flex flex-col gap-4">
+                    {/* Top Metadata */}
+                    <div className="flex flex-col gap-1.5 pb-2.5 border-b border-white/5">
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="text-[10px] md:text-[11px] font-mono uppercase tracking-wider font-semibold text-zinc-400 flex items-center gap-1.5">
+                          Journal Archive <span>&rarr;</span>
+                        </span>
+                        <div className="flex items-center gap-1.5 shrink-0">
+                          <span className="h-1.5 w-1.5 rounded-full bg-zinc-500" />
+                          <span className="text-[10px] font-mono uppercase tracking-wider font-medium text-zinc-400">
+                            Collection
+                          </span>
+                        </div>
+                      </div>
+                      <div className="mt-0.5">
+                        <h3 className="text-2xl md:text-3xl font-semibold text-white tracking-tight font-gothic group-hover:text-accent-cyan transition-colors">
+                          <Link href="/blog" className="hover:underline focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent-cyan">
+                            All Chronicles
+                          </Link>
+                        </h3>
+                      </div>
+                    </div>
+
+                    <p className="text-sm md:text-[15px] leading-relaxed text-zinc-300 font-light text-pretty line-clamp-3">
+                      Writing about music, visual practice, technology, learning and the systems behind the projects.
+                    </p>
+                  </div>
+
+                  {/* Footer Action */}
+                  <div className="pt-3.5 mt-5 border-t border-white/5 flex justify-end">
+                    <Link
+                      href="/blog"
+                      className="text-xs font-mono uppercase tracking-widest text-accent-cyan group-hover:text-white transition-colors flex items-center gap-1.5 font-semibold"
+                    >
+                      <span>Explore All Notes</span>
+                      <span>&rarr;</span>
+                    </Link>
+                  </div>
+                </GlassCard>
+              )}
+            </div>
+          </section>
+        )}
 
         {/* Footer Navigation */}
         <footer className="pt-8 flex items-center justify-between">

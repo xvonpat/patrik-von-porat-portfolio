@@ -99,7 +99,7 @@ Avoid:
 Typography should feel editorial, intentional, and contemporary, supporting both artistic expression and clear long-form reading.
 
 ### Type roles
-- **Display / Heading**: Expressive editorial serif/gothic style (`font-gothic`).
+- **Display / Heading**: Expressive editorial serif/gothic style (`font-gothic`), with clean sans exceptions on selected featured components (such as the featured `LATEST NOTE` journal card using `font-sans font-medium`).
 - **Body**: Clean, highly readable sans-serif typography (`font-sans`).
 - **Labels / Eyebrows**: Monospace tracking (`font-mono tracking-[0.2em]` to `[0.3em]`).
 
@@ -223,7 +223,7 @@ Curated practice showcases with interactive full-screen lightbox zoom.
 Calm minimal composition: primary email CTA + 6 external channels in a 1-row (desktop) / 3×2 grid (mobile) layout.
 
 ### Blog (`/blog`)
-Editorial journal: `JOURNAL` eyebrow, category filters (`Music`, `Visual Art`, `Making`, `Technology`, `Process`, `Personal`), dynamic `LATEST NOTE`, and text-led fallback cards.
+Editorial journal: `JOURNAL` eyebrow, category filters (`Music`, `Visual Art`, `Making`, `Technology`, `Process`, `Personal`), dynamic `LATEST NOTE` featuring the Clean Sans heading treatment (`font-sans font-medium text-2xl sm:text-3xl md:text-4xl`), and text-led fallback cards.
 
 ## Accessibility
 
