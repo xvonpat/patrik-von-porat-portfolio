@@ -53,6 +53,9 @@ function hasLexicalContent(node: any): boolean {
   if (node.type === 'text') {
     return typeof node.text === 'string' && node.text.trim().length > 0;
   }
+  if (node.type === 'upload') {
+    return true;
+  }
   if (node.root) {
     return hasLexicalContent(node.root);
   }

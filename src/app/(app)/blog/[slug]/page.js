@@ -9,6 +9,29 @@ import BlogShare from '@/components/BlogShare';
 
 export const revalidate = 60; // Revalidate every 60 seconds
 
+function getMediaUrl(url) {
+  if (!url || typeof url !== 'string') return null;
+  
+  if (url.startsWith('/api/media/file/')) {
+    const filename = url.replace('/api/media/file/', '');
+    return `https://mjsaegfqipbrnapyleop.supabase.co/storage/v1/object/public/payload-media/${filename}`;
+  }
+
+  if (url.includes('storage.supabase.co/storage/v1/s3')) {
+    return url.replace('storage.supabase.co/storage/v1/s3', 'supabase.co/storage/v1/object/public');
+  }
+
+  if (url.startsWith('http') || url.startsWith('//')) {
+    return url.startsWith('//') ? `https:${url}` : url;
+  }
+  
+  const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL || '';
+  const cleanServerUrl = serverUrl.endsWith('/') ? serverUrl.slice(0, -1) : serverUrl;
+  const cleanUrl = url.startsWith('/') ? url : `/${url}`;
+  
+  return `${cleanServerUrl}${cleanUrl}`;
+}
+
 // Recursive Lexical JSON to JSX Parser
 function renderLexical(node) {
   if (!node) return null;
@@ -74,33 +97,58 @@ function renderLexical(node) {
           {children}
         </blockquote>
       );
+    case 'upload': {
+      if (!node.value) return null;
+      const media = typeof node.value === 'object' ? node.value : null;
+      if (!media) return null;
+      const uploadUrl = getMediaUrl(media.url);
+      if (!uploadUrl) return null;
+      const altText = node.fields?.alt || media.alt || '';
+      const caption = node.fields?.caption;
+      const width = media.width || 1600;
+      const height = media.height || 1000;
+
+      return (
+        <figure className="my-8 space-y-2.5">
+          <div className="relative w-full overflow-hidden rounded-xl md:rounded-2xl border border-white/[0.08] bg-obsidian-900/60 shadow-2xl">
+            <Image
+              src={uploadUrl}
+              alt={altText}
+              width={width}
+              height={height}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 896px"
+              className="w-full h-auto object-cover rounded-xl md:rounded-2xl"
+            />
+          </div>
+          {(caption || altText) && (
+            <figcaption className="text-center text-xs font-mono tracking-wider text-zinc-400">
+              {caption || altText}
+            </figcaption>
+          )}
+        </figure>
+      );
+    }
+    case 'link': {
+      const url = node.fields?.url || node.url || '#';
+      const newTab = node.fields?.newTab;
+      return (
+        <a 
+          href={url}
+          target={newTab ? '_blank' : undefined}
+          rel={newTab ? 'noopener noreferrer' : undefined}
+          className="text-accent-cyan underline underline-offset-4 hover:text-white transition-colors"
+        >
+          {children}
+        </a>
+      );
+    }
+    case 'horizontalrule':
+      return <hr className="my-8 border-white/10" />;
     default:
       return children;
   }
 }
 
-const getMediaUrl = (url) => {
-  if (!url || typeof url !== 'string') return null;
-  
-  if (url.startsWith('/api/media/file/')) {
-    const filename = url.replace('/api/media/file/', '');
-    return `https://mjsaegfqipbrnapyleop.supabase.co/storage/v1/object/public/payload-media/${filename}`;
-  }
-
-  if (url.includes('storage.supabase.co/storage/v1/s3')) {
-    return url.replace('storage.supabase.co/storage/v1/s3', 'supabase.co/storage/v1/object/public');
-  }
-
-  if (url.startsWith('http') || url.startsWith('//')) {
-    return url.startsWith('//') ? `https:${url}` : url;
-  }
-  
-  const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL || '';
-  const cleanServerUrl = serverUrl.endsWith('/') ? serverUrl.slice(0, -1) : serverUrl;
-  const cleanUrl = url.startsWith('/') ? url : `/${url}`;
-  
-  return `${cleanServerUrl}${cleanUrl}`;
-};
 
 function getLexicalText(node) {
   if (!node) return '';
