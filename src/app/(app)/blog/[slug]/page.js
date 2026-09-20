@@ -478,7 +478,7 @@ export default async function BlogPostPage({ params }) {
                       </div>
                       <div className="mt-0.5">
                         <h3 className="text-2xl md:text-3xl font-semibold text-white tracking-tight font-gothic group-hover:text-accent-purple transition-colors">
-                          <Link href={`/blog/${prevPost.slug}`} className="hover:underline focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent-purple">
+                          <Link href={`/blog/${prevPost.slug}`} className="no-underline focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent-purple">
                             {prevPost.title}
                           </Link>
                         </h3>
@@ -522,7 +522,7 @@ export default async function BlogPostPage({ params }) {
                       </div>
                       <div className="mt-0.5">
                         <h3 className="text-2xl md:text-3xl font-semibold text-white tracking-tight font-gothic group-hover:text-accent-purple transition-colors">
-                          <Link href="/blog" className="hover:underline focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent-purple">
+                          <Link href="/blog" className="no-underline focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent-purple">
                             All Chronicles
                           </Link>
                         </h3>
@@ -572,7 +572,7 @@ export default async function BlogPostPage({ params }) {
                       </div>
                       <div className="mt-0.5">
                         <h3 className="text-2xl md:text-3xl font-semibold text-white tracking-tight font-gothic group-hover:text-accent-cyan transition-colors">
-                          <Link href={`/blog/${nextPost.slug}`} className="hover:underline focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent-cyan">
+                          <Link href={`/blog/${nextPost.slug}`} className="no-underline focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent-cyan">
                             {nextPost.title}
                           </Link>
                         </h3>
@@ -616,7 +616,7 @@ export default async function BlogPostPage({ params }) {
                       </div>
                       <div className="mt-0.5">
                         <h3 className="text-2xl md:text-3xl font-semibold text-white tracking-tight font-gothic group-hover:text-accent-cyan transition-colors">
-                          <Link href="/blog" className="hover:underline focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent-cyan">
+                          <Link href="/blog" className="no-underline focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent-cyan">
                             All Chronicles
                           </Link>
                         </h3>

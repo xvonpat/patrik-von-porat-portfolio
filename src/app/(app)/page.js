@@ -388,26 +388,33 @@ export default async function Home() {
                 : 'Recent';
 
               return (
-                <Link key={post.id} href={`/blog/${post.slug}`} className="group h-full">
-                  <GlassCard accent="purple" className="flex flex-col justify-between h-full p-5 md:p-6 transition-premium">
-                    <div className="flex flex-col gap-3">
-                      <div className="flex items-center justify-between text-[10px] font-mono text-zinc-400 uppercase tracking-widest">
-                        <span className="text-accent-purple font-semibold">{post.category || 'Chronicle'}</span>
-                        <span>{formattedDate}</span>
-                      </div>
-                      <h3 className="text-xl md:text-2xl font-semibold text-white font-gothic group-hover:text-accent-purple transition-colors line-clamp-2">
-                        {post.title}
-                      </h3>
-                      {post.excerpt && (
-                        <p className="text-sm text-zinc-300 font-light leading-relaxed text-pretty line-clamp-3">
-                          {post.excerpt}
-                        </p>
-                      )}
+                <Link 
+                  key={post.id} 
+                  href={`/blog/${post.slug}`}
+                  aria-label={`Read note: ${post.title}`}
+                  className="blog-card group flex flex-col justify-between h-full p-5 md:p-6 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-purple/70 focus-visible:ring-offset-2 focus-visible:ring-offset-obsidian-950"
+                >
+                  {/* Decorative inner gothic notch or line */}
+                  <div className="absolute top-0 left-4 right-4 h-[1px] bg-gradient-to-r from-transparent via-white/5 to-transparent" />
+
+                  <div className="flex flex-col gap-3">
+                    <div className="flex items-center justify-between text-[10px] font-mono text-zinc-400 uppercase tracking-widest">
+                      <span className="text-accent-purple font-semibold">{post.category || 'Chronicle'}</span>
+                      <span>{formattedDate}</span>
                     </div>
-                    <span className="text-xs font-mono uppercase tracking-widest text-zinc-400 group-hover:text-white transition-colors flex items-center gap-1 mt-6 font-semibold">
-                      Read Note &rarr;
-                    </span>
-                  </GlassCard>
+                    <h3 className="blog-card-title text-xl md:text-2xl font-semibold font-gothic line-clamp-2">
+                      {post.title}
+                    </h3>
+                    {post.excerpt && (
+                      <p className="text-sm text-zinc-300 font-light leading-relaxed text-pretty line-clamp-3">
+                        {post.excerpt}
+                      </p>
+                    )}
+                  </div>
+                  <span className="text-xs font-mono uppercase tracking-widest text-zinc-400 group-hover:text-accent-purple group-focus-visible:text-accent-purple transition-colors duration-200 flex items-center gap-1.5 mt-6 font-semibold">
+                    <span>Read Note</span>
+                    <span className="blog-card-arrow" aria-hidden="true">&rarr;</span>
+                  </span>
                 </Link>
               );
             })}

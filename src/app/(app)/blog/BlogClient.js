@@ -167,72 +167,34 @@ export default function BlogClient({ posts = [] }) {
             const imgAlt = leadPost.featuredImage?.alt || leadPost.title;
 
             return (
-              <div className="w-full relative group">
-                <GlassCard accent={catInfo.accent} className="overflow-hidden p-6 md:p-8">
-                  
-                  {/* If lead post has a featured image, render balanced 2-column layout */}
-                  {imgUrl ? (
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-7 lg:gap-10 items-center">
-                      
-                      {/* Image Column (5 cols) */}
-                      <div className="lg:col-span-5 relative w-full aspect-[16/10] rounded-xl overflow-hidden border border-white/[0.08] bg-obsidian-900/60 shadow-2xl">
-                        <Image 
-                          src={imgUrl} 
-                          alt={imgAlt} 
-                          fill
-                          priority
-                          sizes="(max-width: 768px) 100vw, 42vw"
-                          className="w-full h-full object-cover object-center grayscale group-hover:grayscale-0 transition-all duration-700 ease-out scale-100 group-hover:scale-[1.02]"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-obsidian-950/60 via-transparent to-transparent opacity-65 pointer-events-none" />
-                      </div>
+              <Link 
+                href={`/blog/${leadPost.slug}`}
+                aria-label={`Read note: ${leadPost.title}`}
+                className="blog-card group block w-full overflow-hidden p-6 md:p-8 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-purple/70 focus-visible:ring-offset-2 focus-visible:ring-offset-obsidian-950"
+              >
+                {/* Decorative inner gothic notch or line */}
+                <div className="absolute top-0 left-4 right-4 h-[1px] bg-gradient-to-r from-transparent via-white/5 to-transparent" />
 
-                      {/* Content Column (7 cols) */}
-                      <div className="lg:col-span-7 flex flex-col justify-center">
-                        <div className="flex flex-wrap items-center gap-2.5 mb-3 font-mono text-[11px]">
-                          <span className="text-[10px] md:text-[11px] font-mono tracking-widest px-2.5 py-0.5 rounded bg-accent-purple/15 border border-accent-purple/30 text-accent-purple uppercase font-semibold">
-                            LATEST NOTE
-                          </span>
-                          <span className="text-zinc-700 select-none">&middot;</span>
-                          <span className={`px-2 py-0.5 rounded border uppercase font-semibold ${catInfo.textClass} ${catInfo.bgClass}`}>
-                            {catInfo.label}
-                          </span>
-                          <span className="text-zinc-700 select-none">&middot;</span>
-                          <span className="text-zinc-400 uppercase font-medium">
-                            {dateStr}
-                          </span>
-                          <span className="text-zinc-700 select-none">&middot;</span>
-                          <span className="text-zinc-400 uppercase font-medium">
-                            {readingTime} min read
-                          </span>
-                        </div>
-
-                        <h2 className="text-2xl sm:text-3xl md:text-4xl font-medium tracking-tight text-white group-hover:text-accent-purple hover:text-accent-purple transition-colors duration-300 mb-3.5 font-sans leading-tight md:leading-snug text-balance">
-                          <Link href={`/blog/${leadPost.slug}`} className="no-underline focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent-purple rounded-sm">
-                            {leadPost.title}
-                          </Link>
-                        </h2>
-
-                        <p className="text-zinc-300 font-light leading-relaxed md:leading-8 text-base md:text-lg mb-6 line-clamp-3 text-pretty">
-                          {leadPost.excerpt}
-                        </p>
-
-                        <div className="pt-4 border-t border-white/5">
-                          <Link 
-                            href={`/blog/${leadPost.slug}`} 
-                            className="text-xs md:text-sm font-mono tracking-wider uppercase text-zinc-100 hover:text-accent-purple transition-colors inline-flex items-center gap-2 font-semibold group/link"
-                          >
-                            <span>Read Note</span>
-                            <span className="transform group-hover/link:translate-x-1 transition-transform inline-block">&rarr;</span>
-                          </Link>
-                        </div>
-                      </div>
-
+                {/* If lead post has a featured image, render balanced 2-column layout */}
+                {imgUrl ? (
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-7 lg:gap-10 items-center">
+                    
+                    {/* Image Column (5 cols) */}
+                    <div className="lg:col-span-5 relative w-full aspect-[16/10] rounded-xl overflow-hidden border border-white/[0.08] bg-obsidian-900/60 shadow-2xl">
+                      <Image 
+                        src={imgUrl} 
+                        alt={imgAlt} 
+                        fill
+                        priority
+                        sizes="(max-width: 768px) 100vw, 42vw"
+                        className="blog-card-image w-full h-full object-cover object-center grayscale group-hover:grayscale-0 group-focus-visible:grayscale-0"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-obsidian-950/60 via-transparent to-transparent opacity-65 pointer-events-none" />
                     </div>
-                  ) : (
-                    /* If lead post has NO featured image, render intentional text-led full-width layout */
-                    <div className="flex flex-col gap-4 max-w-4xl">
-                      <div className="flex flex-wrap items-center gap-2.5 font-mono text-[11px]">
+
+                    {/* Content Column (7 cols) */}
+                    <div className="lg:col-span-7 flex flex-col justify-center">
+                      <div className="flex flex-wrap items-center gap-2.5 mb-3 font-mono text-[11px]">
                         <span className="text-[10px] md:text-[11px] font-mono tracking-widest px-2.5 py-0.5 rounded bg-accent-purple/15 border border-accent-purple/30 text-accent-purple uppercase font-semibold">
                           LATEST NOTE
                         </span>
@@ -250,30 +212,62 @@ export default function BlogClient({ posts = [] }) {
                         </span>
                       </div>
 
-                      <h2 className="text-2xl sm:text-3xl md:text-4xl font-medium tracking-tight text-white group-hover:text-accent-purple hover:text-accent-purple transition-colors duration-300 font-sans leading-tight md:leading-snug text-balance">
-                        <Link href={`/blog/${leadPost.slug}`} className="no-underline focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent-purple rounded-sm">
-                          {leadPost.title}
-                        </Link>
+                      <h2 className="blog-card-title text-2xl sm:text-3xl md:text-4xl font-medium tracking-tight mb-3.5 font-sans leading-tight md:leading-snug text-balance">
+                        {leadPost.title}
                       </h2>
 
-                      <p className="text-zinc-300 font-light leading-relaxed md:leading-8 text-base md:text-lg line-clamp-3 text-pretty max-w-3xl">
+                      <p className="text-zinc-300 font-light leading-relaxed md:leading-8 text-base md:text-lg mb-6 line-clamp-3 text-pretty">
                         {leadPost.excerpt}
                       </p>
 
-                      <div className="pt-4 border-t border-white/5 mt-2">
-                        <Link 
-                          href={`/blog/${leadPost.slug}`} 
-                          className="text-xs md:text-sm font-mono tracking-wider uppercase text-zinc-100 hover:text-accent-purple transition-colors inline-flex items-center gap-2 font-semibold group/link"
-                        >
+                      <div className="pt-4 border-t border-white/5 flex items-center">
+                        <span className="text-xs md:text-sm font-mono tracking-wider uppercase text-zinc-100 group-hover:text-accent-purple group-focus-visible:text-accent-purple transition-colors duration-200 inline-flex items-center gap-2 font-semibold">
                           <span>Read Note</span>
-                          <span className="transform group-hover/link:translate-x-1 transition-transform inline-block">&rarr;</span>
-                        </Link>
+                          <span className="blog-card-arrow" aria-hidden="true">&rarr;</span>
+                        </span>
                       </div>
                     </div>
-                  )}
 
-                </GlassCard>
-              </div>
+                  </div>
+                ) : (
+                  /* If lead post has NO featured image, render intentional text-led full-width layout */
+                  <div className="flex flex-col gap-4 max-w-4xl">
+                    <div className="flex flex-wrap items-center gap-2.5 font-mono text-[11px]">
+                      <span className="text-[10px] md:text-[11px] font-mono tracking-widest px-2.5 py-0.5 rounded bg-accent-purple/15 border border-accent-purple/30 text-accent-purple uppercase font-semibold">
+                        LATEST NOTE
+                      </span>
+                      <span className="text-zinc-700 select-none">&middot;</span>
+                      <span className={`px-2 py-0.5 rounded border uppercase font-semibold ${catInfo.textClass} ${catInfo.bgClass}`}>
+                        {catInfo.label}
+                      </span>
+                      <span className="text-zinc-700 select-none">&middot;</span>
+                      <span className="text-zinc-400 uppercase font-medium">
+                        {dateStr}
+                      </span>
+                      <span className="text-zinc-700 select-none">&middot;</span>
+                      <span className="text-zinc-400 uppercase font-medium">
+                        {readingTime} min read
+                      </span>
+                    </div>
+
+                    <h2 className="blog-card-title text-2xl sm:text-3xl md:text-4xl font-medium tracking-tight font-sans leading-tight md:leading-snug text-balance">
+                      {leadPost.title}
+                    </h2>
+
+                    <p className="text-zinc-300 font-light leading-relaxed md:leading-8 text-base md:text-lg line-clamp-3 text-pretty max-w-3xl">
+                      {leadPost.excerpt}
+                    </p>
+
+                    <div className="pt-4 border-t border-white/5 mt-2 flex items-center">
+                      <span className="text-xs md:text-sm font-mono tracking-wider uppercase text-zinc-100 group-hover:text-accent-purple group-focus-visible:text-accent-purple transition-colors duration-200 inline-flex items-center gap-2 font-semibold">
+                        <span>Read Note</span>
+                        <span className="blog-card-arrow" aria-hidden="true">&rarr;</span>
+                      </span>
+                    </div>
+                  </div>
+                )}
+
+              </Link>
             );
           })()}
 
@@ -309,11 +303,15 @@ export default function BlogClient({ posts = [] }) {
                   const imgAlt = post.featuredImage?.alt || post.title;
 
                   return (
-                    <GlassCard 
+                    <Link 
                       key={post.id} 
-                      accent={catInfo.accent} 
-                      className="p-6 md:p-7 flex flex-col justify-between group h-full"
+                      href={`/blog/${post.slug}`}
+                      aria-label={`Read note: ${post.title}`}
+                      className="blog-card group flex flex-col justify-between h-full p-6 md:p-7 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-purple/70 focus-visible:ring-offset-2 focus-visible:ring-offset-obsidian-950"
                     >
+                      {/* Decorative inner gothic notch or line */}
+                      <div className="absolute top-0 left-4 right-4 h-[1px] bg-gradient-to-r from-transparent via-white/5 to-transparent" />
+
                       <div className="flex flex-col">
                         
                         {/* Featured Image: ONLY rendered when a verified image exists */}
@@ -324,7 +322,7 @@ export default function BlogClient({ posts = [] }) {
                               alt={imgAlt} 
                               fill
                               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 550px"
-                              className="w-full h-full object-cover object-center grayscale group-hover:grayscale-0 transition-all duration-700 ease-out scale-100 group-hover:scale-[1.02]"
+                              className="blog-card-image w-full h-full object-cover object-center grayscale group-hover:grayscale-0 group-focus-visible:grayscale-0"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-obsidian-950/60 via-transparent to-transparent opacity-65 pointer-events-none" />
                           </div>
@@ -346,10 +344,8 @@ export default function BlogClient({ posts = [] }) {
                         </div>
                         
                         {/* Title */}
-                        <h3 className="text-2xl md:text-3xl font-semibold tracking-tight text-white group-hover:text-accent-purple transition-colors mb-3 font-gothic leading-snug text-balance">
-                          <Link href={`/blog/${post.slug}`} className="hover:underline focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent-purple">
-                            {post.title}
-                          </Link>
+                        <h3 className="blog-card-title text-2xl md:text-3xl font-semibold tracking-tight mb-3 font-gothic leading-snug text-balance">
+                          {post.title}
                         </h3>
                         
                         {/* Excerpt */}
@@ -359,17 +355,14 @@ export default function BlogClient({ posts = [] }) {
                       </div>
 
                       {/* Card Action Link */}
-                      <div className="pt-3.5 border-t border-white/5 mt-auto">
-                        <Link 
-                          href={`/blog/${post.slug}`} 
-                          className="text-xs font-mono tracking-wider uppercase text-zinc-200 hover:text-accent-purple transition-colors inline-flex items-center gap-1.5 font-semibold group/link"
-                        >
+                      <div className="pt-3.5 border-t border-white/5 mt-auto flex items-center">
+                        <span className="text-xs font-mono tracking-wider uppercase text-zinc-200 group-hover:text-accent-purple group-focus-visible:text-accent-purple transition-colors duration-200 inline-flex items-center gap-1.5 font-semibold">
                           <span>Read Note</span>
-                          <span className="transform group-hover/link:translate-x-1 transition-transform inline-block">&rarr;</span>
-                        </Link>
+                          <span className="blog-card-arrow" aria-hidden="true">&rarr;</span>
+                        </span>
                       </div>
 
-                    </GlassCard>
+                    </Link>
                   );
                 })}
               </div>
