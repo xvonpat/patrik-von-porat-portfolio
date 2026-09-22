@@ -111,55 +111,6 @@ export default function Projects() {
       imageAlt: 'vonporat.com personal creative hub platform interface preview',
       accent: 'cyan',
       isExternal: true
-    },
-    {
-      id: 'systems-improvement',
-      title: 'Systems & Improvement',
-      category: 'PROCESS · DATA · CONTINUOUS IMPROVEMENT',
-      status: 'PROFESSIONAL PRACTICE',
-      statusType: 'practice',
-      intro: 'Structured problem-solving used to make complex work clearer, more reliable and easier to navigate.',
-      role: 'Lean Six Sigma Green Belt · Process Improvement · Data and Workflow Design',
-      scopeLabel: 'Scope',
-      scopeItems: [
-        'Lean Six Sigma and DMAIC',
-        'Process mapping and workflow design',
-        'Power BI and data-supported decisions',
-        'Continuous improvement'
-      ],
-      evidence: 'Professional experience across warehouse operations, distribution logistics and data-supported continuous improvement.',
-      cta: 'About the Process',
-      link: '/about',
-      image: null,
-      fallbackBadge: 'Analytical & Systems Practice',
-      fallbackDesc: 'Data-backed continuous improvement, DMAIC problem solving, and structured operational workflows.',
-      accent: 'cyan',
-      isExternal: false
-    },
-    {
-      id: 'workbench',
-      title: 'Workbench',
-      category: 'WEB · PERSONAL TOOLS',
-      status: 'ONGOING',
-      statusType: 'ongoing',
-      intro: 'A local-first project journal and personal tool built to track active work across creative domains, maintain a clear next action, and record chronological project decisions.',
-      role: 'Product design, specification, development, and testing',
-      scopeLabel: 'Stack',
-      scopeItems: [
-        'Vite',
-        'React',
-        'TypeScript',
-        'Vitest',
-        'Playwright'
-      ],
-      evidence: 'v1.0 complete with local persistence, corrupted data safeguards, and comprehensive unit and browser test coverage.',
-      cta: 'View Project Details',
-      link: '/projects/workbench',
-      image: null,
-      fallbackBadge: 'Local-First Web Tool',
-      fallbackDesc: 'Browser-based project journal with zero cloud dependencies, offline localStorage persistence, and test coverage.',
-      accent: 'cyan',
-      isExternal: false
     }
   ];
 
@@ -347,7 +298,7 @@ export default function Projects() {
         </div>
       </section>
 
-      {/* 3. Supporting Projects (Visual Practice, vonporat.com, Systems & Improvement) */}
+      {/* 3. Supporting Projects (Visual Practice, vonporat.com) */}
       <section className="flex flex-col gap-6 pt-4 border-t border-white/5">
         <div className="flex items-center justify-between border-b border-white/5 pb-2.5">
           <div className="flex items-center gap-2.5">
