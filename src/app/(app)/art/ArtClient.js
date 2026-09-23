@@ -103,23 +103,10 @@ export default function ArtClient() {
     }
   ];
 
-  // 4. Digital & Generative Artwork
-  const digitalImages = [
-    {
-      src: "/images/art/hero-banner.webp",
-      title: "Obsidian Citadel",
-      category: "Digital & Generative",
-      medium: "Generative study · Digital curation & editing",
-      caption: "Exploratory generative concept investigating monolithic scale, gothic architectural silhouettes, and atmosphere for worldbuilding projects.",
-      alt: "Dark atmospheric concept showing obsidian monolithic towers and gothic arches under stormy clouds."
-    }
-  ];
-
   const allImages = [
     ...traditionalImages,
     ...tattooImages,
-    ...miniatureImages,
-    ...digitalImages
+    ...miniatureImages
   ];
 
   const openLightboxWithImage = (imageSrc) => {
@@ -151,11 +138,11 @@ export default function ArtClient() {
           <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-accent-purple to-transparent mt-0.5 mb-0.5" />
 
           <p className="text-base md:text-lg text-zinc-300 font-light max-w-2xl leading-relaxed md:leading-8 text-balance text-pretty">
-            My visual work moves between graphite, charcoal, tattoo practice, miniatures and digital experimentation. Each medium asks for a different kind of control, but the underlying process remains observation, repetition and refinement.
+            My visual work moves between graphite, charcoal, tattoo practice and miniatures. Each medium asks for a different kind of control, but the underlying process remains observation, repetition and refinement.
           </p>
 
           <p className="text-xs sm:text-sm font-mono tracking-[0.22em] uppercase text-accent-purple font-medium mt-1">
-            DRAWING &middot; TATTOO PRACTICE &middot; PHYSICAL CRAFT &middot; DIGITAL EXPERIMENTATION
+            DRAWING &middot; TATTOO PRACTICE &middot; PHYSICAL CRAFT
           </p>
 
           {/* Hero CTAs */}
@@ -365,24 +352,24 @@ export default function ArtClient() {
           </div>
         </section>
 
-        {/* 4. Physical and Digital Forms */}
+        {/* 4. Physical Practice / Miniatures & 3D Prints */}
         <section id="other-forms" className="flex flex-col gap-8 max-w-6xl mx-auto w-full scroll-mt-24 pt-4 border-t border-white/5">
           <div className="flex flex-col items-center text-center gap-2.5 max-w-3xl mx-auto">
             <span className="text-xs font-mono tracking-[0.3em] text-accent-purple uppercase font-semibold">
-              OTHER FORMS
+              PHYSICAL CRAFT
             </span>
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-white font-gothic text-balance">
-              From physical objects to digital experiments.
+              Dimensional form and surface.
             </h2>
             <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-accent-purple to-transparent mt-1" />
             <p className="text-base md:text-lg text-zinc-300 font-light max-w-2xl leading-relaxed md:leading-8 mt-1 text-balance text-pretty">
-              Some ideas are explored through objects and paint. Others begin as digital compositions and generative studies.
+              Moving from two dimensions into physical objects, resin and paint.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-7 md:gap-8 items-start">
+          <div className="max-w-2xl mx-auto w-full">
             
-            {/* Practice 1: Miniatures & 3D Prints */}
+            {/* Practice: Miniatures & 3D Prints */}
             <GlassCard accent="purple" className="p-6 md:p-8 flex flex-col gap-5">
               
               {/* Header */}
@@ -452,61 +439,6 @@ export default function ArtClient() {
                 </span>
                 <p className="text-zinc-300 font-light leading-relaxed">
                   Resin and FDM Printing &middot; Preparation &middot; Acrylic Painting &middot; Miniatures
-                </p>
-              </div>
-
-            </GlassCard>
-
-            {/* Practice 2: Digital & Generative Work */}
-            <GlassCard accent="cyan" className="p-6 md:p-8 flex flex-col gap-5">
-              
-              {/* Header */}
-              <div className="flex items-center justify-between pb-3 border-b border-white/5">
-                <span className="text-[10px] md:text-xs font-mono uppercase tracking-wider text-accent-cyan font-semibold">
-                  EXPERIMENTAL PRACTICE
-                </span>
-                <span className="text-[10px] md:text-xs font-mono uppercase tracking-wider text-zinc-400 font-medium">
-                  DIGITAL &middot; GENERATIVE
-                </span>
-              </div>
-
-              {/* Title & Description */}
-              <div className="flex flex-col gap-2">
-                <h3 className="text-2xl sm:text-3xl font-semibold text-white tracking-tight font-gothic">
-                  Digital &amp; Generative Work
-                </h3>
-                <p className="text-base leading-relaxed md:leading-7 text-zinc-300 font-light text-pretty">
-                  Generative tools form part of an exploratory visual workflow used to test composition, atmosphere and possible creative directions. Selected results are curated and, where relevant, developed further through editing, layout and project context.
-                </p>
-              </div>
-
-              {/* Featured Showcase */}
-              <div 
-                onClick={() => openLightboxWithImage(digitalImages[0].src)}
-                className="w-full aspect-[16/10] rounded-xl overflow-hidden border border-white/[0.08] bg-obsidian-950/80 relative shadow-md group hover:border-accent-cyan/40 transition-all duration-500 cursor-pointer"
-              >
-                <Image 
-                  src={digitalImages[0].src} 
-                  alt={digitalImages[0].alt} 
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
-                  className="w-full h-full object-cover object-center grayscale group-hover:grayscale-0 transition-all duration-700 ease-out scale-100 group-hover:scale-[1.02]"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-obsidian-950/70 via-transparent to-transparent opacity-60 pointer-events-none" />
-                
-                <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs font-mono text-zinc-200">
-                  <span>{digitalImages[0].title}</span>
-                  <span className="text-[11px] text-zinc-400">Expand</span>
-                </div>
-              </div>
-
-              {/* Scope */}
-              <div className="bg-obsidian-950/70 rounded-lg p-3.5 border border-white/5 text-xs mt-auto">
-                <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-400 block mb-1 font-semibold">
-                  Scope
-                </span>
-                <p className="text-zinc-300 font-light leading-relaxed">
-                  Generative Studies &middot; Image Curation &middot; Photoshop &middot; Visual Development
                 </p>
               </div>
 
