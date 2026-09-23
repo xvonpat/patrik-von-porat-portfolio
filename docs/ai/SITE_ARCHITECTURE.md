@@ -223,13 +223,13 @@ flowchart LR
 ```
 
 Expected workflow:
-1. Inspect and test locally.
-2. Review desktop and mobile behavior.
-3. Run relevant repository checks (`npm run build`, `npm run lint`).
-4. Review the diff.
-5. Commit and push through the approved Git workflow.
-6. Allow Vercel to build and deploy.
-7. Verify the live route and key data paths on `vonporat.com`.
+1. Inspect and test locally according to the task level in `AGENTS.md`.
+2. Review desktop or mobile behavior where layout or interactive changes are involved.
+3. Run relevant checks matching the task scope (e.g. targeted lint for SMALL/MEDIUM; full build for LARGE or pre-deployment).
+4. Review the diff before completion.
+5. Commit and push only when explicitly requested and authorized by the user.
+6. When pushed, Vercel builds and deploys to `vonporat.com`.
+7. Verify the live route on `vonporat.com` post-release.
 
 ## Environment boundaries
 

@@ -8,13 +8,16 @@ This document defines what must be true before work on vonporat.com can be consi
 
 It turns project intent into reviewable acceptance criteria across functionality, design, content, CMS behavior, accessibility, SEO, performance, security, testing, deployment, and handoff.
 
-- `AGENTS.md` defines mandatory agent behavior and current page statuses.
+- `AGENTS.md` defines mandatory agent behavior, task classification (SMALL/MEDIUM/LARGE), and operational workflows.
 - `PROJECT_CONTEXT.md` defines the site's purpose and identity.
 - `SITE_ARCHITECTURE.md` defines routes and ownership.
 - `DESIGN_SYSTEM.md` defines visual quality and layout rules.
 - `CONTENT_GUIDE.md` defines editorial quality and approved copy.
-- `TECHNICAL_SYSTEM.md` defines technical workflows and boundaries.
-- This file defines acceptance and verification.
+- `TECHNICAL_SYSTEM.md` defines technical architecture and operations.
+- This file defines quality standards and reference acceptance criteria.
+
+> [!NOTE]
+> **Operational Authority Notice**: Operational workflows, task classification (SMALL, MEDIUM, LARGE), and verification levels are defined authoritatively in [`AGENTS.md`](../../AGENTS.md). This document serves as reference criteria for quality standards and acceptance guidelines, scaled to the task tier.
 
 ## Core quality principle
 
@@ -85,7 +88,7 @@ Before completing any change:
 - [ ] Existing user changes are preserved.
 - [ ] The final diff has been reviewed.
 - [ ] No secrets, passwords, or tokens appear in code, Markdown, or output.
-- [ ] Relevant checks (`npm run build`, `npm run lint`) have been run.
+- [ ] Relevant checks have been run according to the task level in AGENTS.md (e.g. targeted lint on affected files for SMALL/MEDIUM; full build for LARGE or pre-deployment).
 - [ ] Remaining risk is concrete rather than speculative.
 
 ## Functional quality
@@ -121,14 +124,17 @@ Changes to global styles, navigation, footer, or CMS schemas require inspecting 
 
 Mobile is a first-class layout, not a compressed desktop view.
 
-### Required viewports for UI changes
-- `1440 × 900` (Wide Desktop)
-- `1280 × 800` (Standard Desktop)
-- `1024 × 768` (Small Desktop / Tablet Landscape)
-- `768 × 1024` (Tablet Portrait)
-- `390 × 844` (Standard Mobile)
-- `360 × 800` (Narrow Mobile)
-- `390 × 600` (Short Mobile / Landscape)
+### Reference viewports for UI verification
+Visual verification is risk-based (see `AGENTS.md`):
+- **SMALL changes**: No screenshots or browser sessions needed.
+- **MEDIUM changes**: One targeted viewport (e.g. `390×844` mobile or `1280×800` desktop) when useful to verify contained layout/overflow.
+- **LARGE, responsive, or cross-page changes**: Standard multi-viewport suite:
+  - `1440 × 900` (Wide Desktop)
+  - `1280 × 800` (Standard Desktop)
+  - `1024 × 768` (Small Desktop / Tablet Landscape)
+  - `768 × 1024` (Tablet Portrait)
+  - `390 × 844` (Standard Mobile)
+  - `360 × 800` (Narrow Mobile)
 
 ### Responsive acceptance
 - No horizontal overflow or clipped text.
@@ -244,13 +250,15 @@ Mobile is a first-class layout, not a compressed desktop view.
 
 ## Automated testing & build verification
 
-- Run `npm run build` locally before release.
-- Run `npm run lint` on affected files.
-- Report any unavailable checks honestly.
+Operational verification scales to the task tier (see `AGENTS.md`):
+- **SMALL**: Run only the smallest relevant check (e.g. `npx eslint path/to/file.js` for changed code, or no commands if purely static copy/markdown).
+- **MEDIUM**: Targeted lint (`npx eslint <files>`) and component tests on affected modules.
+- **LARGE / Pre-deployment**: Full `npm run build` and `npm run lint`.
+- **Pre-deployment rule**: If the user explicitly requests a commit and push to production for any change, run appropriate build validation (`npm run build`) before pushing.
 
 ## Deployment quality
 
-- Production deployments are authorized by the user.
+- Production deployments are authorized by the user. Never commit or push without explicit user instruction.
 - Changes committed to `main` trigger Vercel deployment.
 - Deployed routes verified on `https://vonporat.com` post-release.
 
@@ -271,7 +279,7 @@ Mobile is a first-class layout, not a compressed desktop view.
 
 ### Visual component change
 - [ ] Design system tokens and Obsidian Noir rules followed.
-- [ ] Desktop and mobile viewports inspected.
+- [ ] Relevant desktop/mobile viewport inspected as needed.
 - [ ] Focus, hover, and active states checked.
 - [ ] Reduced motion respected.
 
@@ -288,23 +296,23 @@ Mobile is a first-class layout, not a compressed desktop view.
 
 ## Final Definition of Done
 
-A task is complete only when:
+A task is complete when criteria matching its scope are met (see `AGENTS.md`):
 1. **Outcome**: The user's requested result is fully implemented.
 2. **Scope**: Unrelated areas and user changes are preserved.
 3. **Identity**: The result fits the personal Obsidian Noir aesthetic.
 4. **Content**: Claims, terminology, and copy are accurate.
-5. **Responsive**: UI works across desktop, tablet, and mobile viewports.
-6. **Accessible**: Keyboard focus, semantic markup, and contrast standards are met.
+5. **Responsive**: UI works across relevant viewports (scaled by task risk).
+6. **Accessible**: Semantic markup, keyboard focus, and contrast standards are preserved.
 7. **CMS**: Draft, published, and admin boundaries remain protected.
-8. **SEO**: Metadata, Open Graph tags, and canonicals are correct.
-9. **Performance**: Layout stability is preserved (CLS < 0.1) without heavy visual bloat.
+8. **SEO**: Metadata, Open Graph tags, and canonicals are intact when affected.
+9. **Performance**: Layout stability is preserved (CLS < 0.1) without visual bloat.
 10. **Security**: No secrets or credentials are exposed.
-11. **Code & Build**: Production build (`npm run build`) and lint pass cleanly.
-12. **Deployment**: Target environment verified when deployment was requested.
-13. **Documentation**: Durable changes are recorded.
-14. **Handoff**: Verification evidence and concrete remaining risks are reported truthfully.
+11. **Code & Validation**: Relevant validation passes (targeted for SMALL/MEDIUM; full build and lint for LARGE or pre-deployment).
+12. **Deployment**: Target environment verified only when deployment was explicitly requested.
+13. **Documentation**: Durable changes recorded when architecture or policies change.
+14. **Handoff**: Clear, direct communication in chat. Ceremonial walkthrough artifacts and templates are reserved for LARGE plans or explicit user requests.
 
-## Handoff template
+## Handoff template (Reference for LARGE tasks or formal milestones)
 
 ```md
 ## Outcome

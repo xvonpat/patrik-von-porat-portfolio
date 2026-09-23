@@ -43,13 +43,15 @@ Do not treat outdated copy, template content, or an isolated existing component 
 
 ## Before making changes
 
-1. Read this file completely.
-2. Inspect the relevant route, components, styles, data source, and nearby tests.
-3. Read only the relevant files in `docs/ai/` when that directory exists.
-4. Check the existing package manager, scripts, framework conventions, and repository status before running commands.
-5. Identify whether the request is primarily content, design, technical, CMS, SEO, or performance work.
-6. Preserve unrelated user changes and keep the implementation focused on the request.
-7. For broad redesigns, architecture changes, or multi-page work, propose a short plan before implementation.
+1. Classify the task into **SMALL** (default), **MEDIUM**, or **LARGE**.
+2. A single initial `git status --short` is allowed when needed to identify and protect existing user changes. Avoid repeated status, diff, and log loops unless new information requires them.
+3. For reference documentation, read only the directly relevant reference document in `docs/ai/` when necessary:
+   - Visual changes may consult [`docs/ai/DESIGN_SYSTEM.md`](./docs/ai/DESIGN_SYSTEM.md)
+   - Content changes may consult [`docs/ai/CONTENT_GUIDE.md`](./docs/ai/CONTENT_GUIDE.md)
+   - Architectural documents (`SITE_ARCHITECTURE.md`, `TECHNICAL_SYSTEM.md`, `QUALITY_STANDARDS.md`, `PLANS.md`) should normally be reserved for larger structural tasks.
+4. Inspect and edit only the directly affected files for SMALL tasks. Do not inspect unrelated routes, parent layouts, or broad directory trees.
+5. Preserve unrelated user changes and keep the implementation strictly focused on the request.
+6. For broad redesigns, architecture changes, or multi-page work (LARGE), propose a short plan before implementation.
 
 Do not rewrite an entire page or system when a focused change will solve the problem.
 
@@ -109,7 +111,7 @@ Projects is a curated **Selected Work** showcase connecting creative output with
 
 Current project set:
 - **Featured**: `Realmforged` (Active), `Ashwrithe` (In Development)
-- **Supporting**: `Visual Practice` (Ongoing Practice), `vonporat.com` (Live · Evolving), `Systems & Improvement` (Professional Practice)
+- **Supporting**: `Visual Practice` (Ongoing Practice), `vonporat.com` (Live · Evolving)
 
 Each card must answer: What is it? Why does it exist? What was Patrik's role? What is the proof/current state? Where can the visitor continue? Do not use invented results, fake metrics, or generic placeholder case studies.
 
@@ -220,23 +222,39 @@ Secrets belong exclusively in approved environment-variable stores and password 
 
 ## Quality and QA workflow
 
-For page-level design and content work:
-1. Inspect implementation and dependencies.
-2. Make one bounded page change.
-3. Report exact changed files.
-4. Run production build (`npm run build`) and lint (`npm run lint`).
-5. Perform read-only QA and capture screenshots across standard viewports:
-   - `1440 × 900` (Wide Desktop)
-   - `1280 × 800` (Standard Desktop)
-   - `1024 × 768` (Small Desktop / Tablet Landscape)
-   - `768 × 1024` (Tablet Portrait)
-   - `390 × 844` (Mobile)
-   - `360 × 800` (Narrow Mobile)
-6. Visually inspect screenshots for hierarchy, contrast, and overflow.
-7. Store QA screenshots outside `public/` (in agent artifacts directory).
-8. Verify links, keyboard focus, and accessibility.
-9. Obtain explicit user approval before proceeding to the next page.
-10. Commit and deploy only with user authorization.
+Consolidate all mandatory workflow rules here. Reference documentation in `docs/ai/` defines quality criteria; operational verification scales according to task level:
+
+### Task classification & verification tiers
+
+#### 1. SMALL — Default for narrow requests
+*(Copy, color, spacing, styling, single card removal/addition, or a narrowly scoped fix)*
+- **Inspection & edit**: Inspect and edit **only** the directly affected file(s). Do not inspect unrelated routes or parent layouts.
+- **Validation**: Run **only** the smallest relevant validation (e.g. targeted lint via `npx eslint path/to/file.js`, or no command if purely static text/markdown).
+- **No full builds**: Do not run `npm run build` or repository-wide `npm run lint`.
+- **No screenshots**: Do not launch browser sessions or take screenshots (zero screenshots for copy-only or invisible technical changes).
+- **No walkthrough artifacts**: Do not create `walkthrough.md` or planning artifacts. Answer directly and concisely in chat.
+- **No automatic git actions**: Do not commit or push unless explicitly requested.
+
+#### 2. MEDIUM — Contained features & component behavior
+*(Component behavior, interactive state, new isolated component, or contained feature)*
+- **Inspection & edit**: Inspect the affected component and its direct dependencies.
+- **Validation**: Run targeted lint (`npx eslint <files>`), type checking, or component tests. Run `npm run build` only if component exports, types, or routing boundaries are altered.
+- **Visual verification**: Risk-based. One targeted viewport may be used for a contained visual change when it adds meaningful confidence.
+- **Reporting**: Report results directly in chat without ceremonial artifacts unless requested.
+
+#### 3. LARGE — Structural, architectural & cross-cutting changes
+*(Architecture, routing, persistence, CMS schemas, security, cross-cutting features, or full redesigns)*
+- **Planning**: Propose a brief implementation plan before implementation.
+- **Validation**: Run the full relevant validation suite (`npm run build`, `npm run lint`).
+- **Visual verification**: Multi-viewport screenshot suites (`1440×900`, `1280×800`, `1024×768`, `768×1024`, `390×844`, `360×800`) are reserved for responsive, cross-page, or LARGE changes.
+- **Handoff**: Provide structured verification evidence and document durable decisions.
+
+### Core execution rules
+- **Default to SMALL**: When the request is narrow, default to SMALL.
+- **User authorization for git**: Never commit or push without explicit user instruction.
+- **Pre-deployment validation**: If the user explicitly requests a commit and push to production, run the appropriate pre-deployment validation first (including `npm run build` and `npm run lint`). A production push must not bypass necessary build validation merely because the original task was classified as SMALL.
+- **No repetition**: Never repeat validation steps that already completed cleanly.
+- **Quality standards**: Detailed criteria in `docs/ai/QUALITY_STANDARDS.md` serve as reference criteria; operational verification scales strictly to the task tier above.
 
 ## Detailed project documentation
 

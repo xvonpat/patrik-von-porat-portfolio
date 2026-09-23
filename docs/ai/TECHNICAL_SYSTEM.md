@@ -187,12 +187,14 @@ npm run start
 
 ## Git & Vercel deployment flow
 
-1. Complete local changes and verify responsive layouts.
-2. Run `npm run build` and `npm run lint`.
-3. Review `git diff` for clean changes and secret safety.
-4. Commit and push to `origin/main`.
-5. Vercel automatically builds and deploys to `vonporat.com`.
-6. Verify live routes on `https://vonporat.com`.
+Deployments are triggered only upon explicit user request:
+1. Complete local changes and verify behavior according to the task level in `AGENTS.md`.
+2. When the user explicitly requests a commit and push to production:
+   - Run pre-deployment build validation (`npm run build` and `npm run lint`).
+   - Review `git diff` for clean changes and secret safety.
+   - Commit and push to `origin/main` as authorized.
+3. Vercel automatically builds and deploys to `vonporat.com`.
+4. Verify live routes on `https://vonporat.com` post-release.
 
 ## Performance baseline & workflow
 
@@ -218,9 +220,8 @@ npm run start
 
 A technical task is done when:
 1. Requested functionality works as intended.
-2. Production build (`npm run build`) and lint (`npm run lint`) pass with 0 errors.
-3. Responsive layouts are verified on desktop and mobile viewports.
+2. Relevant validation matching the task level in `AGENTS.md` passes (targeted checks for SMALL/MEDIUM; full `npm run build` and `npm run lint` for LARGE or pre-deployment).
+3. Responsive layouts are verified when layout changes are introduced.
 4. Draft/published and admin security boundaries remain intact.
 5. No secrets or credentials appear in code, Markdown, or output.
-6. Git diff is reviewed and clean.
-7. Deployment is verified on the target environment.
+6. Deployment is verified only when deployment was explicitly requested.

@@ -115,9 +115,8 @@ Describe the chosen approach and why it fits the current system.
 2. [pending] Focused step 2 (expected result + verification)
 
 ## Verification plan
-- Automated checks: `npm run build`, `npm run lint`.
-- Manual QA: Viewports (`1440x900`, `1280x800`, `1024x768`, `768x1024`, `390x844`, `360x800`).
-- Screenshots captured and inspected outside `public/`.
+- Automated checks: Scaled to plan scope (e.g. `npm run build` and `npm run lint` for structural/LARGE tasks).
+- Visual QA: Risk-based per `AGENTS.md` (targeted viewports for contained components; multi-viewport suite for responsive/cross-page redesigns).
 
 ## Risks and mitigations
 | Risk | Likelihood | Impact | Mitigation |
