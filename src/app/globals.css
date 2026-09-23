@@ -239,27 +239,55 @@ kbd {
   box-shadow: 0 0 20px rgba(109, 231, 228, 0.12);
 }
 
-/* Logo Sizing Treatment (CSS Mask Emblem) */
-.logo-mark {
-  width: clamp(71px, 8vw, 90px);
-  height: 42px;
-  background: linear-gradient(135deg, #ffffff 0%, #d8dce6 55%, #6de7e4 100%);
-  mask-image: url("/images/PvP2.png?v=6");
-  mask-repeat: no-repeat;
-  mask-position: center;
-  mask-size: contain;
-  -webkit-mask-image: url("/images/PvP2.png?v=6");
-  -webkit-mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  -webkit-mask-size: contain;
-  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.08));
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  display: block;
+/* Header Monogram Brand Mark */
+.brand-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 48px;
+  min-height: 48px;
+  text-decoration: none;
+  border-radius: 0px;
+  outline: none;
 }
 
-.logo-mark:hover {
-  transform: scale(1.025);
-  filter: drop-shadow(0 0 8px rgba(109, 231, 228, 0.45));
+.brand-link:focus-visible {
+  outline: 2px solid var(--theme-accent, #6de7e4);
+  outline-offset: 4px;
+}
+
+.brand-mark {
+  display: block;
+  height: 26px;
+  aspect-ratio: 878 / 520;
+  background-color: #f2f1ed;
+  background-image: linear-gradient(90deg, #f2f1ed 0%, #f2f1ed 100%);
+  mask-image: url("/images/brand/pvp-mark.png");
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  -webkit-mask-image: url("/images/brand/pvp-mark.png");
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  transition: background-image 200ms ease-out, background-color 200ms ease-out;
+}
+
+@media (min-width: 768px) {
+  .brand-mark {
+    height: 29px;
+  }
+}
+
+.brand-link:hover .brand-mark,
+.brand-link:focus-visible .brand-mark {
+  background-image: linear-gradient(90deg, #6de7e4 0%, #e062b5 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-mark {
+    transition: none !important;
+  }
 }
 
 /* Refined Blog Card Interactive Styling */

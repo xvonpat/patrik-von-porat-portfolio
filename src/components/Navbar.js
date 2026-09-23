@@ -30,11 +30,15 @@ export default function Navbar() {
   return (
     <nav className="sticky top-0 w-full z-50 bg-obsidian-950/60 backdrop-blur-xl border-b border-white/[0.04] shadow-[0_4px_30px_rgba(0,0,0,0.6)]">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20 md:h-22">
-          {/* Logo / Brand Name */}
-          <div className="flex-shrink-0 flex items-center">
-            <Link href="/" className="flex items-center transition-premium" aria-label="Home">
-              {/* Logo removed for now */}
+        <div className="relative flex items-center justify-between md:justify-center h-20 md:h-22">
+          {/* Logo / Monogram Brand Mark */}
+          <div className="flex-shrink-0 flex items-center md:absolute md:left-0">
+            <Link 
+              href="/" 
+              className="brand-link" 
+              aria-label="Go to homepage"
+            >
+              <span className="brand-mark" aria-hidden="true" />
             </Link>
           </div>
 
@@ -52,7 +56,7 @@ export default function Navbar() {
             <button
               onClick={() => setIsOpen(!isOpen)}
               type="button"
-              className="inline-flex items-center justify-center p-2 rounded-md text-zinc-400 hover:text-white hover:bg-zinc-900 focus:outline-none transition-colors duration-200"
+              className="inline-flex items-center justify-center min-w-[48px] min-h-[48px] p-2 rounded-md text-zinc-400 hover:text-white hover:bg-zinc-900 focus:outline-none transition-colors duration-200"
               aria-controls="mobile-menu"
               aria-expanded={isOpen}
             >
