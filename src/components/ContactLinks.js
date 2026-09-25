@@ -49,11 +49,6 @@ export default function ContactLinks() {
     }
   ];
 
-  const accentClasses = {
-    purple: "hover:border-accent-purple/50 hover:shadow-[0_0_25px_rgba(139,92,246,0.22)]",
-    cyan: "hover:border-accent-cyan/50 hover:shadow-[0_0_25px_rgba(6,182,212,0.22)]",
-  };
-
   const handleLinkClick = (name) => {
     try {
       track('Outbound Link Click', { platform: name });
@@ -105,22 +100,32 @@ export default function ContactLinks() {
               onClick={() => handleLinkClick(link.name)}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex flex-col items-center gap-2.5 sm:gap-3 w-full focus-visible:ring-2 focus-visible:ring-accent-purple focus-visible:outline-none rounded-xl p-1 min-w-[48px] min-h-[48px]"
+              className="group flex flex-col items-center gap-2.5 sm:gap-3 w-full focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-obsidian-950 rounded-xl p-1 min-w-[48px] min-h-[48px]"
               aria-label={link.ariaLabel}
             >
-              <div 
-                className={`w-13 h-13 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full bg-obsidian-950/70 backdrop-blur-xl border border-white/[0.08] flex items-center justify-center transition-premium transform group-hover:-translate-y-1 group-hover:bg-white/[0.04] shadow-[inset_0_1px_1px_rgba(255,255,255,0.03),0_8px_25px_rgba(0,0,0,0.5)] ${accentClasses[link.accent]}`}
-              >
-                <svg 
-                  className={`w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-zinc-300 group-hover:text-white transition-premium`} 
-                  fill="currentColor" 
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                >
-                  <path d={link.iconPath} />
-                </svg>
+              <div className="relative flex items-center justify-center w-13 h-13 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full isolate overflow-visible bg-transparent">
+                {/* Layer 1: Atmospheric Bloom */}
+                <div className="aurora-orbit-bloom" aria-hidden="true" />
+
+                {/* Layer 2: Base Restrained Outline */}
+                <div className="aurora-orbit-base-ring" aria-hidden="true" />
+
+                {/* Layer 3: Animated Aurora Orbit Ring */}
+                <div className="aurora-orbit-ring" aria-hidden="true" />
+
+                {/* Icon */}
+                <div className="relative z-[3] flex items-center justify-center aurora-orbit-icon transform group-hover:-translate-y-0.5 group-focus-visible:-translate-y-0.5 transition-transform duration-300 ease-out">
+                  <svg 
+                    className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-zinc-400 group-hover:text-[#f2f1ed] group-focus-visible:text-[#f2f1ed] transition-colors duration-300" 
+                    fill="currentColor" 
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path d={link.iconPath} />
+                  </svg>
+                </div>
               </div>
-              <span className="text-[11px] sm:text-xs md:text-[13px] font-mono tracking-wider text-zinc-400 uppercase group-hover:text-white transition-colors duration-300 font-medium">
+              <span className="text-[11px] sm:text-xs md:text-[13px] font-mono tracking-wider text-zinc-400 uppercase group-hover:text-[#f2f1ed] group-focus-visible:text-[#f2f1ed] transition-colors duration-300 font-medium">
                 {link.name}
               </span>
             </a>
