@@ -528,15 +528,15 @@ footer a {
 /* Layer 1: Atmospheric Bloom */
 .aurora-orbit-bloom {
   position: absolute;
-  inset: -10px;
+  inset: -5px;
   border-radius: 9999px;
   pointer-events: none;
   z-index: 0;
   opacity: 0;
-  filter: blur(14px);
+  filter: blur(8px);
   background: 
-    radial-gradient(circle at 35% 35%, rgba(109, 231, 228, 0.45) 0%, rgba(109, 231, 228, 0) 65%),
-    radial-gradient(circle at 65% 65%, rgba(224, 98, 181, 0.35) 0%, rgba(224, 98, 181, 0) 65%);
+    radial-gradient(circle at 35% 35%, rgba(109, 231, 228, 0.40) 0%, rgba(109, 231, 228, 0) 55%),
+    radial-gradient(circle at 65% 65%, rgba(224, 98, 181, 0.30) 0%, rgba(224, 98, 181, 0) 55%);
   transition: opacity 350ms cubic-bezier(0.22, 1, 0.36, 1);
   will-change: opacity;
 }
@@ -586,7 +586,7 @@ footer a {
 /* Hover and Focus-visible Triggers */
 @media (hover: hover) and (pointer: fine) {
   .group:hover .aurora-orbit-bloom {
-    opacity: 0.40;
+    opacity: 0.32;
   }
 
   .group:hover .aurora-orbit-ring {
@@ -600,7 +600,7 @@ footer a {
 }
 
 .group:focus-visible .aurora-orbit-bloom {
-  opacity: 0.40;
+  opacity: 0.32;
 }
 
 .group:focus-visible .aurora-orbit-ring {

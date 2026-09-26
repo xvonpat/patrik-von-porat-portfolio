@@ -27,18 +27,11 @@ export default function ContactLinks() {
       iconPath: "M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"
     },
     {
-      name: "Patreon",
-      ariaLabel: "Support Realmforged on Patreon",
-      url: "https://www.patreon.com/c/realmforgedguild",
+      name: "X",
+      ariaLabel: "Patrik von Porat on X",
+      url: "https://x.com/patvonp",
       accent: "cyan",
-      iconPath: "M22.957 7.21c-.004-3.078-2.684-5.554-6.055-5.554-3.7 0-6.711 3.012-6.711 6.712 0 3.678 2.993 6.677 6.711 6.677 3.393 0 6.055-2.476 6.055-5.554v-2.28zM2.08 1.656H5.05v20.688H2.08V1.656z"
-    },
-    {
-      name: "Bandcamp",
-      ariaLabel: "Realmforged on Bandcamp",
-      url: "https://realmforged.bandcamp.com/",
-      accent: "cyan",
-      iconPath: "M0 18.75h14.887L24 5.25H9.113L0 18.75z"
+      iconPath: "M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
     },
     {
       name: "LinkedIn",
@@ -65,7 +58,7 @@ export default function ContactLinks() {
         <a 
           href="mailto:xvonpat@gmail.com"
           onClick={() => handleLinkClick('Primary Email CTA')}
-          className="group h-[52px] px-8 sm:px-10 rounded-full bg-white/10 hover:bg-white/15 text-white font-semibold uppercase tracking-wider text-xs md:text-sm font-mono border border-white/20 hover:border-accent-purple/50 backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.3)] hover:shadow-[0_0_30px_rgba(139,92,246,0.25)] hover:-translate-y-0.5 active:translate-y-0 text-center transition-premium flex items-center justify-center gap-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-purple focus-visible:ring-offset-2 focus-visible:ring-offset-obsidian-950"
+          className="group h-[52px] px-8 sm:px-10 rounded-full bg-white/10 hover:bg-white/15 text-white font-semibold uppercase tracking-wider text-xs md:text-sm font-mono border border-white/20 hover:border-accent-purple/50 backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.3)] hover:shadow-[0_0_18px_rgba(139,92,246,0.20)] hover:-translate-y-0.5 active:translate-y-0 text-center transition-premium flex items-center justify-center gap-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-purple focus-visible:ring-offset-2 focus-visible:ring-offset-obsidian-950"
           aria-label="Send an email to Patrik von Porat"
         >
           <svg 
@@ -90,9 +83,9 @@ export default function ContactLinks() {
         </span>
       </div>
 
-      {/* 3. Secondary External Channels (6 Items: 1 row on desktop, 3x2 on mobile) */}
+      {/* 3. Secondary External Channels (5 Items: 1 row on desktop, 3+2 on mobile) */}
       <div className="w-full">
-        <div className="grid grid-cols-3 sm:grid-cols-6 gap-3 sm:gap-6 md:gap-8 max-w-[340px] sm:max-w-none mx-auto justify-items-center justify-center">
+        <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 md:gap-8 max-w-[280px] sm:max-w-none mx-auto">
           {socialLinks.map((link, idx) => (
             <a 
               key={idx} 
@@ -100,7 +93,7 @@ export default function ContactLinks() {
               onClick={() => handleLinkClick(link.name)}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex flex-col items-center gap-2.5 sm:gap-3 w-full focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-obsidian-950 rounded-xl p-1 min-w-[48px] min-h-[48px]"
+              className="group flex flex-col items-center gap-2.5 sm:gap-3 w-[76px] sm:w-20 md:w-24 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-obsidian-950 rounded-xl p-1 min-w-[48px] min-h-[48px]"
               aria-label={link.ariaLabel}
             >
               <div className="relative flex items-center justify-center w-13 h-13 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full isolate overflow-visible bg-transparent">
