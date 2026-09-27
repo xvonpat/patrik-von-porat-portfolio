@@ -14,6 +14,14 @@ export default function ArtClient() {
   // 1. Traditional Studies Artwork
   const traditionalImages = [
     {
+      src: "/images/art/drawings/self-portrait.webp",
+      title: "Self-Portrait",
+      category: "Graphite Study",
+      medium: "Graphite on paper",
+      caption: "Graphite on paper. Observational self-portrait study exploring facial structure, lighting, and value transitions.",
+      alt: "Graphite self-portrait study by Patrik von Porat exploring facial structure and tonal transitions on paper."
+    },
+    {
       src: "/images/art/drawings/eye-study.webp",
       title: "Eye Study",
       category: "Graphite Study",
@@ -215,7 +223,7 @@ export default function ArtClient() {
             </div>
 
             {/* Featured Practice Editorial Card (5 columns) */}
-            <div className="lg:col-span-5 flex flex-col">
+            <div className="lg:col-span-5 flex flex-col lg:sticky lg:top-24">
               <GlassCard accent="purple" className="p-6 md:p-8 flex flex-col gap-5">
                 
                 {/* Header & Status */}
