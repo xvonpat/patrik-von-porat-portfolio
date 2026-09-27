@@ -155,7 +155,7 @@ Complete personal narrative connecting music, visual practice, digital systems, 
 ### Contact (`/contact`)
 Deliberately minimal link-exit page:
 - Direct primary email action targeting the configured `mailto:` destination.
-- Verified external channels: Spotify, YouTube, Instagram, Patreon, Bandcamp, LinkedIn.
+- Verified external channels: LinkedIn, Threads, Instagram.
 - Form-free layout without clutter or sales funnels.
 
 ## Selected Work philosophy

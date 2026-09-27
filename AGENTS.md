@@ -149,7 +149,7 @@ Deliberately minimal link-exit page:
 - **Hero**: `CONTACT` / `Start a conversation.`
 - **Introductory copy**: Personal and direct.
 - **Primary action**: Send an Email button targeting the configured `mailto:` destination.
-- **Elsewhere channels**: Spotify, YouTube, Instagram, Patreon, Bandcamp, LinkedIn.
+- **Elsewhere channels**: LinkedIn, Threads, Instagram.
 - **No contact form**: Do not add forms, fields, Calendly, or booking widgets.
 
 ### Blog (`/blog` & `/blog/[slug]`)

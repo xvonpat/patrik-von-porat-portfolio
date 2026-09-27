@@ -134,7 +134,7 @@ Deliberately minimal link-exit page:
 - **Hero**: `CONTACT` / `Start a conversation.`
 - **Introductory copy**: Explaining collaboration across music, art, systems, and process.
 - **Primary action**: Send an Email button targeting the configured `mailto:` destination.
-- **Elsewhere channels**: Spotify, YouTube, Instagram, Patreon, Bandcamp, LinkedIn.
+- **Elsewhere channels**: LinkedIn, Threads, Instagram.
 - **No contact form**: Intentionally form-free.
 
 ### Blog (`/blog` & `/blog/[slug]`)
