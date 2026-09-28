@@ -1,0 +1,11 @@
+.card {
+  box-sizing: border-box;
+  min-width: 0;
+  width: 100%;
+}
+
+@media (min-width: 769px) {
+  .card {
+    width: 50%;
+  }
+}

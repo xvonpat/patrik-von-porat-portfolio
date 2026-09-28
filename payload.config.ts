@@ -18,6 +18,9 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
     components: {
+      afterDashboard: [
+        '/src/components/VercelAnalyticsDashboard#VercelAnalyticsDashboard',
+      ],
       beforeLogin: [
         '/src/components/GoogleLoginButton#GoogleLoginButton',
       ],

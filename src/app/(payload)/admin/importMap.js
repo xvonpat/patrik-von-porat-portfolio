@@ -22,6 +22,7 @@ import { UnderlineFeatureClient as UnderlineFeatureClient_e70f5e05f09f93e00b997e
 import { BoldFeatureClient as BoldFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { ItalicFeatureClient as ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { default as default_f22f5d3e22a648d210465bdce46a03a8 } from '../../../../src/components/TitleWithLinkCell.js'
+import { VercelAnalyticsDashboard as VercelAnalyticsDashboard_19f65a3270e228b580f1a07775fb73a7 } from '../../../../src/components/VercelAnalyticsDashboard'
 import { LogoutButton as LogoutButton_b3d295ab4b1039e6e155cc89ff4f9f01 } from '../../../../src/components/LogoutButton'
 import { GoogleLoginButton as GoogleLoginButton_14c52b3cb0a4315d4a1f982df6bd4d2d } from '../../../../src/components/GoogleLoginButton'
 import { S3ClientUploadHandler as S3ClientUploadHandler_f97aa6c64367fa259c5bc0567239ef24 } from '@payloadcms/storage-s3/client'
@@ -53,6 +54,7 @@ export const importMap = {
   "@payloadcms/richtext-lexical/client#BoldFeatureClient": BoldFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@payloadcms/richtext-lexical/client#ItalicFeatureClient": ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "/src/components/TitleWithLinkCell.js#default": default_f22f5d3e22a648d210465bdce46a03a8,
+  "/src/components/VercelAnalyticsDashboard#VercelAnalyticsDashboard": VercelAnalyticsDashboard_19f65a3270e228b580f1a07775fb73a7,
   "/src/components/LogoutButton#LogoutButton": LogoutButton_b3d295ab4b1039e6e155cc89ff4f9f01,
   "/src/components/GoogleLoginButton#GoogleLoginButton": GoogleLoginButton_14c52b3cb0a4315d4a1f982df6bd4d2d,
   "@payloadcms/storage-s3/client#S3ClientUploadHandler": S3ClientUploadHandler_f97aa6c64367fa259c5bc0567239ef24,
