@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import GlassCard from '@/components/GlassCard';
 import LightboxGallery from '@/components/LightboxGallery';
+import CtaButton from '@/components/CtaButton';
 
 export default function ArtClient() {
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
@@ -155,18 +156,19 @@ export default function ArtClient() {
 
           {/* Hero CTAs */}
           <div className="flex flex-col sm:flex-row gap-3.5 mt-4 w-full sm:w-auto">
-            <a 
+            <CtaButton 
               href="#traditional-studies" 
-              className="px-8 py-3.5 rounded-full bg-white/10 hover:bg-white/15 text-white font-semibold uppercase tracking-wider text-xs md:text-sm font-mono border border-white/20 hover:border-white/40 backdrop-blur-md hover:shadow-[0_0_25px_rgba(255,255,255,0.15)] hover:-translate-y-0.5 active:translate-y-0 text-center transition-premium"
+              className="px-8 py-3.5 text-xs md:text-sm"
             >
               Explore the Work
-            </a>
-            <Link 
+            </CtaButton>
+            <CtaButton 
               href="/blog" 
-              className="px-8 py-3.5 rounded-full bg-zinc-950/60 hover:bg-zinc-900/70 text-white font-semibold uppercase tracking-wider text-xs md:text-sm font-mono border border-zinc-800 hover:border-accent-purple/40 backdrop-blur-md hover:shadow-[0_0_25px_rgba(139,92,246,0.18)] hover:-translate-y-0.5 active:translate-y-0 text-center transition-premium"
+              variant="secondary"
+              className="px-8 py-3.5 text-xs md:text-sm"
             >
               Read Visual Notes
-            </Link>
+            </CtaButton>
           </div>
         </section>
 
@@ -467,18 +469,19 @@ export default function ArtClient() {
             The practice develops through observation, repetition and the willingness to begin again in a different material.
           </p>
           <div className="flex flex-col sm:flex-row gap-3.5 mt-2 w-full sm:w-auto">
-            <Link 
+            <CtaButton 
               href="/blog" 
-              className="px-8 py-3.5 rounded-full bg-white/10 hover:bg-white/15 text-white font-semibold uppercase tracking-wider text-xs md:text-sm font-mono border border-white/20 hover:border-white/40 backdrop-blur-md hover:shadow-[0_0_25px_rgba(255,255,255,0.15)] hover:-translate-y-0.5 active:translate-y-0 text-center transition-premium"
+              className="px-8 py-3.5 text-xs md:text-sm"
             >
               Read the Journal
-            </Link>
-            <Link 
+            </CtaButton>
+            <CtaButton 
               href="/projects" 
-              className="px-8 py-3.5 rounded-full bg-zinc-950/60 hover:bg-zinc-900/70 text-white font-semibold uppercase tracking-wider text-xs md:text-sm font-mono border border-zinc-800 hover:border-accent-purple/40 backdrop-blur-md hover:shadow-[0_0_25px_rgba(139,92,246,0.18)] hover:-translate-y-0.5 active:translate-y-0 text-center transition-premium"
+              variant="secondary"
+              className="px-8 py-3.5 text-xs md:text-sm"
             >
               Explore Selected Work
-            </Link>
+            </CtaButton>
           </div>
         </section>
 

@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import GlassCard from '@/components/GlassCard';
+import CtaButton from '@/components/CtaButton';
 
 export const metadata = {
   title: "Selected Work | Patrik von Porat",
@@ -265,32 +266,26 @@ export default function Projects() {
 
                 {/* Footer Primary Action */}
                 <div className="pt-4 mt-6 border-t border-white/5 flex justify-end">
-                  {proj.isExternal ? (
-                    <a
-                      href={proj.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-6 py-3 rounded-full bg-white/10 hover:bg-white/15 text-white font-mono text-xs md:text-sm uppercase tracking-wider font-semibold border border-white/20 hover:border-accent-purple/50 backdrop-blur-md hover:shadow-[0_0_20px_rgba(139,92,246,0.2)] transition-premium flex items-center gap-2 group/btn"
-                    >
-                      <span>{proj.cta}</span>
+                  <CtaButton
+                    href={proj.link}
+                    target={proj.isExternal ? "_blank" : undefined}
+                    rel={proj.isExternal ? "noopener noreferrer" : undefined}
+                    className="px-6 py-3 text-xs md:text-sm"
+                  >
+                    <span>{proj.cta}</span>
+                    {proj.isExternal ? (
                       <svg 
-                        className={`w-4 h-4 ${accentClass} group-hover/btn:text-white transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5`} 
+                        className={`w-4 h-4 ${accentClass} aurora-cta-icon transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5`} 
                         fill="none" 
                         stroke="currentColor" 
                         viewBox="0 0 24 24"
                       >
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                       </svg>
-                    </a>
-                  ) : (
-                    <Link
-                      href={proj.link}
-                      className="px-6 py-3 rounded-full bg-white/10 hover:bg-white/15 text-white font-mono text-xs md:text-sm uppercase tracking-wider font-semibold border border-white/20 hover:border-accent-purple/50 backdrop-blur-md hover:shadow-[0_0_20px_rgba(139,92,246,0.2)] transition-premium flex items-center gap-2 group/btn"
-                    >
-                      <span>{proj.cta}</span>
-                      <span className={`${accentClass} group-hover/btn:translate-x-0.5 transition-transform`}>&rarr;</span>
-                    </Link>
-                  )}
+                    ) : (
+                      <span className="aurora-cta-arrow inline-block" aria-hidden="true">&rarr;</span>
+                    )}
+                  </CtaButton>
                 </div>
               </GlassCard>
             );
@@ -454,18 +449,19 @@ export default function Projects() {
           Music, images and systems may require different tools, but each begins with observation and becomes clearer through structure, creation and refinement.
         </p>
         <div className="flex flex-col sm:flex-row gap-3.5 mt-2 w-full sm:w-auto">
-          <Link 
+          <CtaButton 
             href="/about" 
-            className="px-8 py-3.5 rounded-full bg-white/10 hover:bg-white/15 text-white font-semibold uppercase tracking-wider text-xs md:text-sm font-mono border border-white/20 hover:border-white/40 backdrop-blur-md hover:shadow-[0_0_25px_rgba(255,255,255,0.15)] hover:-translate-y-0.5 active:translate-y-0 text-center transition-premium"
+            className="px-8 py-3.5 text-xs md:text-sm"
           >
             About the Process
-          </Link>
-          <Link 
+          </CtaButton>
+          <CtaButton 
             href="/blog" 
-            className="px-8 py-3.5 rounded-full bg-zinc-950/60 hover:bg-zinc-900/70 text-white font-semibold uppercase tracking-wider text-xs md:text-sm font-mono border border-zinc-800 hover:border-accent-purple/40 backdrop-blur-md hover:shadow-[0_0_25px_rgba(139,92,246,0.18)] hover:-translate-y-0.5 active:translate-y-0 text-center transition-premium"
+            variant="secondary"
+            className="px-8 py-3.5 text-xs md:text-sm"
           >
             Read the Journal
-          </Link>
+          </CtaButton>
         </div>
       </section>
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import GlassCard from '@/components/GlassCard';
+import CtaButton from '@/components/CtaButton';
 
 export const metadata = {
   title: "Workbench | Selected Work | Patrik von Porat",
@@ -439,12 +440,13 @@ export default function WorkbenchPage() {
           <span>&larr;</span>
           <span>Back to All Projects</span>
         </Link>
-        <Link 
+        <CtaButton 
           href="/about" 
-          className="px-6 py-2.5 rounded-full bg-white/10 hover:bg-white/15 text-white font-mono text-xs md:text-sm uppercase tracking-wider font-semibold border border-white/20 hover:border-accent-cyan/50 backdrop-blur-md transition-premium"
+          className="px-6 py-2.5 text-xs md:text-sm"
         >
-          How I Work &rarr;
-        </Link>
+          <span>How I Work</span>
+          <span className="aurora-cta-arrow inline-block" aria-hidden="true">&rarr;</span>
+        </CtaButton>
       </section>
 
     </div>

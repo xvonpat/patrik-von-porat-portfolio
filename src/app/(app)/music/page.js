@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import GlassCard from '@/components/GlassCard';
+import CtaButton from '@/components/CtaButton';
 
 export const metadata = {
   title: "Music | Patrik von Porat",
@@ -149,18 +150,19 @@ export default function Music() {
 
         {/* Hero CTAs */}
         <div className="flex flex-col sm:flex-row gap-3.5 mt-4 w-full sm:w-auto">
-          <a 
+          <CtaButton 
             href="#selected-releases" 
-            className="px-8 py-3.5 rounded-full bg-white/10 hover:bg-white/15 text-white font-semibold uppercase tracking-wider text-xs md:text-sm font-mono border border-white/20 hover:border-white/40 backdrop-blur-md hover:shadow-[0_0_25px_rgba(255,255,255,0.15)] hover:-translate-y-0.5 active:translate-y-0 text-center transition-premium"
+            className="px-8 py-3.5 text-xs md:text-sm"
           >
             Listen to Selected Releases
-          </a>
-          <a 
+          </CtaButton>
+          <CtaButton 
             href="#current-projects" 
-            className="px-8 py-3.5 rounded-full bg-zinc-950/60 hover:bg-zinc-900/70 text-white font-semibold uppercase tracking-wider text-xs md:text-sm font-mono border border-zinc-800 hover:border-accent-purple/40 backdrop-blur-md hover:shadow-[0_0_25px_rgba(139,92,246,0.18)] hover:-translate-y-0.5 active:translate-y-0 text-center transition-premium"
+            variant="secondary"
+            className="px-8 py-3.5 text-xs md:text-sm"
           >
             Explore Current Projects
-          </a>
+          </CtaButton>
         </div>
       </section>
 
@@ -252,35 +254,36 @@ export default function Music() {
                 {/* Footer Action Buttons */}
                 <div className="pt-4 mt-6 border-t border-white/5 flex flex-wrap items-center justify-end gap-3">
                   {project.secondaryAction && (
-                    <a
+                    <CtaButton
                       href={project.secondaryAction.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-5 py-2.5 rounded-full bg-zinc-950/60 hover:bg-zinc-900/70 text-zinc-300 hover:text-white font-mono text-xs uppercase tracking-wider font-semibold border border-zinc-800 hover:border-accent-purple/40 backdrop-blur-md transition-premium flex items-center gap-1.5"
+                      variant="secondary"
+                      className="px-5 py-2.5 text-xs"
                     >
                       <span>{project.secondaryAction.label}</span>
-                      <svg className="w-3.5 h-3.5 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-3.5 h-3.5 text-zinc-400 group-hover:text-accent-cyan transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                       </svg>
-                    </a>
+                    </CtaButton>
                   )}
                   {project.primaryAction && (
-                    <a
+                    <CtaButton
                       href={project.primaryAction.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-6 py-3 rounded-full bg-white/10 hover:bg-white/15 text-white font-mono text-xs md:text-sm uppercase tracking-wider font-semibold border border-white/20 hover:border-accent-purple/50 backdrop-blur-md hover:shadow-[0_0_20px_rgba(139,92,246,0.2)] transition-premium flex items-center gap-2 group/btn"
+                      className="px-6 py-3 text-xs md:text-sm"
                     >
                       <span>{project.primaryAction.label}</span>
                       <svg 
-                        className={`w-4 h-4 ${accentClass} group-hover/btn:text-white transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5`} 
+                        className={`w-4 h-4 ${accentClass} aurora-cta-icon transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5`} 
                         fill="none" 
                         stroke="currentColor" 
                         viewBox="0 0 24 24"
                       >
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                       </svg>
-                    </a>
+                    </CtaButton>
                   )}
                 </div>
               </GlassCard>
@@ -462,18 +465,19 @@ export default function Music() {
           Artwork, stories, release structures and digital spaces all grow from the same musical starting point.
         </p>
         <div className="flex flex-col sm:flex-row gap-3.5 mt-2 w-full sm:w-auto">
-          <Link 
+          <CtaButton 
             href="/projects" 
-            className="px-8 py-3.5 rounded-full bg-white/10 hover:bg-white/15 text-white font-semibold uppercase tracking-wider text-xs md:text-sm font-mono border border-white/20 hover:border-white/40 backdrop-blur-md hover:shadow-[0_0_25px_rgba(255,255,255,0.15)] hover:-translate-y-0.5 active:translate-y-0 text-center transition-premium"
+            className="px-8 py-3.5 text-xs md:text-sm"
           >
             Explore Selected Work
-          </Link>
-          <Link 
+          </CtaButton>
+          <CtaButton 
             href="/contact" 
-            className="px-8 py-3.5 rounded-full bg-zinc-950/60 hover:bg-zinc-900/70 text-white font-semibold uppercase tracking-wider text-xs md:text-sm font-mono border border-zinc-800 hover:border-accent-purple/40 backdrop-blur-md hover:shadow-[0_0_25px_rgba(139,92,246,0.18)] hover:-translate-y-0.5 active:translate-y-0 text-center transition-premium"
+            variant="secondary"
+            className="px-8 py-3.5 text-xs md:text-sm"
           >
             Get in Touch
-          </Link>
+          </CtaButton>
         </div>
       </section>
 

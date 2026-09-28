@@ -166,7 +166,7 @@ Curated **Selected Work** showcase:
 ### Contact (`/contact`) — Approved & Locked
 
 - **Hero**: `CONTACT` / `Start a conversation.`
-- **Body**: *“If the work here connects with you—through music, visual practice, digital systems or process—email is the best place to start. You can also follow the projects and ongoing work through the channels below.”*
+- **Body**: *“If the work here connects with you—through music, visual practice, digital systems or process—email is the best place to start. You can also follow what I’m working on through the channels below.”*
 - **Primary Action**: Send an Email button targeting the configured `mailto:` destination.
 - **Elsewhere Channels**: LinkedIn, Threads, Instagram.
 - **No contact form**.

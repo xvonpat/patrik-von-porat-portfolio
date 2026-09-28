@@ -2,6 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import GlassCard from '@/components/GlassCard';
+import CtaButton from '@/components/CtaButton';
 
 export const metadata = {
   title: "About | Patrik von Porat",
@@ -102,18 +103,19 @@ export default function About() {
 
         {/* Hero Actions */}
         <div className="flex flex-col sm:flex-row gap-3.5 mt-4 w-full sm:w-auto">
-          <Link 
+          <CtaButton 
             href="/projects" 
-            className="px-8 py-3.5 rounded-full bg-white/10 hover:bg-white/15 text-white font-semibold uppercase tracking-wider text-xs md:text-sm font-mono border border-white/20 hover:border-white/40 backdrop-blur-md hover:shadow-[0_0_25px_rgba(255,255,255,0.15)] hover:-translate-y-0.5 active:translate-y-0 text-center transition-premium"
+            className="px-8 py-3.5 text-xs md:text-sm"
           >
             Explore Selected Work
-          </Link>
-          <Link 
+          </CtaButton>
+          <CtaButton 
             href="/contact" 
-            className="px-8 py-3.5 rounded-full bg-zinc-950/60 hover:bg-zinc-900/70 text-white font-semibold uppercase tracking-wider text-xs md:text-sm font-mono border border-zinc-800 hover:border-accent-purple/40 backdrop-blur-md hover:shadow-[0_0_25px_rgba(139,92,246,0.18)] hover:-translate-y-0.5 active:translate-y-0 text-center transition-premium"
+            variant="secondary"
+            className="px-8 py-3.5 text-xs md:text-sm"
           >
             Get in Touch
-          </Link>
+          </CtaButton>
         </div>
       </section>
 
@@ -324,18 +326,19 @@ export default function About() {
           Explore the projects, music, images and systems developed through this approach.
         </p>
         <div className="flex flex-col sm:flex-row gap-3.5 mt-2 w-full sm:w-auto">
-          <Link 
+          <CtaButton 
             href="/projects" 
-            className="px-8 py-3.5 rounded-full bg-white/10 hover:bg-white/15 text-white font-semibold uppercase tracking-wider text-xs md:text-sm font-mono border border-white/20 hover:border-white/40 backdrop-blur-md hover:shadow-[0_0_25px_rgba(255,255,255,0.15)] hover:-translate-y-0.5 active:translate-y-0 text-center transition-premium"
+            className="px-8 py-3.5 text-xs md:text-sm"
           >
             Explore Selected Work
-          </Link>
-          <Link 
+          </CtaButton>
+          <CtaButton 
             href="/contact" 
-            className="px-8 py-3.5 rounded-full bg-zinc-950/60 hover:bg-zinc-900/70 text-white font-semibold uppercase tracking-wider text-xs md:text-sm font-mono border border-zinc-800 hover:border-accent-purple/40 backdrop-blur-md hover:shadow-[0_0_25px_rgba(139,92,246,0.18)] hover:-translate-y-0.5 active:translate-y-0 text-center transition-premium"
+            variant="secondary"
+            className="px-8 py-3.5 text-xs md:text-sm"
           >
             Get in Touch
-          </Link>
+          </CtaButton>
         </div>
       </section>
 

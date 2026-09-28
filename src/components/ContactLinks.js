@@ -44,20 +44,32 @@ export default function ContactLinks() {
         <a 
           href="mailto:xvonpat@gmail.com"
           onClick={() => handleLinkClick('Primary Email CTA')}
-          className="group h-[52px] px-8 sm:px-10 rounded-full bg-white/10 hover:bg-white/15 text-white font-semibold uppercase tracking-wider text-xs md:text-sm font-mono border border-white/20 hover:border-accent-purple/50 backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.3)] hover:shadow-[0_0_18px_rgba(139,92,246,0.20)] hover:-translate-y-0.5 active:translate-y-0 text-center transition-premium flex items-center justify-center gap-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-purple focus-visible:ring-offset-2 focus-visible:ring-offset-obsidian-950"
+          className="email-cta-btn group relative inline-flex items-center justify-center h-[52px] px-8 sm:px-10 rounded-full text-white font-semibold uppercase tracking-wider text-xs md:text-sm font-mono text-center backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.3)] transition-premium isolate overflow-visible hover:-translate-y-0.5 active:translate-y-0 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-obsidian-950"
           aria-label="Send an email to Patrik von Porat"
         >
-          <svg 
-            className="w-4 h-4 text-accent-purple group-hover:text-white transition-colors" 
-            fill="none" 
-            stroke="currentColor" 
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-          </svg>
-          <span>Send an Email</span>
-          <span className="text-accent-purple group-hover:translate-x-0.5 transition-transform inline-block" aria-hidden="true">&rarr;</span>
+          {/* Layer 1: Atmospheric Bloom */}
+          <div className="email-cta-bloom" aria-hidden="true" />
+
+          {/* Layer 2: Base Surface Background & Base Border */}
+          <div className="email-cta-surface" aria-hidden="true" />
+
+          {/* Layer 3: Aurora Orbit Light Sweep Border */}
+          <div className="email-cta-border-orbit" aria-hidden="true" />
+
+          {/* Content (z-index above layers) */}
+          <div className="relative z-[3] flex items-center justify-center gap-2.5">
+            <svg 
+              className="w-4 h-4 email-cta-icon" 
+              fill="none" 
+              stroke="currentColor" 
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+            <span>Send an Email</span>
+            <span className="email-cta-arrow inline-block" aria-hidden="true">&rarr;</span>
+          </div>
         </a>
       </div>
 

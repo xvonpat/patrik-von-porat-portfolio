@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import GlassCard from '@/components/GlassCard';
+import CtaButton from '@/components/CtaButton';
 
 const getMediaUrl = (url) => {
   if (!url || typeof url !== 'string') return null;
@@ -138,13 +139,12 @@ export default function BlogClient({ posts = [] }) {
             <p className="text-sm text-zinc-300 font-light leading-relaxed">
               This part of the journal is still taking shape.
             </p>
-            <button
-              type="button"
+            <CtaButton
               onClick={() => setActiveFilter('All')}
-              className="mt-2 px-6 py-2.5 rounded-full bg-white/10 hover:bg-white/15 text-white font-mono text-xs uppercase tracking-wider font-semibold border border-white/20 hover:border-accent-purple/40 transition-premium"
+              className="mt-2 px-6 py-2.5 text-xs"
             >
               View All Notes
-            </button>
+            </CtaButton>
           </GlassCard>
         </div>
       ) : (

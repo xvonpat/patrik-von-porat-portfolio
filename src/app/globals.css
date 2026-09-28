@@ -626,3 +626,467 @@ footer a {
     transition: none !important;
   }
 }
+
+/* ==========================================================================
+   Aurora CTA — Rectangular Primary Button Interaction
+   ========================================================================== */
+
+/* Layer 1: Atmospheric Bloom */
+.aurora-cta-bloom,
+.email-cta-bloom {
+  position: absolute;
+  inset: -6px;
+  border-radius: var(--theme-radius);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  filter: blur(12px);
+  background: 
+    radial-gradient(ellipse 55% 65% at 30% 50%, rgba(109, 231, 228, 0.45) 0%, rgba(109, 231, 228, 0) 70%),
+    radial-gradient(ellipse 55% 65% at 70% 50%, rgba(224, 98, 181, 0.40) 0%, rgba(224, 98, 181, 0) 70%);
+  transition: opacity 350ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity;
+}
+
+/* Layer 2: Surface Background & Base Border */
+.aurora-cta-surface,
+.email-cta-surface {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--theme-radius);
+  pointer-events: none;
+  z-index: 1;
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  transition: background-color 300ms ease-out, border-color 300ms ease-out;
+}
+
+/* Layer 3: Aurora Orbit Light Sweep Border (1px masked border with rotating conic beam) */
+.aurora-cta-border-orbit,
+.email-cta-border-orbit {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--theme-radius);
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+  overflow: hidden;
+  padding: 1px;
+  box-sizing: border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  transition: opacity 300ms ease-out;
+  will-change: opacity;
+}
+
+.aurora-cta-border-orbit::before,
+.email-cta-border-orbit::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 440px;
+  height: 440px;
+  margin-top: -220px;
+  margin-left: -220px;
+  background: conic-gradient(
+    from 0deg,
+    rgba(109, 231, 228, 0.10) 0deg,
+    rgba(224, 98, 181, 0.15) 120deg,
+    rgba(224, 98, 181, 0.40) 230deg,
+    rgba(224, 98, 181, 0.90) 280deg,
+    #f2f1ed 310deg,
+    #6de7e4 330deg,
+    rgba(109, 231, 228, 0.45) 350deg,
+    rgba(109, 231, 228, 0.10) 360deg
+  );
+  transform: rotate(0deg);
+  transition: transform 550ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+/* Interactive Elements inside CTA */
+.aurora-cta-icon,
+.email-cta-icon {
+  color: var(--color-accent-purple);
+  transition: color 300ms ease-out;
+}
+
+.aurora-cta-arrow,
+.email-cta-arrow {
+  color: var(--color-accent-purple);
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1), color 300ms ease-out;
+  will-change: transform;
+}
+
+/* Hover and Focus-visible Triggers */
+@media (hover: hover) and (pointer: fine) {
+  .aurora-cta-btn:hover .aurora-cta-bloom,
+  .email-cta-btn:hover .email-cta-bloom {
+    opacity: 0.50;
+  }
+
+  .aurora-cta-btn:hover .aurora-cta-surface,
+  .email-cta-btn:hover .email-cta-surface {
+    background-color: rgba(255, 255, 255, 0.13);
+    border-color: rgba(255, 255, 255, 0.06);
+  }
+
+  .aurora-cta-btn:hover .aurora-cta-border-orbit,
+  .email-cta-btn:hover .email-cta-border-orbit {
+    opacity: 1;
+  }
+
+  .aurora-cta-btn:hover .aurora-cta-border-orbit::before,
+  .email-cta-btn:hover .email-cta-border-orbit::before {
+    transform: rotate(190deg);
+  }
+
+  .aurora-cta-btn:hover .aurora-cta-icon,
+  .email-cta-btn:hover .email-cta-icon {
+    color: var(--color-accent-cyan);
+  }
+
+  .aurora-cta-btn:hover .aurora-cta-arrow,
+  .email-cta-btn:hover .email-cta-arrow {
+    transform: translateX(4px);
+    color: var(--color-accent-cyan);
+  }
+}
+
+.aurora-cta-btn:focus-visible .aurora-cta-bloom,
+.email-cta-btn:focus-visible .email-cta-bloom {
+  opacity: 0.50;
+}
+
+.aurora-cta-btn:focus-visible .aurora-cta-surface,
+.email-cta-btn:focus-visible .email-cta-surface {
+  background-color: rgba(255, 255, 255, 0.13);
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+.aurora-cta-btn:focus-visible .aurora-cta-border-orbit,
+.email-cta-btn:focus-visible .email-cta-border-orbit {
+  opacity: 1;
+}
+
+.aurora-cta-btn:focus-visible .aurora-cta-border-orbit::before,
+.email-cta-btn:focus-visible .email-cta-border-orbit::before {
+  transform: rotate(190deg);
+}
+
+.aurora-cta-btn:focus-visible .aurora-cta-icon,
+.email-cta-btn:focus-visible .email-cta-icon {
+  color: var(--color-accent-cyan);
+}
+
+.aurora-cta-btn:focus-visible .aurora-cta-arrow,
+.email-cta-btn:focus-visible .email-cta-arrow {
+  transform: translateX(4px);
+  color: var(--color-accent-cyan);
+}
+
+/* Reduced Motion Override: Static gradient color change, no rotation or translation */
+@media (prefers-reduced-motion: reduce) {
+  .aurora-cta-btn,
+  .email-cta-btn {
+    transform: none !important;
+  }
+
+  .aurora-cta-bloom,
+  .email-cta-bloom {
+    transition: opacity 200ms ease !important;
+  }
+
+  .aurora-cta-border-orbit,
+  .email-cta-border-orbit {
+    transition: opacity 200ms ease !important;
+  }
+
+  .aurora-cta-border-orbit::before,
+  .email-cta-border-orbit::before {
+    transform: none !important;
+    transition: none !important;
+    background: linear-gradient(
+      90deg,
+      rgba(109, 231, 228, 0.85) 0%,
+      rgba(224, 98, 181, 0.85) 100%
+    ) !important;
+  }
+
+  .aurora-cta-arrow,
+  .email-cta-arrow {
+    transform: none !important;
+    transition: color 200ms ease !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Secondary Variant: Muted obsidian surface with refined Orchid orbit sweep
+   -------------------------------------------------------------------------- */
+
+/* Layer 1: Atmospheric Bloom (Quieter, Orchid-led depth) */
+.aurora-cta-bloom--secondary {
+  filter: blur(10px);
+  background: 
+    radial-gradient(ellipse 55% 65% at 50% 50%, rgba(224, 98, 181, 0.35) 0%, rgba(224, 98, 181, 0) 70%),
+    radial-gradient(ellipse 55% 65% at 30% 50%, rgba(109, 231, 228, 0.20) 0%, rgba(109, 231, 228, 0) 70%);
+}
+
+/* Layer 2: Surface (Dark obsidian resting background) */
+.aurora-cta-surface--secondary {
+  background-color: rgba(14, 16, 20, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+/* Layer 3: Border Orbit (Sleek Orchid-led sweep) */
+.aurora-cta-border-orbit--secondary::before {
+  background: conic-gradient(
+    from 0deg,
+    rgba(224, 98, 181, 0.05) 0deg,
+    rgba(224, 98, 181, 0.20) 120deg,
+    rgba(224, 98, 181, 0.50) 230deg,
+    rgba(224, 98, 181, 0.90) 280deg,
+    #f2f1ed 310deg,
+    rgba(109, 231, 228, 0.55) 330deg,
+    rgba(224, 98, 181, 0.25) 350deg,
+    rgba(224, 98, 181, 0.05) 360deg
+  );
+}
+
+/* Secondary Hover and Focus-visible Triggers */
+@media (hover: hover) and (pointer: fine) {
+  .aurora-cta-btn--secondary:hover .aurora-cta-bloom--secondary {
+    opacity: 0.32;
+  }
+
+  .aurora-cta-btn--secondary:hover .aurora-cta-surface--secondary {
+    background-color: rgba(20, 24, 30, 0.85);
+    border-color: rgba(255, 255, 255, 0.04);
+  }
+
+  .aurora-cta-btn--secondary:hover .aurora-cta-border-orbit--secondary {
+    opacity: 1;
+  }
+
+  .aurora-cta-btn--secondary:hover .aurora-cta-border-orbit--secondary::before {
+    transform: rotate(190deg);
+  }
+}
+
+.aurora-cta-btn--secondary:focus-visible .aurora-cta-bloom--secondary {
+  opacity: 0.32;
+}
+
+.aurora-cta-btn--secondary:focus-visible .aurora-cta-surface--secondary {
+  background-color: rgba(20, 24, 30, 0.85);
+  border-color: rgba(255, 255, 255, 0.04);
+}
+
+.aurora-cta-btn--secondary:focus-visible .aurora-cta-border-orbit--secondary {
+  opacity: 1;
+}
+
+.aurora-cta-btn--secondary:focus-visible .aurora-cta-border-orbit--secondary::before {
+  transform: rotate(190deg);
+}
+
+/* Secondary Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+  .aurora-cta-border-orbit--secondary::before {
+    background: linear-gradient(
+      90deg,
+      rgba(224, 98, 181, 0.70) 0%,
+      rgba(109, 231, 228, 0.50) 100%
+    ) !important;
+  }
+}
+
+/* ==========================================================================
+   Universal CTA Button Classes & Automatic Pattern Coverage
+   Ensures any primary/secondary CTA added now or in the future automatically
+   inherits the Aurora Orbit light sweep and bloom, even without manual spans.
+   ========================================================================== */
+
+@property --orbit-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+/* Primary CTA Button (Canonical class and raw Tailwind pattern matching) */
+.btn-primary:not(.aurora-cta-btn):not(.email-cta-btn),
+a:not(.aurora-cta-btn):not(.email-cta-btn)[class*="rounded-full"][class*="bg-white/10"],
+button:not(.aurora-cta-btn):not(.email-cta-btn)[class*="rounded-full"][class*="bg-white/10"] {
+  position: relative;
+  isolation: isolate;
+  overflow: visible;
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 350ms cubic-bezier(0.22, 1, 0.36, 1),
+              background-color 300ms ease-out,
+              border-color 300ms ease-out;
+}
+
+.btn-primary:not(.aurora-cta-btn):not(.email-cta-btn)::before,
+a:not(.aurora-cta-btn):not(.email-cta-btn)[class*="rounded-full"][class*="bg-white/10"]::before,
+button:not(.aurora-cta-btn):not(.email-cta-btn)[class*="rounded-full"][class*="bg-white/10"]::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: var(--theme-radius);
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+  padding: 1px;
+  box-sizing: border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  background: conic-gradient(
+    from var(--orbit-angle, 0deg),
+    rgba(109, 231, 228, 0.10) 0deg,
+    rgba(224, 98, 181, 0.15) 120deg,
+    rgba(224, 98, 181, 0.40) 230deg,
+    rgba(224, 98, 181, 0.90) 280deg,
+    #f2f1ed 310deg,
+    #6de7e4 330deg,
+    rgba(109, 231, 228, 0.45) 350deg,
+    rgba(109, 231, 228, 0.10) 360deg
+  );
+  transition: opacity 300ms ease-out, --orbit-angle 550ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, --orbit-angle;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn-primary:not(.aurora-cta-btn):not(.email-cta-btn):hover,
+  a:not(.aurora-cta-btn):not(.email-cta-btn)[class*="rounded-full"][class*="bg-white/10"]:hover,
+  button:not(.aurora-cta-btn):not(.email-cta-btn)[class*="rounded-full"][class*="bg-white/10"]:hover {
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4), 0 0 25px rgba(109, 231, 228, 0.35), 0 0 45px rgba(224, 98, 181, 0.25);
+    background-color: rgba(255, 255, 255, 0.13);
+    border-color: rgba(255, 255, 255, 0.06);
+    transform: translateY(-2px);
+  }
+
+  .btn-primary:not(.aurora-cta-btn):not(.email-cta-btn):hover::before,
+  a:not(.aurora-cta-btn):not(.email-cta-btn)[class*="rounded-full"][class*="bg-white/10"]:hover::before,
+  button:not(.aurora-cta-btn):not(.email-cta-btn)[class*="rounded-full"][class*="bg-white/10"]:hover::before {
+    opacity: 1;
+    --orbit-angle: 190deg;
+  }
+}
+
+.btn-primary:not(.aurora-cta-btn):not(.email-cta-btn):focus-visible,
+a:not(.aurora-cta-btn):not(.email-cta-btn)[class*="rounded-full"][class*="bg-white/10"]:focus-visible,
+button:not(.aurora-cta-btn):not(.email-cta-btn)[class*="rounded-full"][class*="bg-white/10"]:focus-visible {
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4), 0 0 25px rgba(109, 231, 228, 0.35), 0 0 45px rgba(224, 98, 181, 0.25);
+  background-color: rgba(255, 255, 255, 0.13);
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+.btn-primary:not(.aurora-cta-btn):not(.email-cta-btn):focus-visible::before,
+a:not(.aurora-cta-btn):not(.email-cta-btn)[class*="rounded-full"][class*="bg-white/10"]:focus-visible::before,
+button:not(.aurora-cta-btn):not(.email-cta-btn)[class*="rounded-full"][class*="bg-white/10"]:focus-visible::before {
+  opacity: 1;
+  --orbit-angle: 190deg;
+}
+
+/* Secondary CTA Button (Canonical class and raw Tailwind pattern matching) */
+.btn-secondary:not(.aurora-cta-btn):not(.email-cta-btn),
+a:not(.aurora-cta-btn):not(.email-cta-btn)[class*="rounded-full"][class*="bg-zinc-950"],
+button:not(.aurora-cta-btn):not(.email-cta-btn)[class*="rounded-full"][class*="bg-zinc-950"] {
+  position: relative;
+  isolation: isolate;
+  overflow: visible;
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 350ms cubic-bezier(0.22, 1, 0.36, 1),
+              background-color 300ms ease-out,
+              border-color 300ms ease-out;
+}
+
+.btn-secondary:not(.aurora-cta-btn):not(.email-cta-btn)::before,
+a:not(.aurora-cta-btn):not(.email-cta-btn)[class*="rounded-full"][class*="bg-zinc-950"]::before,
+button:not(.aurora-cta-btn):not(.email-cta-btn)[class*="rounded-full"][class*="bg-zinc-950"]::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: var(--theme-radius);
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+  padding: 1px;
+  box-sizing: border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  background: conic-gradient(
+    from var(--orbit-angle, 0deg),
+    rgba(224, 98, 181, 0.05) 0deg,
+    rgba(224, 98, 181, 0.20) 120deg,
+    rgba(224, 98, 181, 0.50) 230deg,
+    rgba(224, 98, 181, 0.90) 280deg,
+    #f2f1ed 310deg,
+    rgba(109, 231, 228, 0.55) 330deg,
+    rgba(224, 98, 181, 0.25) 350deg,
+    rgba(224, 98, 181, 0.05) 360deg
+  );
+  transition: opacity 300ms ease-out, --orbit-angle 550ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, --orbit-angle;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn-secondary:not(.aurora-cta-btn):not(.email-cta-btn):hover,
+  a:not(.aurora-cta-btn):not(.email-cta-btn)[class*="rounded-full"][class*="bg-zinc-950"]:hover,
+  button:not(.aurora-cta-btn):not(.email-cta-btn)[class*="rounded-full"][class*="bg-zinc-950"]:hover {
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4), 0 0 25px rgba(224, 98, 181, 0.28), 0 0 40px rgba(109, 231, 228, 0.18);
+    background-color: rgba(20, 24, 30, 0.85);
+    border-color: rgba(255, 255, 255, 0.04);
+    transform: translateY(-2px);
+  }
+
+  .btn-secondary:not(.aurora-cta-btn):not(.email-cta-btn):hover::before,
+  a:not(.aurora-cta-btn):not(.email-cta-btn)[class*="rounded-full"][class*="bg-zinc-950"]:hover::before,
+  button:not(.aurora-cta-btn):not(.email-cta-btn)[class*="rounded-full"][class*="bg-zinc-950"]:hover::before {
+    opacity: 1;
+    --orbit-angle: 190deg;
+  }
+}
+
+.btn-secondary:not(.aurora-cta-btn):not(.email-cta-btn):focus-visible,
+a:not(.aurora-cta-btn):not(.email-cta-btn)[class*="rounded-full"][class*="bg-zinc-950"]:focus-visible,
+button:not(.aurora-cta-btn):not(.email-cta-btn)[class*="rounded-full"][class*="bg-zinc-950"]:focus-visible {
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4), 0 0 25px rgba(224, 98, 181, 0.28), 0 0 40px rgba(109, 231, 228, 0.18);
+  background-color: rgba(20, 24, 30, 0.85);
+  border-color: rgba(255, 255, 255, 0.04);
+}
+
+.btn-secondary:not(.aurora-cta-btn):not(.email-cta-btn):focus-visible::before,
+a:not(.aurora-cta-btn):not(.email-cta-btn)[class*="rounded-full"][class*="bg-zinc-950"]:focus-visible::before,
+button:not(.aurora-cta-btn):not(.email-cta-btn)[class*="rounded-full"][class*="bg-zinc-950"]:focus-visible::before {
+  opacity: 1;
+  --orbit-angle: 190deg;
+}
+
+/* Reduced Motion Override for Automatic Selectors */
+@media (prefers-reduced-motion: reduce) {
+  .btn-primary:not(.aurora-cta-btn):not(.email-cta-btn)::before,
+  a:not(.aurora-cta-btn):not(.email-cta-btn)[class*="rounded-full"][class*="bg-white/10"]::before,
+  button:not(.aurora-cta-btn):not(.email-cta-btn)[class*="rounded-full"][class*="bg-white/10"]::before {
+    transform: none !important;
+    transition: opacity 200ms ease !important;
+    background: linear-gradient(90deg, rgba(109, 231, 228, 0.85) 0%, rgba(224, 98, 181, 0.85) 100%) !important;
+  }
+
+  .btn-secondary:not(.aurora-cta-btn):not(.email-cta-btn)::before,
+  a:not(.aurora-cta-btn):not(.email-cta-btn)[class*="rounded-full"][class*="bg-zinc-950"]::before,
+  button:not(.aurora-cta-btn):not(.email-cta-btn)[class*="rounded-full"][class*="bg-zinc-950"]::before {
+    transform: none !important;
+    transition: opacity 200ms ease !important;
+    background: linear-gradient(90deg, rgba(224, 98, 181, 0.70) 0%, rgba(109, 231, 228, 0.50) 100%) !important;
+  }
+}
+
+

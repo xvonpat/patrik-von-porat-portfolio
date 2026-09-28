@@ -28,7 +28,7 @@ export default function Contact() {
         </h1>
         <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-accent-purple to-transparent mt-1 mb-1" />
         <p className="text-base md:text-[17px] lg:text-lg leading-relaxed md:leading-8 text-zinc-300 font-light max-w-2xl text-balance text-pretty">
-          If the work here connects with you—through music, visual practice, digital systems or process—email is the best place to start. You can also follow the projects and ongoing work through the channels below.
+          If the work here connects with you—through music, visual practice, digital systems or process—email is the best place to start. You can also follow what I’m working on through the channels below.
         </p>
       </div>
 

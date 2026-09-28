@@ -148,8 +148,12 @@ Cards should have a clear job (routing to a discipline, presenting a project, sh
 
 ## Buttons, links, and actions
 
-- **Primary actions**: Purple-accented emphasis or smoked-glass pills for the main page action.
-- **Secondary actions**: Lower emphasis through outline or subtle text treatment.
+- **CTA Buttons (Aurora Orbit Interaction)**:
+  - **Component**: Standardize on `<CtaButton>` (`import CtaButton from '@/components/CtaButton'`). Supports Next.js internal routing (`<Link>`), external links (`<a>`), and action triggers (`<button>`).
+  - **Primary Variant (`variant="primary"` / `.btn-primary`)**: Cyan-led rotating conic beam along the 1px masked border, 50% atmospheric bloom (`#6de7e4` and `#e062b5`), and subtle arrow translate on hover.
+  - **Secondary Variant (`variant="secondary"` / `.btn-secondary`)**: Orchid-led rotating conic beam along the 1px masked border, 32% restrained bloom, and muted obsidian surface (`rgba(14, 16, 20, 0.75)`).
+  - **Universal Fallback**: Automatic CSS pattern matching in `globals.css` ensures that any future CTA added with raw Tailwind classes (`bg-white/10` or `bg-zinc-950/60` with `rounded-full`) automatically inherits the 1px border sweep and bloom without requiring manual nested markup.
+  - **Reduced Motion**: Full `prefers-reduced-motion: reduce` compliance with static gradient color transitions and zero translation or rotation.
 - **Touch targets**: Maintain comfortable touch targets (minimum 44–48px per accessibility standards).
 - **Labels**: Use clear, destination-specific labels. Avoid repeated generic “Learn more.”
 

@@ -171,6 +171,11 @@ The visual identity is **Obsidian Noir**:
 - Subtle borders, smoked glass panels, and material depth
 - Restrained motion respecting `prefers-reduced-motion`
 
+### Call-to-action (CTA) buttons
+- All rectangular CTA buttons must use the **Aurora Orbit** interaction.
+- Standard component: `<CtaButton>` (`@/components/CtaButton`) with `variant="primary"` (default) or `variant="secondary"`.
+- Canonical classes: `.btn-primary` and `.btn-secondary`. Automatic CSS rules in `src/app/globals.css` also cover raw button/link elements using standard Tailwind classes (`bg-white/10` and `bg-zinc-950/60` with `rounded-full`), preventing future additions from missing the styling.
+
 ### Avoid
 
 - Generic corporate portfolio or SaaS styling
