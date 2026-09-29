@@ -54,35 +54,35 @@ export default async function Home() {
     }
   ];
 
-  // 2. The Four-Stage Process
+  // 2. The Four-Stage Process (Concrete examples from showcased work)
   const processSteps = [
     {
       number: '01',
       name: 'OBSERVE',
-      desc: 'Find the pattern, tension or possibility.',
+      desc: 'Catching raw guitar riffs, studying pencil proportions, or spotting friction in daily studio habits.',
       accent: 'purple'
     },
     {
       number: '02',
       name: 'STRUCTURE',
-      desc: 'Give the idea constraints, hierarchy and direction.',
+      desc: 'Arranging tempos for Realmforged, mapping graphite values, or designing local data models for Workbench.',
       accent: 'purple'
     },
     {
       number: '03',
       name: 'CREATE',
-      desc: 'Turn the concept into sound, image or system.',
+      desc: 'Tracking layered guitars, rendering physical ink studies, or building client-side tools without cloud bloat.',
       accent: 'cyan'
     },
     {
       number: '04',
       name: 'REFINE',
-      desc: 'Remove noise and strengthen what remains.',
+      desc: 'Trimming arrangement clutter, balancing drawing contrast, and writing automated tests that verify durability.',
       accent: 'cyan'
     }
   ];
 
-  // 3. Three Curated Selected Work Entries
+  // 3. Curated Selected Work Entries (Music, Physical Visual Art, Digital Tools)
   const selectedWork = [
     {
       title: 'Realmforged',
@@ -98,7 +98,7 @@ export default async function Home() {
       title: 'Ashwrithe',
       category: 'MUSIC · ATMOSPHERE · VISUAL IDENTITY',
       description: 'An evolving dark extreme metal project built through sound, restraint, ritual atmosphere and a deliberately controlled visual identity.',
-      image: '/images/music/qa-ashwrithe.webp',
+      image: '/images/projects/proof/proof-ashwrithe-showcase.webp',
       imageAlt: 'Ashwrithe dark extreme metal visual identity showcase',
       link: '/music',
       ctaText: 'Explore Ashwrithe',
@@ -113,6 +113,16 @@ export default async function Home() {
       link: '/art',
       ctaText: 'Explore Visual Practice',
       accent: 'purple'
+    },
+    {
+      title: 'Workbench',
+      category: 'WEB · PERSONAL TOOLS',
+      description: 'A local-first project journal built to track multidisciplinary creative work, keep a single next action, and record experiments, decisions, and progress offline.',
+      image: '/images/projects/workbench-showcase.webp',
+      imageAlt: 'Workbench local-first project journal architecture and progress overview',
+      link: '/projects/workbench',
+      ctaText: 'Explore Workbench',
+      accent: 'cyan'
     }
   ];
 
@@ -143,7 +153,7 @@ export default async function Home() {
         
         {/* Body Copy */}
         <p className="text-lg md:text-xl leading-relaxed md:leading-9 text-zinc-300 font-light max-w-3xl mt-1 text-balance text-pretty">
-          I turn unformed ideas into music, images and digital systems—using observation, structure, craft and refinement to make each part belong to a coherent whole.
+          I’m Patrik von Porat. I make heavy music, draw by hand, and build digital tools for creative work. This is where I share the projects—and the thinking that shapes them.
         </p>
 
         {/* Identity Line */}
@@ -154,7 +164,7 @@ export default async function Home() {
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row gap-3.5 mt-4 w-full sm:w-auto">
           <CtaButton 
-            href="/projects" 
+            href="#selected-work" 
             className="px-8 py-3.5 text-xs md:text-sm"
           >
             Explore Selected Work
@@ -171,18 +181,94 @@ export default async function Home() {
         <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-accent-purple/80 to-transparent mt-6" />
       </section>
 
-      {/* 2. EXPRESSIONS SECTION */}
+      {/* 2. SELECTED WORK SECTION (Presented early for first-time visitors) */}
+      <section id="selected-work" className="flex flex-col gap-8 max-w-6xl mx-auto w-full scroll-mt-24">
+        <div className="flex flex-col items-center text-center gap-2.5 max-w-3xl mx-auto">
+          <span className="text-xs font-mono tracking-[0.3em] text-accent-purple uppercase font-semibold">
+            SELECTED WORK
+          </span>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-white font-gothic text-balance">
+            Concrete projects across sound, image and code.
+          </h2>
+          <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-accent-purple to-transparent mt-1" />
+          <p className="text-base md:text-lg text-zinc-300 font-light max-w-2xl leading-relaxed md:leading-8 mt-1 text-balance text-pretty">
+            Active music releases, physical craft, and personal tools currently in development.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-7">
+          {selectedWork.map((card, idx) => {
+            const isPurple = card.accent === 'purple';
+            const accentClass = isPurple ? 'text-accent-purple' : 'text-accent-cyan';
+
+            return (
+              <GlassCard key={idx} accent={card.accent} className="p-5 md:p-6 flex flex-col justify-between h-full group">
+                <div className="flex flex-col gap-4">
+                  {/* Visual Showcase Banner */}
+                  <div className="w-full aspect-[16/10] rounded-xl overflow-hidden border border-white/[0.08] bg-obsidian-950/80 relative shadow-md group-hover:border-white/20 transition-all duration-500">
+                    <Image 
+                      src={card.image} 
+                      alt={card.imageAlt} 
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+                      className="w-full h-full object-cover object-center grayscale group-hover:grayscale-0 transition-all duration-700 ease-out scale-100 group-hover:scale-[1.03]"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-obsidian-950/70 via-transparent to-transparent opacity-60 pointer-events-none" />
+                  </div>
+
+                  {/* Category & Title */}
+                  <div className="flex flex-col gap-1.5 pb-2.5 border-b border-white/5">
+                    <span className={`text-[10px] md:text-[11px] font-mono uppercase tracking-wider font-semibold ${accentClass}`}>
+                      {card.category}
+                    </span>
+                    <h3 className="text-2xl md:text-3xl font-semibold tracking-tight text-white font-gothic">
+                      {card.title}
+                    </h3>
+                  </div>
+
+                  {/* Description */}
+                  <p className="text-sm md:text-[15px] text-zinc-300 font-light leading-relaxed text-pretty">
+                    {card.description}
+                  </p>
+                </div>
+
+                <div className="mt-6 pt-3.5 border-t border-white/5 flex justify-end">
+                  <Link 
+                    href={card.link}
+                    className={`text-xs font-mono uppercase tracking-widest ${accentClass} group-hover:text-white transition-colors flex items-center gap-1 font-semibold`}
+                  >
+                    {card.ctaText} &rarr;
+                  </Link>
+                </div>
+              </GlassCard>
+            );
+          })}
+        </div>
+
+        {/* Understated link beneath section */}
+        <div className="flex justify-center pt-2">
+          <Link 
+            href="/projects" 
+            className="inline-flex items-center gap-2 text-xs md:text-sm font-mono tracking-widest uppercase text-zinc-400 hover:text-white transition-colors group font-medium"
+          >
+            <span>View all projects</span>
+            <span className="transform group-hover:translate-x-1 transition-transform inline-block">&rarr;</span>
+          </Link>
+        </div>
+      </section>
+
+      {/* 3. EXPRESSIONS SECTION */}
       <section className="flex flex-col gap-8 max-w-6xl mx-auto w-full">
         <div className="flex flex-col items-center text-center gap-2.5 max-w-3xl mx-auto">
           <span className="text-xs font-mono tracking-[0.3em] text-accent-purple uppercase font-semibold">
             ONE IDENTITY &middot; MANY EXPRESSIONS
           </span>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-white font-gothic text-balance">
-            Different materials. One underlying approach.
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-white font-gothic text-balance">
+            Explore by discipline.
           </h2>
           <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-accent-purple to-transparent mt-1" />
           <p className="text-base md:text-lg text-zinc-300 font-light max-w-2xl leading-relaxed md:leading-8 mt-1 text-balance text-pretty">
-            My work moves between sound, image and systems. Each begins with something unformed that needs observation, structure and direction.
+            Three distinct creative areas connected by the same commitment to craft, structure, and continuous improvement.
           </p>
         </div>
 
@@ -223,18 +309,18 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* 3. PROCESS SECTION */}
+      {/* 4. PROCESS SECTION (Grounded with specific examples from work) */}
       <section className="flex flex-col gap-8 max-w-6xl mx-auto w-full">
         <div className="flex flex-col items-center text-center gap-2.5 max-w-3xl mx-auto">
           <span className="text-xs font-mono tracking-[0.3em] text-accent-purple uppercase font-semibold">
             HOW I WORK
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-white font-gothic text-balance">
-            From ambiguity to intention.
+            From raw instinct to deliberate execution.
           </h2>
           <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-accent-purple to-transparent mt-1" />
           <p className="text-base md:text-lg text-zinc-300 font-light max-w-2xl leading-relaxed md:leading-8 mt-1 text-balance text-pretty">
-            Whether I am building a song, an image, a website or a workflow, the underlying process remains much the same.
+            The medium dictates the tools, but the underlying discipline connects every project.
           </p>
         </div>
 
@@ -264,71 +350,14 @@ export default async function Home() {
             );
           })}
         </div>
-      </section>
 
-      {/* 4. SELECTED WORK SECTION */}
-      <section id="selected-work" className="flex flex-col gap-8 max-w-6xl mx-auto w-full scroll-mt-24">
-        <div className="flex flex-col items-center text-center gap-2.5 max-w-3xl mx-auto">
-          <span className="text-xs font-mono tracking-[0.3em] text-accent-purple uppercase font-semibold">
-            SELECTED WORK
-          </span>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-white font-gothic text-balance">
-            Ideas developed into coherent worlds and systems.
-          </h2>
-          <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-accent-purple to-transparent mt-1" />
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-7">
-          {selectedWork.map((card, idx) => (
-            <GlassCard key={idx} accent={card.accent} className="p-5 md:p-6 flex flex-col justify-between h-full group">
-              <div className="flex flex-col gap-4">
-                {/* Visual Showcase Banner */}
-                <div className="w-full aspect-[16/10] rounded-xl overflow-hidden border border-white/[0.08] bg-obsidian-950/80 relative shadow-md group-hover:border-white/20 transition-all duration-500">
-                  <Image 
-                    src={card.image} 
-                    alt={card.imageAlt} 
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
-                    className="w-full h-full object-cover object-center grayscale group-hover:grayscale-0 transition-all duration-700 ease-out scale-100 group-hover:scale-[1.03]"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-obsidian-950/70 via-transparent to-transparent opacity-60 pointer-events-none" />
-                </div>
-
-                {/* Category & Title */}
-                <div className="flex flex-col gap-1.5 pb-2.5 border-b border-white/5">
-                  <span className="text-[10px] md:text-[11px] font-mono uppercase tracking-wider text-accent-purple font-semibold">
-                    {card.category}
-                  </span>
-                  <h3 className="text-2xl md:text-3xl font-semibold tracking-tight text-white font-gothic">
-                    {card.title}
-                  </h3>
-                </div>
-
-                {/* Description */}
-                <p className="text-sm md:text-[15px] text-zinc-300 font-light leading-relaxed text-pretty">
-                  {card.description}
-                </p>
-              </div>
-
-              <div className="mt-6 pt-3.5 border-t border-white/5 flex justify-end">
-                <Link 
-                  href={card.link}
-                  className="text-xs font-mono uppercase tracking-widest text-accent-purple group-hover:text-white transition-colors flex items-center gap-1 font-semibold"
-                >
-                  {card.ctaText} &rarr;
-                </Link>
-              </div>
-            </GlassCard>
-          ))}
-        </div>
-
-        {/* Understated link beneath section */}
-        <div className="flex justify-center pt-2">
+        {/* Understated link to full process on About */}
+        <div className="flex justify-center pt-1">
           <Link 
-            href="/projects" 
+            href="/about" 
             className="inline-flex items-center gap-2 text-xs md:text-sm font-mono tracking-widest uppercase text-zinc-400 hover:text-white transition-colors group font-medium"
           >
-            <span>View all projects</span>
+            <span>Read the full process on About</span>
             <span className="transform group-hover:translate-x-1 transition-transform inline-block">&rarr;</span>
           </Link>
         </div>

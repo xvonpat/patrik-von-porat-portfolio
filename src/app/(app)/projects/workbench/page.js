@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import GlassCard from '@/components/GlassCard';
 import CtaButton from '@/components/CtaButton';
 
@@ -161,6 +162,35 @@ export default function WorkbenchPage() {
             </span>
           </div>
         ))}
+      </section>
+
+      {/* Visual Showcase Banner */}
+      <section className="flex flex-col gap-3">
+        <div className="w-full aspect-[16/9] rounded-2xl overflow-hidden border border-white/[0.08] bg-obsidian-950/80 relative shadow-[0_12px_40px_rgba(0,0,0,0.5)]">
+          <Image 
+            src="/images/projects/workbench-showcase.webp" 
+            alt="Workbench local-first project journal architecture and progress overview" 
+            fill
+            priority
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1200px"
+            className="w-full h-full object-cover object-center"
+          />
+        </div>
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 p-4 rounded-xl bg-obsidian-950/60 border border-white/5">
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-accent-cyan" />
+            <span className="text-xs font-mono text-zinc-300">
+              Companion Article: <strong className="text-white font-normal">&ldquo;What Is Workbench?&rdquo;</strong>
+            </span>
+          </div>
+          <Link 
+            href="/blog/what-is-workbench" 
+            className="text-xs font-mono uppercase tracking-wider text-accent-cyan hover:text-white transition-colors flex items-center gap-1 font-semibold"
+          >
+            <span>Read in the Journal</span>
+            <span>&rarr;</span>
+          </Link>
+        </div>
       </section>
 
       {/* 3. Project Purpose & Philosophy */}
@@ -440,13 +470,21 @@ export default function WorkbenchPage() {
           <span>&larr;</span>
           <span>Back to All Projects</span>
         </Link>
-        <CtaButton 
-          href="/about" 
-          className="px-6 py-2.5 text-xs md:text-sm"
-        >
-          <span>How I Work</span>
-          <span className="aurora-cta-arrow inline-block" aria-hidden="true">&rarr;</span>
-        </CtaButton>
+        <div className="flex items-center gap-4">
+          <Link
+            href="/blog/what-is-workbench"
+            className="text-xs md:text-sm font-mono uppercase tracking-widest text-accent-cyan hover:text-white transition-colors"
+          >
+            Read Journal Note &rarr;
+          </Link>
+          <CtaButton 
+            href="/about" 
+            className="px-6 py-2.5 text-xs md:text-sm"
+          >
+            <span>How I Work</span>
+            <span className="aurora-cta-arrow inline-block" aria-hidden="true">&rarr;</span>
+          </CtaButton>
+        </div>
       </section>
 
     </div>

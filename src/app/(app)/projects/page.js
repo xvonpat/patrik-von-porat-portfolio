@@ -90,6 +90,35 @@ export default function Projects() {
       isExternal: false
     },
     {
+      id: 'workbench',
+      title: 'Workbench',
+      category: 'WEB · PERSONAL TOOLS',
+      status: 'ONGOING · V1.0 COMPLETE',
+      statusType: 'ongoing',
+      intro: 'A locally stored project journal built to track active creative work across disciplines, maintain a single clear next action, and record experiments, decisions, and progress over time.',
+      role: 'Product design · Architecture · Development · Automated testing',
+      scopeLabel: 'Stack',
+      scopeItems: [
+        'React',
+        'TypeScript',
+        'Vite',
+        'Vitest',
+        'Playwright',
+        'LocalStorage'
+      ],
+      evidence: 'v1.0 is complete and in daily personal studio use. Runs 100% in the browser with offline localStorage persistence, corrupted data safeguards, and unit and browser test suites.',
+      cta: 'View Case Study',
+      link: '/projects/workbench',
+      articleLink: '/blog/what-is-workbench',
+      articleTitle: 'What Is Workbench?',
+      image: '/images/projects/workbench-showcase.webp',
+      imageAlt: 'Workbench local-first project journal architecture and progress overview',
+      fallbackBadge: 'Local-First Web Tool',
+      fallbackDesc: 'Browser-based project journal with zero cloud dependencies, offline localStorage persistence, and test coverage.',
+      accent: 'cyan',
+      isExternal: false
+    },
+    {
       id: 'vonporat',
       title: 'vonporat.com',
       category: 'CREATIVE HUB · EDITORIAL SYSTEM · WEB',
@@ -108,7 +137,7 @@ export default function Projects() {
       evidence: 'A live publishing platform connecting project work, visual galleries, journal entries and structured content.',
       cta: 'View Project',
       link: 'https://vonporat.com',
-      image: '/images/projects/proof/proof-vonporat-showcase.webp',
+      image: '/images/projects/proof/proof-vonporat-showcase-v2.webp',
       imageAlt: 'vonporat.com personal creative hub platform interface preview',
       accent: 'cyan',
       isExternal: true
@@ -159,10 +188,10 @@ export default function Projects() {
         </h1>
         <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-accent-purple to-transparent mt-1 mb-1" />
         <p className="text-base md:text-lg text-zinc-300 leading-relaxed md:leading-8 font-light max-w-2xl text-balance text-pretty">
-          A selection of music projects, visual practices and digital systems shaped through the same underlying process: observe, structure, create and refine.
+          Active music releases, visual craft, and custom tools. Each project connects sound, image, story, or software into something deliberate, functional, and finished.
         </p>
         <p className="text-sm md:text-[15px] text-zinc-400 leading-relaxed font-light max-w-xl text-balance text-pretty">
-          Each project brings sound, image, story or systems together into something coherent and deliberately built.
+          Built across multidisciplinary craft—from heavy guitar arrangements and hand drawing to local-first client-side systems.
         </p>
       </section>
 
@@ -307,7 +336,7 @@ export default function Projects() {
           </span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-7">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-7">
           {supportingProjects.map((proj) => {
             const statusBadge = getStatusBadge(proj.status, proj.statusType);
             const isPurple = proj.accent === 'purple';
@@ -347,7 +376,7 @@ export default function Projects() {
                         src={proj.image} 
                         alt={proj.imageAlt} 
                         fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 420px"
                         className="w-full h-full object-cover object-center grayscale group-hover:grayscale-0 transition-all duration-700 ease-out scale-100 group-hover:scale-[1.02]"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-obsidian-950/70 via-transparent to-transparent opacity-60 pointer-events-none" />
@@ -396,13 +425,26 @@ export default function Projects() {
                   </div>
 
                   {/* Evidence Box */}
-                  <div className="bg-obsidian-950/70 rounded-lg p-3 border border-white/5 mt-auto">
-                    <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-400 block mb-0.5 font-semibold">
-                      Evidence
-                    </span>
-                    <p className="text-xs text-zinc-300 font-light leading-relaxed text-pretty">
-                      {proj.evidence}
-                    </p>
+                  <div className="bg-obsidian-950/70 rounded-lg p-3 border border-white/5 mt-auto flex flex-col gap-2">
+                    <div>
+                      <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-400 block mb-0.5 font-semibold">
+                        Evidence
+                      </span>
+                      <p className="text-xs text-zinc-300 font-light leading-relaxed text-pretty">
+                        {proj.evidence}
+                      </p>
+                    </div>
+                    {proj.articleLink && (
+                      <div className="pt-2 border-t border-white/5 flex items-center gap-1.5">
+                        <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider">Note:</span>
+                        <Link 
+                          href={proj.articleLink}
+                          className="text-accent-cyan hover:text-white transition-colors underline underline-offset-2 font-mono text-[11px]"
+                        >
+                          {proj.articleTitle || 'Read Journal Note'} &rarr;
+                        </Link>
+                      </div>
+                    )}
                   </div>
 
                 </div>
@@ -443,10 +485,10 @@ export default function Projects() {
           BEHIND THE WORK
         </span>
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-white font-gothic text-balance">
-          Different outcomes. The same underlying process.
+          From initial spark to disciplined execution.
         </h2>
         <p className="text-base md:text-lg text-zinc-300 font-light leading-relaxed text-balance text-pretty">
-          Music, images and systems may require different tools, but each begins with observation and becomes clearer through structure, creation and refinement.
+          Whether tracking guitars for Realmforged, studying graphite values on paper, or engineering offline-first architecture for Workbench, each medium shares the same standard of focus and refinement.
         </p>
         <div className="flex flex-col sm:flex-row gap-3.5 mt-2 w-full sm:w-auto">
           <CtaButton 
