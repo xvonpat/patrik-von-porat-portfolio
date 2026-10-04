@@ -4,6 +4,7 @@ import configPromise from '../../../payload.config.ts';
 import React from 'react';
 
 import '@payloadcms/next/css';
+import './admin.css';
 
 const serverFunction = async function (args) {
   'use server';

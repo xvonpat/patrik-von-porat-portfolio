@@ -1,0 +1,11 @@
+/* Custom styles for Payload CMS Admin */
+
+/* Prevent alarming red "not-allowed" cursor when a document is fully saved */
+#action-save:disabled,
+button#action-save[disabled],
+.btn--disabled#action-save,
+.btn--disabled[id="action-save"],
+#action-save-draft:disabled,
+button#action-save-draft[disabled] {
+  cursor: default !important;
+}
