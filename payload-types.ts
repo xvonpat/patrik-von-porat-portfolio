@@ -69,6 +69,7 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    categories: Category;
     posts: Post;
     'admin-links': AdminLink;
     'payload-kv': PayloadKv;
@@ -80,6 +81,7 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    categories: CategoriesSelect<false> | CategoriesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
     'admin-links': AdminLinksSelect<false> | AdminLinksSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
@@ -167,6 +169,31 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categories".
+ */
+export interface Category {
+  id: number;
+  /**
+   * Display name for this category (e.g., Music, Visual Art, Making).
+   */
+  name: string;
+  /**
+   * URL-friendly identifier (e.g., music, visual-art). Auto-generated from name if left empty.
+   */
+  slug: string;
+  /**
+   * Short editorial description for this topic area (optional).
+   */
+  description?: string | null;
+  /**
+   * Visual accent color in the journal filters and post badges.
+   */
+  accent?: ('purple' | 'cyan') | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "posts".
  */
 export interface Post {
@@ -176,7 +203,10 @@ export interface Post {
    * Slug is generated from the title if left empty.
    */
   slug?: string | null;
-  category?: ('music' | 'visual-art' | 'making' | 'technology' | 'process' | 'personal') | null;
+  /**
+   * Assign a category or create/edit one.
+   */
+  category?: (number | null) | Category;
   /**
    * Published Date is set automatically when publishing if left empty.
    */
@@ -319,6 +349,10 @@ export interface PayloadLockedDocument {
         value: number | Media;
       } | null)
     | ({
+        relationTo: 'categories';
+        value: number | Category;
+      } | null)
+    | ({
         relationTo: 'posts';
         value: number | Post;
       } | null)
@@ -407,6 +441,18 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categories_select".
+ */
+export interface CategoriesSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  description?: T;
+  accent?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

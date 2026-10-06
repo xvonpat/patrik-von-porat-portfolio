@@ -7,6 +7,7 @@ import * as migration_20260527_205655 from './20260527_205655';
 import * as migration_20260601_210827_add_seo_fields_to_posts from './20260601_210827_add_seo_fields_to_posts';
 import * as migration_20260601_212030_add_admin_links_collection from './20260601_212030_add_admin_links_collection';
 import * as migration_20260616_204349_enable_rls_on_all_tables from './20260616_204349_enable_rls_on_all_tables';
+import * as migration_20261006_220000_add_categories_collection from './20261006_220000_add_categories_collection';
 
 export const migrations = [
   {
@@ -52,6 +53,11 @@ export const migrations = [
   {
     up: migration_20260616_204349_enable_rls_on_all_tables.up,
     down: migration_20260616_204349_enable_rls_on_all_tables.down,
-    name: '20260616_204349_enable_rls_on_all_tables'
+    name: '20260616_204349_enable_rls_on_all_tables',
+  },
+  {
+    up: migration_20261006_220000_add_categories_collection.up,
+    down: migration_20261006_220000_add_categories_collection.down,
+    name: '20261006_220000_add_categories_collection',
   },
 ];

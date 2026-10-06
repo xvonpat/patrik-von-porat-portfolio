@@ -430,7 +430,9 @@ export default async function Home() {
 
                   <div className="flex flex-col gap-3">
                     <div className="flex items-center justify-between text-[10px] font-mono text-zinc-400 uppercase tracking-widest">
-                      <span className="text-accent-purple font-semibold">{post.category || 'Chronicle'}</span>
+                      <span className={`font-semibold ${(typeof post.category === 'object' && post.category?.accent === 'cyan') ? 'text-accent-cyan' : 'text-accent-purple'}`}>
+                        {typeof post.category === 'object' && post.category !== null ? (post.category.name || post.category.slug || 'Chronicle') : (post.category || 'Chronicle')}
+                      </span>
                       <span>{formattedDate}</span>
                     </div>
                     <h3 className="blog-card-title text-xl md:text-2xl font-semibold font-gothic line-clamp-2">

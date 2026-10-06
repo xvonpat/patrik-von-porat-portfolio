@@ -5,6 +5,7 @@ import path from 'path';
 import { buildConfig } from 'payload';
 import { fileURLToPath } from 'url';
 import { s3Storage } from '@payloadcms/storage-s3';
+import { Categories } from './src/collections/Categories';
 import { Posts } from './src/collections/Posts';
 import { AdminLinks } from './src/collections/AdminLinks';
 
@@ -85,6 +86,7 @@ export default buildConfig({
         },
       ],
     },
+    Categories,
     Posts,
     AdminLinks,
   ],

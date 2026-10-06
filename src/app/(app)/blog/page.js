@@ -21,16 +21,23 @@ export const metadata = {
 export default async function BlogPage() {
   const payload = await getPayload({ config: configPromise });
 
-  const posts = await payload.find({
-    collection: 'posts',
-    where: {
-      status: {
-        equals: 'published',
+  const [posts, categories] = await Promise.all([
+    payload.find({
+      collection: 'posts',
+      where: {
+        status: {
+          equals: 'published',
+        },
       },
-    },
-    sort: '-publishedDate',
-    limit: 100,
-  });
+      sort: '-publishedDate',
+      limit: 100,
+    }),
+    payload.find({
+      collection: 'categories',
+      limit: 100,
+      sort: 'createdAt',
+    }).catch(() => ({ docs: [] })),
+  ]);
 
   return (
     <div className="max-w-5xl xl:max-w-6xl 2xl:max-w-[1240px] mx-auto px-6 lg:px-8 py-8 md:py-14 flex flex-col gap-10 md:gap-14 relative z-10">
@@ -54,7 +61,7 @@ export default async function BlogPage() {
       </section>
 
       {/* 2. Blog Client: Interactive Filtering, Latest Note & Archive */}
-      <BlogClient posts={posts.docs} />
+      <BlogClient posts={posts.docs} categories={categories.docs} />
     </div>
   );
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
+import { draftMode } from 'next/headers';
 import { getPayload } from 'payload';
 import configPromise from '../../../../../payload.config.ts';
 import GlassCard from '@/components/GlassCard';
@@ -175,22 +176,26 @@ export async function generateMetadata({ params }) {
   const { slug } = await params;
   const payload = await getPayload({ config: configPromise });
 
+  let isDraftMode = false;
+  try {
+    const draft = await draftMode();
+    isDraftMode = draft.isEnabled;
+  } catch {
+    // Draft mode fallback
+  }
+
+  const whereCondition = isDraftMode
+    ? { slug: { equals: slug } }
+    : {
+        and: [
+          { slug: { equals: slug } },
+          { status: { equals: 'published' } },
+        ],
+      };
+
   const response = await payload.find({
     collection: 'posts',
-    where: {
-      and: [
-        {
-          slug: {
-            equals: slug,
-          },
-        },
-        {
-          status: {
-            equals: 'published',
-          },
-        },
-      ],
-    },
+    where: whereCondition,
   });
 
   const post = response.docs[0];
@@ -202,7 +207,8 @@ export async function generateMetadata({ params }) {
   }
 
   // Safe SEO fallback mappings
-  const seoTitle = post.seo?.seoTitle || post.title;
+  const rawSeoTitle = post.seo?.seoTitle || post.title;
+  const seoTitle = isDraftMode && post.status === 'draft' ? `[Preview] ${rawSeoTitle}` : rawSeoTitle;
   const seoDescription = post.seo?.metaDescription || post.excerpt || 'Read the latest chronicle by Patrik von Porat.';
   
   // Custom canonical URL or dynamic fallback URL
@@ -249,24 +255,27 @@ export default async function BlogPostPage({ params }) {
   
   const payload = await getPayload({ config: configPromise });
 
+  let isDraftMode = false;
+  try {
+    const draft = await draftMode();
+    isDraftMode = draft.isEnabled;
+  } catch {
+    // Draft mode fallback
+  }
+
+  const whereCondition = isDraftMode
+    ? { slug: { equals: slug } }
+    : {
+        and: [
+          { slug: { equals: slug } },
+          { status: { equals: 'published' } },
+        ],
+      };
+
   const response = await payload.find({
     collection: 'posts',
-    where: {
-      and: [
-        {
-          slug: {
-            equals: slug,
-          },
-        },
-        {
-          status: {
-            equals: 'published',
-          },
-        },
-      ],
-    },
+    where: whereCondition,
   });
-
 
   const post = response.docs[0];
 
@@ -333,12 +342,23 @@ export default async function BlogPostPage({ params }) {
     'behind-the-scenes': { label: 'Personal', accent: 'purple', textClass: 'text-accent-purple', bgClass: 'bg-accent-purple/10 border-accent-purple/20' },
   };
 
-  const catInfo = categoryMap[post.category] || { 
-    label: post.category || 'General', 
-    accent: 'purple', 
-    textClass: 'text-accent-purple', 
-    bgClass: 'bg-accent-purple/10 border-accent-purple/20' 
-  };
+  let catInfo;
+  if (typeof post.category === 'object' && post.category !== null) {
+    const isCyan = post.category.accent === 'cyan';
+    catInfo = {
+      label: post.category.name || post.category.slug || 'General',
+      accent: isCyan ? 'cyan' : 'purple',
+      textClass: isCyan ? 'text-accent-cyan' : 'text-accent-purple',
+      bgClass: isCyan ? 'bg-accent-cyan/10 border-accent-cyan/20' : 'bg-accent-purple/10 border-accent-purple/20'
+    };
+  } else {
+    catInfo = categoryMap[post.category] || { 
+      label: post.category || 'General', 
+      accent: 'purple', 
+      textClass: 'text-accent-purple', 
+      bgClass: 'bg-accent-purple/10 border-accent-purple/20' 
+    };
+  }
 
   const canonicalUrl = `https://vonporat.com/blog/${post.slug}`;
   const readingTime = getReadingTime(post.content);
@@ -355,6 +375,34 @@ export default async function BlogPostPage({ params }) {
 
   return (
     <>
+      {/* Preview Mode Banner */}
+      {isDraftMode && (
+        <div className="w-full bg-obsidian-950/95 border-b border-accent-purple/40 backdrop-blur-md px-4 sm:px-6 py-2.5 text-xs font-mono text-zinc-300 flex flex-wrap items-center justify-between gap-3 sticky top-0 z-50 shadow-2xl">
+          <div className="flex items-center gap-2.5">
+            <span className="w-2.5 h-2.5 rounded-full bg-accent-purple animate-pulse shadow-[0_0_10px_rgba(168,85,247,0.8)]" />
+            <span className="uppercase tracking-widest text-accent-purple font-semibold">PREVIEW MODE</span>
+            <span className="text-zinc-400">
+              · {post.status === 'draft' ? 'Draft Chronicle (Unpublished)' : 'Live Chronicle (Previewing)'}
+            </span>
+          </div>
+          <div className="flex items-center gap-3.5 text-xs font-sans">
+            <a 
+              href={`/admin/collections/posts/${post.id}`}
+              className="text-zinc-300 hover:text-white transition-colors flex items-center gap-1 font-medium"
+            >
+              <span>←</span> Return to Editor
+            </a>
+            <span className="text-zinc-600">|</span>
+            <a 
+              href={`/api/exit-preview?redirect=/blog/${encodeURIComponent(post.slug)}`}
+              className="text-accent-cyan hover:text-white underline underline-offset-4 transition-colors font-medium"
+            >
+              Exit Preview
+            </a>
+          </div>
+        </div>
+      )}
+
       <article className="max-w-3xl lg:max-w-4xl mx-auto px-6 py-8 md:py-12 relative z-10">
         
         {/* Navigation Breadcrumb */}

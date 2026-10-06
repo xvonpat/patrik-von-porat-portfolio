@@ -49,10 +49,19 @@ function getReadingTime(content) {
   return Math.ceil(wordCount / 200) || 1;
 }
 
-export default function BlogClient({ posts = [] }) {
+export default function BlogClient({ posts = [], categories = [] }) {
   const [activeFilter, setActiveFilter] = useState('All');
 
-  const filters = ['All', 'Music', 'Visual Art', 'Making', 'Technology', 'Process', 'Personal'];
+  const fallbackFilters = ['Music', 'Visual Art', 'Making', 'Technology', 'Process', 'Personal'];
+  const categoryList = categories && categories.length > 0
+    ? categories
+    : fallbackFilters.map(name => ({
+        name,
+        slug: name.toLowerCase().replace(/\s+/g, '-'),
+        accent: (name === 'Technology' || name === 'Process') ? 'cyan' : 'purple',
+      }));
+
+  const filters = ['All', ...categoryList.map(c => c.name)];
 
   const categoryMap = {
     'music': { label: 'Music', accent: 'purple', textClass: 'text-accent-purple', bgClass: 'bg-accent-purple/10 border-accent-purple/20' },
@@ -68,11 +77,44 @@ export default function BlogClient({ posts = [] }) {
     'behind-the-scenes': { label: 'Personal', accent: 'purple', textClass: 'text-accent-purple', bgClass: 'bg-accent-purple/10 border-accent-purple/20' },
   };
 
-  const getCategoryInfo = (category) => categoryMap[category] || { 
-    label: category || 'General', 
-    accent: 'purple', 
-    textClass: 'text-accent-purple', 
-    bgClass: 'bg-accent-purple/10 border-accent-purple/20' 
+  const getCategoryInfo = (category) => {
+    if (!category) {
+      return { 
+        label: 'Personal', 
+        accent: 'purple', 
+        textClass: 'text-accent-purple', 
+        bgClass: 'bg-accent-purple/10 border-accent-purple/20' 
+      };
+    }
+
+    if (typeof category === 'object') {
+      const label = category.name || category.slug || 'General';
+      const isCyan = category.accent === 'cyan';
+      return {
+        label,
+        accent: isCyan ? 'cyan' : 'purple',
+        textClass: isCyan ? 'text-accent-cyan' : 'text-accent-purple',
+        bgClass: isCyan ? 'bg-accent-cyan/10 border-accent-cyan/20' : 'bg-accent-purple/10 border-accent-purple/20',
+      };
+    }
+
+    const matched = categoryList.find(c => c.slug === category || c.name?.toLowerCase() === category.toLowerCase());
+    if (matched) {
+      const isCyan = matched.accent === 'cyan';
+      return {
+        label: matched.name,
+        accent: isCyan ? 'cyan' : 'purple',
+        textClass: isCyan ? 'text-accent-cyan' : 'text-accent-purple',
+        bgClass: isCyan ? 'bg-accent-cyan/10 border-accent-cyan/20' : 'bg-accent-purple/10 border-accent-purple/20',
+      };
+    }
+
+    return categoryMap[category] || { 
+      label: category || 'General', 
+      accent: 'purple', 
+      textClass: 'text-accent-purple', 
+      bgClass: 'bg-accent-purple/10 border-accent-purple/20' 
+    };
   };
 
   // Filter posts based on active category
@@ -102,7 +144,8 @@ export default function BlogClient({ posts = [] }) {
         >
           {filters.map((filter) => {
             const isActive = activeFilter === filter;
-            const isCyan = filter === 'Technology' || filter === 'Process';
+            const matchingCat = categoryList.find(c => c.name === filter);
+            const isCyan = matchingCat ? matchingCat.accent === 'cyan' : (filter === 'Technology' || filter === 'Process');
             const activeColorClass = isCyan
               ? 'text-accent-cyan border-accent-cyan/40 bg-accent-cyan/10 shadow-[0_0_15px_rgba(6,182,212,0.12)]'
               : 'text-accent-purple border-accent-purple/40 bg-accent-purple/10 shadow-[0_0_15px_rgba(139,92,246,0.12)]';

@@ -70,6 +70,12 @@ export const Posts: CollectionConfig = {
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'category', 'slug', 'publishedDate'],
+    preview: (doc: any, { token }: any) => {
+      const slug = doc?.slug;
+      if (!slug) return null;
+      const tokenParam = token ? `&token=${encodeURIComponent(token)}` : '';
+      return `/api/preview?slug=${encodeURIComponent(slug)}${tokenParam}`;
+    },
   },
   hooks: {
     beforeValidate: [
@@ -165,10 +171,7 @@ export const Posts: CollectionConfig = {
             }
           }
 
-          // 8. Category default fallback: If category is empty, default to personal
-          if (!data.category && !originalDoc?.category) {
-            data.category = 'personal';
-          }
+          // 8. Category validation handled by field validator upon publish
 
           // 9. Tags auto-suggestion: If tags array is empty, generate from content keywords
           const rawTags = data.tags || originalDoc?.tags;
@@ -187,7 +190,10 @@ export const Posts: CollectionConfig = {
           if (existingTags.length === 0) {
             const resolvedTitleText = (resolvedTitle || '').toLowerCase();
             const resolvedExcerptText = (resolvedExcerpt || '').toLowerCase();
-            const resolvedCategoryText = (data.category || originalDoc?.category || '').toLowerCase();
+            const rawCategory = data.category || originalDoc?.category;
+            const resolvedCategoryText = typeof rawCategory === 'string'
+              ? rawCategory.toLowerCase()
+              : (rawCategory && typeof rawCategory === 'object' && rawCategory.name ? String(rawCategory.name).toLowerCase() : '');
             const resolvedBodyText = resolvedContent ? getLexicalText(resolvedContent).toLowerCase() : '';
 
             const combinedText = `${resolvedTitleText} ${resolvedExcerptText} ${resolvedCategoryText} ${resolvedBodyText}`;
@@ -215,13 +221,15 @@ export const Posts: CollectionConfig = {
 
             // Fallback default tag based on category if still empty
             if (suggestedNames.length === 0) {
-              const category = data.category || originalDoc?.category;
-              if (category === 'music') suggestedNames.push('Music');
-              else if (category === 'art') suggestedNames.push('Vector Art');
-              else if (category === 'ai') suggestedNames.push('AI Art');
-              else if (category === 'process-improvement') suggestedNames.push('Lean Six Sigma');
-              else if (category === 'behind-the-scenes') suggestedNames.push('Behind the Scenes');
-              else if (category === 'website-build-log') suggestedNames.push('Creative Process');
+              const catKey = typeof rawCategory === 'string'
+                ? rawCategory
+                : (rawCategory && typeof rawCategory === 'object' ? rawCategory.slug : '');
+              if (catKey === 'music') suggestedNames.push('Music');
+              else if (catKey === 'art' || catKey === 'visual-art') suggestedNames.push('Vector Art');
+              else if (catKey === 'ai' || catKey === 'technology') suggestedNames.push('AI Art');
+              else if (catKey === 'process-improvement' || catKey === 'process') suggestedNames.push('Lean Six Sigma');
+              else if (catKey === 'behind-the-scenes' || catKey === 'personal') suggestedNames.push('Behind the Scenes');
+              else if (catKey === 'website-build-log') suggestedNames.push('Creative Process');
             }
 
             data.tags = suggestedNames.map((t) => ({ tag: t }));
@@ -254,24 +262,18 @@ export const Posts: CollectionConfig = {
     },
     {
       name: 'category',
-      type: 'select',
-      options: [
-        { label: 'Music', value: 'music' },
-        { label: 'Visual Art', value: 'visual-art' },
-        { label: 'Making', value: 'making' },
-        { label: 'Technology', value: 'technology' },
-        { label: 'Process', value: 'process' },
-        { label: 'Personal', value: 'personal' },
-      ],
+      type: 'relationship',
+      relationTo: 'categories',
       required: false,
       validate: (val: any, { data }: { data?: any }) => {
-        if (data?.status === 'published' && (!val || typeof val !== 'string' || val.trim() === '')) {
+        if (data?.status === 'published' && !val) {
           return 'A category is required when the post is published.';
         }
         return true;
       },
       admin: {
         position: 'sidebar',
+        description: 'Assign a category or create/edit one.',
       },
     },
     {
