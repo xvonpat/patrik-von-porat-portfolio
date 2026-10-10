@@ -15,21 +15,26 @@ export default function GalleryClient() {
 
   // Check URL query parameter on mount for direct photo deep-linking (e.g. ?photo=IMG_1556 or ?loupe=0)
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const params = new URLSearchParams(window.location.search);
-      const photoParam = params.get('photo') || params.get('loupe');
-      if (photoParam !== null) {
-        if (!isNaN(Number(photoParam))) {
-          const idx = parseInt(photoParam, 10);
-          if (idx >= 0 && idx < galleryPhotos.length) {
-            setActiveLoupeIndex(idx);
-          }
-        } else {
-          const foundIdx = galleryPhotos.findIndex(p => p.id === photoParam || p.filename === photoParam || p.filename === `${photoParam}.jpg`);
-          if (foundIdx !== -1) {
-            setActiveLoupeIndex(foundIdx);
-          }
+    if (typeof window === 'undefined') return;
+    const params = new URLSearchParams(window.location.search);
+    const photoParam = params.get('photo') || params.get('loupe');
+    if (photoParam !== null) {
+      let targetIdx = -1;
+      if (!isNaN(Number(photoParam))) {
+        const idx = parseInt(photoParam, 10);
+        if (idx >= 0 && idx < galleryPhotos.length) {
+          targetIdx = idx;
         }
+      } else {
+        const foundIdx = galleryPhotos.findIndex(p => p.id === photoParam || p.filename === photoParam || p.filename === `${photoParam}.jpg`);
+        if (foundIdx !== -1) {
+          targetIdx = foundIdx;
+        }
+      }
+      if (targetIdx !== -1) {
+        requestAnimationFrame(() => {
+          setActiveLoupeIndex(targetIdx);
+        });
       }
     }
   }, []);

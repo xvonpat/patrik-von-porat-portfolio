@@ -97,6 +97,14 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className="min-h-full flex flex-col bg-obsidian-950 font-sans text-zinc-200">
+        {/* Skip-to-content accessibility link */}
+        <a 
+          href="#main-content" 
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-obsidian-900 focus:text-bone focus:border focus:border-accent-purple/50 focus:rounded-md focus:shadow-lg focus:outline-none font-mono text-xs uppercase tracking-wider"
+        >
+          Skip to content
+        </a>
+
         {/* Background ambient animations */}
         <GlowEffect />
         
@@ -104,7 +112,7 @@ export default function RootLayout({ children }) {
         <Navbar />
         
         {/* Main interactive content */}
-        <main className="flex-grow relative">
+        <main id="main-content" className="flex-grow relative">
           {children}
         </main>
         

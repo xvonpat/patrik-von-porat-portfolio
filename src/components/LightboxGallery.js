@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 
 export default function LightboxGallery({
   isOpen,
@@ -11,12 +11,17 @@ export default function LightboxGallery({
 }) {
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [loadedIndex, setLoadedIndex] = useState(null);
 
-  // Reset loaded animation state on index change
-  useEffect(() => {
-    setIsLoaded(false);
-  }, [currentIndex]);
+  const isLoaded = loadedIndex === currentIndex;
+
+  const handleNext = useCallback(() => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+  }, [images.length, setCurrentIndex]);
+
+  const handlePrev = useCallback(() => {
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
+  }, [images.length, setCurrentIndex]);
 
   // Close on ESC, Navigate with Left/Right Arrow keys
   useEffect(() => {
@@ -36,19 +41,11 @@ export default function LightboxGallery({
       window.removeEventListener('keydown', handleKeyDown);
       document.body.style.overflow = 'unset';
     };
-  }, [isOpen, currentIndex, images]);
+  }, [isOpen, onClose, handleNext, handlePrev]);
 
   if (!isOpen || images.length === 0) return null;
 
   const activeImage = images[currentIndex];
-
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-  };
-
-  const handlePrev = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
-  };
 
   // Mobile touch swipe logic
   const minSwipeDistance = 50;
@@ -74,6 +71,9 @@ export default function LightboxGallery({
 
   return (
     <div 
+      role="dialog"
+      aria-modal="true"
+      aria-label="Image gallery preview"
       className="fixed inset-0 z-[100] flex flex-col justify-between bg-obsidian-950/95 backdrop-blur-xl animate-fade-in"
       onClick={onClose}
     >
@@ -136,10 +136,11 @@ export default function LightboxGallery({
           onClick={(e) => e.stopPropagation()}
         >
           {activeImage.src && !activeImage.src.includes('...') ? (
+            /* eslint-disable-next-line @next/next/no-img-element */
             <img 
               src={activeImage.src} 
               alt={activeImage.alt || activeImage.title}
-              onLoad={() => setIsLoaded(true)}
+              onLoad={() => setLoadedIndex(currentIndex)}
               className={`max-h-[68vh] md:max-h-[76vh] max-w-[90vw] md:max-w-[70vw] object-contain rounded-lg border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.8)] transition-all duration-500 transform ${
                 isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
               }`}

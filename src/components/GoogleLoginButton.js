@@ -31,6 +31,7 @@ export function GoogleLoginButton() {
           color: #ffffff;
         }
       `}</style>
+      {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
       <a
         href="/api/oauth/google"
         className="google-login-btn"

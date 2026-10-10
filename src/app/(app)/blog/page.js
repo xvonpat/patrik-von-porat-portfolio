@@ -15,6 +15,14 @@ export const metadata = {
     title: "Journal | Patrik von Porat",
     description: "Notes on music, visual practice, technology, learning and the systems behind the projects.",
     url: 'https://vonporat.com/blog',
+    images: [
+      {
+        url: '/images/PvP2.png',
+        width: 1200,
+        height: 630,
+        alt: 'Patrik von Porat - Journal',
+      },
+    ],
   }
 };
 

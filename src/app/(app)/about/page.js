@@ -14,6 +14,14 @@ export const metadata = {
     title: "About | Patrik von Porat",
     description: "Guitarist, visual artist and systems-minded creator based in Sweden. The motivation, process and way of thinking behind the work.",
     url: 'https://vonporat.com/about',
+    images: [
+      {
+        url: '/images/PvP2.png',
+        width: 1200,
+        height: 630,
+        alt: 'Patrik von Porat - About',
+      },
+    ],
   }
 };
 

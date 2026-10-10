@@ -14,6 +14,14 @@ export const metadata = {
     title: "Music | Patrik von Porat",
     description: "Guitar, composition, arrangement and recording across more than 35 years of heavy music. Featuring Realmforged, Ashwrithe, Freternia and Cromonic.",
     url: 'https://vonporat.com/music',
+    images: [
+      {
+        url: '/images/PvP2.png',
+        width: 1200,
+        height: 630,
+        alt: 'Patrik von Porat - Music',
+      },
+    ],
   }
 };
 

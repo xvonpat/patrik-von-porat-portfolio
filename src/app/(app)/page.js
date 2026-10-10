@@ -65,7 +65,7 @@ export default async function Home() {
     {
       number: '02',
       name: 'STRUCTURE',
-      desc: 'Arranging tempos for Realmforged, mapping graphite values, or designing local data models for Workbench.',
+      desc: 'Arranging tempos for Realmforged, mapping graphite values, or designing local data models for DMAIC Companion.',
       accent: 'purple'
     },
     {
@@ -115,13 +115,13 @@ export default async function Home() {
       accent: 'purple'
     },
     {
-      title: 'Workbench',
-      category: 'WEB · PERSONAL TOOLS',
-      description: 'A local-first project journal built to track multidisciplinary creative work, keep a single next action, and record experiments, decisions, and progress offline.',
-      image: '/images/projects/workbench-showcase.webp',
-      imageAlt: 'Workbench local-first project journal architecture and progress overview',
-      link: '/projects/workbench',
-      ctaText: 'Explore Workbench',
+      title: 'DMAIC Companion',
+      category: 'WEB · IMPROVEMENT TOOLS',
+      description: 'A local-first, guided web app for Lean Six Sigma improvement work and Apollo root cause analysis, replacing static templates with guided workflows.',
+      image: '/images/projects/proof/dmaic-companion-featured-1600x900.png',
+      imageAlt: 'DMAIC Companion – home screen with the three ways in and the D-M-A-I-C phase band',
+      link: '/projects/dmaic-companion',
+      ctaText: 'Explore DMAIC Companion',
       accent: 'cyan'
     }
   ];

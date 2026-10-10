@@ -11,6 +11,14 @@ export const metadata = {
     title: "Contact | Patrik von Porat",
     description: "Start a conversation with Patrik von Porat. Inquiries for creative collaborations, music, visual art, or systems and process work.",
     url: 'https://vonporat.com/contact',
+    images: [
+      {
+        url: '/images/PvP2.png',
+        width: 1200,
+        height: 630,
+        alt: 'Patrik von Porat - Contact',
+      },
+    ],
   }
 };
 

@@ -14,6 +14,14 @@ export const metadata = {
     title: "Selected Work | Patrik von Porat",
     description: "Selected music projects, visual practices and digital systems shaped through the same underlying process: observe, structure, create and refine.",
     url: 'https://vonporat.com/projects',
+    images: [
+      {
+        url: '/images/PvP2.png',
+        width: 1200,
+        height: 630,
+        alt: 'Patrik von Porat - Selected Work',
+      },
+    ],
   }
 };
 
@@ -90,31 +98,30 @@ export default function Projects() {
       isExternal: false
     },
     {
-      id: 'workbench',
-      title: 'Workbench',
-      category: 'WEB · PERSONAL TOOLS',
-      status: 'ONGOING · V1.0 COMPLETE',
+      id: 'dmaic-companion',
+      title: 'DMAIC Companion',
+      category: 'WEB · IMPROVEMENT TOOLS',
+      status: 'ONGOING',
       statusType: 'ongoing',
-      intro: 'A locally stored project journal built to track active creative work across disciplines, maintain a single clear next action, and record experiments, decisions, and progress over time.',
-      role: 'Product design · Architecture · Development · Automated testing',
+      intro: 'A local-first, guided web app for Lean Six Sigma improvement work. Teaches the method while you use it and replaces static slide decks and spreadsheets with guided workflows that export to a PowerPoint report.',
+      role: 'Product idea · Method design · Specification and testing (Claude Code)',
       scopeLabel: 'Stack',
       scopeItems: [
         'React',
         'TypeScript',
         'Vite',
-        'Vitest',
-        'Playwright',
-        'LocalStorage'
+        'Tailwind CSS',
+        'React Flow',
+        'pptxgenjs',
+        'Vitest'
       ],
-      evidence: 'v1.0 is complete and in daily personal studio use. Runs 100% in the browser with offline localStorage persistence, corrupted data safeguards, and unit and browser test suites.',
+      evidence: '37 tools built across DMAIC phases and Apollo RCA. Runs 100% in the browser with offline localStorage autosave, .dmaic.json project files, and 387 automated tests.',
       cta: 'View Case Study',
-      link: '/projects/workbench',
-      articleLink: '/blog/what-is-workbench',
-      articleTitle: 'What Is Workbench?',
-      image: '/images/projects/workbench-showcase.webp',
-      imageAlt: 'Workbench local-first project journal architecture and progress overview',
-      fallbackBadge: 'Local-First Web Tool',
-      fallbackDesc: 'Browser-based project journal with zero cloud dependencies, offline localStorage persistence, and test coverage.',
+      link: '/projects/dmaic-companion',
+      image: '/images/projects/proof/dmaic-companion-featured-1600x900.png',
+      imageAlt: 'DMAIC Companion – home screen with the three ways in and the D-M-A-I-C phase band',
+      fallbackBadge: 'Improvement Tool',
+      fallbackDesc: 'Local-first guided web app for Lean Six Sigma projects and Apollo root cause analysis.',
       accent: 'cyan',
       isExternal: false
     },
@@ -488,7 +495,7 @@ export default function Projects() {
           From initial spark to disciplined execution.
         </h2>
         <p className="text-base md:text-lg text-zinc-300 font-light leading-relaxed text-balance text-pretty">
-          Whether tracking guitars for Realmforged, studying graphite values on paper, or engineering offline-first architecture for Workbench, each medium shares the same standard of focus and refinement.
+          Whether tracking guitars for Realmforged, studying graphite values on paper, or engineering local-first architecture for DMAIC Companion, each medium shares the same standard of focus and refinement.
         </p>
         <div className="flex flex-col sm:flex-row gap-3.5 mt-2 w-full sm:w-auto">
           <CtaButton 

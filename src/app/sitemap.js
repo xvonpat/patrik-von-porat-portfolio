@@ -36,7 +36,7 @@ export default async function sitemap() {
   const staticRoutes = [
     '',
     '/projects',
-    '/projects/workbench',
+    '/projects/dmaic-companion',
     '/music',
     '/art',
     '/blog',
