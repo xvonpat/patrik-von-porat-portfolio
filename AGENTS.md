@@ -80,9 +80,10 @@ Current implemented navigation order (in `src/components/Navbar.js`):
 2. **Projects** (`/projects`)
 3. **Music** (`/music`)
 4. **Art** (`/art`)
-5. **Blog** (`/blog`)
-6. **About** (`/about`)
-7. **Contact** (`/contact`)
+5. **Gallery** (`/gallery`)
+6. **Blog** (`/blog`)
+7. **About** (`/about`)
+8. **Contact** (`/contact`)
 
 Projects is approved and active in public navigation. Do not hide or remove it.
 

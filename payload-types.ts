@@ -72,6 +72,9 @@ export interface Config {
     categories: Category;
     posts: Post;
     'admin-links': AdminLink;
+    'gallery-categories': GalleryCategory;
+    'gallery-albums': GalleryAlbum;
+    'gallery-images': GalleryImage;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -84,6 +87,9 @@ export interface Config {
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
     'admin-links': AdminLinksSelect<false> | AdminLinksSelect<true>;
+    'gallery-categories': GalleryCategoriesSelect<false> | GalleryCategoriesSelect<true>;
+    'gallery-albums': GalleryAlbumsSelect<false> | GalleryAlbumsSelect<true>;
+    'gallery-images': GalleryImagesSelect<false> | GalleryImagesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -318,6 +324,136 @@ export interface AdminLink {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gallery-categories".
+ */
+export interface GalleryCategory {
+  id: number;
+  /**
+   * Display name for this collection (e.g., Summer 2026, 3D Prints, Graphite, Charcoal).
+   */
+  name: string;
+  /**
+   * URL identifier (e.g., summer-2026, 3d-prints). Auto-generated from name if left empty.
+   */
+  slug: string;
+  /**
+   * Numerical sort order in the gallery category selector (lower numbers appear first).
+   */
+  order?: number | null;
+  /**
+   * Optional small label above heading (e.g., "Adobe Lightroom Collection" or "Physical Models").
+   */
+  eyebrow?: string | null;
+  /**
+   * Optional descriptive note shown beneath the collection heading.
+   */
+  description?: string | null;
+  /**
+   * Draft categories are hidden from the public gallery.
+   */
+  status: 'published' | 'draft';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gallery-albums".
+ */
+export interface GalleryAlbum {
+  id: number;
+  /**
+   * Display title of the project / album (e.g., "Eddie the Trooper").
+   */
+  title: string;
+  /**
+   * Unique URL identifier (e.g., "eddie-the-trooper"). Auto-generated from title if empty.
+   */
+  slug: string;
+  /**
+   * Assign this album to a top-level collection (e.g., "3D Prints").
+   */
+  collection: number | GalleryCategory;
+  /**
+   * Optional cover image from the Media library. Falls back to first album image if omitted.
+   */
+  coverImage?: (number | null) | Media;
+  /**
+   * Optional path or URL to cover thumbnail (e.g., "/images/art/eddie-the-trooper/thumbnails/IMG_0693.webp").
+   */
+  coverUrl?: string | null;
+  /**
+   * Optional short description or project notes.
+   */
+  description?: string | null;
+  /**
+   * Display order within its parent collection (lower numbers appear first).
+   */
+  order?: number | null;
+  /**
+   * Draft albums are hidden from public gallery views.
+   */
+  status: 'published' | 'draft';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gallery-images".
+ */
+export interface GalleryImage {
+  id: number;
+  /**
+   * Display title or identifier (e.g. "IMG_1552" or "Eddie the Trooper - Final Print").
+   */
+  title: string;
+  /**
+   * Original file identifier (e.g. "IMG_1552.jpg").
+   */
+  filename?: string | null;
+  /**
+   * Upload or choose an image from the Payload Media library.
+   */
+  image?: (number | null) | Media;
+  /**
+   * Optional path to static image asset (e.g. "/images/gallery/images/large/IMG_1552.jpg").
+   */
+  imageUrl?: string | null;
+  /**
+   * Optional path to static thumbnail asset (e.g. "/images/gallery/images/thumbnails/IMG_1552.jpg").
+   */
+  thumbUrl?: string | null;
+  /**
+   * Assign this image to a specific collection (e.g., Summer 2026, 3D Prints, Graphite).
+   */
+  category?: (number | null) | GalleryCategory;
+  /**
+   * Optional album within the assigned collection (e.g., "Eddie the Trooper" under "3D Prints").
+   */
+  album?: (number | null) | GalleryAlbum;
+  /**
+   * Optional project or subject name for grouping (e.g., "Eddie the Trooper").
+   */
+  project?: string | null;
+  /**
+   * Used for gallery orientation filtering (All / Landscape / Portrait).
+   */
+  orientation: 'landscape' | 'portrait';
+  /**
+   * Numerical sort sequence within its collection (lower numbers appear first).
+   */
+  order?: number | null;
+  width?: number | null;
+  height?: number | null;
+  aspectRatio?: string | null;
+  /**
+   * Draft images are hidden from public gallery views.
+   */
+  status: 'published' | 'draft';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -359,6 +495,18 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'admin-links';
         value: number | AdminLink;
+      } | null)
+    | ({
+        relationTo: 'gallery-categories';
+        value: number | GalleryCategory;
+      } | null)
+    | ({
+        relationTo: 'gallery-albums';
+        value: number | GalleryAlbum;
+      } | null)
+    | ({
+        relationTo: 'gallery-images';
+        value: number | GalleryImage;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -498,6 +646,58 @@ export interface AdminLinksSelect<T extends boolean = true> {
   priority?: T;
   sortOrder?: T;
   openInNewTab?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gallery-categories_select".
+ */
+export interface GalleryCategoriesSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  order?: T;
+  eyebrow?: T;
+  description?: T;
+  status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gallery-albums_select".
+ */
+export interface GalleryAlbumsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  collection?: T;
+  coverImage?: T;
+  coverUrl?: T;
+  description?: T;
+  order?: T;
+  status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gallery-images_select".
+ */
+export interface GalleryImagesSelect<T extends boolean = true> {
+  title?: T;
+  filename?: T;
+  image?: T;
+  imageUrl?: T;
+  thumbUrl?: T;
+  category?: T;
+  album?: T;
+  project?: T;
+  orientation?: T;
+  order?: T;
+  width?: T;
+  height?: T;
+  aspectRatio?: T;
+  status?: T;
   updatedAt?: T;
   createdAt?: T;
 }

@@ -8,6 +8,10 @@ import * as migration_20260601_210827_add_seo_fields_to_posts from './20260601_2
 import * as migration_20260601_212030_add_admin_links_collection from './20260601_212030_add_admin_links_collection';
 import * as migration_20260616_204349_enable_rls_on_all_tables from './20260616_204349_enable_rls_on_all_tables';
 import * as migration_20261006_220000_add_categories_collection from './20261006_220000_add_categories_collection';
+import * as migration_20261010_193000_add_gallery_collections from './20261010_193000_add_gallery_collections';
+import * as migration_20261010_220000_add_eddie_the_trooper_images from './20261010_220000_add_eddie_the_trooper_images';
+import * as migration_20261010_223000_add_more_eddie_images from './20261010_223000_add_more_eddie_images';
+import * as migration_20261011_003000_add_gallery_albums from './20261011_003000_add_gallery_albums';
 
 export const migrations = [
   {
@@ -59,5 +63,25 @@ export const migrations = [
     up: migration_20261006_220000_add_categories_collection.up,
     down: migration_20261006_220000_add_categories_collection.down,
     name: '20261006_220000_add_categories_collection',
+  },
+  {
+    up: migration_20261010_193000_add_gallery_collections.up,
+    down: migration_20261010_193000_add_gallery_collections.down,
+    name: '20261010_193000_add_gallery_collections',
+  },
+  {
+    up: migration_20261010_220000_add_eddie_the_trooper_images.up,
+    down: migration_20261010_220000_add_eddie_the_trooper_images.down,
+    name: '20261010_220000_add_eddie_the_trooper_images',
+  },
+  {
+    up: migration_20261010_223000_add_more_eddie_images.up,
+    down: migration_20261010_223000_add_more_eddie_images.down,
+    name: '20261010_223000_add_more_eddie_images',
+  },
+  {
+    up: migration_20261011_003000_add_gallery_albums.up,
+    down: migration_20261011_003000_add_gallery_albums.down,
+    name: '20261011_003000_add_gallery_albums',
   },
 ];

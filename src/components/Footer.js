@@ -26,9 +26,10 @@ export default function Footer() {
             <Link href="/projects" className="hover:text-accent-cyan transition-colors duration-200">Projects</Link>
             <Link href="/music" className="hover:text-accent-purple transition-colors duration-200">Music</Link>
             <Link href="/art" className="hover:text-accent-cyan transition-colors duration-200">Art</Link>
-            <Link href="/blog" className="hover:text-accent-purple transition-colors duration-200">Blog</Link>
-            <Link href="/about" className="hover:text-accent-cyan transition-colors duration-200">About</Link>
-            <Link href="/contact" className="hover:text-accent-purple transition-colors duration-200">Contact</Link>
+            <Link href="/gallery" className="hover:text-accent-purple transition-colors duration-200">Gallery</Link>
+            <Link href="/blog" className="hover:text-accent-cyan transition-colors duration-200">Blog</Link>
+            <Link href="/about" className="hover:text-accent-purple transition-colors duration-200">About</Link>
+            <Link href="/contact" className="hover:text-accent-cyan transition-colors duration-200">Contact</Link>
           </div>
           <p className="text-xs text-zinc-400 mt-1 font-mono">
             &copy; {currentYear} Patrik von Porat. All rights reserved.

@@ -8,6 +8,9 @@ import { s3Storage } from '@payloadcms/storage-s3';
 import { Categories } from './src/collections/Categories';
 import { Posts } from './src/collections/Posts';
 import { AdminLinks } from './src/collections/AdminLinks';
+import { GalleryCategories } from './src/collections/GalleryCategories';
+import { GalleryAlbums } from './src/collections/GalleryAlbums';
+import { GalleryImages } from './src/collections/GalleryImages';
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -89,6 +92,9 @@ export default buildConfig({
     Categories,
     Posts,
     AdminLinks,
+    GalleryCategories,
+    GalleryAlbums,
+    GalleryImages,
   ],
   editor: lexicalEditor({}),
   secret: process.env.PAYLOAD_SECRET || 'a-very-secure-secret-placeholder-change-this',
