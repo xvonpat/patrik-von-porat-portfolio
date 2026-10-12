@@ -12,6 +12,7 @@ import * as migration_20261010_193000_add_gallery_collections from './20261010_1
 import * as migration_20261010_220000_add_eddie_the_trooper_images from './20261010_220000_add_eddie_the_trooper_images';
 import * as migration_20261010_223000_add_more_eddie_images from './20261010_223000_add_more_eddie_images';
 import * as migration_20261011_003000_add_gallery_albums from './20261011_003000_add_gallery_albums';
+import * as migration_20261011_131500_add_priming_eddie_images from './20261011_131500_add_priming_eddie_images';
 
 export const migrations = [
   {
@@ -83,5 +84,10 @@ export const migrations = [
     up: migration_20261011_003000_add_gallery_albums.up,
     down: migration_20261011_003000_add_gallery_albums.down,
     name: '20261011_003000_add_gallery_albums',
+  },
+  {
+    up: migration_20261011_131500_add_priming_eddie_images.up,
+    down: migration_20261011_131500_add_priming_eddie_images.down,
+    name: '20261011_131500_add_priming_eddie_images',
   },
 ];

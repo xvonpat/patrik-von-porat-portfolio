@@ -505,6 +505,36 @@ export const eddieTheTrooperPhotos = [
     project: "Eddie the Trooper",
     albumSlug: "eddie-the-trooper",
     order: 16
+  },
+  {
+    id: "IMG_0985",
+    filename: "IMG_0985.webp",
+    title: "Eddie the Trooper — Priming Prep & Chaos Black",
+    src: "/images/art/eddie-the-trooper/IMG_0985.webp",
+    thumb: "/images/art/eddie-the-trooper/thumbnails/IMG_0985.webp",
+    width: 2048,
+    height: 1152,
+    orientation: "landscape",
+    aspectRatio: "16/9",
+    categorySlug: "3d-prints",
+    project: "Eddie the Trooper",
+    albumSlug: "eddie-the-trooper",
+    order: 17
+  },
+  {
+    id: "IMG_0986",
+    filename: "IMG_0986.webp",
+    title: "Eddie the Trooper — Chaos Black Undercoat",
+    src: "/images/art/eddie-the-trooper/IMG_0986.webp",
+    thumb: "/images/art/eddie-the-trooper/thumbnails/IMG_0986.webp",
+    width: 2048,
+    height: 1152,
+    orientation: "landscape",
+    aspectRatio: "16/9",
+    categorySlug: "3d-prints",
+    project: "Eddie the Trooper",
+    albumSlug: "eddie-the-trooper",
+    order: 18
   }
 ];
 

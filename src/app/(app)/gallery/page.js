@@ -123,19 +123,19 @@ export default async function GalleryPage() {
   if (!images.length) {
     categories = [
       {
-        id: 'summer-2026',
-        name: 'Summer 2026',
-        slug: 'summer-2026',
-        eyebrow: 'Adobe Lightroom Collection',
-        description: 'Curated Web Album • 35mm & Digital',
-        order: 1,
-      },
-      {
         id: '3d-prints',
         name: '3D Prints',
         slug: '3d-prints',
         eyebrow: 'Physical Models',
         description: 'Resin printing, assembly, and hand-painted miniatures',
+        order: 1,
+      },
+      {
+        id: 'summer-2026',
+        name: 'Summer 2026',
+        slug: 'summer-2026',
+        eyebrow: 'Adobe Lightroom Collection',
+        description: 'Curated Web Album • 35mm & Digital',
         order: 2,
       },
     ];

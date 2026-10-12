@@ -10,19 +10,19 @@ export default function GalleryClient({ initialCategories = [], initialAlbums = 
     if (initialCategories.length > 0) return initialCategories;
     return [
       {
-        id: 'summer-2026',
-        name: 'Summer 2026',
-        slug: 'summer-2026',
-        eyebrow: 'Adobe Lightroom Collection',
-        description: 'Curated Web Album • 35mm & Digital',
-        order: 1,
-      },
-      {
         id: '3d-prints',
         name: '3D Prints',
         slug: '3d-prints',
         eyebrow: 'Physical Models',
         description: 'Resin printing, assembly, and hand-painted miniatures',
+        order: 1,
+      },
+      {
+        id: 'summer-2026',
+        name: 'Summer 2026',
+        slug: 'summer-2026',
+        eyebrow: 'Adobe Lightroom Collection',
+        description: 'Curated Web Album • 35mm & Digital',
         order: 2,
       },
     ];
@@ -46,7 +46,7 @@ export default function GalleryClient({ initialCategories = [], initialAlbums = 
     ];
   }, [initialImages]);
 
-  // Selected category: default to 'summer-2026' for initial release, or first category, or 'all-collections'
+  // Selected category: default to '3d-prints' when entering gallery
   const [selectedCategory, setSelectedCategory] = useState(() => {
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
@@ -54,8 +54,8 @@ export default function GalleryClient({ initialCategories = [], initialAlbums = 
       if (catParam === 'all' || catParam === 'all-collections') return 'all-collections';
       if (catParam && categories.some(c => c.slug === catParam)) return catParam;
     }
-    const hasSummer = categories.some(c => c.slug === 'summer-2026');
-    if (hasSummer) return 'summer-2026';
+    const has3DPrints = categories.some(c => c.slug === '3d-prints');
+    if (has3DPrints) return '3d-prints';
     return categories[0]?.slug || 'all-collections';
   });
 
@@ -92,6 +92,26 @@ export default function GalleryClient({ initialCategories = [], initialAlbums = 
   const visibleCategories = useMemo(() => {
     return categories.filter(cat => (categoryCounts[cat.slug] || 0) > 0);
   }, [categories, categoryCounts]);
+
+  // Reset to default category when user clicks any clean Gallery navigation link while already on /gallery
+  useEffect(() => {
+    const handleGalleryLinkClick = (e) => {
+      const link = e.target.closest?.('a[href="/gallery"]');
+      if (link) {
+        const defaultCat = categories.some(c => c.slug === '3d-prints')
+          ? '3d-prints'
+          : (categories[0]?.slug || 'all-collections');
+        setSelectedCategory(defaultCat);
+        setSelectedAlbum('all-images');
+        setActiveLoupeIndex(null);
+        setIsPlaying(false);
+        setIsZoomed(false);
+      }
+    };
+
+    window.addEventListener('click', handleGalleryLinkClick);
+    return () => window.removeEventListener('click', handleGalleryLinkClick);
+  }, [categories]);
 
   // Check URL query parameters on mount for direct deep-linking
   useEffect(() => {
