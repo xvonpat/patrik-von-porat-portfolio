@@ -14,6 +14,7 @@ import * as migration_20261010_223000_add_more_eddie_images from './20261010_223
 import * as migration_20261011_003000_add_gallery_albums from './20261011_003000_add_gallery_albums';
 import * as migration_20261011_131500_add_priming_eddie_images from './20261011_131500_add_priming_eddie_images';
 import * as migration_20261013_221500_enable_rls_gallery_albums from './20261013_221500_enable_rls_gallery_albums';
+import * as migration_20261014_200500_add_base_prep_eddie_images from './20261014_200500_add_base_prep_eddie_images';
 
 export const migrations = [
   {
@@ -95,5 +96,10 @@ export const migrations = [
     up: migration_20261013_221500_enable_rls_gallery_albums.up,
     down: migration_20261013_221500_enable_rls_gallery_albums.down,
     name: '20261013_221500_enable_rls_gallery_albums',
+  },
+  {
+    up: migration_20261014_200500_add_base_prep_eddie_images.up,
+    down: migration_20261014_200500_add_base_prep_eddie_images.down,
+    name: '20261014_200500_add_base_prep_eddie_images',
   },
 ];
