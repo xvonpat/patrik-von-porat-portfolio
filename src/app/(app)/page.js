@@ -156,7 +156,7 @@ export default async function Home() {
         {/* 1. HERO SECTION */}
         <section className="grid grid-cols-1 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] items-center gap-6 w-full relative pt-2 pb-2 md:pt-6 md:pb-4 lg:pt-8">
           {/* Ambient subtle glow backdrop */}
-          <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[85%] h-[60%] bg-accent-purple/8 blur-[110px] rounded-full pointer-events-none -z-10" />
+          <div className="hero-ambient absolute top-[10%] left-1/2 -translate-x-1/2 w-[85%] h-[60%] bg-accent-purple/8 blur-[110px] rounded-full pointer-events-none -z-10" />
 
           {/* Introductory Text (Left Column on Desktop) */}
           <div className="flex flex-col items-center text-center lg:items-start lg:text-left gap-5 max-w-4xl mx-auto lg:mx-0">

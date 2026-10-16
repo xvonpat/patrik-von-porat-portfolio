@@ -1,14 +1,16 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { getSculptureSettings, SCULPTURE_SETTINGS } from './settings';
+import { getSculptureSettings } from './settings';
 import styles from './DigitalSculpture.module.css';
 
 /**
  * Interactive Digital Sculpture for the homepage hero.
  *
  * Supports selectable themes:
- * - 'contour-flow' (Option B, Default): Sweeping S-shaped river valley with rolling ridges
+ * - 'digital-eclipse' (Default): Original radial corona
+ * - 'digital-eclipse-v2': Atmospheric corona with fine clustered detail
+ * - 'contour-flow' (Option B): Sweeping S-shaped river valley with rolling ridges
  * - 'alpine-landscape' (Option A): Sharp alpine massifs & arête peaks
  *
  * Theme can be set via:
@@ -109,10 +111,12 @@ export default function DigitalSculpture({ className = '', theme = 'digital-ecli
 
     const handle = schedule(async () => {
       try {
-        const { mountSculptureScene } = await import('./scene');
+        const mountScene = activeSettings.id === 'digital-eclipse-v2'
+          ? (await import('./eclipse-v2/scene')).mountEclipseV2Scene
+          : (await import('./scene')).mountSculptureScene;
         if (cancelled) return;
 
-        dispose = mountSculptureScene(container, activeSettings, {
+        dispose = mountScene(container, activeSettings, {
           reducedMotion,
           coarsePointer,
           onReady: () => !cancelled && setStatus('ready'),

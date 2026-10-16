@@ -236,7 +236,32 @@ export const DIGITAL_ECLIPSE_SETTINGS = {
   },
 };
 
+/** A separate atmospheric eclipse version; the original remains selectable. */
+export const DIGITAL_ECLIPSE_V2_SETTINGS = {
+  id: 'digital-eclipse-v2',
+  label: 'Digital Eclipse II (Atmospheric Corona)',
+  corona: {
+    seed: 7319,
+    detailDensity: 1,
+    rimOpacity: 0.7,
+    cyanGlow: 1.8,
+    pinkGlow: 1.65,
+  },
+  animation: {
+    speed: 1,
+    parallaxPixels: 5,
+    pointerReach: 85,
+  },
+  rendering: {
+    maxPixelRatioDesktop: 1.75,
+    maxPixelRatioMobile: 1.5,
+    desktopFps: 30,
+    mobileFps: 24,
+  },
+};
+
 export const SCULPTURE_THEMES = {
+  'digital-eclipse-v2': DIGITAL_ECLIPSE_V2_SETTINGS,
   'digital-eclipse': DIGITAL_ECLIPSE_SETTINGS,
   'contour-flow': CONTOUR_FLOW_SETTINGS,
   'alpine-landscape': ALPINE_PEAKS_SETTINGS,
@@ -245,6 +270,9 @@ export const SCULPTURE_THEMES = {
 export function getSculptureSettings(themeName) {
   if (!themeName) return DIGITAL_ECLIPSE_SETTINGS;
   const key = String(themeName).toLowerCase().trim();
+  if (key === 'eclipse-v2' || key === 'digital-eclipse-v2' || key === 'd') {
+    return DIGITAL_ECLIPSE_V2_SETTINGS;
+  }
   if (key === 'eclipse' || key === 'digital-eclipse' || key === 'c') {
     return DIGITAL_ECLIPSE_SETTINGS;
   }

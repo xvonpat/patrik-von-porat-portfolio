@@ -6,6 +6,16 @@ import styles from './BackgroundThemeDashboardCard.module.css';
 
 const THEMES = [
   {
+    id: 'digital-eclipse-v2',
+    title: 'Digital Eclipse II',
+    subtitle: 'Option D — Atmospheric Corona',
+    badge: 'New Version',
+    description:
+      'A delicate, uneven corona around a dark circular void, with concentrated cyan highlights, vivid pink light scattering, fine clustered filaments, and quiet gaps.',
+    features: ['Thin irregular corona', 'Local cyan and pink glow', 'Gentle light pulses', 'Damped pointer response'],
+    previewQuery: 'eclipse-v2',
+  },
+  {
     id: 'digital-eclipse',
     title: 'Digital Eclipse',
     subtitle: 'Option C — Cosmic Corona & Filaments',
@@ -92,9 +102,14 @@ export function BackgroundThemeDashboardCard() {
         setStatusMessage(`✓ "${name}" is now active on the homepage!`);
         setTimeout(() => setStatusMessage(''), 5000);
       } else {
-        const errorData = await res.json().catch(() => ({}));
-        console.error('Failed to update background theme:', errorData);
-        setStatusMessage('✕ Failed to update theme. Please try again or open Site Settings.');
+        // Payload may return an empty error body. Keep the useful HTTP status
+        // without logging server response bodies that could contain DB details.
+        console.error(`Failed to update background theme (HTTP ${res.status}).`);
+        setStatusMessage(
+          res.status === 401 || res.status === 403
+            ? '✕ Your session may have expired. Sign in again and retry.'
+            : `✕ Failed to update theme (HTTP ${res.status}). Please try again or open Site Settings.`
+        );
       }
     } catch (err) {
       console.error('Error updating background theme:', err);

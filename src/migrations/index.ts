@@ -18,6 +18,7 @@ import * as migration_20261014_200500_add_base_prep_eddie_images from './2026101
 import * as migration_20261015_191000_add_dry_fit_eddie_images from './20261015_191000_add_dry_fit_eddie_images';
 import * as migration_20261016_181500_add_grey_primer_eddie_images from './20261016_181500_add_grey_primer_eddie_images';
 import * as migration_20261017_000000_add_site_settings_global from './20261017_000000_add_site_settings_global';
+import * as migration_20261017_010000_add_digital_eclipse_v2 from './20261017_010000_add_digital_eclipse_v2';
 
 export const migrations = [
   {
@@ -119,5 +120,10 @@ export const migrations = [
     up: migration_20261017_000000_add_site_settings_global.up,
     down: migration_20261017_000000_add_site_settings_global.down,
     name: '20261017_000000_add_site_settings_global',
+  },
+  {
+    up: migration_20261017_010000_add_digital_eclipse_v2.up,
+    down: migration_20261017_010000_add_digital_eclipse_v2.down,
+    name: '20261017_010000_add_digital_eclipse_v2',
   },
 ];

@@ -47,6 +47,21 @@
     radial-gradient(ellipse 40% 40% at 75% 54%, rgba(244, 63, 94, 0.08) 0%, rgba(225, 29, 72, 0.02) 52%, transparent 74%);
 }
 
+/* V2 supplies its own local scattering; broad coloured haze would fog the void. */
+.sculptureBackground[data-theme="digital-eclipse-v2"] .haze {
+  display: none;
+}
+
+:global(main:has([data-theme="digital-eclipse-v2"]) .hero-ambient) {
+  opacity: 0.12;
+}
+
+.sculptureBackground[data-theme="digital-eclipse-v2"] .readabilityMask {
+  background:
+    linear-gradient(90deg, #040609 0%, rgba(4, 6, 9, 0.9) 30%, rgba(4, 6, 9, 0.35) 48%, transparent 59%),
+    linear-gradient(to bottom, rgba(4, 6, 9, 0.65), transparent 18%, transparent 76%, #040609);
+}
+
 /*
  * Broad, smoothly feathered darkening layer between the 3D landscape and foreground content:
  * - Strongest behind the left-hand hero text (heading, paragraph, role labels, buttons), fading gradually toward the right.
@@ -130,6 +145,12 @@
 }
 
 @media (max-width: 1023px) {
+  .sculptureBackground[data-theme="digital-eclipse-v2"] .readabilityMask {
+    background:
+      linear-gradient(90deg, rgba(4, 6, 9, 0.9), rgba(4, 6, 9, 0.63) 60%, rgba(4, 6, 9, 0.35)),
+      linear-gradient(to bottom, #040609, transparent 24%, rgba(4, 6, 9, 0.3) 50%, #040609 82%);
+  }
+
   .readabilityMask {
     background:
       radial-gradient(

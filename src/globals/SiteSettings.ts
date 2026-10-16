@@ -16,6 +16,10 @@ export const SiteSettings: GlobalConfig = {
       required: true,
       options: [
         {
+          label: 'Digital Eclipse II (Atmospheric Corona — New Version)',
+          value: 'digital-eclipse-v2',
+        },
+        {
           label: 'Digital Eclipse (Radial Corona & Cosmic Filaments — New)',
           value: 'digital-eclipse',
         },

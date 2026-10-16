@@ -423,3 +423,25 @@ Allows Patrik to switch the website's background theme instantly from the admini
 ### Decision
 
 The navbar monogram logo uses the standard background glow on mouse hover matching the rest of the navigation pills, rather than colorizing the logo artwork itself.
+
+---
+
+## D-030 — Additive Digital Eclipse II
+
+**Status:** Implemented locally; database option enabled
+
+**Decision date:** 2026-10-17
+
+### Decision
+
+`digital-eclipse-v2` (Digital Eclipse II) is a separate background option. The original eclipse, both landscape themes, their aliases, and the saved homepage selection remain unchanged. Preview with `/?theme=eclipse-v2`. The additive PostgreSQL enum migration was applied to the configured database with explicit user approval and recorded as migration batch 20. Other databases require this migration before the new value can be saved in Site Settings.
+
+The new front-facing corona uses a seeded Canvas renderer in `src/components/digital-sculpture/eclipse-v2/`. Fine curved filaments, dust, a thin non-additive rim, and local cyan/pink scattering are cached independently of the animated overlay. This avoids accumulated white stroke roots and adds no dependency. Visual controls live in `DIGITAL_ECLIPSE_V2_SETTINGS`: density, rim opacity, cyan/pink glow, motion speed, parallax and pointer reach.
+
+Motion is capped at 30 fps on desktop and 24 fps on narrow screens, with pixel-ratio limits. Rendering pauses in hidden tabs and below the hero. Reduced-motion changes are observed live and render a static frame. Passive pointer observation preserves native scrolling, text selection and navigation. Listeners, animation frames and canvas backing stores are released on unmount or drawing failure.
+
+### Verification
+
+Compared and refined the actual localhost render against the supplied 1536×1024 reference; inspected desktop, tablet and mobile layouts. Tested mobile scrolling, About and Projects navigation, route cleanup and pointer input. Full lint and production build passed, plus nine Node lifecycle tests (`node --test tests/eclipse-v2-lifecycle.test.mjs`). The restricted build stalled at compilation; the unrestricted build completed successfully.
+
+The result retains a softer, less dense outer sparkle field than the supplied reference. Existing typography, logo, content, buttons and page structure are preserved. After applying the user-approved migration, an actual database update to `digital-eclipse-v2` succeeded in a rolled-back verification transaction, and the saved selection was confirmed unchanged. No commit, push or deployment was performed.
