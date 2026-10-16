@@ -10,23 +10,35 @@ import configPromise from '../../../payload.config.ts';
 export const revalidate = 60;
 
 export default async function Home() {
-  // Gracefully fetch latest published blog posts from Payload CMS
+  // Gracefully fetch latest published blog posts and site settings from Payload CMS
   let latestPosts = [];
+  let homepageBackground = 'digital-eclipse';
   try {
     const payload = await getPayload({ config: configPromise });
-    const result = await payload.find({
-      collection: 'posts',
-      where: {
-        status: {
-          equals: 'published',
+    const [postsResult, siteSettings] = await Promise.all([
+      payload.find({
+        collection: 'posts',
+        where: {
+          status: {
+            equals: 'published',
+          },
         },
-      },
-      sort: '-publishedDate',
-      limit: 3,
-    });
-    latestPosts = result?.docs || [];
+        sort: '-publishedDate',
+        limit: 3,
+      }),
+      payload.findGlobal({
+        slug: 'site-settings',
+      }).catch((err) => {
+        console.warn('Could not fetch site-settings global:', err?.message);
+        return null;
+      }),
+    ]);
+    latestPosts = postsResult?.docs || [];
+    if (siteSettings?.homepageBackground) {
+      homepageBackground = siteSettings.homepageBackground;
+    }
   } catch (error) {
-    console.error('Failed to fetch latest posts for homepage:', error);
+    console.error('Failed to fetch homepage data from Payload:', error);
     latestPosts = [];
   }
 
@@ -136,8 +148,8 @@ export default async function Home() {
 
   return (
     <>
-      {/* 3D Digital Sculpture Background (homepage-scoped full viewport) */}
-      <DigitalSculpture />
+      {/* 3D Digital Sculpture Background (homepage-scoped full viewport, configured via Payload CMS) */}
+      <DigitalSculpture theme={homepageBackground} />
 
       <div className="max-w-6xl xl:max-w-7xl 2xl:max-w-[1320px] mx-auto px-6 lg:px-8 py-8 md:py-14 flex flex-col gap-16 md:gap-24 relative z-10">
         

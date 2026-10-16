@@ -35,6 +35,18 @@
   transition: opacity 600ms ease;
 }
 
+.sculptureBackground[data-theme="contour-flow"] .haze {
+  background:
+    radial-gradient(ellipse 46% 36% at 72% 36%, rgba(94, 234, 212, 0.075) 0%, rgba(23, 59, 78, 0.02) 55%, transparent 78%),
+    radial-gradient(ellipse 38% 28% at 55% 58%, rgba(244, 63, 94, 0.035) 0%, transparent 70%);
+}
+
+.sculptureBackground[data-theme="digital-eclipse"] .haze {
+  background:
+    radial-gradient(ellipse 46% 46% at 71% 46%, rgba(0, 240, 255, 0.085) 0%, rgba(8, 145, 178, 0.025) 50%, transparent 75%),
+    radial-gradient(ellipse 40% 40% at 75% 54%, rgba(244, 63, 94, 0.08) 0%, rgba(225, 29, 72, 0.02) 52%, transparent 74%);
+}
+
 /*
  * Broad, smoothly feathered darkening layer between the 3D landscape and foreground content:
  * - Strongest behind the left-hand hero text (heading, paragraph, role labels, buttons), fading gradually toward the right.

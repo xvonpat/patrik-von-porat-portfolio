@@ -1,22 +1,27 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { SCULPTURE_SETTINGS } from './settings';
+import { getSculptureSettings, SCULPTURE_SETTINGS } from './settings';
 import styles from './DigitalSculpture.module.css';
 
 /**
  * Interactive Digital Sculpture for the homepage hero.
  *
- * An abstract computational sculpture made of fine curved contour lines,
- * short dashed strokes, and faint points of light. Features local magnetic-field
- * deformation, slow idle wave undulation, traveling data pulses, and free drag rotation.
+ * Supports selectable themes:
+ * - 'contour-flow' (Option B, Default): Sweeping S-shaped river valley with rolling ridges
+ * - 'alpine-landscape' (Option A): Sharp alpine massifs & arête peaks
+ *
+ * Theme can be set via:
+ * 1. Prop: `<DigitalSculpture theme="contour-flow" />`
+ * 2. URL parameter for instant testing: `?theme=contour-flow` or `?theme=alpine`
  *
  * Loads dynamically during idle time to guarantee zero blocking of page text and navigation.
  */
-export default function DigitalSculpture({ className = '' }) {
+export default function DigitalSculpture({ className = '', theme = 'digital-eclipse' }) {
   const rootRef = useRef(null);
   const containerRef = useRef(null);
   const [status, setStatus] = useState('loading'); // loading | ready | failed
+  const [resolvedTheme, setResolvedTheme] = useState('digital-eclipse');
 
   useEffect(() => {
     const root = rootRef.current;
@@ -71,6 +76,12 @@ export default function DigitalSculpture({ className = '' }) {
     let dispose = null;
     let cancelled = false;
 
+    // Detect theme from URL query param (?theme=flow / ?theme=alpine / ?bg=...) or prop
+    const urlParams = typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : null;
+    const urlTheme = urlParams?.get('theme') || urlParams?.get('bg');
+    const activeSettings = getSculptureSettings(urlTheme || theme || 'digital-eclipse');
+    setResolvedTheme(activeSettings.id);
+
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const coarsePointer = window.matchMedia('(pointer: coarse)').matches;
 
@@ -82,15 +93,26 @@ export default function DigitalSculpture({ className = '' }) {
     };
 
     // Load after the browser is idle so hero content is immediately accessible
-    const schedule = window.requestIdleCallback || ((cb) => window.setTimeout(cb, 60));
-    const cancelSchedule = window.cancelIdleCallback || window.clearTimeout;
+    const schedule = (cb) => {
+      if (typeof window !== 'undefined' && typeof window.requestIdleCallback === 'function') {
+        return window.requestIdleCallback(cb, { timeout: 160 });
+      }
+      return setTimeout(cb, 40);
+    };
+    const cancelSchedule = (id) => {
+      if (typeof window !== 'undefined' && typeof window.cancelIdleCallback === 'function') {
+        window.cancelIdleCallback(id);
+      } else {
+        clearTimeout(id);
+      }
+    };
 
     const handle = schedule(async () => {
       try {
         const { mountSculptureScene } = await import('./scene');
         if (cancelled) return;
 
-        dispose = mountSculptureScene(container, SCULPTURE_SETTINGS, {
+        dispose = mountSculptureScene(container, activeSettings, {
           reducedMotion,
           coarsePointer,
           onReady: () => !cancelled && setStatus('ready'),
@@ -107,13 +129,14 @@ export default function DigitalSculpture({ className = '' }) {
       dispose?.();
       dispose = null;
     };
-  }, []);
+  }, [theme]);
 
   return (
     <div
       ref={rootRef}
       className={`${styles.sculptureBackground} digital-sculpture ${className}`}
       data-status={status}
+      data-theme={resolvedTheme}
       aria-hidden="true"
     >
       {/* Computational ambient aura */}

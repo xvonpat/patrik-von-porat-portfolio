@@ -169,11 +169,13 @@ export class SculptureController {
     this._offset.copy(this.basePos).sub(this.baseTarget);
     this._Spherical.setFromVector3(this._offset);
 
+    const isFrontFacing = this.framing?.mode === 'front-facing' || Math.abs(this.basePos.y) < 1.5;
+
     this._Spherical.theta += this.dragAngles.x;
     this._Spherical.phi = THREE.MathUtils.clamp(
       this._Spherical.phi - this.dragAngles.y,
-      0.35,
-      Math.PI * 0.46
+      isFrontFacing ? Math.PI * 0.42 : 0.35,
+      isFrontFacing ? Math.PI * 0.58 : Math.PI * 0.46
     );
 
     this._offset.setFromSpherical(this._Spherical);
@@ -188,8 +190,12 @@ export class SculptureController {
     const py = this.currentPointer.y * (this.parallax.hoverPositionY ?? 0.35);
 
     this.cameraPos.x += px + breathX;
-    // Prevent camera from ever dipping close to or beneath the foreground terrain
-    this.cameraPos.y = Math.max(3.6, this.cameraPos.y + py + breathY);
+    if (isFrontFacing) {
+      this.cameraPos.y += py + breathY;
+    } else {
+      // Prevent camera from ever dipping close to or beneath the foreground terrain
+      this.cameraPos.y = Math.max(3.6, this.cameraPos.y + py + breathY);
+    }
 
     const tx = this.currentPointer.x * (this.parallax.hoverTargetX ?? 0.45);
     const ty = this.currentPointer.y * (this.parallax.hoverTargetY ?? 0.20);

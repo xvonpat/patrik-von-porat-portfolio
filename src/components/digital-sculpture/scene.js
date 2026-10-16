@@ -1,10 +1,10 @@
 import * as THREE from 'three';
-import { createSculptureGeometries } from './geometry';
-import { createSculptureMaterials } from './materials';
+import { createSculptureGeometries, createDigitalEclipseGeometries } from './geometry';
+import { createSculptureMaterials, createEclipseMaterials } from './materials';
 import { SculptureController } from './interaction';
 
 /**
- * Mounts the real-time 3D Topographic Landscape scene into `container`.
+ * Mounts the real-time 3D Digital Sculpture / Eclipse scene into `container`.
  * Loaded dynamically during browser idle time to preserve initial page speed.
  *
  * @returns {() => void} dispose
@@ -15,6 +15,7 @@ export function mountSculptureScene(
   { reducedMotion, coarsePointer, onReady, onError }
 ) {
   const { cameraFraming, contourSpacing, terrainScale, parallaxStrength, rendering } = settings;
+  const isEclipse = settings.id === 'digital-eclipse';
 
   const renderer = new THREE.WebGLRenderer({
     antialias: true,
@@ -25,7 +26,7 @@ export function mountSculptureScene(
   renderer.setClearColor(0x000000, 0);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.05;
+  renderer.toneMappingExposure = isEclipse ? 1.18 : 1.05;
 
   const maxDpr = coarsePointer ? rendering.maxPixelRatioMobile : rendering.maxPixelRatioDesktop;
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, maxDpr));
@@ -39,35 +40,105 @@ export function mountSculptureScene(
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(
-    cameraFraming.fovDesktop || 33,
+    cameraFraming.fovDesktop || (isEclipse ? 38 : 33),
     1,
     0.5,
     120
   );
 
-  // Build deterministic 3D terrain mesh, Marching Squares elevation contours, and magenta routes
-  const { terrainGeometry, contourGeometry, magentaGeometry } = createSculptureGeometries({
-    isMobile: coarsePointer,
-    terrainScale,
-    contourSpacing,
-  });
+  let terrainMesh = null;
+  let contourLines = null;
+  let magentaLines = null;
+  let terrainGeometry = null;
+  let contourGeometry = null;
+  let magentaGeometry = null;
+  let terrainMaterial = null;
+  let contourMaterial = null;
+  let magentaMaterial = null;
+  let landscapeGroup = null;
 
-  const { terrainMaterial, contourMaterial, magentaMaterial } = createSculptureMaterials(settings);
+  let eclipseGroup = null;
+  let eclipseVoidMesh = null;
+  let eclipseHaloMesh = null;
+  let eclipseFilamentLines = null;
+  let eclipseParticlePoints = null;
+  let eclipseFilamentsGeometry = null;
+  let eclipseParticlesGeometry = null;
+  let eclipseHaloGeometry = null;
+  let eclipseVoidGeometry = null;
+  let eclipseFilamentMaterial = null;
+  let eclipseHaloMaterial = null;
+  let eclipseParticleMaterial = null;
+  let eclipseVoidMaterial = null;
 
-  const terrainMesh = new THREE.Mesh(terrainGeometry, terrainMaterial);
-  terrainMesh.renderOrder = 0;
+  if (isEclipse) {
+    const eclipseGeoms = createDigitalEclipseGeometries({
+      isMobile: coarsePointer,
+      settings,
+    });
+    eclipseFilamentsGeometry = eclipseGeoms.eclipseFilamentsGeometry;
+    eclipseParticlesGeometry = eclipseGeoms.eclipseParticlesGeometry;
+    eclipseHaloGeometry = eclipseGeoms.eclipseHaloGeometry;
+    eclipseVoidGeometry = eclipseGeoms.eclipseVoidGeometry;
 
-  const contourLines = new THREE.LineSegments(contourGeometry, contourMaterial);
-  contourLines.renderOrder = 1;
+    const eclipseMats = createEclipseMaterials(settings);
+    eclipseFilamentMaterial = eclipseMats.eclipseFilamentMaterial;
+    eclipseHaloMaterial = eclipseMats.eclipseHaloMaterial;
+    eclipseParticleMaterial = eclipseMats.eclipseParticleMaterial;
+    eclipseVoidMaterial = eclipseMats.eclipseVoidMaterial;
 
-  const magentaLines = new THREE.LineSegments(magentaGeometry, magentaMaterial);
-  magentaLines.renderOrder = 2;
+    eclipseVoidMesh = new THREE.Mesh(eclipseVoidGeometry, eclipseVoidMaterial);
+    eclipseVoidMesh.position.z = 0.005;
+    eclipseVoidMesh.renderOrder = 0;
 
-  const landscapeGroup = new THREE.Group();
-  landscapeGroup.add(terrainMesh);
-  landscapeGroup.add(contourLines);
-  landscapeGroup.add(magentaLines);
-  scene.add(landscapeGroup);
+    eclipseHaloMesh = new THREE.Mesh(eclipseHaloGeometry, eclipseHaloMaterial);
+    eclipseHaloMesh.position.z = -0.02;
+    eclipseHaloMesh.renderOrder = 1;
+
+    eclipseFilamentLines = new THREE.LineSegments(eclipseFilamentsGeometry, eclipseFilamentMaterial);
+    eclipseFilamentLines.renderOrder = 2;
+
+    eclipseParticlePoints = new THREE.Points(eclipseParticlesGeometry, eclipseParticleMaterial);
+    eclipseParticlePoints.renderOrder = 3;
+
+    eclipseGroup = new THREE.Group();
+    eclipseGroup.add(eclipseVoidMesh);
+    eclipseGroup.add(eclipseHaloMesh);
+    eclipseGroup.add(eclipseFilamentLines);
+    eclipseGroup.add(eclipseParticlePoints);
+    scene.add(eclipseGroup);
+  } else {
+    // Build deterministic 3D terrain mesh, Marching Squares elevation contours, and magenta routes
+    const terrainGeoms = createSculptureGeometries({
+      theme: settings.id || 'contour-flow',
+      isMobile: coarsePointer,
+      terrainScale,
+      contourSpacing,
+    });
+    terrainGeometry = terrainGeoms.terrainGeometry;
+    contourGeometry = terrainGeoms.contourGeometry;
+    magentaGeometry = terrainGeoms.magentaGeometry;
+
+    const terrainMats = createSculptureMaterials(settings);
+    terrainMaterial = terrainMats.terrainMaterial;
+    contourMaterial = terrainMats.contourMaterial;
+    magentaMaterial = terrainMats.magentaMaterial;
+
+    terrainMesh = new THREE.Mesh(terrainGeometry, terrainMaterial);
+    terrainMesh.renderOrder = 0;
+
+    contourLines = new THREE.LineSegments(contourGeometry, contourMaterial);
+    contourLines.renderOrder = 1;
+
+    magentaLines = new THREE.LineSegments(magentaGeometry, magentaMaterial);
+    magentaLines.renderOrder = 2;
+
+    landscapeGroup = new THREE.Group();
+    landscapeGroup.add(terrainMesh);
+    landscapeGroup.add(contourLines);
+    landscapeGroup.add(magentaLines);
+    scene.add(landscapeGroup);
+  }
 
   const controller = new SculptureController({
     cameraFraming,
@@ -82,8 +153,17 @@ export function mountSculptureScene(
     const aspect = w / h;
     camera.aspect = aspect;
     camera.fov = isDesktop
-      ? cameraFraming.fovDesktop || 33
-      : cameraFraming.fovMobile || 42;
+      ? cameraFraming.fovDesktop || (isEclipse ? 38 : 33)
+      : cameraFraming.fovMobile || (isEclipse ? 44 : 42);
+
+    if (isEclipse && eclipseGroup) {
+      const center = isDesktop
+        ? cameraFraming.eclipseCenterDesktop || [2.55, 0.10, 0]
+        : cameraFraming.eclipseCenterMobile || [0.0, -0.62, 0];
+      eclipseGroup.position.set(center[0], center[1], center[2]);
+      const s = isDesktop ? 1.0 : 0.88;
+      eclipseGroup.scale.set(s, s, s);
+    }
 
     controller.setViewportMode(isDesktop);
     controller.update(0, performance.now());
@@ -120,9 +200,34 @@ export function mountSculptureScene(
     controller.applyToCamera(camera);
 
     const timeSeconds = reducedMotion ? 0.0 : now * 0.001;
-    terrainMaterial.uniforms.uTime.value = timeSeconds;
-    contourMaterial.uniforms.uTime.value = timeSeconds;
-    magentaMaterial.uniforms.uTime.value = timeSeconds;
+
+    if (isEclipse) {
+      eclipseFilamentMaterial.uniforms.uTime.value = timeSeconds;
+      eclipseHaloMaterial.uniforms.uTime.value = timeSeconds;
+      eclipseParticleMaterial.uniforms.uTime.value = timeSeconds;
+
+      // Extract section calm progress from CSS custom property
+      const rootEl = container.closest('[data-theme]') || container.parentElement || container;
+      const calmVal = parseFloat(getComputedStyle(rootEl).getPropertyValue('--section-calm') || '0');
+      eclipseFilamentMaterial.uniforms.uSectionCalm.value = calmVal;
+      eclipseHaloMaterial.uniforms.uSectionCalm.value = calmVal;
+      eclipseParticleMaterial.uniforms.uSectionCalm.value = calmVal;
+
+      // Map smoothed pointer to eclipse local coordinates
+      const camZ = camera.position.z || 10.0;
+      const halfH = camZ * Math.tan((camera.fov * Math.PI) / 360.0);
+      const halfW = halfH * camera.aspect;
+      const ptrWorldX = controller.currentPointer.x * halfW;
+      const ptrWorldY = controller.currentPointer.y * halfH;
+      const localPtrX = ptrWorldX - eclipseGroup.position.x;
+      const localPtrY = ptrWorldY - eclipseGroup.position.y;
+      eclipseFilamentMaterial.uniforms.uPointer.value.set(localPtrX, localPtrY);
+      eclipseFilamentMaterial.uniforms.uHover.value = (activePointer !== null || controller.state === 'hover' || !coarsePointer) ? 1.0 : 0.6;
+    } else {
+      terrainMaterial.uniforms.uTime.value = timeSeconds;
+      contourMaterial.uniforms.uTime.value = timeSeconds;
+      magentaMaterial.uniforms.uTime.value = timeSeconds;
+    }
 
     renderer.render(scene, camera);
 
@@ -292,12 +397,23 @@ export function mountSculptureScene(
       document.body.style.cursor = '';
     }
 
-    terrainGeometry.dispose();
-    contourGeometry.dispose();
-    magentaGeometry.dispose();
-    terrainMaterial.dispose();
-    contourMaterial.dispose();
-    magentaMaterial.dispose();
+    if (isEclipse) {
+      eclipseFilamentsGeometry?.dispose();
+      eclipseParticlesGeometry?.dispose();
+      eclipseHaloGeometry?.dispose();
+      eclipseVoidGeometry?.dispose();
+      eclipseFilamentMaterial?.dispose();
+      eclipseHaloMaterial?.dispose();
+      eclipseParticleMaterial?.dispose();
+      eclipseVoidMaterial?.dispose();
+    } else {
+      terrainGeometry?.dispose();
+      contourGeometry?.dispose();
+      magentaGeometry?.dispose();
+      terrainMaterial?.dispose();
+      contourMaterial?.dispose();
+      magentaMaterial?.dispose();
+    }
     renderer.dispose();
     renderer.forceContextLoss?.();
     canvas.remove();

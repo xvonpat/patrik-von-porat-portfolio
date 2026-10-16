@@ -24,6 +24,7 @@ import { ItalicFeatureClient as ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0
 import { default as default_f22f5d3e22a648d210465bdce46a03a8 } from '../../../../src/components/TitleWithLinkCell.js'
 import { default as default_3cba3712a755e434e0e22fc0853ca230 } from '../../../../src/components/GalleryThumbnailCell.js'
 import { default as default_50fe867ad0483d5b859b2f9ee08117d9 } from '../../../../src/components/GalleryThumbnailField.js'
+import { BackgroundThemeDashboardCard as BackgroundThemeDashboardCard_70949a0f5dcb2c1e0f5b2f766916f96e } from '../../../../src/components/BackgroundThemeDashboardCard'
 import { VercelAnalyticsDashboard as VercelAnalyticsDashboard_19f65a3270e228b580f1a07775fb73a7 } from '../../../../src/components/VercelAnalyticsDashboard'
 import { LogoutButton as LogoutButton_b3d295ab4b1039e6e155cc89ff4f9f01 } from '../../../../src/components/LogoutButton'
 import { GoogleLoginButton as GoogleLoginButton_14c52b3cb0a4315d4a1f982df6bd4d2d } from '../../../../src/components/GoogleLoginButton'
@@ -58,6 +59,7 @@ export const importMap = {
   "/src/components/TitleWithLinkCell.js#default": default_f22f5d3e22a648d210465bdce46a03a8,
   "/src/components/GalleryThumbnailCell.js#default": default_3cba3712a755e434e0e22fc0853ca230,
   "/src/components/GalleryThumbnailField.js#default": default_50fe867ad0483d5b859b2f9ee08117d9,
+  "/src/components/BackgroundThemeDashboardCard#BackgroundThemeDashboardCard": BackgroundThemeDashboardCard_70949a0f5dcb2c1e0f5b2f766916f96e,
   "/src/components/VercelAnalyticsDashboard#VercelAnalyticsDashboard": VercelAnalyticsDashboard_19f65a3270e228b580f1a07775fb73a7,
   "/src/components/LogoutButton#LogoutButton": LogoutButton_b3d295ab4b1039e6e155cc89ff4f9f01,
   "/src/components/GoogleLoginButton#GoogleLoginButton": GoogleLoginButton_14c52b3cb0a4315d4a1f982df6bd4d2d,

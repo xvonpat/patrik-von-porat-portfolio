@@ -11,6 +11,7 @@ import { AdminLinks } from './src/collections/AdminLinks';
 import { GalleryCategories } from './src/collections/GalleryCategories';
 import { GalleryAlbums } from './src/collections/GalleryAlbums';
 import { GalleryImages } from './src/collections/GalleryImages';
+import { SiteSettings } from './src/globals/SiteSettings';
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -23,6 +24,7 @@ export default buildConfig({
     },
     components: {
       afterDashboard: [
+        '/src/components/BackgroundThemeDashboardCard#BackgroundThemeDashboardCard',
         '/src/components/VercelAnalyticsDashboard#VercelAnalyticsDashboard',
       ],
       beforeLogin: [
@@ -95,6 +97,9 @@ export default buildConfig({
     GalleryCategories,
     GalleryAlbums,
     GalleryImages,
+  ],
+  globals: [
+    SiteSettings,
   ],
   editor: lexicalEditor({}),
   secret: process.env.PAYLOAD_SECRET || 'a-very-secure-secret-placeholder-change-this',

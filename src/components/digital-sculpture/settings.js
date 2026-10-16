@@ -1,104 +1,261 @@
 /**
- * Topographic Landscape — Tunable Settings.
+ * Topographic Landscape & Contour Flow — Tunable Settings & Theme Registry.
  *
- * Exposes clearly named parameters for camera framing, contour spacing,
- * terrain scale, cyan brightness, magenta intensity, and parallax strength.
+ * Provides full support for selectable themes:
+ * - 'contour-flow' (Default): Option B — Dark flowing landscape with broad rolling ridges,
+ *   a sweeping S-shaped luminous valley, fine contour lines, and calm text negative space.
+ * - 'alpine-landscape': Option A — High alpine survey with sharp arête ridges, peaks,
+ *   and cirque valleys.
  */
-export const SCULPTURE_SETTINGS = {
-  /** Camera framing for desktop and mobile viewports. */
+
+export const CONTOUR_FLOW_SETTINGS = {
+  id: 'contour-flow',
+  label: 'Contour Flow (S-Valley)',
+
+  /** Camera framing for elevated oblique view of the sweeping S-valley */
   cameraFraming: {
-    fovDesktop: 32,
-    fovMobile: 40,
-    /** Elevated oblique mountain-survey camera position and target [x, y, z]. */
-    positionDesktop: [-0.4, 6.2, 18.0],
-    targetDesktop: [0.8, 1.15, -16.0],
-    positionMobile: [0.5, 6.6, 20.0],
-    targetMobile: [1.0, 1.1, -16.0],
+    fovDesktop: 33,
+    fovMobile: 42,
+    positionDesktop: [-1.8, 9.0, 19.2],
+    targetDesktop: [3.8, 1.1, -15.0],
+    positionMobile: [0.2, 9.8, 22.5],
+    targetMobile: [2.8, 0.8, -15.0],
   },
 
-  /** Constant-elevation contour line spacing and density. */
+  /** Fine, high-density constant-elevation contour line spacing */
   contourSpacing: {
-    /** Vertical elevation interval between constant-elevation slices. */
-    elevationStep: 0.085,
-    /** Minimum and maximum elevation levels to slice. */
-    minElevation: -0.8,
-    maxElevation: 6.8,
-    /** Line opacity and distance fade control. */
+    elevationStep: 0.054,
+    minElevation: -0.6,
+    maxElevation: 5.6,
     nearFadeDistance: 2.5,
-    farFadeDistance: 48.0,
+    farFadeDistance: 50.0,
   },
 
-  /** Deterministic 3D terrain dimensions and vertical scale. */
+  /** 3D terrain dimensions and grid resolution */
   terrainScale: {
-    /** Deterministic seed for repeatable mountain and valley layout. */
-    seed: 2049,
-    /** World width (X) and depth (Z) — oversized so edges never enter the viewport. */
-    width: 84.0,
-    depth: 68.0,
-    /** Overall vertical elevation multiplier. */
+    seed: 1984,
+    width: 86.0,
+    depth: 70.0,
     heightMultiplier: 1.0,
-    /** Grid resolution for terrain mesh and Marching Squares contour extraction. */
-    gridXDesktop: 300,
-    gridZDesktop: 260,
-    gridXMobile: 180,
-    gridZMobile: 160,
+    gridXDesktop: 330,
+    gridZDesktop: 290,
+    gridXMobile: 190,
+    gridZMobile: 170,
   },
 
-  /** Cyan-white elevation contour appearance (mostly restrained cyan with selective highlights). */
+  /** Restrained cyan & glowing stream palette (Option B reference) */
   cyanBrightness: {
-    /** Overall brightness multiplier for elevation contours. */
-    intensity: 0.88,
-    /** Primary contour color — restrained atmospheric cyan. */
-    cyanColor: '#4ec5e6',
-    /** Deep slope/bowl & distant contour tint — muted slate-cyan. */
-    deepCyanColor: '#184359',
-    /** Selective ridge crest highlight color — soft icy cyan-white. */
-    ridgeWhiteColor: '#cbeeff',
-    /** Subtle smoky mist in deep valleys and mountain bases. */
-    valleyMistColor: '#102836',
-    valleyMistIntensity: 0.28,
+    intensity: 0.96,
+    cyanColor: '#38bdf8',
+    deepCyanColor: '#13374b',
+    ridgeWhiteColor: '#e0f7ff',
+    valleyMistColor: '#0a1d27',
+    valleyMistIntensity: 0.30,
+    valleyStreamColor: '#5eead4',
+    valleyStreamIntensity: 1.45,
   },
 
-  /** Sparse, coherent magenta routes winding through valleys and saddles. */
+  /** Delicate magenta routes winding along outer valley contours and foreground ridge */
   magentaIntensity: {
-    /** Overall luminance of the magenta paths. */
     intensity: 1.15,
-    /** Primary route color — Aurora magenta/pink. */
-    primaryColor: '#f23d93',
-    /** Bright core highlight on pulse peaks. */
-    coreColor: '#ffd1e8',
-    /** Speed of light pulses travelling along the magenta routes. */
-    pulseSpeed: 0.45,
+    primaryColor: '#f43f5e',
+    coreColor: '#ffe4e6',
+    pulseSpeed: 0.38,
   },
 
-  /** Pointer parallax and constrained drag viewing angle adjustments. */
+  /** Smooth pointer parallax and cushioned drag viewing angle limits */
   parallaxStrength: {
-    /** Damped camera shift on pointer move [x, y] in world units. */
-    hoverPositionX: 0.55,
-    hoverPositionY: 0.24,
-    /** Subtle target shift on pointer move. */
-    hoverTargetX: 0.30,
-    hoverTargetY: 0.14,
-    /** Smoothing speed for pointer parallax. */
+    hoverPositionX: 0.48,
+    hoverPositionY: 0.22,
+    hoverTargetX: 0.28,
+    hoverTargetY: 0.12,
     dampingSpeed: 3.8,
-    /** Radians of camera angle adjustment per pixel dragged. */
     dragSensitivity: 0.0015,
-    /** Constrained viewing angle limits (radians) so terrain never flips or clips. */
     maxYaw: 0.15,
     maxPitchUp: 0.08,
     maxPitchDown: 0.05,
-    /** Inertial decay rate after releasing drag. */
     inertiaDamping: 3.5,
-    /** Inactivity delay before easing back to reference framing (ms). */
     returnDelayMs: 2200,
-    /** Speed of smooth return to reference pose. */
     returnSpeed: 1.5,
   },
 
-  /** Adaptive rendering quality limits. */
   rendering: {
     maxPixelRatioDesktop: 2.0,
     maxPixelRatioMobile: 1.5,
     mobileFps: 30,
   },
 };
+
+export const ALPINE_PEAKS_SETTINGS = {
+  id: 'alpine-landscape',
+  label: 'Topographic Landscape (Alpine Peaks)',
+
+  cameraFraming: {
+    fovDesktop: 32,
+    fovMobile: 40,
+    positionDesktop: [-0.4, 6.2, 18.0],
+    targetDesktop: [0.8, 1.15, -16.0],
+    positionMobile: [0.5, 6.6, 20.0],
+    targetMobile: [1.0, 1.1, -16.0],
+  },
+
+  contourSpacing: {
+    elevationStep: 0.085,
+    minElevation: -0.8,
+    maxElevation: 6.8,
+    nearFadeDistance: 2.5,
+    farFadeDistance: 48.0,
+  },
+
+  terrainScale: {
+    seed: 2049,
+    width: 84.0,
+    depth: 68.0,
+    heightMultiplier: 1.0,
+    gridXDesktop: 300,
+    gridZDesktop: 260,
+    gridXMobile: 180,
+    gridZMobile: 160,
+  },
+
+  cyanBrightness: {
+    intensity: 0.88,
+    cyanColor: '#4ec5e6',
+    deepCyanColor: '#184359',
+    ridgeWhiteColor: '#cbeeff',
+    valleyMistColor: '#102836',
+    valleyMistIntensity: 0.28,
+    valleyStreamColor: '#4ec5e6',
+    valleyStreamIntensity: 1.0,
+  },
+
+  magentaIntensity: {
+    intensity: 1.15,
+    primaryColor: '#f23d93',
+    coreColor: '#ffd1e8',
+    pulseSpeed: 0.45,
+  },
+
+  parallaxStrength: {
+    hoverPositionX: 0.55,
+    hoverPositionY: 0.24,
+    hoverTargetX: 0.30,
+    hoverTargetY: 0.14,
+    dampingSpeed: 3.8,
+    dragSensitivity: 0.0015,
+    maxYaw: 0.15,
+    maxPitchUp: 0.08,
+    maxPitchDown: 0.05,
+    inertiaDamping: 3.5,
+    returnDelayMs: 2200,
+    returnSpeed: 1.5,
+  },
+
+  rendering: {
+    maxPixelRatioDesktop: 2.0,
+    maxPixelRatioMobile: 1.5,
+    mobileFps: 30,
+  },
+};
+
+export const DIGITAL_ECLIPSE_SETTINGS = {
+  id: 'digital-eclipse',
+  label: 'Digital Eclipse (Radial Corona & Cosmic Filaments)',
+
+  cameraFraming: {
+    mode: 'front-facing',
+    fovDesktop: 38,
+    fovMobile: 44,
+    positionDesktop: [0, 0, 10.0],
+    targetDesktop: [0, 0, 0],
+    positionMobile: [0, 0, 10.8],
+    targetMobile: [0, 0, 0],
+    eclipseCenterDesktop: [2.55, 0.10, 0],
+    eclipseCenterMobile: [0.0, -0.62, 0],
+  },
+
+  eclipseGeometry: {
+    innerRadiusDesktop: 1.36,
+    innerRadiusMobile: 0.84,
+    rimCountDesktop: 7500,
+    rimCountMobile: 3600,
+    spiculeCountDesktop: 2200,
+    spiculeCountMobile: 1200,
+    streamerCountDesktop: 160,
+    streamerCountMobile: 80,
+    particleCountDesktop: 2800,
+    particleCountMobile: 1400,
+    haloRadiusDesktop: 3.6,
+    haloRadiusMobile: 2.3,
+  },
+
+  cyanBrightness: {
+    intensity: 1.35,
+    electricCyan: '#00f0ff',
+    cyanHighlight: '#f0fdfa',
+    deepCyan: '#0891b2',
+    haloCyan: '#00d8f6',
+  },
+
+  magentaIntensity: {
+    intensity: 1.30,
+    vividPink: '#f43f5e',
+    magentaHighlight: '#ffe4e6',
+    deepMagenta: '#be123c',
+    haloPink: '#ff2875',
+  },
+
+  voidColor: '#040609',
+
+  animation: {
+    pulseSpeed: 0.65,
+    shimmerSpeed: 1.35,
+    particleDriftSpeed: 0.22,
+    breathingScale: 0.015,
+  },
+
+  parallaxStrength: {
+    hoverPositionX: 0.35,
+    hoverPositionY: 0.20,
+    hoverTargetX: 0.15,
+    hoverTargetY: 0.10,
+    dampingSpeed: 3.6,
+    dragSensitivity: 0.0012,
+    maxYaw: 0.12,
+    maxPitchUp: 0.07,
+    maxPitchDown: 0.07,
+    inertiaDamping: 3.8,
+    returnDelayMs: 1800,
+    returnSpeed: 1.8,
+  },
+
+  rendering: {
+    maxPixelRatioDesktop: 2.0,
+    maxPixelRatioMobile: 1.5,
+    mobileFps: 30,
+  },
+};
+
+export const SCULPTURE_THEMES = {
+  'digital-eclipse': DIGITAL_ECLIPSE_SETTINGS,
+  'contour-flow': CONTOUR_FLOW_SETTINGS,
+  'alpine-landscape': ALPINE_PEAKS_SETTINGS,
+};
+
+export function getSculptureSettings(themeName) {
+  if (!themeName) return DIGITAL_ECLIPSE_SETTINGS;
+  const key = String(themeName).toLowerCase().trim();
+  if (key === 'eclipse' || key === 'digital-eclipse' || key === 'c') {
+    return DIGITAL_ECLIPSE_SETTINGS;
+  }
+  if (key === 'flow' || key === 'contour-flow' || key === 'b') {
+    return CONTOUR_FLOW_SETTINGS;
+  }
+  if (key === 'alpine' || key === 'alpine-peaks' || key === 'alpine-landscape' || key === 'a') {
+    return ALPINE_PEAKS_SETTINGS;
+  }
+  return SCULPTURE_THEMES[key] || DIGITAL_ECLIPSE_SETTINGS;
+}
+
+/** Default active settings (Digital Eclipse) */
+export const SCULPTURE_SETTINGS = DIGITAL_ECLIPSE_SETTINGS;
