@@ -1088,5 +1088,3 @@ button:not(.aurora-cta-btn):not(.email-cta-btn)[class*="rounded-full"][class*="b
     background: linear-gradient(90deg, rgba(224, 98, 181, 0.70) 0%, rgba(109, 231, 228, 0.50) 100%) !important;
   }
 }
-
-

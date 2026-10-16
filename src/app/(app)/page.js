@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import GlassCard from '@/components/GlassCard';
 import CtaButton from '@/components/CtaButton';
+import DigitalSculpture from '@/components/digital-sculpture/DigitalSculpture';
 import { getPayload } from 'payload';
 import configPromise from '../../../payload.config.ts';
 
@@ -134,52 +135,62 @@ export default async function Home() {
   ];
 
   return (
-    <div className="max-w-6xl xl:max-w-7xl 2xl:max-w-[1320px] mx-auto px-6 lg:px-8 py-8 md:py-14 flex flex-col gap-16 md:gap-24 relative z-10">
-      
-      {/* 1. HERO SECTION */}
-      <section className="flex flex-col items-center text-center justify-center gap-5 max-w-4xl mx-auto relative pt-4 pb-2 md:pt-8 md:pb-4">
-        {/* Ambient subtle glow backdrop */}
-        <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[85%] h-[60%] bg-accent-purple/8 blur-[110px] rounded-full pointer-events-none -z-10" />
+    <>
+      {/* 3D Digital Sculpture Background (homepage-scoped full viewport) */}
+      <DigitalSculpture />
 
-        {/* Eyebrow */}
-        <p className="text-xs md:text-sm font-mono tracking-[0.3em] uppercase text-zinc-400 font-medium">
-          PATRIK VON PORAT · CREATIVE HUB
-        </p>
+      <div className="max-w-6xl xl:max-w-7xl 2xl:max-w-[1320px] mx-auto px-6 lg:px-8 py-8 md:py-14 flex flex-col gap-16 md:gap-24 relative z-10">
         
-        {/* Primary Heading */}
-        <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold tracking-tight text-white font-gothic leading-[1.08] select-none text-balance">
-          Creative instinct, given structure.
-        </h1>
-        
-        {/* Body Copy */}
-        <p className="text-lg md:text-xl leading-relaxed md:leading-9 text-zinc-300 font-light max-w-3xl mt-1 text-balance text-pretty">
-          I’m Patrik von Porat. I make heavy music, draw by hand, and build digital tools for creative work. This is where I share the projects—and the thinking that shapes them.
-        </p>
+        {/* 1. HERO SECTION */}
+        <section className="grid grid-cols-1 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] items-center gap-6 w-full relative pt-2 pb-2 md:pt-6 md:pb-4 lg:pt-8">
+          {/* Ambient subtle glow backdrop */}
+          <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[85%] h-[60%] bg-accent-purple/8 blur-[110px] rounded-full pointer-events-none -z-10" />
 
-        {/* Identity Line */}
-        <p className="text-xs sm:text-sm font-mono tracking-[0.22em] uppercase text-accent-purple font-medium mt-1">
-          Guitarist &middot; Visual Artist &middot; Systems-Minded Creator
-        </p>
-        
-        {/* CTAs */}
-        <div className="flex flex-col sm:flex-row gap-3.5 mt-4 w-full sm:w-auto">
-          <CtaButton 
-            href="#selected-work" 
-            className="px-8 py-3.5 text-xs md:text-sm"
-          >
-            Explore Selected Work
-          </CtaButton>
-          <CtaButton 
-            href="/about" 
-            variant="secondary"
-            className="px-8 py-3.5 text-xs md:text-sm"
-          >
-            About the Process
-          </CtaButton>
-        </div>
-        
-        <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-accent-purple/80 to-transparent mt-6" />
-      </section>
+          {/* Introductory Text (Left Column on Desktop) */}
+          <div className="flex flex-col items-center text-center lg:items-start lg:text-left gap-5 max-w-4xl mx-auto lg:mx-0">
+            {/* Eyebrow */}
+            <p className="text-xs md:text-sm font-mono tracking-[0.3em] uppercase text-zinc-400 font-medium">
+              PATRIK VON PORAT · CREATIVE HUB
+            </p>
+            
+            {/* Primary Heading */}
+            <h1 className="text-5xl sm:text-6xl md:text-7xl xl:text-[5.25rem] font-semibold tracking-tight text-white font-gothic leading-[1.08] select-none text-balance">
+              Creative instinct, given structure.
+            </h1>
+            
+            {/* Body Copy */}
+            <p className="text-lg md:text-xl leading-relaxed md:leading-9 text-zinc-300 font-light max-w-3xl lg:max-w-2xl mt-1 text-balance text-pretty">
+              I’m Patrik von Porat. I make heavy music, draw by hand, and build digital tools for creative work. This is where I share the projects—and the thinking that shapes them.
+            </p>
+
+            {/* Identity Line */}
+            <p className="text-xs sm:text-sm font-mono tracking-[0.22em] uppercase text-accent-purple font-medium mt-1">
+              Guitarist &middot; Visual Artist &middot; Systems-Minded Creator
+            </p>
+            
+            {/* CTAs */}
+            <div className="flex flex-col sm:flex-row gap-3.5 mt-4 w-full sm:w-auto">
+              <CtaButton 
+                href="#selected-work" 
+                className="px-8 py-3.5 text-xs md:text-sm"
+              >
+                Explore Selected Work
+              </CtaButton>
+              <CtaButton 
+                href="/about" 
+                variant="secondary"
+                className="px-8 py-3.5 text-xs md:text-sm"
+              >
+                About the Process
+              </CtaButton>
+            </div>
+            
+            <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-accent-purple/80 to-transparent mt-6" />
+          </div>
+
+          {/* Open negative space on desktop framing the 3D sculpture's detailed core */}
+          <div className="hidden lg:block min-h-[460px] pointer-events-none" aria-hidden="true" />
+        </section>
 
       {/* 2. SELECTED WORK SECTION (Presented early for first-time visitors) */}
       <section id="selected-work" className="flex flex-col gap-8 max-w-6xl mx-auto w-full scroll-mt-24">
@@ -494,5 +505,6 @@ export default async function Home() {
       </section>
 
     </div>
+    </>
   );
 }
