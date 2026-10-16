@@ -1,6 +1,6 @@
 # vonporat.com — Site Architecture
 
-Last reviewed: 2026-08-25
+Last reviewed: 2026-10-17
 
 ## Purpose
 
@@ -25,7 +25,7 @@ It is an architectural map grounded in the actual codebase implementation.
 
 ## System summary
 
-vonporat.com is a Next.js (App Router, Turbopack) application deployed on Vercel. Payload CMS provides administration and structured publishing. Supabase/PostgreSQL provides persistent data and media storage. GitHub is the version-controlled deployment source. Google Search Console and Vercel Analytics support visibility and performance review.
+vonporat.com is a Next.js (App Router, Turbopack) application deployed on Vercel. Payload CMS provides administration, site settings globals, and structured publishing. Supabase/PostgreSQL provides persistent data, settings, and media storage. Three.js powers the high-performance interactive 3D background sculpture engine (`DigitalSculpture`). GitHub is the version-controlled deployment source. Google Search Console and Vercel Analytics support visibility and performance review.
 
 High-level system shape:
 
@@ -35,6 +35,8 @@ flowchart TD
     E["Patrik as editor"] --> P["Payload CMS admin (/admin)"]
     P --> D["Supabase / PostgreSQL"]
     P --> M["Media storage"]
+    P --> S["SiteSettings Global"]
+    S --> D
     N --> D
     N --> M
     G["GitHub repository"] --> H["Vercel deployment"]
@@ -49,25 +51,27 @@ Current implemented navigation order (in `src/components/Navbar.js`):
 2. **Projects** (`/projects`)
 3. **Music** (`/music`)
 4. **Art** (`/art`)
-5. **Blog** (`/blog`)
-6. **About** (`/about`)
-7. **Contact** (`/contact`)
+5. **Gallery** (`/gallery`)
+6. **Blog** (`/blog`)
+7. **About** (`/about`)
+8. **Contact** (`/contact`)
 
-Projects is approved and active in public navigation.
+Projects and Gallery are approved and active in public navigation.
 
 ## Route map
 
 | Route | Visibility | Status | Content source | Responsibility |
 | --- | --- | --- | --- | --- |
-| `/` | Public | Approved & locked | Static composition + dynamic latest blog query | Position Patrik and orient visitors through the conceptual journey. |
+| `/` | Public | Approved & locked | Static composition + SiteSettings background + dynamic latest blog query | Position Patrik and orient visitors through the conceptual journey. |
 | `/projects` | Public | Approved & locked | Static composition | Present curated proof cards connecting creative work and systems thinking. |
 | `/music` | Public | Approved & locked | Static composition | Present active music projects, verified discography, roles, and legacy bands. |
 | `/art` | Public | Approved & locked | Static composition + interactive client lightbox | Present curated visual and physical practice (graphite, tattoo, miniatures, digital). |
+| `/gallery` | Public | Approved & locked | Static composition | Present curated visual practice works in an art gallery format. |
 | `/blog` | Public | Under review | Payload CMS (`posts` collection) | List published posts with category filters, dynamic lead entry, and text-led cards. |
 | `/blog/[slug]` | Public (published) | Outside recent review | Payload CMS (`posts` collection) | Render individual published articles with rich text, media, and metadata. |
 | `/about` | Public | Approved & locked | Static composition | Connect music, visual craft, technology, and systems into one personal narrative. |
 | `/contact` | Public | Approved & locked | Static composition | Provide direct primary email action and verified external channels. |
-| `/admin` | Private | Operational | Payload CMS | Authenticate editors and manage CMS collections. |
+| `/admin` | Private | Operational | Payload CMS | Authenticate editors and manage CMS collections and site settings globals. |
 
 ## Homepage architecture
 

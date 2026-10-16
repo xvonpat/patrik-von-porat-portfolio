@@ -1,6 +1,6 @@
 # vonporat.com — Execution Plans & Roadmap
 
-Last reviewed: 2026-08-25
+Last reviewed: 2026-10-17
 
 ## Purpose
 
@@ -17,14 +17,16 @@ This document defines when and how to create an execution plan for significant w
 
 ### 1. Completed & Approved Pages (Locked)
 
-| Page | Approved Scope | Date Locked |
+| Page / Feature | Approved Scope | Date Locked |
 | --- | --- | --- |
-| **Home** (`/`) | Hero positioning, The Impulse, 3 Core Expressions, 4-stage Process, Selected Work proof cards, Current Focus, Journal preview, Contact exit. | 2026-08-25 |
+| **Home** (`/`) | Hero positioning, interactive 3D WebGL Digital Sculpture (`digital-eclipse` default), The Impulse, 3 Core Expressions, 4-stage Process, Selected Work proof cards, Current Focus, Journal preview, Contact exit. | 2026-10-17 |
 | **Projects** (`/projects`) | Publicly active in navigation. Curated Selected Work (Realmforged, Ashwrithe, Visual Practice, vonporat.com, Systems & Improvement). | 2026-08-25 |
 | **Music** (`/music`) | Realmforged and Ashwrithe active showcases, verified discography releases, and Freternia/Cromonic legacy timeline. | 2026-08-25 |
 | **Art** (`/art`) | Curated Traditional Studies, Tattoo Practice, Miniatures & 3D Prints, Generative Visuals, and interactive full-screen lightbox. | 2026-08-25 |
+| **Gallery** (`/gallery`) | Curated visual practice works presented in an art gallery showcase format. | 2026-10-11 |
 | **About** (`/about`) | Personal narrative, studio portrait + Core Facts band in Background, How I Work natural typography measure, contextual capability modes. | 2026-08-25 |
 | **Contact** (`/contact`) | Direct email CTA targeting the configured `mailto:` destination, form-free layout, 6 verified external channels (Spotify, YouTube, Instagram, Patreon, Bandcamp, LinkedIn). | 2026-08-25 |
+| **Theme Selector** | Payload CMS SiteSettings Global + Admin Dashboard card for 1-click background theme selection with preview thumbnails. | 2026-10-17 |
 
 ### 2. In Progress / Under Review
 

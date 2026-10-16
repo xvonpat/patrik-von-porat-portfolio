@@ -1,6 +1,6 @@
 # vonporat.com — Technical System
 
-Last reviewed: 2026-08-25
+Last reviewed: 2026-10-17
 
 ## Purpose
 
@@ -18,8 +18,9 @@ It is grounded in the actual codebase implementation and package configuration.
 | Layer | Technology | Details |
 | --- | --- | --- |
 | Frontend framework | Next.js 16.2.6 | App Router, Turbopack, React 19.2.4 |
-| CMS engine | Payload CMS v3.85+ | Lexical rich-text editor, Postgres adapter, Local API |
-| Database | Supabase / PostgreSQL | Persistent data storage for Payload CMS collections |
+| 3D Graphics engine | Three.js (WebGL) | Interactive 3D digital sculpture background engine with selectable themes |
+| CMS engine | Payload CMS v3.85+ | Lexical rich-text editor, Postgres adapter, Local API, Globals |
+| Database | Supabase / PostgreSQL | Persistent data storage for Payload CMS collections and site settings |
 | Media storage | S3-compatible Supabase Storage | Payload `@payloadcms/storage-s3` plugin |
 | Styling | Tailwind CSS v4 | PostCSS plugin, CSS theme variables |
 | Hosting & Analytics | Vercel | Automatic deployments on `main`, Vercel Analytics, Speed Insights |
@@ -34,6 +35,8 @@ flowchart TD
     A["Authenticated Editor"] --> P["Payload CMS Admin (/admin)"]
     P --> DB["Supabase PostgreSQL"]
     P --> MS["Supabase S3 Storage"]
+    P --> S["SiteSettings Global"]
+    S --> DB
     W --> DB
     W --> MS
     GH["GitHub (main)"] --> VC["Vercel Deployment Pipeline"]
@@ -48,7 +51,7 @@ Before performing technical work, inspect the repository rather than relying on 
 - Package manager and lockfile (`package-lock.json` &rarr; `npm`)
 - Next.js and Payload versions in `package.json`
 - Next.js route tree in `src/app/(app)/`
-- Payload configuration in `payload.config.ts` and collections in `src/collections/`
+- Payload configuration in `payload.config.ts`, collections in `src/collections/`, and globals in `src/globals/`
 - Database and storage adapter configurations
 - Environment-variable names in `.env` and call sites
 - Available scripts in `package.json`
@@ -59,15 +62,18 @@ Before performing technical work, inspect the repository rather than relying on 
 - **`posts` collection**: Blog articles, titles, slugs, excerpts, rich-text body, categories, published status, publish dates, and cover media.
 - **`media` collection**: Uploaded images and media records.
 - **`users` collection**: Authenticated administrative users.
+- **`site-settings` global**: Configurable site-wide settings including `backgroundTheme` (`digital-eclipse`, `contour-flow`, `alpine-landscape`) with 1-click dashboard controls.
 
 ### Repository-managed (Static code)
 - Homepage structure and copy (`src/app/(app)/page.js`)
 - Projects page (`src/app/(app)/projects/page.js`)
 - Music page (`src/app/(app)/music/page.js`)
 - Art page and client lightbox (`src/app/(app)/art/`)
+- Gallery page (`src/app/(app)/gallery/page.js`)
 - About page (`src/app/(app)/about/page.js`)
 - Contact page (`src/app/(app)/contact/page.js`, `src/components/ContactLinks.js`)
 - Navigation and Footer components (`src/components/`)
+- Interactive 3D WebGL sculpture engine (`src/components/digital-sculpture/`)
 - Static assets and logos (`public/images/`)
 
 Do not introduce dual ownership where the same value can be edited in both code and CMS without an explicit synchronization design.
@@ -77,17 +83,19 @@ Do not introduce dual ownership where the same value can be edited in both code 
 Current implemented navigation order (in `src/components/Navbar.js`):
 
 ```text
-Home (/) · Projects (/projects) · Music (/music) · Art (/art) · Blog (/blog) · About (/about) · Contact (/contact)
+Home (/) · Projects (/projects) · Music (/music) · Art (/art) · Gallery (/gallery) · Blog (/blog) · About (/about) · Contact (/contact)
 ```
 
 Verified public routes:
-- `/` — Homepage (static composition + dynamic latest blog query)
+- `/` — Homepage (static composition + dynamic background theme + latest blog query)
 - `/projects` — Selected Work proof cards (static composition)
 - `/music` — Projects, discography, and legacy bands (static composition)
 - `/art` — Visual craft showcases and interactive lightbox (static + client gallery)
+- `/gallery` — Visual practice gallery showcase (static composition)
 - `/blog` — Journal listing (Payload CMS `posts` collection)
 - `/blog/[slug]` — Individual article reader (Payload CMS `posts` collection)
 - `/about` — Personal narrative, studio portrait, core facts (static composition)
+- `/contact` — Email CTA and external channels (static composition)
 - `/contact` — Email CTA and external channels (static composition)
 
 ## Private and administrative boundaries
@@ -115,6 +123,16 @@ The `posts` collection (`src/collections/Posts.ts`) defines:
 | `content` | RichText | Lexical rich-text body. |
 | `seo` | Group | `seoTitle`, `metaDescription`, `ogImage`, and `canonicalUrl` (auto-populated with fallbacks). |
 
+### Global schema: `site-settings`
+The `site-settings` Global (`src/globals/SiteSettings.ts`) controls site-wide runtime configurations:
+
+| Field | Type | Options / Purpose |
+| --- | --- | --- |
+| `backgroundTheme` | Select | `digital-eclipse` (Default, Option C), `contour-flow` (Option B), `alpine-landscape` (Option A). Governs the active 3D WebGL background sculpture. |
+
+- An interactive admin dashboard card (`src/components/BackgroundThemeDashboardCard.js`) is mounted in the Payload Admin Dashboard, enabling 1-click theme switching with preview thumbnails without requiring a code deployment or rebuild.
+- The homepage query (`src/app/(app)/page.js`) fetches the active theme via the Payload Local API with a 60-second revalidation window (`revalidate = 60`), with query-parameter overrides supported for immediate testing (`?theme=eclipse`, `?theme=flow`, `?theme=alpine`).
+
 ### Blog query behavior
 - Public queries query only published posts (`where: { status: { equals: 'published' } }`).
 - Draft posts remain private and are excluded from public sitemaps and listings.
@@ -125,6 +143,22 @@ The `posts` collection (`src/collections/Posts.ts`) defines:
 - Blog bodies use Payload's Lexical editor.
 - The frontend renderer handles standard nodes: headings (`h1`–`h4`), paragraphs, lists (ordered/unordered), blockquotes, links, and embedded images.
 - Content inherits typography styles defined in the design system.
+
+## Interactive 3D Digital Sculpture Architecture (`DigitalSculpture`)
+
+The hero section background runs a custom Three.js WebGL rendering engine (`src/components/digital-sculpture/`):
+
+- **Theme Registry (`settings.js`)**:
+  - `digital-eclipse` (Default): Large cosmic eclipse beside the intro text with a pure black central void, dual electric cyan flares (with a brilliant diamond flare at the lower-right arc), vivid magenta/pink clusters along the right and lower arcs, delicate multi-scale radial filaments, starlight endpoint beads, and soft scattering corona halo.
+  - `contour-flow`: Sweeping S-shaped river valley with rolling mountain ridges, high-angle camera framing, glowing river stream, and delicate constant-elevation elevation contours.
+  - `alpine-landscape`: Sharp high-alpine survey with arête ridges, jagged peaks, and cirque valleys.
+- **Dynamic Idle Loading**: Loads asynchronously via `requestIdleCallback` (with 200ms fallback) to guarantee zero blocking of page text, typography, and navigation.
+- **Shaders & Blending**: Custom GLSL vertex and fragment shaders using `vertexColors: true`, per-vertex alpha (`aAlpha`), and `THREE.AdditiveBlending` without clipping into white.
+- **Readability & Scroll Transition**: A smoothly feathered darkening veil (`readabilityMask`) protects left-hand reading typography; a `--section-calm` CSS variable dynamically fades sculpture contrast and brightness as the visitor scrolls towards *Selected Work*.
+- **Performance & Battery Protections**:
+  - Automatically pauses the `requestAnimationFrame` render loop when offscreen or when the browser tab is hidden.
+  - Respects `prefers-reduced-motion` by freezing camera and pulse animations.
+  - Mobile frame rate limiter (`mobileFps: 30`, reduced particle/filament counts).
 
 ## Media pipeline
 

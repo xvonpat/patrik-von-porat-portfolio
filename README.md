@@ -28,8 +28,9 @@ The site is a curated, evolving overview of selected work and active projects. I
 The platform is built on:
 
 - **Next.js (App Router, Turbopack)** — public application, routes, rendering, and metadata
-- **Payload CMS (v3.85+)** — private administration, rich-text editing, and structured publishing
-- **Supabase / PostgreSQL** — persistent CMS data and media storage
+- **Three.js (WebGL)** — interactive 3D digital sculpture background engine with selectable themes
+- **Payload CMS (v3.85+)** — private administration, rich-text editing, site settings globals, and structured publishing
+- **Supabase / PostgreSQL** — persistent CMS data, settings, and media storage
 - **Vercel** — hosting, deployment automation, Vercel Analytics, and Speed Insights
 - **GitHub** — source control and automated deployment pipeline
 - **Google Search Console** — indexing and search performance review
@@ -41,17 +42,18 @@ The repository is authoritative for exact dependencies, scripts, schemas, and ru
 Current implemented navigation order (in `src/components/Navbar.js`):
 
 ```text
-Home · Projects · Music · Art · Blog · About · Contact
+Home · Projects · Music · Art · Gallery · Blog · About · Contact
 ```
 
 ### Current Website Status
 
 | Page / Route | Status | Notes |
 | --- | --- | --- |
-| **Home** (`/`) | Approved & locked | Hero, The Impulse, 3 Expressions, 4-stage Process, Selected Work, Now, Journal preview, Contact exit. |
+| **Home** (`/`) | Approved & locked | Hero with interactive 3D Digital Sculpture (`digital-eclipse` default), The Impulse, 3 Expressions, 4-stage Process, Selected Work, Now, Journal preview, Contact exit. |
 | **Projects** (`/projects`) | Approved & locked | Curated Selected Work (Realmforged, Ashwrithe, Visual Practice, vonporat.com, Systems & Improvement). Publicly visible. |
 | **Music** (`/music`) | Approved & locked | Realmforged & Ashwrithe priority, verified discography, Freternia/Cromonic legacy history. |
 | **Art** (`/art`) | Approved & locked | Curated Traditional Studies, Tattoo Practice, Miniatures & 3D Prints, Generative Visuals, full lightbox. |
+| **Gallery** (`/gallery`) | Approved & locked | Visual art showcase with curated visual practice sections. |
 | **About** (`/about`) | Approved & locked | Personal narrative, studio portrait + Core Facts band in Background, How I Work measure, contextual capabilities. |
 | **Contact** (`/contact`) | Approved & locked | Email-led CTA targeting the configured `mailto:` destination, form-free layout, 6 external channels (Spotify, YouTube, Instagram, Patreon, Bandcamp, LinkedIn). |
 | **Blog index** (`/blog`) | Under review | Redesigned editorial journal with category filters (`Music`, `Visual Art`, `Making`, `Technology`, `Process`, `Personal`) and text-led cards implemented; awaiting final review. |
@@ -61,8 +63,9 @@ Home · Projects · Music · Art · Blog · About · Contact
 
 ## Content Ownership
 
-- **Blog** is the primary CMS-driven public section.
-- **Home, Music, Art, Projects, About, and Contact** remain repository-managed by default.
+- **Blog** is the primary CMS-driven public section (`posts` collection).
+- **Site Settings** (`site-settings` Global) allows 1-click switching of background theme (`digital-eclipse`, `contour-flow`, `alpine-landscape`) from the Payload Admin Dashboard.
+- **Home, Music, Art, Gallery, Projects, About, and Contact** remain repository-managed by default.
 - New Payload collections or broader CMS migrations require an observed maintenance need and explicit approval.
 - Draft and private content must never be exposed publicly.
 

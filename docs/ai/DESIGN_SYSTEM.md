@@ -1,6 +1,6 @@
 # vonporat.com — Design System
 
-Last reviewed: 2026-08-25
+Last reviewed: 2026-10-17
 
 ## Purpose
 
@@ -59,7 +59,7 @@ Perceived speed, immediate response, and minimal layout shift are essential to a
 
 | Role | Direction / Token | Use |
 | --- | --- | --- |
-| Canvas base | Obsidian (`obsidian-950` / `#0a0a0d`) | Main page background and deepest layer. |
+| Canvas base | Obsidian (`obsidian-950` / `#0a0a0d` / `#040609`) | Main page background and deepest layer. |
 | Canvas raised | Dark graphite (`obsidian-900` / `#0f0f14`) | Large sections, panels, and separation. |
 | Surface | Smoked graphite (`obsidian-950/70` blur) | Cards, navigation capsule, drawers, and elevated content. |
 | Surface strong | Elevated graphite (`white/[0.04]`) | Hovered or selected surfaces. |
@@ -68,7 +68,7 @@ Perceived speed, immediate response, and minimal layout shift are essential to a
 | Text quiet | Low-contrast gray (`text-zinc-400` / `text-zinc-500`) | Section eyebrows, dates, metadata, and captions. |
 | Border subtle | Low-contrast graphite (`border-white/[0.06]` to `[0.12]`) | Structural separation without outlining every object. |
 | Accent primary | Amethyst / purple (`accent-purple` / `#8b5cf6`) | Primary interaction, selected filter, signature emphasis, active states. |
-| Accent secondary | Controlled turquoise (`accent-cyan` / `#06b6d4`) | Small contrast moments, secondary signals, systems, process numbers. |
+| Accent secondary | Controlled turquoise (`accent-cyan` / `#06b6d4` / `#00f0ff`) | Small contrast moments, secondary signals, systems, process numbers, cyan flares. |
 
 ### Accent hierarchy
 - **Purple** is the dominant accent for primary identity, interactive emphasis, and active states.
@@ -83,10 +83,12 @@ Perceived speed, immediate response, and minimal layout shift are essential to a
 
 ## Background and atmosphere
 
-The background may use layered visual atmosphere while remaining subordinate to content:
-- Subtle graphite grain or soft vignette
-- Low-opacity radial ambient glow (e.g. `bg-accent-purple/8 blur-[110px]`)
-- Controlled purple or turquoise atmospheric accents
+The homepage hero employs a multi-theme interactive 3D WebGL sculpture engine (`DigitalSculpture`) positioned as a non-intrusive backdrop:
+- **Digital Eclipse** (Default): High-contrast cosmic ring beside the hero text with dual electric cyan flares (featuring a brilliant diamond flare at the lower-right arc), vivid magenta/pink clusters along the right and lower arcs, hair-thin stardust filaments, and a soft scattering corona bloom.
+- **Contour Flow**: High-angle topographic landscape with broad rolling ridges, constant-elevation contour lines, and an illuminated S-shaped river valley.
+- **Alpine Landscape**: Sharp alpine survey with arête ridges, peaks, and cirque valleys.
+- **Readability & Text Protection**: A smoothly feathered darkening veil (`readabilityMask`) keeps the left-hand text column clear and legible.
+- **Scroll Alignment**: A `--section-calm` CSS property dynamically softens contrast and brightness as the visitor scrolls towards *Selected Work*.
 
 Avoid:
 - Obvious repeating noise tiles or animated background particles
@@ -191,6 +193,14 @@ Image treatment:
 - Controlled hover feedback without layout-shifting jumps.
 - Respect `prefers-reduced-motion` unconditionally.
 - Avoid continuous decorative animation loops or heavy parallax on mobile.
+
+### Call-to-action (CTA) buttons — Aurora Orbit
+All rectangular CTA buttons use the **Aurora Orbit** interaction:
+- Standard component: `<CtaButton>` (`@/components/CtaButton`) with `variant="primary"` (default) or `variant="secondary"`.
+- Canonical classes: `.btn-primary` and `.btn-secondary`. Automatic CSS rules in `src/app/globals.css` also cover raw button/link elements using standard Tailwind classes (`bg-white/10` and `bg-zinc-950/60` with `rounded-full`), preventing future additions from missing the styling.
+
+### Monogram logo hover state
+- The navbar monogram logo uses the same background glow as the rest of the navigation pills on hover, ensuring unified navigation feedback without recoloring the logo artwork itself.
 
 ## Responsive behavior
 

@@ -1,6 +1,6 @@
 # vonporat.com — Decision Log
 
-Last reviewed: 2026-08-25
+Last reviewed: 2026-10-17
 
 ## Purpose
 
@@ -382,3 +382,44 @@ A comprehensive global consistency audit is pending. The current footer tagline:
 is flagged for review to determine whether it should be aligned with the canonical positioning:
 `Guitarist · Visual Artist · Systems-Minded Creator`.
 No code changes are to be made until explicitly directed.
+
+---
+
+## D-027 — Interactive 3D Digital Sculpture Background Engine
+
+**Status:** Active  
+**Decision date:** 2026-10-17
+
+### Decision
+
+The homepage hero incorporates a non-intrusive interactive 3D WebGL background (`DigitalSculpture`), supporting selectable themes with **Digital Eclipse** (`digital-eclipse`) as the primary default, alongside **Contour Flow** (`contour-flow`) and **Alpine Landscape** (`alpine-landscape`).
+
+### Rationale
+
+The background reinforces the site's identity—creative instinct given digital structure—through live mathematical forms without competing with the typography. Dynamic idle loading (`requestIdleCallback`), visibility pausing, and mobile frame-rate caps ensure zero impact on page load speed or reading performance.
+
+---
+
+## D-028 — CMS-Driven Background Theme Selection via SiteSettings Global
+
+**Status:** Active  
+**Decision date:** 2026-10-17
+
+### Decision
+
+Background theme selection is governed by a Payload CMS Global (`SiteSettings`, field `backgroundTheme`), stored in PostgreSQL and switchable directly from the Payload Admin Dashboard via an interactive card with 1-click thumbnail controls.
+
+### Rationale
+
+Allows Patrik to switch the website's background theme instantly from the administrative panel without code deployments or database migrations, while preserving ISR caching (60s revalidation) for public visitors.
+
+---
+
+## D-029 — Monogram Logo Aurora Hover State Alignment
+
+**Status:** Active  
+**Decision date:** 2026-10-17
+
+### Decision
+
+The navbar monogram logo uses the standard background glow on mouse hover matching the rest of the navigation pills, rather than colorizing the logo artwork itself.
