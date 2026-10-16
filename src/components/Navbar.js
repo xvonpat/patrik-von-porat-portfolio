@@ -185,6 +185,11 @@ export default function Navbar() {
               className="brand-link" 
               aria-label="Go to homepage"
             >
+              <div className="brand-aurora" aria-hidden="true">
+                <div className="nav-aurora-bloom" />
+                <div className="nav-aurora-aura" />
+                <div className="nav-aurora-core" />
+              </div>
               <span className="brand-mark" aria-hidden="true" />
             </Link>
           </div>
