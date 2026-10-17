@@ -129,6 +129,43 @@ function renderLexical(node) {
         </figure>
       );
     }
+    case 'block': {
+      if (node.fields?.blockType === 'galleryImage') {
+        const gi = node.fields?.image;
+        if (!gi) return null;
+        const rawUrl = typeof gi === 'object'
+          ? (gi.imageUrl || (gi.image?.url) || (gi.filename ? `/images/gallery/images/large/${gi.filename}` : null))
+          : null;
+        const uploadUrl = getMediaUrl(rawUrl);
+        if (!uploadUrl) return null;
+
+        const altText = node.fields?.caption || gi.title || gi.filename || '';
+        const caption = node.fields?.caption || gi.title;
+        const width = gi.width || 1200;
+        const height = gi.height || 800;
+
+        return (
+          <figure className="my-8 space-y-2.5">
+            <div className="relative w-full overflow-hidden rounded-xl md:rounded-2xl border border-white/[0.08] bg-obsidian-900/60 shadow-2xl">
+              <Image
+                src={uploadUrl}
+                alt={altText}
+                width={width}
+                height={height}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 896px"
+                className="w-full h-auto object-cover rounded-xl md:rounded-2xl"
+              />
+            </div>
+            {(caption || altText) && (
+              <figcaption className="text-center text-xs font-mono tracking-wider text-zinc-400">
+                {caption || altText}
+              </figcaption>
+            )}
+          </figure>
+        );
+      }
+      return null;
+    }
     case 'link': {
       const url = node.fields?.url || node.url || '#';
       const newTab = node.fields?.newTab;
@@ -169,6 +206,43 @@ function getReadingTime(content) {
   const text = getLexicalText(content?.root);
   const wordCount = text.split(/\s+/).filter(Boolean).length;
   return Math.ceil(wordCount / 200) || 1;
+}
+
+function getPostFeaturedImage(post) {
+  if (!post) return null;
+
+  // 1. Check galleryImage if chosen
+  if (post.galleryImage && typeof post.galleryImage === 'object') {
+    const gi = post.galleryImage;
+    const rawUrl = gi.imageUrl || (gi.image?.url) || (gi.filename ? `/images/gallery/images/large/${gi.filename}` : null);
+    if (rawUrl) {
+      return {
+        url: getMediaUrl(rawUrl),
+        alt: gi.title || gi.filename || post.title || '',
+        width: gi.width || 1200,
+        height: gi.height || 800,
+        focalX: null,
+        focalY: null,
+      };
+    }
+  }
+
+  // 2. Check featuredImage (uploaded media)
+  if (post.featuredImage && typeof post.featuredImage === 'object' && post.featuredImage !== null) {
+    const media = post.featuredImage;
+    if (media.url) {
+      return {
+        url: getMediaUrl(media.url),
+        alt: media.alt || post.title || '',
+        width: media.width || 1600,
+        height: media.height || 1000,
+        focalX: media.focalX,
+        focalY: media.focalY,
+      };
+    }
+  }
+
+  return null;
 }
 
 // Dynamic metadata generator for search engines and dynamic canonical links
@@ -217,10 +291,11 @@ export async function generateMetadata({ params }) {
     ? (customCanonical.startsWith('http') ? customCanonical : `https://vonporat.com${customCanonical.startsWith('/') ? '' : '/'}${customCanonical}`)
     : `https://vonporat.com/blog/${post.slug}`;
 
-  // Custom OG Image or fallback to featuredImage
-  const seoImage = post.seo?.ogImage || post.featuredImage;
+  // Custom OG Image or fallback to galleryImage or featuredImage
+  const postImg = getPostFeaturedImage(post);
+  const seoImage = post.seo?.ogImage;
   const rawImgUrl = typeof seoImage === 'object' && seoImage !== null ? seoImage.url : null;
-  const resolvedImgUrl = rawImgUrl ? getMediaUrl(rawImgUrl) : 'https://vonporat.com/images/PvP2.png';
+  const resolvedImgUrl = rawImgUrl ? getMediaUrl(rawImgUrl) : (postImg?.url || 'https://vonporat.com/images/PvP2.png');
 
   return {
     title: `${seoTitle} | Chronicles`,
@@ -363,12 +438,12 @@ export default async function BlogPostPage({ params }) {
   const canonicalUrl = `https://vonporat.com/blog/${post.slug}`;
   const readingTime = getReadingTime(post.content);
 
-  // Extract featured image from Payload media relationship
-  const rawImgUrl = typeof post.featuredImage === 'object' && post.featuredImage !== null ? post.featuredImage.url : null;
-  const imgUrl = getMediaUrl(rawImgUrl);
-  const imgAlt = (typeof post.featuredImage === 'object' && post.featuredImage !== null ? post.featuredImage.alt : '') || '';
-  const focalX = post.featuredImage?.focalX;
-  const focalY = post.featuredImage?.focalY;
+  // Extract featured image from galleryImage or Payload media relationship
+  const postImg = getPostFeaturedImage(post);
+  const imgUrl = postImg?.url;
+  const imgAlt = postImg?.alt || '';
+  const focalX = postImg?.focalX;
+  const focalY = postImg?.focalY;
   const objectPosition = (typeof focalX === 'number' && typeof focalY === 'number') 
     ? `${focalX}% ${focalY}%` 
     : 'center';

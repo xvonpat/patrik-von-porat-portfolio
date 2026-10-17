@@ -1,4 +1,5 @@
-import type { CollectionConfig } from 'payload';
+import type { CollectionConfig, Block } from 'payload';
+import { lexicalEditor, BlocksFeature } from '@payloadcms/richtext-lexical';
 
 function extractFirstParagraph(content: any): string {
   if (!content || typeof content !== 'object' || !content.root || !Array.isArray(content.root.children)) {
@@ -53,7 +54,7 @@ function hasLexicalContent(node: any): boolean {
   if (node.type === 'text') {
     return typeof node.text === 'string' && node.text.trim().length > 0;
   }
-  if (node.type === 'upload') {
+  if (node.type === 'upload' || node.type === 'block') {
     return true;
   }
   if (node.root) {
@@ -64,6 +65,37 @@ function hasLexicalContent(node: any): boolean {
   }
   return false;
 }
+
+const GalleryImageBlock: Block = {
+  slug: 'galleryImage',
+  labels: {
+    singular: 'Gallery Image',
+    plural: 'Gallery Images',
+  },
+  fields: [
+    {
+      name: 'image',
+      type: 'relationship',
+      relationTo: 'gallery-images',
+      required: true,
+      label: 'Select Gallery Image',
+      admin: {
+        components: {
+          Field: '/src/components/GalleryImagePicker.js',
+        },
+        description: 'Choose a photograph or art piece from your Photo Gallery (e.g. Eddie the Trooper).',
+      },
+    },
+    {
+      name: 'caption',
+      type: 'text',
+      label: 'Caption (Optional)',
+      admin: {
+        description: 'Optional custom caption. Defaults to image title if left blank.',
+      },
+    },
+  ],
+};
 
 export const Posts: CollectionConfig = {
   slug: 'posts',
@@ -334,6 +366,23 @@ export const Posts: CollectionConfig = {
       type: 'upload',
       relationTo: 'media',
       required: false,
+      admin: {
+        description: 'Upload an image from Media, or select an existing photo from the Gallery below.',
+      },
+    },
+    {
+      name: 'galleryImage',
+      type: 'relationship',
+      relationTo: 'gallery-images',
+      hasMany: false,
+      label: 'Or Choose From Gallery',
+      admin: {
+        position: 'sidebar',
+        components: {
+          Field: '/src/components/GalleryImagePicker.js',
+        },
+        description: 'Pick an existing image from your Photo Gallery (e.g. Eddie the Trooper). Used as the featured image if selected.',
+      },
     },
     {
       name: 'excerpt',
@@ -351,6 +400,14 @@ export const Posts: CollectionConfig = {
     {
       name: 'content',
       type: 'richText',
+      editor: lexicalEditor({
+        features: ({ defaultFeatures }) => [
+          ...defaultFeatures,
+          BlocksFeature({
+            blocks: [GalleryImageBlock],
+          }),
+        ],
+      }),
       validate: (val: any, { data }: { data?: any }) => {
         if (data?.status === 'published') {
           if (!hasLexicalContent(val)) {

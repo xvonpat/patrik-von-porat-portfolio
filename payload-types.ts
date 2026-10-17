@@ -235,7 +235,14 @@ export interface Post {
    */
   status: 'draft' | 'published';
   featured?: boolean | null;
+  /**
+   * Upload an image from Media, or select an existing photo from the Gallery below.
+   */
   featuredImage?: (number | null) | Media;
+  /**
+   * Pick an existing image from your Photo Gallery (e.g. Eddie the Trooper). Used as the featured image if selected.
+   */
+  galleryImage?: (number | null) | GalleryImage;
   /**
    * Excerpt is generated from the first paragraph if left empty.
    */
@@ -278,51 +285,57 @@ export interface Post {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "admin-links".
+ * via the `definition` "gallery-images".
  */
-export interface AdminLink {
+export interface GalleryImage {
   id: number;
   /**
-   * A descriptive name for this admin link (e.g., Vercel Dashboard).
+   * Display title or identifier (e.g. "IMG_1552" or "Eddie the Trooper - Final Print").
    */
   title: string;
   /**
-   * The full URL, including https:// (e.g., https://vercel.com).
+   * Original file identifier (e.g. "IMG_1552.jpg").
    */
-  url: string;
+  filename?: string | null;
   /**
-   * Choose the operational category for this tool.
+   * Upload or choose an image from the Payload Media library.
    */
-  category:
-    | 'hosting-deployment'
-    | 'analytics-seo'
-    | 'cms-database'
-    | 'domains-dns'
-    | 'creative-platforms'
-    | 'music-platforms'
-    | 'social-media'
-    | 'tools'
-    | 'other';
+  image?: (number | null) | Media;
   /**
-   * Optional notes, usage instructions, or login details.
+   * Optional path to static image asset (e.g. "/images/gallery/images/large/IMG_1552.jpg").
    */
-  description?: string | null;
+  imageUrl?: string | null;
   /**
-   * Current status of this link or tool.
+   * Optional path to static thumbnail asset (e.g. "/images/gallery/images/thumbnails/IMG_1552.jpg").
    */
-  status?: ('active' | 'occasional' | 'archived') | null;
+  thumbUrl?: string | null;
   /**
-   * Operational priority / importance for quick access.
+   * Assign this image to a specific collection (e.g., Summer 2026, 3D Prints, Graphite).
    */
-  priority?: ('high' | 'medium' | 'low') | null;
+  category?: (number | null) | GalleryCategory;
   /**
-   * Lower numbers will appear first in default sorting.
+   * Optional album within the assigned collection (e.g., "Eddie the Trooper" under "3D Prints").
    */
-  sortOrder?: number | null;
+  album?: (number | null) | GalleryAlbum;
   /**
-   * When clicked in the admin panel, should the link open in a new tab?
+   * Optional project or subject name for grouping (e.g., "Eddie the Trooper").
    */
-  openInNewTab?: boolean | null;
+  project?: string | null;
+  /**
+   * Used for gallery orientation filtering (All / Landscape / Portrait).
+   */
+  orientation: 'landscape' | 'portrait';
+  /**
+   * Numerical sort sequence within its collection (lower numbers appear first).
+   */
+  order?: number | null;
+  width?: number | null;
+  height?: number | null;
+  aspectRatio?: string | null;
+  /**
+   * Draft images are hidden from public gallery views.
+   */
+  status: 'published' | 'draft';
   updatedAt: string;
   createdAt: string;
 }
@@ -402,57 +415,51 @@ export interface GalleryAlbum {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "gallery-images".
+ * via the `definition` "admin-links".
  */
-export interface GalleryImage {
+export interface AdminLink {
   id: number;
   /**
-   * Display title or identifier (e.g. "IMG_1552" or "Eddie the Trooper - Final Print").
+   * A descriptive name for this admin link (e.g., Vercel Dashboard).
    */
   title: string;
   /**
-   * Original file identifier (e.g. "IMG_1552.jpg").
+   * The full URL, including https:// (e.g., https://vercel.com).
    */
-  filename?: string | null;
+  url: string;
   /**
-   * Upload or choose an image from the Payload Media library.
+   * Choose the operational category for this tool.
    */
-  image?: (number | null) | Media;
+  category:
+    | 'hosting-deployment'
+    | 'analytics-seo'
+    | 'cms-database'
+    | 'domains-dns'
+    | 'creative-platforms'
+    | 'music-platforms'
+    | 'social-media'
+    | 'tools'
+    | 'other';
   /**
-   * Optional path to static image asset (e.g. "/images/gallery/images/large/IMG_1552.jpg").
+   * Optional notes, usage instructions, or login details.
    */
-  imageUrl?: string | null;
+  description?: string | null;
   /**
-   * Optional path to static thumbnail asset (e.g. "/images/gallery/images/thumbnails/IMG_1552.jpg").
+   * Current status of this link or tool.
    */
-  thumbUrl?: string | null;
+  status?: ('active' | 'occasional' | 'archived') | null;
   /**
-   * Assign this image to a specific collection (e.g., Summer 2026, 3D Prints, Graphite).
+   * Operational priority / importance for quick access.
    */
-  category?: (number | null) | GalleryCategory;
+  priority?: ('high' | 'medium' | 'low') | null;
   /**
-   * Optional album within the assigned collection (e.g., "Eddie the Trooper" under "3D Prints").
+   * Lower numbers will appear first in default sorting.
    */
-  album?: (number | null) | GalleryAlbum;
+  sortOrder?: number | null;
   /**
-   * Optional project or subject name for grouping (e.g., "Eddie the Trooper").
+   * When clicked in the admin panel, should the link open in a new tab?
    */
-  project?: string | null;
-  /**
-   * Used for gallery orientation filtering (All / Landscape / Portrait).
-   */
-  orientation: 'landscape' | 'portrait';
-  /**
-   * Numerical sort sequence within its collection (lower numbers appear first).
-   */
-  order?: number | null;
-  width?: number | null;
-  height?: number | null;
-  aspectRatio?: string | null;
-  /**
-   * Draft images are hidden from public gallery views.
-   */
-  status: 'published' | 'draft';
+  openInNewTab?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -624,6 +631,7 @@ export interface PostsSelect<T extends boolean = true> {
   status?: T;
   featured?: T;
   featuredImage?: T;
+  galleryImage?: T;
   excerpt?: T;
   content?: T;
   seo?:

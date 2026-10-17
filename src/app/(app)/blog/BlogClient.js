@@ -29,6 +29,35 @@ const getMediaUrl = (url) => {
   return `${cleanServerUrl}${cleanUrl}`;
 };
 
+function getPostImage(post) {
+  if (!post) return null;
+
+  // 1. Check galleryImage if chosen
+  if (post.galleryImage && typeof post.galleryImage === 'object') {
+    const gi = post.galleryImage;
+    const rawUrl = gi.imageUrl || (gi.image?.url) || (gi.filename ? `/images/gallery/images/large/${gi.filename}` : null);
+    if (rawUrl) {
+      return {
+        url: getMediaUrl(rawUrl),
+        alt: gi.title || gi.filename || post.title || '',
+      };
+    }
+  }
+
+  // 2. Check featuredImage (uploaded media)
+  if (post.featuredImage && typeof post.featuredImage === 'object' && post.featuredImage !== null) {
+    const media = post.featuredImage;
+    if (media.url) {
+      return {
+        url: getMediaUrl(media.url),
+        alt: media.alt || post.title || '',
+      };
+    }
+  }
+
+  return null;
+}
+
 function getLexicalText(node) {
   if (!node) return '';
   if (Array.isArray(node)) {
@@ -205,9 +234,9 @@ export default function BlogClient({ posts = [], categories = [] }) {
             
             const catInfo = getCategoryInfo(leadPost.category);
             const readingTime = getReadingTime(leadPost.content);
-            const rawImgUrl = typeof leadPost.featuredImage === 'object' ? leadPost.featuredImage?.url : null;
-            const imgUrl = getMediaUrl(rawImgUrl);
-            const imgAlt = leadPost.featuredImage?.alt || leadPost.title;
+            const postImg = getPostImage(leadPost);
+            const imgUrl = postImg?.url;
+            const imgAlt = postImg?.alt || leadPost.title;
 
             return (
               <Link 
@@ -341,9 +370,9 @@ export default function BlogClient({ posts = [], categories = [] }) {
 
                   const catInfo = getCategoryInfo(post.category);
                   const readingTime = getReadingTime(post.content);
-                  const rawImgUrl = typeof post.featuredImage === 'object' ? post.featuredImage?.url : null;
-                  const imgUrl = getMediaUrl(rawImgUrl);
-                  const imgAlt = post.featuredImage?.alt || post.title;
+                  const postImg = getPostImage(post);
+                  const imgUrl = postImg?.url;
+                  const imgAlt = postImg?.alt || post.title;
 
                   return (
                     <Link 
