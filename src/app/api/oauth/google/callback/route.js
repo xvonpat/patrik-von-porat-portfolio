@@ -4,6 +4,7 @@ import { SignJWT } from 'jose';
 import { cookies } from 'next/headers';
 import { getPayload } from 'payload';
 import configPromise from '../../../../../../payload.config.ts';
+import { getRedirectUri } from '../route.js';
 
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
@@ -13,6 +14,19 @@ export async function GET(request) {
     return NextResponse.json({ error: 'No authorization code provided.' }, { status: 400 });
   }
 
+  const clientId = process.env.GOOGLE_CLIENT_ID || '';
+  const clientSecret = process.env.GOOGLE_CLIENT_SECRET || '';
+  const redirectUri = getRedirectUri(request);
+
+  if (!clientId || !clientSecret) {
+    return NextResponse.json(
+      {
+        error: 'Server misconfiguration: Google OAuth credentials (GOOGLE_CLIENT_ID or GOOGLE_CLIENT_SECRET) missing on the server.',
+      },
+      { status: 500 }
+    );
+  }
+
   try {
     // 1. Exchange authorization code for tokens
     const tokenResponse = await fetch('https://oauth2.googleapis.com/token', {
@@ -20,9 +34,9 @@ export async function GET(request) {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: new URLSearchParams({
         code,
-        client_id: process.env.GOOGLE_CLIENT_ID || '',
-        client_secret: process.env.GOOGLE_CLIENT_SECRET || '',
-        redirect_uri: process.env.GOOGLE_REDIRECT_URI || '',
+        client_id: clientId,
+        client_secret: clientSecret,
+        redirect_uri: redirectUri,
         grant_type: 'authorization_code',
       }),
     });
