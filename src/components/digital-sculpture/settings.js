@@ -177,20 +177,18 @@ export const DIGITAL_ECLIPSE_SETTINGS = {
   eclipseGeometry: {
     innerRadiusDesktop: 1.36,
     innerRadiusMobile: 0.84,
-    rimCountDesktop: 7500,
-    rimCountMobile: 3600,
-    spiculeCountDesktop: 2200,
-    spiculeCountMobile: 1200,
-    streamerCountDesktop: 160,
-    streamerCountMobile: 80,
-    particleCountDesktop: 2800,
-    particleCountMobile: 1400,
+    streamCountDesktop: 520,
+    streamCountMobile: 300,
+    particleCountDesktop: 6400,
+    particleCountMobile: 3200,
+    particleSize: 1.0,
+    particleDensity: 1.0,
     haloRadiusDesktop: 3.6,
     haloRadiusMobile: 2.3,
   },
 
   cyanBrightness: {
-    intensity: 1.35,
+    intensity: 1.42,
     electricCyan: '#00f0ff',
     cyanHighlight: '#f0fdfa',
     deepCyan: '#0891b2',
@@ -198,7 +196,7 @@ export const DIGITAL_ECLIPSE_SETTINGS = {
   },
 
   magentaIntensity: {
-    intensity: 1.30,
+    intensity: 1.38,
     vividPink: '#f43f5e',
     magentaHighlight: '#ffe4e6',
     deepMagenta: '#be123c',
@@ -208,10 +206,14 @@ export const DIGITAL_ECLIPSE_SETTINGS = {
   voidColor: '#040609',
 
   animation: {
-    pulseSpeed: 0.65,
-    shimmerSpeed: 1.35,
-    particleDriftSpeed: 0.22,
-    breathingScale: 0.015,
+    pulseSpeed: 0.84,          // ~7.5s per full revolution around the ring (rad/s)
+    outwardFlowSpeed: 0.28,    // Outward data stream cycle speed along radial paths
+    breathingAmplitude: 0.088, // Corona expansion/relaxation amplitude
+    breathingSpeed: 1.25,      // ~5.0s breathing period (rad/s)
+    shimmerSpeed: 1.45,
+    particleDriftSpeed: 0.28,
+    breathingScale: 0.088,
+    glowIntensity: 1.38,
   },
 
   parallaxStrength: {
@@ -243,20 +245,27 @@ export const DIGITAL_ECLIPSE_V2_SETTINGS = {
   corona: {
     seed: 7319,
     detailDensity: 1,
-    rimOpacity: 0.7,
-    cyanGlow: 1.8,
-    pinkGlow: 1.65,
+    particleDensity: 1,
+    particleSize: 1.05,
+    rimOpacity: 0.45,
+    cyanGlow: 1.85,
+    pinkGlow: 1.72,
+    glowIntensity: 1.35,
   },
   animation: {
     speed: 1,
+    pulseSpeed: 0.84,          // ~7.5s per full revolution around the ring (rad/s)
+    outwardFlowSpeed: 0.30,    // Outward data packet flow rate along curved paths
+    breathingAmplitude: 0.09,  // Corona expansion/relaxation amplitude (~5s period)
+    breathingSpeed: 1.25,      // ~5.0s breathing cycle frequency (rad/s)
     parallaxPixels: 5,
-    pointerReach: 85,
+    pointerReach: 95,
   },
   rendering: {
     maxPixelRatioDesktop: 1.75,
     maxPixelRatioMobile: 1.5,
-    desktopFps: 30,
-    mobileFps: 24,
+    desktopFps: 60,
+    mobileFps: 30,
   },
 };
 

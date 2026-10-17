@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import React from 'react';
 import { useAuth } from '@payloadcms/ui';
@@ -10,7 +10,6 @@ export function LogoutButton() {
     e.preventDefault();
     try {
       await logOut();
-      // Manually redirect to the login screen to ensure the UI updates correctly
       window.location.href = '/admin/login';
     } catch (err) {
       console.error('Logout failed:', err);
@@ -18,38 +17,34 @@ export function LogoutButton() {
   };
 
   return (
-    <div style={{ marginTop: '1.5rem', padding: '0' }}>
-      <style>{`
-        .custom-logout-btn {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          width: 100%;
-          padding: 10px 12px;
-          background: transparent;
-          border: 1px solid rgba(255, 255, 255, 0.08);
-          border-radius: 4px;
-          color: rgba(255, 255, 255, 0.6);
-          font-family: monospace;
-          font-size: 11px;
-          font-weight: 500;
-          text-decoration: none;
-          text-transform: uppercase;
-          letter-spacing: 0.12em;
-          cursor: pointer;
-          transition: all 0.2s ease;
-        }
-        .custom-logout-btn:hover {
-          background-color: rgba(255, 255, 255, 0.04);
-          border-color: rgba(249, 115, 22, 0.3);
-          color: #ffffff;
-        }
-      `}</style>
-      <button 
-        type="button" 
-        onClick={handleLogout} 
+    <div className="pvp-nav-footer">
+      <a
+        href="/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="pvp-nav-site-btn"
+      >
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+          <polyline points="15 3 21 3 21 9" />
+          <line x1="10" y1="14" x2="21" y2="3" />
+        </svg>
+        <span>View Live Site</span>
+      </a>
+
+      <button
+        type="button"
+        onClick={handleLogout}
         className="custom-logout-btn"
-        style={{ width: '100%', textAlign: 'left' }}
       >
         <svg
           width="14"
@@ -65,7 +60,7 @@ export function LogoutButton() {
           <polyline points="16 17 21 12 16 7" />
           <line x1="21" y1="12" x2="9" y2="12" />
         </svg>
-        Logout
+        <span>Logout</span>
       </button>
     </div>
   );

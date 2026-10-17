@@ -1074,48 +1074,26 @@ export function getEclipseAngularWeights(theta) {
 }
 
 /**
- * Builds all 3D geometries for the Digital Eclipse:
- * 1. eclipseFilamentsGeometry: Multi-scale radial strokes (dense faint rim stardust, spicules, streamers)
- * 2. eclipseParticlesGeometry: Cosmic dust sparks & streamer endpoint beads
- * 3. eclipseHaloGeometry: Quad plane for saturated additive corona bloom
+ * Builds all 3D geometries for the Digital Eclipse particle-based data ring:
+ * 1. eclipseFilamentsGeometry: Subtle broken inner-rim micro-segments (no dominant radial spikes)
+ * 2. eclipseParticlesGeometry: Sequences of small, individually visible luminous dots along
+ *    loosely radial, slightly curved paths + outward-drifting peripheral data dust
+ * 3. eclipseHaloGeometry: Quad plane for saturated additive corona bloom + travelling pulse glow
  * 4. eclipseVoidGeometry: Solid black occlusion disc
  */
 export function createDigitalEclipseGeometries({ isMobile = false, settings }) {
   const geomSettings = settings?.eclipseGeometry || {};
+  const animSettings = settings?.animation || {};
+  const densityScale = animSettings.particleDensity ?? 1.0;
+  const sizeScale = animSettings.particleSize ?? 1.0;
+
   const innerRadius = isMobile
     ? (geomSettings.innerRadiusMobile || 0.84)
     : (geomSettings.innerRadiusDesktop || 1.36);
 
-  const rimCount = isMobile
-    ? (geomSettings.rimCountMobile || 3600)
-    : (geomSettings.rimCountDesktop || 7500);
-
-  const spiculeCount = isMobile
-    ? (geomSettings.spiculeCountMobile || 1200)
-    : (geomSettings.spiculeCountDesktop || 2200);
-
-  const streamerCount = isMobile
-    ? (geomSettings.streamerCountMobile || 80)
-    : (geomSettings.streamerCountDesktop || 160);
-
-  const particleCount = isMobile
-    ? (geomSettings.particleCountMobile || 1400)
-    : (geomSettings.particleCountDesktop || 2800);
-
   const haloRadius = isMobile
     ? (geomSettings.haloRadiusMobile || 2.3)
     : (geomSettings.haloRadiusDesktop || 3.6);
-
-  const maxTotalLines = rimCount + spiculeCount + streamerCount;
-
-  // Pre-allocate buffers for LineSegments (2 vertices per line: root & tip)
-  const linePositions = new Float32Array(maxTotalLines * 2 * 3);
-  const lineColors = new Float32Array(maxTotalLines * 2 * 3);
-  const lineNormals = new Float32Array(maxTotalLines * 2 * 3);
-  const lineParams = new Float32Array(maxTotalLines * 2 * 4); // [theta, length, isTip, phase]
-  const lineAlphas = new Float32Array(maxTotalLines * 2);
-
-  let lineOffset = 0;
 
   // Pseudo-random deterministic generator for consistent placement
   let seed = 42;
@@ -1124,235 +1102,190 @@ export function createDigitalEclipseGeometries({ isMobile = false, settings }) {
     return (seed - 1) / 2147483646;
   };
 
-  const streamerTips = [];
+  // 1. Subtle broken inner-rim micro-segments (keeps inner edge definition without a solid white band)
+  const rimSegmentCount = isMobile ? 220 : 420;
+  const linePositions = new Float32Array(rimSegmentCount * 2 * 3);
+  const lineColors = new Float32Array(rimSegmentCount * 2 * 3);
+  const lineNormals = new Float32Array(rimSegmentCount * 2 * 3);
+  const lineParams = new Float32Array(rimSegmentCount * 2 * 4);
+  const lineAlphas = new Float32Array(rimSegmentCount * 2);
+  let lineOffset = 0;
 
-  const addFilament = (theta, length, rootAlpha, tipAlpha) => {
-    const cosT = Math.cos(theta);
-    const sinT = Math.sin(theta);
-
+  for (let i = 0; i < rimSegmentCount; i++) {
+    const theta = (i / rimSegmentCount) * Math.PI * 2 + (rand() - 0.5) * 0.014;
     const weights = getEclipseAngularWeights(theta);
-    const { cyanWeight, pinkWeight, isDiamondCore, isUpperCyanCore } = weights;
+    if (weights.intensity < 0.22 && rand() > 0.35) continue;
 
-    // Organic jittered starting radius so strokes do not overlap on a hard ring edge
-    const rootR = innerRadius + rand() * 0.038;
-    const tipR = rootR + length;
+    const r = innerRadius + (rand() - 0.3) * 0.018;
+    const arcSpan = (0.004 + rand() * 0.008) / r;
+    const a0 = theta - arcSpan * 0.5;
+    const a1 = theta + arcSpan * 0.5;
 
-    const zRoot = (rand() - 0.5) * 0.015;
-    const zTip = (rand() - 0.5) * 0.045;
-
-    const p0 = [rootR * cosT, rootR * sinT, zRoot];
-    const p1 = [tipR * cosT, tipR * sinT, zTip];
-
-    // Determine colors: NO automatic near-white roots!
-    let rootColor = [0.0, 0.65, 0.88]; // deep electric cyan
-    let tipColor = [0.0, 0.94, 1.0];
-
-    if (cyanWeight > pinkWeight * 1.05) {
-      // In cyan arcs: pure cyan gradient
-      rootColor = [0.0, 0.65, 0.88];
-      tipColor = [0.0, 0.94, 1.0];
-
-      // Reserve white core ONLY for a tiny fraction (< 3%) of strokes in the diamond flare
-      if (isDiamondCore && rand() < 0.07) {
-        rootColor = [0.94, 0.98, 1.0];
-        tipColor = [0.55, 0.92, 1.0];
-      } else if (isUpperCyanCore && rand() < 0.04) {
-        rootColor = [0.90, 0.96, 1.0];
-        tipColor = [0.45, 0.90, 1.0];
-      }
-    } else if (pinkWeight > 0.15) {
-      // In pink/magenta arcs: vivid magenta/pink, NOT white
-      rootColor = [0.86, 0.12, 0.42];
-      tipColor = [0.98, 0.32, 0.62];
-      if (rand() < 0.03 && pinkWeight > 0.75) {
-        rootColor = [0.98, 0.82, 0.90]; // soft pink highlight
-      }
-    } else {
-      // In quiet arcs: subdued, dim blue-grey
-      rootColor = [0.08, 0.22, 0.32];
-      tipColor = [0.14, 0.36, 0.48];
+    let col = [0.0, 0.72, 0.94];
+    if (weights.pinkWeight > weights.cyanWeight * 0.95) {
+      col = [0.92, 0.18, 0.48];
+    } else if (weights.intensity < 0.25) {
+      col = [0.10, 0.26, 0.38];
     }
 
+    const alpha = (0.04 + 0.11 * Math.min(1.0, weights.intensity)) * (0.6 + 0.4 * rand());
     const phase = rand();
     const vIdx = lineOffset * 2;
 
-    // Root vertex
-    linePositions[vIdx * 3 + 0] = p0[0];
-    linePositions[vIdx * 3 + 1] = p0[1];
-    linePositions[vIdx * 3 + 2] = p0[2];
+    linePositions[vIdx * 3 + 0] = r * Math.cos(a0);
+    linePositions[vIdx * 3 + 1] = r * Math.sin(a0);
+    linePositions[vIdx * 3 + 2] = 0;
+    linePositions[(vIdx + 1) * 3 + 0] = r * Math.cos(a1);
+    linePositions[(vIdx + 1) * 3 + 1] = r * Math.sin(a1);
+    linePositions[(vIdx + 1) * 3 + 2] = 0;
 
-    lineColors[vIdx * 3 + 0] = rootColor[0];
-    lineColors[vIdx * 3 + 1] = rootColor[1];
-    lineColors[vIdx * 3 + 2] = rootColor[2];
-
-    lineNormals[vIdx * 3 + 0] = cosT;
-    lineNormals[vIdx * 3 + 1] = sinT;
-    lineNormals[vIdx * 3 + 2] = 0;
-
-    lineParams[vIdx * 4 + 0] = theta;
-    lineParams[vIdx * 4 + 1] = length;
-    lineParams[vIdx * 4 + 2] = 0.0; // root
-    lineParams[vIdx * 4 + 3] = phase;
-
-    lineAlphas[vIdx] = rootAlpha;
-
-    // Tip vertex
-    linePositions[(vIdx + 1) * 3 + 0] = p1[0];
-    linePositions[(vIdx + 1) * 3 + 1] = p1[1];
-    linePositions[(vIdx + 1) * 3 + 2] = p1[2];
-
-    lineColors[(vIdx + 1) * 3 + 0] = tipColor[0];
-    lineColors[(vIdx + 1) * 3 + 1] = tipColor[1];
-    lineColors[(vIdx + 1) * 3 + 2] = tipColor[2];
-
-    lineNormals[(vIdx + 1) * 3 + 0] = cosT;
-    lineNormals[(vIdx + 1) * 3 + 1] = sinT;
-    lineNormals[(vIdx + 1) * 3 + 2] = 0;
-
-    lineParams[(vIdx + 1) * 4 + 0] = theta;
-    lineParams[(vIdx + 1) * 4 + 1] = length;
-    lineParams[(vIdx + 1) * 4 + 2] = 1.0; // tip
-    lineParams[(vIdx + 1) * 4 + 3] = phase;
-
-    lineAlphas[vIdx + 1] = tipAlpha;
-
+    for (let k = 0; k < 2; k++) {
+      const idx = vIdx + k;
+      lineColors[idx * 3 + 0] = col[0];
+      lineColors[idx * 3 + 1] = col[1];
+      lineColors[idx * 3 + 2] = col[2];
+      lineNormals[idx * 3 + 0] = Math.cos(theta);
+      lineNormals[idx * 3 + 1] = Math.sin(theta);
+      lineNormals[idx * 3 + 2] = 0;
+      lineParams[idx * 4 + 0] = theta;
+      lineParams[idx * 4 + 1] = 0.01;
+      lineParams[idx * 4 + 2] = k;
+      lineParams[idx * 4 + 3] = phase;
+      lineAlphas[idx] = alpha;
+    }
     lineOffset++;
-    return [p1[0], p1[1], p1[2], tipColor, theta, phase];
-  };
-
-  // 1. Layer 1: Dense, very short, faint rim stardust strokes
-  for (let i = 0; i < rimCount; i++) {
-    const theta = (i / rimCount) * Math.PI * 2 + (rand() - 0.5) * 0.007;
-    const weights = getEclipseAngularWeights(theta);
-    // In quiet zones, reject ~65% of rim strokes to break the solid perimeter
-    if (weights.intensity < 0.28 && rand() > (0.20 + weights.intensity * 2.0)) {
-      continue;
-    }
-    const len = (0.012 + rand() * 0.038) * (0.45 + 0.55 * weights.intensity);
-    // Delicate low alpha: roots never bloom into saturated solid white
-    const rootAlpha = (0.12 + 0.26 * weights.intensity) * (0.7 + 0.3 * rand());
-    const tipAlpha = 0.0;
-    addFilament(theta, len, rootAlpha, tipAlpha);
   }
-
-  // 2. Layer 2: Medium spicules (corona rays)
-  for (let i = 0; i < spiculeCount; i++) {
-    const theta = rand() * Math.PI * 2;
-    const weights = getEclipseAngularWeights(theta);
-    // Spicules only emerge from active zones
-    if (rand() > Math.pow(weights.intensity, 0.95)) continue;
-
-    const len = (0.05 + Math.pow(rand(), 1.5) * 0.22) * weights.intensity;
-    const rootAlpha = (0.18 + 0.32 * weights.intensity) * (0.8 + 0.2 * rand());
-    const tipAlpha = 0.02;
-    const tipData = addFilament(theta, len, rootAlpha, tipAlpha);
-
-    // Occasional tiny spark on medium spicule tips (~12% in active zones)
-    if (rand() < 0.12 && weights.intensity > 0.45) {
-      streamerTips.push(tipData);
-    }
-  }
-
-  // 3. Layer 3: Long energetic streamers with terminal luminous beads
-  for (let i = 0; i < streamerCount; i++) {
-    const theta = rand() * Math.PI * 2;
-    const weights = getEclipseAngularWeights(theta);
-    // Streamers concentrated heavily in diamond flare & upper-left flare
-    if (rand() > Math.pow(weights.intensity, 1.35)) continue;
-
-    const isDiamond = weights.isDiamondCore;
-    const len = (0.32 + Math.pow(rand(), 1.2) * 0.48) * (isDiamond ? 1.30 : 1.0);
-    const rootAlpha = (0.25 + 0.45 * weights.intensity);
-    const tipAlpha = 0.08;
-    const tipData = addFilament(theta, len, rootAlpha, tipAlpha);
-    streamerTips.push(tipData);
-  }
-
-  // Trim arrays to actual lines generated
-  const actualLines = lineOffset;
-  const actualPositions = linePositions.subarray(0, actualLines * 2 * 3);
-  const actualColors = lineColors.subarray(0, actualLines * 2 * 3);
-  const actualNormals = lineNormals.subarray(0, actualLines * 2 * 3);
-  const actualParams = lineParams.subarray(0, actualLines * 2 * 4);
-  const actualAlphas = lineAlphas.subarray(0, actualLines * 2);
 
   const eclipseFilamentsGeometry = new THREE.BufferGeometry();
-  eclipseFilamentsGeometry.setAttribute('position', new THREE.BufferAttribute(actualPositions, 3));
-  eclipseFilamentsGeometry.setAttribute('color', new THREE.BufferAttribute(actualColors, 3));
-  eclipseFilamentsGeometry.setAttribute('aNormal', new THREE.BufferAttribute(actualNormals, 3));
-  eclipseFilamentsGeometry.setAttribute('aParams', new THREE.BufferAttribute(actualParams, 4));
-  eclipseFilamentsGeometry.setAttribute('aAlpha', new THREE.BufferAttribute(actualAlphas, 1));
+  eclipseFilamentsGeometry.setAttribute('position', new THREE.BufferAttribute(linePositions.subarray(0, lineOffset * 6), 3));
+  eclipseFilamentsGeometry.setAttribute('color', new THREE.BufferAttribute(lineColors.subarray(0, lineOffset * 6), 3));
+  eclipseFilamentsGeometry.setAttribute('aNormal', new THREE.BufferAttribute(lineNormals.subarray(0, lineOffset * 6), 3));
+  eclipseFilamentsGeometry.setAttribute('aParams', new THREE.BufferAttribute(lineParams.subarray(0, lineOffset * 8), 4));
+  eclipseFilamentsGeometry.setAttribute('aAlpha', new THREE.BufferAttribute(lineAlphas.subarray(0, lineOffset * 2), 1));
   eclipseFilamentsGeometry.computeBoundingSphere();
 
-  // 4. Cosmic Dust Particles & Streamer Endpoint Beads
-  const totalParticles = particleCount + streamerTips.length;
-  const partPositions = new Float32Array(totalParticles * 3);
-  const partColors = new Float32Array(totalParticles * 3);
-  const partParams = new Float32Array(totalParticles * 4); // [theta, radius, phase, size]
+  // 2. Curved radial particle streams + outward-drifting peripheral dots
+  const streamCount = Math.round((isMobile ? 520 : 940) * densityScale);
+  const dustCount = Math.round((isMobile ? 900 : 1800) * densityScale);
 
-  // Add beads at the tips of streamers and selected spicules
-  for (let i = 0; i < streamerTips.length; i++) {
-    const tip = streamerTips[i];
-    partPositions[i * 3 + 0] = tip[0];
-    partPositions[i * 3 + 1] = tip[1];
-    partPositions[i * 3 + 2] = tip[2] + 0.005;
+  const posList = [];
+  const colList = [];
+  const paramsList = []; // [theta, streamLen, dotFrac, phase]
+  const streamList = []; // [startR, curve, speed, baseSize]
+  const alphaList = [];
 
-    partColors[i * 3 + 0] = tip[3][0];
-    partColors[i * 3 + 1] = tip[3][1];
-    partColors[i * 3 + 2] = tip[3][2];
+  const pickParticleColor = (weights, isCoreSpark) => {
+    const { cyanWeight, pinkWeight, isDiamondCore, isUpperCyanCore } = weights;
+    if (cyanWeight >= pinkWeight * 0.95) {
+      if ((isDiamondCore && isCoreSpark && rand() < 0.22) || (isUpperCyanCore && isCoreSpark && rand() < 0.14)) {
+        return [0.93, 0.99, 1.0]; // near-white highlight core
+      }
+      return rand() < 0.45 ? [0.22, 0.95, 1.0] : [0.0, 0.84, 0.98];
+    }
+    if (pinkWeight > 0.14) {
+      if (isCoreSpark && pinkWeight > 0.72 && rand() < 0.16) {
+        return [1.0, 0.78, 0.90];
+      }
+      return rand() < 0.5 ? [1.0, 0.24, 0.58] : [0.92, 0.14, 0.46];
+    }
+    return [0.16, 0.38, 0.52];
+  };
 
-    const r = Math.hypot(tip[0], tip[1]);
-    partParams[i * 4 + 0] = tip[4]; // theta
-    partParams[i * 4 + 1] = r;
-    partParams[i * 4 + 2] = tip[5]; // phase
-    partParams[i * 4 + 3] = 1.6 + rand() * 1.6; // delicate luminous bead
+  for (let s = 0; s < streamCount; s++) {
+    const baseTheta = (s / streamCount) * Math.PI * 2 + (rand() - 0.5) * 0.012;
+    const weights = getEclipseAngularWeights(baseTheta);
+    const activity = weights.intensity;
+
+    // Keep quiet stretches sparser with clear dark gaps
+    if (activity < 0.22 && rand() > (0.28 + activity * 1.6)) continue;
+
+    const tierRoll = rand();
+    const isLong = tierRoll > 0.84 - Math.min(0.32, activity * 0.22);
+    const isMedium = !isLong && tierRoll > 0.36;
+
+    // Stagger inner starting radius so inner edge never merges into a solid white band
+    const startR = innerRadius + 0.012 + Math.pow(rand(), 1.35) * (isLong ? 0.085 : 0.055);
+    const streamLen = isLong
+      ? (0.34 + Math.pow(rand(), 1.25) * (0.58 + activity * 0.42))
+      : isMedium
+        ? (0.12 + Math.pow(rand(), 1.4) * (0.24 + activity * 0.20))
+        : (0.045 + rand() * (0.09 + activity * 0.08));
+
+    const dotCount = isLong
+      ? 7 + Math.floor(rand() * 6)
+      : isMedium
+        ? 4 + Math.floor(rand() * 4)
+        : 2 + Math.floor(rand() * 3);
+
+    const curve = (rand() - 0.5) * (isLong ? 0.22 : 0.11);
+    const speed = (0.45 + rand() * 0.85) * (isLong ? 1.12 : 0.92);
+    const streamPhase = rand();
+
+    for (let d = 0; d < dotCount; d++) {
+      const dotFrac = (d + (rand() - 0.5) * 0.28) / dotCount;
+      const clampedFrac = Math.max(0.02, Math.min(0.98, dotFrac));
+      const r = startR + clampedFrac * streamLen;
+      const theta = baseTheta + (clampedFrac * curve) / Math.max(1.0, r);
+      const z = (rand() - 0.5) * 0.04;
+
+      const isCoreSpark = d === 0 || (d === dotCount - 1 && isLong && rand() < 0.5);
+      const col = pickParticleColor(weights, isCoreSpark);
+
+      const baseSize = (1.35 + rand() * 1.65 + (isCoreSpark ? 0.55 : 0.0)) * sizeScale;
+      const baseAlpha = Math.min(
+        0.88,
+        (0.18 + Math.min(1.0, activity) * 0.52) * (0.65 + 0.35 * rand())
+      );
+
+      posList.push(r * Math.cos(theta), r * Math.sin(theta), z);
+      colList.push(col[0], col[1], col[2]);
+      paramsList.push(baseTheta, streamLen, clampedFrac, (streamPhase + d * 0.09) % 1.0);
+      streamList.push(startR, curve, speed, baseSize);
+      alphaList.push(baseAlpha);
+    }
   }
 
-  // Add floating cosmic dust particles (starlight embers)
-  for (let i = 0; i < particleCount; i++) {
-    const idx = streamerTips.length + i;
-    const theta = rand() * Math.PI * 2;
-    const weights = getEclipseAngularWeights(theta);
+  // 3. Outward-drifting peripheral data particles
+  for (let i = 0; i < dustCount; i++) {
+    const baseTheta = rand() * Math.PI * 2;
+    const weights = getEclipseAngularWeights(baseTheta);
+    const activity = weights.intensity;
 
-    // Stardust density biased near the ring with gentle drift outward
-    const r = innerRadius + 0.02 + Math.pow(rand(), 2.8) * (isMobile ? 1.6 : 2.4);
+    const startR = innerRadius + 0.06 + Math.pow(rand(), 1.8) * (isMobile ? 0.55 : 0.85);
+    const streamLen = 0.28 + Math.pow(rand(), 1.4) * (isMobile ? 0.95 : 1.45);
+    const dotFrac = rand();
+    const curve = (rand() - 0.5) * 0.26;
+    const speed = 0.35 + rand() * 0.75;
+    const phase = rand();
+
+    const r = startR + dotFrac * streamLen;
+    const theta = baseTheta + (dotFrac * curve) / Math.max(1.0, r);
     const z = (rand() - 0.5) * 0.06;
 
-    const cosT = Math.cos(theta);
-    const sinT = Math.sin(theta);
+    const col = pickParticleColor(weights, rand() < 0.08);
+    const baseSize = (1.05 + rand() * 1.45) * sizeScale;
+    const baseAlpha = (0.12 + Math.min(1.0, activity) * 0.36) * (0.55 + 0.45 * rand());
 
-    partPositions[idx * 3 + 0] = r * cosT;
-    partPositions[idx * 3 + 1] = r * sinT;
-    partPositions[idx * 3 + 2] = z;
-
-    let col = [0.0, 0.94, 1.0];
-    if (weights.pinkWeight > weights.cyanWeight) {
-      col = [0.96, 0.28, 0.54];
-    } else if (rand() > 0.85) {
-      col = [0.92, 0.98, 1.0]; // bright starlight spark
-    }
-
-    partColors[idx * 3 + 0] = col[0];
-    partColors[idx * 3 + 1] = col[1];
-    partColors[idx * 3 + 2] = col[2];
-
-    partParams[idx * 4 + 0] = theta;
-    partParams[idx * 4 + 1] = r;
-    partParams[idx * 4 + 2] = rand();
-    partParams[idx * 4 + 3] = 0.9 + rand() * 1.5;
+    posList.push(r * Math.cos(theta), r * Math.sin(theta), z);
+    colList.push(col[0], col[1], col[2]);
+    paramsList.push(baseTheta, streamLen, dotFrac, phase);
+    streamList.push(startR, curve, speed, baseSize);
+    alphaList.push(baseAlpha);
   }
 
   const eclipseParticlesGeometry = new THREE.BufferGeometry();
-  eclipseParticlesGeometry.setAttribute('position', new THREE.BufferAttribute(partPositions, 3));
-  eclipseParticlesGeometry.setAttribute('color', new THREE.BufferAttribute(partColors, 3));
-  eclipseParticlesGeometry.setAttribute('aParams', new THREE.BufferAttribute(partParams, 4));
+  eclipseParticlesGeometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array(posList), 3));
+  eclipseParticlesGeometry.setAttribute('color', new THREE.BufferAttribute(new Float32Array(colList), 3));
+  eclipseParticlesGeometry.setAttribute('aParams', new THREE.BufferAttribute(new Float32Array(paramsList), 4));
+  eclipseParticlesGeometry.setAttribute('aStream', new THREE.BufferAttribute(new Float32Array(streamList), 4));
+  eclipseParticlesGeometry.setAttribute('aBaseAlpha', new THREE.BufferAttribute(new Float32Array(alphaList), 1));
   eclipseParticlesGeometry.computeBoundingSphere();
 
-  // 5. Corona Halo Plane (soft saturated scattering glow)
+  // 4. Corona Halo Plane (soft saturated scattering glow)
   const haloPlaneSize = haloRadius * 2.0;
   const eclipseHaloGeometry = new THREE.PlaneGeometry(haloPlaneSize, haloPlaneSize, 1, 1);
 
-  // 6. Void Occlusion Disc (absolute pitch black interior void)
+  // 5. Void Occlusion Disc (absolute pitch black interior void)
   const eclipseVoidGeometry = new THREE.CircleGeometry(innerRadius * 0.996, 96);
 
   return {

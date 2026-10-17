@@ -32,23 +32,51 @@ export default buildConfig({
           },
         },
       },
-      afterDashboard: [
+      beforeDashboard: [
         '/src/components/WorkbenchDashboardCard#WorkbenchDashboardCard',
+      ],
+      afterDashboard: [
         '/src/components/BackgroundThemeDashboardCard#BackgroundThemeDashboardCard',
         '/src/components/VercelAnalyticsDashboard#VercelAnalyticsDashboard',
       ],
       beforeLogin: [
         '/src/components/GoogleLoginButton#GoogleLoginButton',
       ],
-      afterNavLinks: [
+      beforeNavLinks: [
         '/src/components/WorkbenchNavLink#WorkbenchNavLink',
+      ],
+      afterNavLinks: [
         '/src/components/LogoutButton#LogoutButton',
       ],
     },
   },
   collections: [
+    Posts,
+    Categories,
+    {
+      slug: 'media',
+      admin: {
+        group: 'Editorial',
+      },
+      upload: true,
+      fields: [
+        {
+          name: 'alt',
+          type: 'text',
+          required: true,
+        },
+      ],
+    },
+    GalleryImages,
+    GalleryAlbums,
+    GalleryCategories,
+    AdminLinks,
     {
       slug: 'users',
+      admin: {
+        group: 'System',
+        useAsTitle: 'email',
+      },
       auth: {
         strategies: [
           {
@@ -91,23 +119,6 @@ export default buildConfig({
       },
       fields: [],
     },
-    {
-      slug: 'media',
-      upload: true,
-      fields: [
-        {
-          name: 'alt',
-          type: 'text',
-          required: true,
-        },
-      ],
-    },
-    Categories,
-    Posts,
-    AdminLinks,
-    GalleryCategories,
-    GalleryAlbums,
-    GalleryImages,
   ],
   globals: [
     SiteSettings,

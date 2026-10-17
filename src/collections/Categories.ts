@@ -4,6 +4,7 @@ export const Categories: CollectionConfig = {
   slug: 'categories',
   admin: {
     useAsTitle: 'name',
+    group: 'Editorial',
     defaultColumns: ['name', 'slug', 'accent', 'updatedAt'],
   },
   access: {

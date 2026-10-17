@@ -221,8 +221,11 @@ export function mountSculptureScene(
       const ptrWorldY = controller.currentPointer.y * halfH;
       const localPtrX = ptrWorldX - eclipseGroup.position.x;
       const localPtrY = ptrWorldY - eclipseGroup.position.y;
+      const hoverVal = (activePointer !== null || controller.state === 'hover') ? 1.0 : 0.0;
       eclipseFilamentMaterial.uniforms.uPointer.value.set(localPtrX, localPtrY);
-      eclipseFilamentMaterial.uniforms.uHover.value = (activePointer !== null || controller.state === 'hover' || !coarsePointer) ? 1.0 : 0.6;
+      eclipseFilamentMaterial.uniforms.uHover.value = hoverVal;
+      eclipseParticleMaterial.uniforms.uPointer.value.set(localPtrX, localPtrY);
+      eclipseParticleMaterial.uniforms.uHover.value = hoverVal;
     } else {
       terrainMaterial.uniforms.uTime.value = timeSeconds;
       contourMaterial.uniforms.uTime.value = timeSeconds;

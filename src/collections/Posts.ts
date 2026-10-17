@@ -101,6 +101,7 @@ export const Posts: CollectionConfig = {
   slug: 'posts',
   admin: {
     useAsTitle: 'title',
+    group: 'Editorial',
     defaultColumns: ['title', 'category', 'slug', 'publishedDate'],
     preview: (doc: any, { token }: any) => {
       const slug = doc?.slug;

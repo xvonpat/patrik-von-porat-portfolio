@@ -5,6 +5,7 @@ export const AdminLinks: CollectionConfig = {
   defaultSort: 'sortOrder',
   admin: {
     useAsTitle: 'title',
+    group: 'System',
     defaultColumns: ['title', 'category', 'status', 'priority', 'sortOrder'],
   },
   access: {

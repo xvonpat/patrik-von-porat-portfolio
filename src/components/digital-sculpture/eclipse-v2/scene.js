@@ -1,7 +1,8 @@
-import { RADIUS, EXTENT, createCorona, paintRestingCorona, drawLight, drawFilament, drawDrift } from './appearance';
+import { RADIUS, EXTENT, createCorona, paintRestingCorona, drawLight, drawCoronaParticles } from './appearance';
 
-/** A front-facing, layered corona. Static fine detail is rasterized only on
- * resize; animation composites that cache plus a small moving light layer.
+/** A front-facing, layered particle-based data ring. Atmospheric glow is
+ * cached on resize; each frame renders animated radial particle streams,
+ * travelling activation pulses, outward data flow, and gentle breathing.
  * No pointer capture, drag handlers or touch cancellation: content stays native.
  */
 export function mountEclipseV2Scene(container, settings, { onReady, onError }) {
@@ -91,34 +92,30 @@ export function mountEclipseV2Scene(container, settings, { onReady, onError }) {
     if (!motion.matches) {
       ctx.save();
       ctx.globalCompositeOperation = 'screen';
-      ctx.globalAlpha = 0.12 + 0.1 * Math.sin(elapsed * 0.38);
+      ctx.globalAlpha = 0.14 + 0.11 * Math.sin(elapsed * (settings.animation.breathingSpeed ?? 1.25));
       ctx.drawImage(lightCache, -size / 2, -size / 2, size, size);
       ctx.restore();
     }
     ctx.scale(scale, scale);
-    if (!motion.matches) {
-      drawDrift(ctx, corona.dust, elapsed);
-      // A low-amplitude light wave travels through selected short filaments;
-      // geometry and the circular silhouette remain fixed.
-      for (let i = 0; i < corona.filaments.length; i += 13) {
-        const filament = corona.filaments[i];
-        const pulse = Math.max(0, Math.sin(elapsed * 0.34 - filament.angle * 2)) ** 8;
-        if (pulse > 0.02) drawFilament(ctx, filament, 0, pulse * 0.28);
-      }
-      if (moving && current.active > 0.005) {
-        const localX = (current.x - x) / scale;
-        const localY = (current.y - y) / scale;
-        const reach = settings.animation.pointerReach / scale;
-        for (let i = 0; i < corona.filaments.length; i += 3) {
-          const filament = corona.filaments[i];
-          const distance = Math.hypot(Math.cos(filament.angle) * (filament.start + filament.length * 0.5) - localX, Math.sin(filament.angle) * (filament.start + filament.length * 0.5) - localY);
-          if (distance < reach) {
-            const response = (1 - distance / reach) ** 2 * current.active;
-            drawFilament(ctx, filament, response, response * 0.8);
-          }
-        }
-      }
-    }
+    const pointerState = moving && current.active > 0.005 ? {
+      active: current.active,
+      localX: (current.x - x) / scale,
+      localY: (current.y - y) / scale,
+      reach: settings.animation.pointerReach / scale,
+    } : null;
+    drawCoronaParticles(
+      ctx,
+      corona,
+      settings.corona,
+      settings.animation,
+      motion.matches ? 0 : elapsed,
+      pointerState
+    );
+    // Keep the inner void clean and dark beneath inner-edge halos.
+    ctx.fillStyle = '#030608';
+    ctx.beginPath();
+    ctx.arc(0, 0, RADIUS - 0.3, 0, Math.PI * 2);
+    ctx.fill();
     ctx.restore();
     if (!ready) { ready = true; onReady?.(); }
   }

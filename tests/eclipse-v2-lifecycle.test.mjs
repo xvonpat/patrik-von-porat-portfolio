@@ -276,3 +276,29 @@ test('a drawing failure reports the error and disposes rendering resources', () 
   assert.equal(scene.document.listeners.size, 0);
   assert.equal(scene.observers[0].disconnected, true);
 });
+
+test('particle-based data ring animates travelling pulses, outward flow, and breathing across idle frames', (t) => {
+  const scene = mount();
+  t.after(scene.dispose);
+  const ctx = scene.canvases[0].context;
+  const recordedArcs = [];
+  const origArc = ctx.arc;
+  ctx.arc = (...args) => {
+    recordedArcs.push(args);
+    origArc(...args);
+  };
+
+  scene.tick();
+  const frame1Count = recordedArcs.length;
+  // Over 1,500 individual particle dots + halos rendered per frame
+  assert.ok(frame1Count > 1500);
+  const frame1Sample = recordedArcs.slice(10, 40).map(([x, y, r]) => `${x.toFixed(3)},${y.toFixed(3)},${r.toFixed(3)}`);
+
+  recordedArcs.length = 0;
+  for (let i = 0; i < 15; i++) scene.tick();
+  const frame2Sample = recordedArcs.slice(10, 40).map(([x, y, r]) => `${x.toFixed(3)},${y.toFixed(3)},${r.toFixed(3)}`);
+
+  // Idle animation moves particles outward and advances pulses without pointer interaction
+  assert.notDeepEqual(frame1Sample, frame2Sample);
+});
+

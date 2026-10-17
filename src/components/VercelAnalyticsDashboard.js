@@ -165,28 +165,76 @@ function DashboardCard({ children, dateRange, title, status = 'ready', updatedAt
       className={styles.card}
       role={status === 'error' ? 'alert' : undefined}
       style={{
-        background: 'var(--theme-elevation-0)',
-        border: '1px solid var(--theme-elevation-150)',
-        borderRadius: 'var(--style-radius-m)',
-        marginBottom: 'var(--base)',
-        padding: 'calc(var(--base) * 1.25)',
+        background: '#0e0e12',
+        border: '1px solid rgba(56, 189, 248, 0.22)',
+        borderRadius: '10px',
+        marginBottom: 'var(--base, 1.5rem)',
+        padding: 'calc(var(--base, 1rem) * 1.25)',
+        boxShadow: '0 4px 20px rgba(0, 0, 0, 0.35)',
       }}
     >
-      <h2
-        id="vercel-analytics-title"
-        style={{ fontSize: '1.1rem', margin: '0 0 var(--base)' }}
+      <div
+        style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: '0.75rem',
+          marginBottom: '1rem',
+          paddingBottom: '0.85rem',
+          borderBottom: '1px solid rgba(255, 255, 255, 0.07)',
+        }}
       >
-        {title}
-      </h2>
-      <p style={{ color: 'var(--theme-elevation-500)', margin: '0 0 var(--base)' }}>
-        Source: Vercel Web Analytics
-        {dateRange && ` · Last 30 days (${dateRange.since} – ${dateRange.until} UTC)`}
-      </p>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+          <span
+            aria-hidden="true"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: '2rem',
+              height: '2rem',
+              borderRadius: '6px',
+              background: 'rgba(56, 189, 248, 0.12)',
+              border: '1px solid rgba(56, 189, 248, 0.3)',
+              color: '#38bdf8',
+            }}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <line x1="18" y1="20" x2="18" y2="10" />
+              <line x1="12" y1="20" x2="12" y2="4" />
+              <line x1="6" y1="20" x2="6" y2="14" />
+            </svg>
+          </span>
+          <div>
+            <h2
+              id="vercel-analytics-title"
+              style={{ fontSize: '1.05rem', fontWeight: 600, margin: 0, color: '#ffffff' }}
+            >
+              {title}
+            </h2>
+            <p style={{ color: '#a1a1aa', fontSize: '0.8rem', margin: '0.15rem 0 0' }}>
+              Source: Vercel Web Analytics
+              {dateRange && ` · Last 30 days (${dateRange.since} – ${dateRange.until} UTC)`}
+            </p>
+          </div>
+        </div>
+
+        <span
+          style={{
+            color: '#a1a1aa',
+            fontSize: '0.75rem',
+            background: 'rgba(255, 255, 255, 0.04)',
+            border: '1px solid rgba(255, 255, 255, 0.07)',
+            padding: '0.25rem 0.6rem',
+            borderRadius: '999px',
+          }}
+        >
+          Updated: {updatedAt ? `${dateTimeFormatter.format(new Date(updatedAt))} UTC` : 'Pending'}
+        </span>
+      </div>
+
       {children}
-      <p style={{ color: 'var(--theme-elevation-500)', fontSize: '0.8rem', margin: 'var(--base) 0 0' }}>
-        Last successful update:{' '}
-        {updatedAt ? `${dateTimeFormatter.format(new Date(updatedAt))} UTC` : 'Not available yet'}
-      </p>
     </section>
   );
 }
@@ -194,18 +242,25 @@ function DashboardCard({ children, dateRange, title, status = 'ready', updatedAt
 function StatusCard({ children, dateRange, status = 'error', title = 'Vercel Web Analytics' }) {
   return (
     <DashboardCard dateRange={dateRange} status={status} title={title}>
-      <p style={{ margin: 0 }}>{children}</p>
+      <p style={{ margin: 0, fontSize: '0.85rem', color: '#a1a1aa' }}>{children}</p>
     </DashboardCard>
   );
 }
 
 function Metric({ label, value }) {
   return (
-    <div>
-      <div style={{ color: 'var(--theme-elevation-500)', fontSize: '0.85rem' }}>
+    <div
+      style={{
+        background: '#14141a',
+        border: '1px solid rgba(255, 255, 255, 0.07)',
+        borderRadius: '8px',
+        padding: '0.75rem 1rem',
+      }}
+    >
+      <div style={{ color: '#a1a1aa', fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
         {label}
       </div>
-      <div style={{ fontSize: '1.5rem', fontWeight: 600 }}>{value}</div>
+      <div style={{ fontSize: '1.45rem', fontWeight: 600, color: '#f4f4f5', marginTop: '0.15rem' }}>{value}</div>
     </div>
   );
 }
