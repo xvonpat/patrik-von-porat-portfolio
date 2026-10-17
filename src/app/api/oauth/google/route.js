@@ -3,12 +3,24 @@ import { NextResponse } from 'next/server';
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
+export function findEnvVar(name) {
+  if (process.env[name]) return process.env[name];
+  const target = name.trim().toLowerCase();
+  for (const [key, value] of Object.entries(process.env)) {
+    const k = key.trim().toLowerCase();
+    if (k === target || k === `next_public_${target}`) {
+      return value;
+    }
+  }
+  return undefined;
+}
+
 export function getRedirectUri(request) {
   const host = request?.headers?.get('x-forwarded-host') || request?.nextUrl?.host || (request?.url ? new URL(request.url).host : 'localhost:3000');
   const proto = request?.headers?.get('x-forwarded-proto') || (host.includes('localhost') ? 'http' : 'https');
   const computed = `${proto}://${host}/api/oauth/google/callback`;
 
-  const envUri = process.env.GOOGLE_REDIRECT_URI;
+  const envUri = findEnvVar('GOOGLE_REDIRECT_URI');
   if (envUri) {
     // If envUri is configured for localhost but request is on live domain, prioritize computed live URL
     if (envUri.includes('localhost') && !host.includes('localhost')) {
@@ -20,16 +32,30 @@ export function getRedirectUri(request) {
 }
 
 export async function GET(request) {
-  const clientId = process.env.GOOGLE_CLIENT_ID;
+  const clientId = findEnvVar('GOOGLE_CLIENT_ID');
   const redirectUri = getRedirectUri(request);
 
   if (!clientId) {
+    const googleKeys = Object.keys(process.env)
+      .filter((k) => k.toLowerCase().includes('google'))
+      .map((k) => k.trim());
+
     return NextResponse.json(
       {
         error: 'Google OAuth configuration is missing on the server.',
         details: 'GOOGLE_CLIENT_ID is missing from the server environment variables.',
+        diagnostics: {
+          vercelEnv: process.env.VERCEL_ENV || process.env.NODE_ENV || 'unknown',
+          host: request?.headers?.get('host') || 'unknown',
+          foundGoogleKeys: googleKeys,
+        },
       },
-      { status: 500 }
+      {
+        status: 500,
+        headers: {
+          'Cache-Control': 'no-store, no-cache, must-revalidate',
+        },
+      }
     );
   }
 

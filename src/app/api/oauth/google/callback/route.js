@@ -4,7 +4,7 @@ import { SignJWT } from 'jose';
 import { cookies } from 'next/headers';
 import { getPayload } from 'payload';
 import configPromise from '../../../../../../payload.config.ts';
-import { getRedirectUri } from '../route.js';
+import { getRedirectUri, findEnvVar } from '../route.js';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -17,8 +17,8 @@ export async function GET(request) {
     return NextResponse.json({ error: 'No authorization code provided.' }, { status: 400 });
   }
 
-  const clientId = process.env.GOOGLE_CLIENT_ID || '';
-  const clientSecret = process.env.GOOGLE_CLIENT_SECRET || '';
+  const clientId = findEnvVar('GOOGLE_CLIENT_ID') || '';
+  const clientSecret = findEnvVar('GOOGLE_CLIENT_SECRET') || '';
   const redirectUri = getRedirectUri(request);
 
   if (!clientId || !clientSecret) {
@@ -65,7 +65,7 @@ export async function GET(request) {
     }
 
     // 3. Verify user matches the OWNER_EMAIL in env variables
-    const ownerEmail = process.env.OWNER_EMAIL;
+    const ownerEmail = findEnvVar('OWNER_EMAIL');
     if (!ownerEmail || email.toLowerCase() !== ownerEmail.toLowerCase()) {
       return NextResponse.json(
         { error: 'Unauthorized: This account is not registered to access the admin panel.' },
