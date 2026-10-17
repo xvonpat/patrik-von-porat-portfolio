@@ -1,5 +1,8 @@
 import { NextResponse } from 'next/server';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export function getRedirectUri(request) {
   const host = request?.headers?.get('x-forwarded-host') || request?.nextUrl?.host || (request?.url ? new URL(request.url).host : 'localhost:3000');
   const proto = request?.headers?.get('x-forwarded-proto') || (host.includes('localhost') ? 'http' : 'https');

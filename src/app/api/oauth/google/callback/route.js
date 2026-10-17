@@ -6,6 +6,9 @@ import { getPayload } from 'payload';
 import configPromise from '../../../../../../payload.config.ts';
 import { getRedirectUri } from '../route.js';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
   const code = searchParams.get('code');
