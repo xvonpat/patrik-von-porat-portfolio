@@ -15,15 +15,19 @@ export const SiteSettings: GlobalConfig = {
       name: 'homepageBackground',
       label: 'Homepage Background Theme',
       type: 'select',
-      defaultValue: 'digital-eclipse',
+      defaultValue: 'harmonic-nexus',
       required: true,
       options: [
         {
-          label: 'Digital Eclipse II (Atmospheric Corona — New Version)',
+          label: 'Harmonic Nexus (3D Cymatic Strings & Attractor Field — Signature)',
+          value: 'harmonic-nexus',
+        },
+        {
+          label: 'Digital Eclipse II (Atmospheric Corona — Particle Data Ring)',
           value: 'digital-eclipse-v2',
         },
         {
-          label: 'Digital Eclipse (Radial Corona & Cosmic Filaments — New)',
+          label: 'Digital Eclipse (Radial Corona & Cosmic Filaments)',
           value: 'digital-eclipse',
         },
         {

@@ -111,9 +111,14 @@ export default function DigitalSculpture({ className = '', theme = 'digital-ecli
 
     const handle = schedule(async () => {
       try {
-        const mountScene = activeSettings.id === 'digital-eclipse-v2'
-          ? (await import('./eclipse-v2/scene')).mountEclipseV2Scene
-          : (await import('./scene')).mountSculptureScene;
+        let mountScene;
+        if (activeSettings.id === 'harmonic-nexus') {
+          mountScene = (await import('./harmonic-nexus/scene')).mountHarmonicNexusScene;
+        } else if (activeSettings.id === 'digital-eclipse-v2') {
+          mountScene = (await import('./eclipse-v2/scene')).mountEclipseV2Scene;
+        } else {
+          mountScene = (await import('./scene')).mountSculptureScene;
+        }
         if (cancelled) return;
 
         dispose = mountScene(container, activeSettings, {

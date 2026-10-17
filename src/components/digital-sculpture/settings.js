@@ -269,7 +269,67 @@ export const DIGITAL_ECLIPSE_V2_SETTINGS = {
   },
 };
 
+/** Harmonic Nexus: 3D Cymatic Strings & Attractor Field unifying Music, Visual Art, and Systems. */
+export const HARMONIC_NEXUS_SETTINGS = {
+  id: 'harmonic-nexus',
+  label: 'Harmonic Nexus (3D Cymatic Strings & Attractor)',
+
+  cameraFraming: {
+    mode: 'front-facing',
+    fovDesktop: 38,
+    fovMobile: 44,
+    positionDesktop: [0, 0, 10.0],
+    targetDesktop: [0, 0, 0],
+    positionMobile: [0, 0, 10.8],
+    targetMobile: [0, 0, 0],
+    nexusCenterDesktop: [2.48, 0.08, 0],
+    nexusCenterMobile: [0.0, -0.58, 0],
+  },
+
+  nexusGeometry: {
+    seed: 4099,
+    scaleDesktop: 1.0,
+    scaleMobile: 0.72,
+    coreRadius: 1.12,
+    haloRadius: 3.85,
+    strandCountDesktop: 76,
+    strandCountMobile: 44,
+    particleCountDesktop: 6800,
+    particleCountMobile: 3400,
+  },
+
+  palette: {
+    electricCyan: '#00f0ff',
+    obsidianViolet: '#a855f7',
+    vividPink: '#f43f5e',
+    highlightWhite: '#f0fdfa',
+    voidColor: '#040609',
+  },
+
+  parallaxStrength: {
+    hoverPositionX: 0.42,
+    hoverPositionY: 0.24,
+    hoverTargetX: 0.18,
+    hoverTargetY: 0.12,
+    dampingSpeed: 3.8,
+    dragSensitivity: 0.0014,
+    maxYaw: 0.22,
+    maxPitchUp: 0.14,
+    maxPitchDown: 0.14,
+    inertiaDamping: 3.6,
+    returnDelayMs: 2000,
+    returnSpeed: 1.6,
+  },
+
+  rendering: {
+    maxPixelRatioDesktop: 2.0,
+    maxPixelRatioMobile: 1.5,
+    mobileFps: 30,
+  },
+};
+
 export const SCULPTURE_THEMES = {
+  'harmonic-nexus': HARMONIC_NEXUS_SETTINGS,
   'digital-eclipse-v2': DIGITAL_ECLIPSE_V2_SETTINGS,
   'digital-eclipse': DIGITAL_ECLIPSE_SETTINGS,
   'contour-flow': CONTOUR_FLOW_SETTINGS,
@@ -277,8 +337,11 @@ export const SCULPTURE_THEMES = {
 };
 
 export function getSculptureSettings(themeName) {
-  if (!themeName) return DIGITAL_ECLIPSE_SETTINGS;
+  if (!themeName) return HARMONIC_NEXUS_SETTINGS;
   const key = String(themeName).toLowerCase().trim();
+  if (key === 'nexus' || key === 'harmonic' || key === 'harmonic-nexus' || key === 'e') {
+    return HARMONIC_NEXUS_SETTINGS;
+  }
   if (key === 'eclipse-v2' || key === 'digital-eclipse-v2' || key === 'd') {
     return DIGITAL_ECLIPSE_V2_SETTINGS;
   }
@@ -291,8 +354,9 @@ export function getSculptureSettings(themeName) {
   if (key === 'alpine' || key === 'alpine-peaks' || key === 'alpine-landscape' || key === 'a') {
     return ALPINE_PEAKS_SETTINGS;
   }
-  return SCULPTURE_THEMES[key] || DIGITAL_ECLIPSE_SETTINGS;
+  return SCULPTURE_THEMES[key] || HARMONIC_NEXUS_SETTINGS;
 }
 
-/** Default active settings (Digital Eclipse) */
-export const SCULPTURE_SETTINGS = DIGITAL_ECLIPSE_SETTINGS;
+/** Default active settings (Harmonic Nexus) */
+export const SCULPTURE_SETTINGS = HARMONIC_NEXUS_SETTINGS;
+

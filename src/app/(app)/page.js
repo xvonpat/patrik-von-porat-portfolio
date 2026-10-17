@@ -12,7 +12,7 @@ export const revalidate = 60;
 export default async function Home() {
   // Gracefully fetch latest published blog posts and site settings from Payload CMS
   let latestPosts = [];
-  let homepageBackground = 'digital-eclipse';
+  let homepageBackground = 'harmonic-nexus';
   try {
     const payload = await getPayload({ config: configPromise });
     const [postsResult, siteSettings] = await Promise.all([

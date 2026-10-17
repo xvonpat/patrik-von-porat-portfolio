@@ -6,6 +6,22 @@ import styles from './BackgroundThemeDashboardCard.module.css';
 
 const THEMES = [
   {
+    id: 'harmonic-nexus',
+    title: 'Harmonic Nexus — 3D Cymatic Strings & Attractor',
+    subtitle: 'Option E — Signature Identity Sculpture (Music · Visual Art · Systems)',
+    badge: 'Signature 3D',
+    featured: true,
+    description:
+      'Real-time 3D WebGL sculpture uniting guitar string standing-wave harmonics, stippled cymatic particle streams, and a four-phase systems attractor in Electric Cyan, Obsidian Violet, and Vivid Rose. Move your pointer to pluck strings or click-and-drag to orbit.',
+    features: [
+      '3D resonant guitar strings',
+      'Interactive pointer plucking',
+      'Cymatic particle attractor',
+      'Cyan · Violet · Magenta spectrum',
+    ],
+    previewQuery: 'harmonic-nexus',
+  },
+  {
     id: 'digital-eclipse-v2',
     title: 'Digital Eclipse II',
     subtitle: 'Option D — Particle Data Ring',
@@ -48,7 +64,7 @@ const THEMES = [
 ];
 
 export function BackgroundThemeDashboardCard() {
-  const [activeTheme, setActiveTheme] = useState('digital-eclipse');
+  const [activeTheme, setActiveTheme] = useState('harmonic-nexus');
   const [loading, setLoading] = useState(true);
   const [savingTheme, setSavingTheme] = useState(null);
   const [statusMessage, setStatusMessage] = useState('');
@@ -172,7 +188,7 @@ export function BackgroundThemeDashboardCard() {
             return (
               <div
                 key={theme.id}
-                className={`${styles.themeOption} ${isActive ? styles.themeOptionActive : ''}`}
+                className={`${styles.themeOption} ${theme.featured ? styles.themeOptionFeatured : ''} ${isActive ? styles.themeOptionActive : ''}`}
                 onClick={() => !isActive && handleSelectTheme(theme.id)}
                 role="button"
                 tabIndex={0}
