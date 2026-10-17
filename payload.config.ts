@@ -23,7 +23,17 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
     components: {
+      views: {
+        workbench: {
+          Component: '/src/components/WorkbenchViewWrapper#WorkbenchViewWrapper',
+          path: '/workbench',
+          meta: {
+            title: 'Workbench Assistant — vonporat.com',
+          },
+        },
+      },
       afterDashboard: [
+        '/src/components/WorkbenchDashboardCard#WorkbenchDashboardCard',
         '/src/components/BackgroundThemeDashboardCard#BackgroundThemeDashboardCard',
         '/src/components/VercelAnalyticsDashboard#VercelAnalyticsDashboard',
       ],
@@ -31,6 +41,7 @@ export default buildConfig({
         '/src/components/GoogleLoginButton#GoogleLoginButton',
       ],
       afterNavLinks: [
+        '/src/components/WorkbenchNavLink#WorkbenchNavLink',
         '/src/components/LogoutButton#LogoutButton',
       ],
     },

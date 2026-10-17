@@ -23,7 +23,7 @@
         "./src/*"
       ],
       "@payload-config": [
-        "./payload.config.js"
+        "./payload.config.ts"
       ]
     },
     "plugins": [
