@@ -75,29 +75,6 @@ export default function Projects() {
 
   const supportingProjects = [
     {
-      id: 'visual-practice',
-      title: 'Visual Practice',
-      category: 'DRAWING · TATTOO PRACTICE · PHYSICAL CRAFT',
-      status: 'ONGOING PRACTICE',
-      statusType: 'active',
-      intro: 'An ongoing exploration of observation, material and controlled technique across traditional and physical forms.',
-      scopeLabel: 'Scope',
-      scopeItems: [
-        'Graphite and charcoal studies',
-        'Tattoo linework and shading practice',
-        'Miniatures and physical models',
-        'Selected digital experimentation'
-      ],
-      role: null,
-      evidence: 'Studies, experiments and finished work documenting continued development across different materials.',
-      cta: 'View Visual Practice',
-      link: '/art',
-      image: '/images/art/drawings/eye-study.webp',
-      imageAlt: 'Visual practice traditional graphite drawing study',
-      accent: 'purple',
-      isExternal: false
-    },
-    {
       id: 'dmaic-companion',
       title: 'DMAIC Companion',
       category: 'WEB · IMPROVEMENT TOOLS',
@@ -118,7 +95,7 @@ export default function Projects() {
       evidence: '37 tools built across DMAIC phases and Apollo RCA. Runs 100% in the browser with offline localStorage autosave, .dmaic.json project files, and 387 automated tests.',
       cta: 'View Case Study',
       link: '/projects/dmaic-companion',
-      image: '/images/projects/proof/dmaic-companion-featured-1600x900.png',
+      image: '/images/projects/proof/proof-dmaic-companion-clean.webp',
       imageAlt: 'DMAIC Companion – home screen with the three ways in and the D-M-A-I-C phase band',
       fallbackBadge: 'Improvement Tool',
       fallbackDesc: 'Local-first guided web app for Lean Six Sigma projects and Apollo root cause analysis.',
@@ -129,7 +106,7 @@ export default function Projects() {
       id: 'vonporat',
       title: 'vonporat.com',
       category: 'CREATIVE HUB · EDITORIAL SYSTEM · WEB',
-      status: 'LIVE · EVOLVING',
+      status: 'LIVE',
       statusType: 'live',
       intro: 'A personal creative hub designed to connect music, visual practice, writing and systems thinking within one coherent identity.',
       role: 'Concept · Content Architecture · Design Direction · CMS Structure · Iterative Development',
@@ -144,7 +121,7 @@ export default function Projects() {
       evidence: 'A live publishing platform connecting project work, visual galleries, journal entries and structured content.',
       cta: 'View Project',
       link: 'https://vonporat.com',
-      image: '/images/projects/proof/proof-vonporat-showcase-v2.webp',
+      image: '/images/projects/proof/proof-vonporat-nexus.webp',
       imageAlt: 'vonporat.com personal creative hub platform interface preview',
       accent: 'cyan',
       isExternal: true
@@ -329,7 +306,7 @@ export default function Projects() {
         </div>
       </section>
 
-      {/* 3. Supporting Projects (Visual Practice, vonporat.com) */}
+      {/* 3. Supporting Projects (DMAIC Companion, vonporat.com) */}
       <section className="flex flex-col gap-6 pt-4 border-t border-white/5">
         <div className="flex items-center justify-between border-b border-white/5 pb-2.5">
           <div className="flex items-center gap-2.5">
@@ -343,7 +320,7 @@ export default function Projects() {
           </span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-7">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-7">
           {supportingProjects.map((proj) => {
             const statusBadge = getStatusBadge(proj.status, proj.statusType);
             const isPurple = proj.accent === 'purple';
