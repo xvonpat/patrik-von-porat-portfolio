@@ -95,7 +95,7 @@ export default async function Home() {
     }
   ];
 
-  // 3. Curated Selected Work Entries (Music, Physical Visual Art, Digital Tools)
+  // 3. Curated Selected Work Entries (Music, Digital Tools)
   const selectedWork = [
     {
       title: 'Realmforged',
@@ -118,21 +118,11 @@ export default async function Home() {
       accent: 'purple'
     },
     {
-      title: 'Visual Practice',
-      category: 'DRAWING · TATTOO PRACTICE · PHYSICAL CRAFT',
-      description: 'An ongoing exploration of traditional materials, controlled technique and visual observation through studies, experiments and finished work.',
-      image: '/images/art/drawings/eye-study.webp',
-      imageAlt: 'Visual practice graphite drawing study',
-      link: '/art',
-      ctaText: 'Explore Visual Practice',
-      accent: 'purple'
-    },
-    {
       title: 'DMAIC Companion',
       category: 'WEB · IMPROVEMENT TOOLS',
       description: 'A local-first, guided web app for Lean Six Sigma improvement work and Apollo root cause analysis, replacing static templates with guided workflows.',
-      image: '/images/projects/proof/dmaic-companion-featured-1600x900.png',
-      imageAlt: 'DMAIC Companion – home screen with the three ways in and the D-M-A-I-C phase band',
+      image: '/images/projects/dmaic-companion/01-hero-promo.png',
+      imageAlt: 'DMAIC Companion – "Every Lean Six Sigma tool. One guided flow." with a wall of real tool screens: Cause & Effect Tree, Pareto, control chart, capability, Fishbone, boxplot and more',
       link: '/projects/dmaic-companion',
       ctaText: 'Explore DMAIC Companion',
       accent: 'cyan'
@@ -215,11 +205,11 @@ export default async function Home() {
           </h2>
           <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-accent-purple to-transparent mt-1" />
           <p className="text-base md:text-lg text-zinc-300 font-light max-w-2xl leading-relaxed md:leading-8 mt-1 text-balance text-pretty">
-            Active music releases, physical craft, and personal tools currently in development.
+            Active music releases and personal tools currently in development.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-7">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-7">
           {selectedWork.map((card, idx) => {
             const isPurple = card.accent === 'purple';
             const accentClass = isPurple ? 'text-accent-purple' : 'text-accent-cyan';
