@@ -6,20 +6,20 @@ import CtaButton from '@/components/CtaButton';
 
 export const metadata = {
   title: "DMAIC Companion | Selected Work | Patrik von Porat",
-  description: "A local-first, guided web app for Lean Six Sigma improvement work. It teaches the method while you use it, and replaces PowerPoint and Excel/Minitab templates with guided workflows that export to a PowerPoint report.",
+  description: "A guided web app for Lean Six Sigma improvement work and Apollo root cause analysis. It teaches the method while you use it – with guides, interactive labs and gentle checks – and replaces PowerPoint and Excel/Minitab templates with guided workflows that end in a PowerPoint report.",
   alternates: {
     canonical: '/projects/dmaic-companion',
   },
   openGraph: {
     title: "DMAIC Companion | Selected Work | Patrik von Porat",
-    description: "A local-first, guided web app for Lean Six Sigma improvement work. It teaches the method while you use it, and replaces PowerPoint and Excel/Minitab templates with guided workflows that export to a PowerPoint report.",
+    description: "A guided web app for Lean Six Sigma improvement work and Apollo root cause analysis. It teaches the method while you use it – with guides, interactive labs and gentle checks – and replaces PowerPoint and Excel/Minitab templates with guided workflows that end in a PowerPoint report.",
     url: 'https://vonporat.com/projects/dmaic-companion',
     images: [
       {
-        url: '/images/projects/proof/dmaic-companion-featured-1600x900.png',
-        width: 1200,
-        height: 675,
-        alt: 'DMAIC Companion – home screen with the three ways in and the D-M-A-I-C phase band',
+        url: '/images/projects/dmaic-companion/01-hero-promo.png',
+        width: 1600,
+        height: 1000,
+        alt: 'DMAIC Companion – "Every Lean Six Sigma tool. One guided flow." with a wall of real tool screens: Cause & Effect Tree, Pareto, control chart, capability, Fishbone, boxplot and more',
       },
     ],
   }
@@ -29,7 +29,7 @@ export default function DmaicCompanionPage() {
   const metadataFacts = [
     { 
       label: "STATUS", 
-      value: "Ongoing – all 37 tools built, self-testing before sharing with colleagues", 
+      value: "Live at dmaic.vonporat.com (invite only) – all 37 tools built; self-testing and initial user invites", 
       accent: "cyan" 
     },
     { 
@@ -42,15 +42,15 @@ export default function DmaicCompanionPage() {
     },
     { 
       label: "ARCHITECTURE", 
-      value: "Local-first SPA (client-side), installable as an app" 
+      value: "Local-first web app (client-side), installable, with an optional online sign-in" 
     },
     { 
       label: "PERSISTENCE", 
-      value: "Browser localStorage autosave + JSON project files (.dmaic.json)" 
+      value: "Projects stay on the user's computer: browser autosave + .dmaic.json project files. Online only: sign-in and user list" 
     },
     { 
       label: "STACK", 
-      value: "Vite, React, TypeScript, Tailwind CSS, React Flow, pptxgenjs, Vitest" 
+      value: "Vite, React, TypeScript, Tailwind CSS, React Flow, pptxgenjs, Supabase, Vercel, Vitest" 
     },
   ];
 
@@ -62,19 +62,19 @@ export default function DmaicCompanionPage() {
       items: [
         {
           name: "React 19 & Vite 8",
-          detail: "Modern declarative interface with high-performance bundling and sub-second local hot reloading."
+          detail: "Declarative interface, fast local builds."
         },
         {
           name: "TypeScript 7 (Strict)",
-          detail: "Strict type definitions across all 37 tool models, statistical outputs, schemas, and migration pipelines."
+          detail: "Typed models for all 37 tools, statistics, file schema and migrations."
         },
         {
-          name: "Tailwind CSS 4 & Themes",
-          detail: "Clean, responsive interface with both light and dark themes tailored for focused analytical and workshop settings."
+          name: "Tailwind CSS 4 & 12 Themes",
+          detail: "From calm \"Cream paper\" to a vonporat.com theme with the site's own fonts; colour meanings (action, condition, root cause) are the same in every theme."
         },
         {
-          name: "React Flow & PWA Support",
-          detail: "Interactive Cause & Effect Tree visual editor powered by React Flow; installable as a standalone app via web manifest."
+          name: "React Flow, Installable App, Phone Layout",
+          detail: "Interactive charts (Cause & Effect Tree, Fishbone, Value Stream Map…) with full-screen mode; installs as an app; usable on a phone."
         }
       ]
     },
@@ -84,41 +84,79 @@ export default function DmaicCompanionPage() {
       accent: "purple",
       items: [
         {
-          name: "Single JSON Object Model",
-          detail: "One project equals one JSON object with explicit schema versioning and automatic backward-compatible migrations on open."
+          name: "One JSON Object per Project",
+          detail: "Schema version and backward-compatible migrations on open."
         },
         {
           name: "Modular Tool Registry",
-          detail: "Every project maintains a composable registry of tools, allowing analyses to start small and expand without restarting."
+          detail: "Every project is a list of tools, so any project can grow."
         },
         {
-          name: "Native TypeScript Statistics",
-          detail: "Core statistics written entirely in plain TypeScript—mean, standard deviation, histograms, and normal/t/F distributions without third-party math libraries."
+          name: "Statistics in Plain TypeScript",
+          detail: "Mean, standard deviation, histograms, normal/t/F distributions, normality test – no maths library."
         },
         {
           name: "Quality & Process Control",
-          detail: "Built-in algorithms for normality testing, process capability (Cp/Cpk), control charts, hypothesis tests, regression, and Gage R&R—eliminating Minitab dependency."
+          detail: "Capability (Cp/Cpk), control charts, hypothesis tests and ANOVA, regression and Gage R&R – no Minitab needed. Data is pasted straight from Excel."
         }
       ]
     },
     {
-      layer: "TESTING & QUALITY",
-      badge: "Verification",
+      layer: "ONLINE, TESTING & QUALITY",
+      badge: "Verification & Online",
       accent: "cyan",
       items: [
         {
-          name: "Vitest (387 Tests in 62 Files)",
-          detail: "Comprehensive automated test suite, including validation that every worked example passes every tool's checklist."
+          name: "Vercel + Supabase",
+          detail: "Hosted at dmaic.vonporat.com; invite-only sign-in with e-mail invites, user/admin roles, and an Admin panel for people, tool release and feedback. Tight database rules: each user can only read their own profile."
         },
         {
-          name: "Oxlint Code Quality",
-          detail: "Rapid static analysis enforcing uniform code standards across domain logic, tools, and test suites."
+          name: "Vitest (678 Tests in 79 Files)",
+          detail: "Including checks that every worked example passes every tool's checklist, and that every guide and glossary term is consistent."
         },
         {
-          name: "PowerPoint Export (pptxgenjs)",
-          detail: "Client-side report engine generating structured, consulting-style PowerPoint slide decks directly from active project data."
+          name: "Oxlint & PowerPoint Export",
+          detail: "Fast code checks; client-side PowerPoint report (pptxgenjs) for every project type."
         }
       ]
+    }
+  ];
+
+  const labsList = [
+    {
+      num: "1",
+      title: "Center, spread and histograms",
+      desc: "Drag the dots and watch the mean, median and histogram move."
+    },
+    {
+      num: "2",
+      title: "Sampling",
+      desc: "Draw samples and see why bigger samples give more precise answers."
+    },
+    {
+      num: "3",
+      title: "Process capability",
+      desc: "Slide the centre, the spread and the limits; watch Cp and Cpk respond."
+    },
+    {
+      num: "4",
+      title: "Control charts",
+      desc: "Shift or drift the process and see when the chart notices, and by which rule."
+    },
+    {
+      num: "5",
+      title: "Boxplots",
+      desc: "Three shifts as boxes, with the data points that make them."
+    },
+    {
+      num: "6",
+      title: "Correlation",
+      desc: "Order size against packing time, and why correlation is not causation."
+    },
+    {
+      num: "7",
+      title: "Process flow",
+      desc: "Orders flowing through a warehouse: throughput, lead time, work in progress, Little's law and the bottleneck."
     }
   ];
 
@@ -128,35 +166,35 @@ export default function DmaicCompanionPage() {
       count: "7 Tools",
       color: "text-rose-400",
       accent: "rose",
-      examples: "Improvement Charter, Stakeholder analysis, Voice of the Customer (VOC), CTQ Tree, Process Boundary Scope, SIPOC Preview, Project Risk Assessment"
+      examples: "Problem definition, Team & scope, Improvement Charter, Stakeholder analysis, Communication plan, Voice of the Customer, Define tollgate"
     },
     {
       phase: "Measure",
       count: "7 Tools",
       color: "text-amber-400",
       accent: "amber",
-      examples: "SIPOC, Value Stream Map, Data Collection Plan, Operational Definitions, MSA / Gage R&R, Process Baseline, Normality Check"
+      examples: "Evidence & timeline, SIPOC, Process map, Value Stream Map, CTQ tree, Data collection plan, MSA / Gage R&R"
     },
     {
       phase: "Analyze",
       count: "10 Tools",
       color: "text-accent-purple",
       accent: "purple",
-      examples: "5 Whys, Fishbone (Ishikawa), Pareto Analysis, Cause & Effect Tree, FMEA, Multi-Vari Analysis, Hypothesis Testing, Correlation & Regression, Process Flow Detailing, Root Cause Verification"
+      examples: "Analysis tools (5 Whys, Fishbone, Pareto), Cause & Effect Tree, Root causes, Basic statistics & histogram, Boxplot & stratification, Scatter plot & correlation, Hypothesis tests, Regression, FMEA, Affinity diagram"
     },
     {
       phase: "Improve",
       count: "7 Tools",
       color: "text-accent-cyan",
       accent: "cyan",
-      examples: "Solution Brainstorming, Solution Selection Matrix, Poka-Yoke (Mistake Proofing), Implementation Plan, Pilot Evaluation, Risk Mitigation, Future State VSM"
+      examples: "Solutions, Action plan, Solution selection matrix, Poka-yoke, Minimal Viable Product (pilot), Six Thinking Hats, House of Change"
     },
     {
       phase: "Control",
       count: "6 Tools",
       color: "text-emerald-400",
       accent: "emerald",
-      examples: "Process Capability Before/After (Cp/Cpk), Statistical Process Control Charts, Control Plan, Standard Operating Procedure (SOP), Training Matrix, Final Project Report"
+      examples: "Validate & sustain, Lessons learned, Control plan, Control charts (SPC), Capability before/after, Final report"
     }
   ];
 
@@ -180,9 +218,9 @@ export default function DmaicCompanionPage() {
             </span>
             <span className="text-zinc-600 font-mono text-xs">&bull;</span>
             <div className="flex items-center gap-1.5">
-              <span className="h-2 w-2 rounded-full bg-accent-cyan animate-pulse" />
-              <span className="text-xs font-mono uppercase tracking-wider text-accent-cyan font-semibold">
-                ONGOING
+              <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-semibold">
+                LIVE · INVITE ONLY
               </span>
             </div>
           </div>
@@ -192,7 +230,7 @@ export default function DmaicCompanionPage() {
           </h1>
 
           <p className="text-lg md:text-xl text-zinc-300 font-light leading-relaxed max-w-3xl text-balance text-pretty">
-            A local-first, guided web app for Lean Six Sigma improvement work. It teaches the method while you use it, and replaces PowerPoint and Excel/Minitab templates with guided workflows that export to a PowerPoint report.
+            A guided web app for Lean Six Sigma improvement work and Apollo root cause analysis. It teaches the method while you use it – with guides, interactive labs and gentle checks – and replaces PowerPoint and Excel/Minitab templates with guided workflows that end in a PowerPoint report.
           </p>
         </div>
       </section>
@@ -213,10 +251,10 @@ export default function DmaicCompanionPage() {
 
       {/* Visual Showcase Banner */}
       <section className="flex flex-col gap-3">
-        <div className="w-full aspect-[16/9] rounded-2xl overflow-hidden border border-white/[0.08] bg-obsidian-950/80 relative shadow-[0_12px_40px_rgba(0,0,0,0.5)]">
+        <div className="w-full aspect-[16/10] rounded-2xl overflow-hidden border border-white/[0.08] bg-obsidian-950/80 relative shadow-[0_12px_40px_rgba(0,0,0,0.5)]">
           <Image 
-            src="/images/projects/proof/dmaic-companion-featured-1600x900.png" 
-            alt="DMAIC Companion – home screen with the three ways in and the D-M-A-I-C phase band" 
+            src="/images/projects/dmaic-companion/01-hero-promo.png" 
+            alt="DMAIC Companion – &ldquo;Every Lean Six Sigma tool. One guided flow.&rdquo; with a wall of real tool screens: Cause &amp; Effect Tree, Pareto, control chart, capability, Fishbone, boxplot and more" 
             fill
             priority
             sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1200px"
@@ -245,10 +283,10 @@ export default function DmaicCompanionPage() {
               Learning by Building
             </h3>
             <p className="text-sm md:text-[15px] text-zinc-300 leading-relaxed font-light text-pretty">
-              As a Lean Six Sigma Green Belt learning the Apollo root cause analysis method, coursework arrived primarily as slide decks and Excel templates: helpful for reading, but slow for execution.
+              As a Lean Six Sigma Green Belt learning the Apollo root cause analysis method, my course material came as slide decks and Excel templates: good for reading, slow for doing.
             </p>
             <p className="text-sm md:text-[15px] text-zinc-300 leading-relaxed font-light text-pretty">
-              The impulse was to build a tool that walks through the method step by step and explains why each step exists in practice.
+              I wanted a tool that walks through the method step by step and explains <em>why</em> each step exists.
             </p>
           </GlassCard>
 
@@ -257,10 +295,10 @@ export default function DmaicCompanionPage() {
               From One Method to a Toolbox
             </h3>
             <p className="text-sm md:text-[15px] text-zinc-300 leading-relaxed font-light text-pretty">
-              The project started as the Apollo RCA Guide—12 guided steps from problem definition to lessons learned, structured along DMAIC principles.
+              It started as the <em>Apollo RCA Guide</em> – 12 guided steps from problem definition to lessons learned, structured by DMAIC.
             </p>
             <p className="text-sm md:text-[15px] text-zinc-300 leading-relaxed font-light text-pretty">
-              It quickly grew into DMAIC Companion: a cohesive environment supporting full DMAIC improvement projects and standalone Lean Six Sigma tools in one uniform format.
+              It grew into DMAIC Companion: full DMAIC improvement projects, Apollo RCAs and single Lean Six Sigma tools in one format – and then into a place to learn: a library of 50 guides and seven hands-on labs.
             </p>
           </GlassCard>
 
@@ -269,10 +307,10 @@ export default function DmaicCompanionPage() {
               Personal Project
             </h3>
             <p className="text-sm md:text-[15px] text-zinc-300 leading-relaxed font-light text-pretty">
-              DMAIC Companion is an ongoing personal project and learning vehicle—not a commercial product, cloud service, or SaaS business.
+              An ongoing personal project and learning vehicle – not a commercial product or SaaS.
             </p>
             <p className="text-sm md:text-[15px] text-zinc-300 leading-relaxed font-light text-pretty">
-              Built without a formal coding background by defining requirements, testing every step, and letting an AI coding assistant write the code under a written method guide and strict working rules.
+              Built without a formal coding background: I write the requirements, test every step, and let an AI coding assistant write the code under a written method guide and strict working rules. Since October 2026 it is online for invited test users.
             </p>
           </GlassCard>
         </div>
@@ -288,7 +326,7 @@ export default function DmaicCompanionPage() {
             </h2>
           </div>
           <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest font-medium">
-            Zero Cloud
+            Local-First
           </span>
         </div>
 
@@ -299,10 +337,10 @@ export default function DmaicCompanionPage() {
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
-                <span>Zero Cloud</span>
+                <span>Projects Never Leave Your Machine</span>
               </div>
               <p className="text-xs md:text-sm text-zinc-300 font-light leading-relaxed">
-                Runs entirely in the browser. There is no remote server, database, user accounts, or telemetry. Because improvement initiatives frequently handle sensitive operational information, nothing ever leaves the local machine.
+                Improvement work often holds confidential information, so project data is never sent to a server – not even when the app runs online. The server only knows who may sign in (names, e-mails, roles), feedback messages and which tools are released. On a laptop the app also runs fully offline, without sign-in.
               </p>
             </div>
 
@@ -314,7 +352,7 @@ export default function DmaicCompanionPage() {
                 <span>Files Are the Real Save</span>
               </div>
               <p className="text-xs md:text-sm text-zinc-300 font-light leading-relaxed">
-                Every modification autosaves continuously to the browser’s <code className="text-accent-cyan font-mono text-xs px-1 py-0.5 rounded bg-zinc-900/90 border border-white/5">localStorage</code> as a safety net. The real save is a versioned <code className="text-accent-cyan font-mono text-xs px-1 py-0.5 rounded bg-zinc-900/90 border border-white/5">.dmaic.json</code> project file that can be archived, backed up, and shared.
+                Every change is autosaved in the browser as a safety net. The real save is a versioned <code className="text-accent-cyan font-mono text-xs px-1 py-0.5 rounded bg-zinc-900/90 border border-white/5">.dmaic.json</code> project file that can be kept, backed up and shared. Older files – including the original RCA files – still open.
               </p>
             </div>
 
@@ -326,7 +364,7 @@ export default function DmaicCompanionPage() {
                 <span>Guidance, Not Blockers</span>
               </div>
               <p className="text-xs md:text-sm text-zinc-300 font-light leading-relaxed">
-                Every tool checks user input against methodology rules (for example, identifying if an entry states a cause rather than describing what occurred) and explains why. Practitioners always retain full freedom to proceed.
+                Every tool checks the input against the method (for example, &ldquo;this looks like a cause – describe only what happened&rdquo;) and explains why. The user can always continue.
               </p>
             </div>
           </div>
@@ -379,6 +417,22 @@ export default function DmaicCompanionPage() {
             </div>
           ))}
         </div>
+
+        {/* Architecture Showcase: Phone Layout & Cross-Device Readiness */}
+        <div className="flex flex-col gap-3 pt-2">
+          <div className="w-full aspect-[16/10] rounded-2xl overflow-hidden border border-white/[0.08] bg-obsidian-950/80 relative shadow-[0_12px_40px_rgba(0,0,0,0.5)]">
+            <Image 
+              src="/images/projects/dmaic-companion/09-phone.png" 
+              alt="DMAIC Companion on a phone: the Learn page, a control chart and a lab" 
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1200px"
+              className="w-full h-full object-cover object-center"
+            />
+          </div>
+          <span className="text-xs font-mono text-zinc-400 uppercase tracking-wider text-center sm:text-left">
+            Responsive architecture &ndash; Learn page, control chart, and interactive lab running on phone width
+          </span>
+        </div>
       </section>
 
       {/* 6. Core Workflow & Data Model */}
@@ -398,23 +452,29 @@ export default function DmaicCompanionPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           
           {/* Three Ways In */}
-          <GlassCard accent="cyan" className="p-6 flex flex-col gap-4">
+          <GlassCard accent="cyan" className="p-6 flex flex-col gap-5">
+            <div className="w-full aspect-[16/10] rounded-xl overflow-hidden border border-white/[0.08] bg-obsidian-950/80 relative shadow-[0_8px_30px_rgba(0,0,0,0.4)]">
+              <Image 
+                src="/images/projects/dmaic-companion/02-home.png" 
+                alt="The Home page: the D-M-A-I-C phase band and &ldquo;continue where you left off&rdquo;" 
+                fill
+                sizes="(max-width: 768px) 100vw, 600px"
+                className="w-full h-full object-cover object-center"
+              />
+            </div>
             <div className="flex items-center justify-between">
               <h3 className="text-lg font-semibold text-white font-gothic">
                 Three Ways In
               </h3>
               <span className="text-[10px] font-mono uppercase text-zinc-400">Entry Points</span>
             </div>
-            <p className="text-xs md:text-sm text-zinc-300 font-light leading-relaxed">
-              Users can approach improvement work through whichever lens fits the immediate problem at hand:
-            </p>
             <div className="flex flex-col gap-2.5 pt-1">
               <div className="bg-obsidian-950/60 rounded-lg p-3 border border-white/5 flex flex-col gap-1">
                 <span className="text-xs font-mono text-accent-cyan font-semibold uppercase tracking-wider">
-                  1. DMAIC Improvement
+                  1. DMAIC improvement
                 </span>
                 <span className="text-xs text-zinc-300 font-light">
-                  Full project trajectory from Improvement Charter through to Final Report.
+                  The full Lean Six Sigma flow, from Improvement Charter to Final report.
                 </span>
               </div>
               <div className="bg-obsidian-950/60 rounded-lg p-3 border border-white/5 flex flex-col gap-1">
@@ -422,91 +482,247 @@ export default function DmaicCompanionPage() {
                   2. Apollo RCA
                 </span>
                 <span className="text-xs text-zinc-300 font-light">
-                  12 guided steps for systematic problem investigation, cause-and-effect charting, and root cause identification.
+                  12 guided steps: problem definition, evidence and timeline, Cause &amp; Effect Tree, root causes, solutions, action plan and lessons learned.
                 </span>
               </div>
               <div className="bg-obsidian-950/60 rounded-lg p-3 border border-white/5 flex flex-col gap-1">
                 <span className="text-xs font-mono text-zinc-300 font-semibold uppercase tracking-wider">
-                  3. Single Tool
+                  3. Single tool
                 </span>
                 <span className="text-xs text-zinc-300 font-light">
-                  Jump directly into an isolated tool (e.g. Fishbone, FMEA, Pareto) without needing a full project wrapper.
+                  Just one tool, e.g. a Fishbone, an FMEA or a capability study.
                 </span>
               </div>
             </div>
             <p className="text-xs text-zinc-400 font-light italic pt-1">
-              Any tool can be added to an existing project later without starting over.
+              Any tool can be added to a project later without starting over.
             </p>
           </GlassCard>
 
           {/* Method Built In */}
-          <GlassCard accent="purple" className="p-6 flex flex-col gap-4">
+          <GlassCard accent="purple" className="p-6 flex flex-col gap-5">
+            <div className="w-full aspect-[16/10] rounded-xl overflow-hidden border border-white/[0.08] bg-obsidian-950/80 relative shadow-[0_8px_30px_rgba(0,0,0,0.4)]">
+              <Image 
+                src="/images/projects/dmaic-companion/03-cause-effect-tree.png" 
+                alt="A Cause &amp; Effect Tree with actions, conditions, evidence codes, root causes and stop signs" 
+                fill
+                sizes="(max-width: 768px) 100vw, 600px"
+                className="w-full h-full object-cover object-center"
+              />
+            </div>
             <div className="flex items-center justify-between">
               <h3 className="text-lg font-semibold text-white font-gothic">
                 Method Built In
               </h3>
               <span className="text-[10px] font-mono uppercase text-zinc-400">Apollo Principles</span>
             </div>
-            <p className="text-xs md:text-sm text-zinc-300 font-light leading-relaxed">
-              Root cause principles are woven directly into the interface rather than left to user discipline:
-            </p>
-            <div className="flex flex-col gap-2 pt-1 text-xs">
-              <div className="flex items-start gap-2.5">
-                <span className="font-mono font-semibold uppercase tracking-wider shrink-0 w-28 text-accent-purple">Action &amp; Condition</span>
-                <span className="text-zinc-400 font-light leading-relaxed">Every effect requires both an action and a condition; root causes are conditions that can be controlled.</span>
+            <div className="flex flex-col gap-2.5 pt-1 text-xs">
+              <div className="flex flex-col gap-0.5">
+                <span className="font-mono font-semibold uppercase tracking-wider text-accent-purple">Action &amp; condition</span>
+                <span className="text-zinc-400 font-light leading-relaxed">Every effect needs at least one action and one condition; root causes are conditions.</span>
               </div>
-              <div className="flex items-start gap-2.5">
-                <span className="font-mono font-semibold uppercase tracking-wider shrink-0 w-28 text-accent-cyan">Evidence Driven</span>
-                <span className="text-zinc-400 font-light leading-relaxed">Every causal statement requires evidence; causes without supporting evidence are visually marked with a &ldquo;?&rdquo;.</span>
+              <div className="flex flex-col gap-0.5">
+                <span className="font-mono font-semibold uppercase tracking-wider text-accent-cyan">Evidence driven</span>
+                <span className="text-zinc-400 font-light leading-relaxed">Every cause needs evidence &ndash; a cause without it is marked with a &ldquo;?&rdquo;.</span>
               </div>
-              <div className="flex items-start gap-2.5">
-                <span className="font-mono font-semibold uppercase tracking-wider shrink-0 w-28 text-emerald-400">Blame Free</span>
-                <span className="text-zinc-400 font-light leading-relaxed">&ldquo;Don&rsquo;t blame people &ndash; blame the process.&rdquo; Prompts encourage systemic solutions over individual fault.</span>
+              <div className="flex flex-col gap-0.5">
+                <span className="font-mono font-semibold uppercase tracking-wider text-emerald-400">Blame free</span>
+                <span className="text-zinc-400 font-light leading-relaxed">&ldquo;Don&apos;t blame people &ndash; blame the process.&rdquo;</span>
               </div>
-              <div className="flex items-start gap-2.5">
-                <span className="font-mono font-semibold uppercase tracking-wider shrink-0 w-28 text-amber-400">Worked Examples</span>
-                <span className="text-zinc-400 font-light leading-relaxed">Integrated Learn library with guides and six complete worked examples—from the Titanic tragedy to full industrial DMAIC projects.</span>
+              <div className="flex flex-col gap-0.5">
+                <span className="font-mono font-semibold uppercase tracking-wider text-amber-400">Worked examples</span>
+                <span className="text-zinc-400 font-light leading-relaxed">11 complete examples, small to large – from the Titanic and a hot-coffee burn to a full manufacturing DMAIC project with Gage R&amp;R, ANOVA, regression, control charts and capability – including a practice case to solve yourself first.</span>
               </div>
             </div>
           </GlassCard>
 
         </div>
+      </section>
 
-        {/* 37 Tools Phase Breakdown */}
-        <div className="rounded-xl border border-white/[0.08] bg-obsidian-950/60 p-6 flex flex-col gap-5">
-          <div className="flex items-center justify-between border-b border-white/5 pb-3">
-            <div className="flex items-center gap-2">
-              <span className="text-sm font-semibold text-white font-mono uppercase tracking-wider">
-                37 Tools Across the DMAIC Framework
-              </span>
+      {/* 7. NEW SECTION – Labs: Change Something, See What Happens */}
+      <section className="flex flex-col gap-6">
+        <div className="flex items-center justify-between border-b border-white/5 pb-2.5">
+          <div className="flex items-center gap-2.5">
+            <span className="w-2 h-2 rounded-full bg-accent-purple" />
+            <h2 className="text-xl md:text-2xl font-semibold text-white font-gothic tracking-wide">
+              Labs: Change Something, See What Happens
+            </h2>
+          </div>
+          <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest font-medium">
+            Interactive Labs
+          </span>
+        </div>
+
+        <p className="text-sm md:text-[15px] text-zinc-300 font-light leading-relaxed max-w-4xl text-pretty">
+          Learn is for reading; Labs is for trying. Seven interactive experiments with the charts and numbers of improvement work. Drag a data point, change the process, draw a new sample – and watch the chart and the numbers respond. Each lab has five challenges: guess what will happen, try it, then see why it happened and what it means in a project. The data is made up – nothing touches your projects.
+        </p>
+
+        {/* First image: 06-labs.png */}
+        <div className="w-full aspect-[16/10] rounded-2xl overflow-hidden border border-white/[0.08] bg-obsidian-950/80 relative shadow-[0_12px_40px_rgba(0,0,0,0.5)]">
+          <Image 
+            src="/images/projects/dmaic-companion/06-labs.png" 
+            alt="The Labs page: seven interactive labs, each with a small picture of its chart" 
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1200px"
+            className="w-full h-full object-cover object-center"
+          />
+        </div>
+
+        {/* Seven labs list */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {labsList.map((lab) => (
+            <div 
+              key={lab.num} 
+              className="rounded-xl border border-white/[0.08] bg-obsidian-950/60 p-4 md:p-5 flex flex-col gap-1.5"
+            >
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-mono font-semibold text-accent-cyan">
+                  {lab.num}.
+                </span>
+                <h4 className="text-sm font-semibold text-white font-mono">
+                  {lab.title}
+                </h4>
+              </div>
+              <p className="text-xs text-zinc-400 font-light leading-relaxed">
+                {lab.desc}
+              </p>
             </div>
-            <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest">
-              Complete Coverage
+          ))}
+        </div>
+
+        {/* Labs Gallery (07 & 08) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="flex flex-col gap-3">
+            <div className="w-full aspect-[16/10] rounded-xl overflow-hidden border border-white/[0.08] bg-obsidian-950/80 relative shadow-[0_8px_30px_rgba(0,0,0,0.4)]">
+              <Image 
+                src="/images/projects/dmaic-companion/07-lab-capability.png" 
+                alt="The Process capability lab: a histogram against the customer's limits, with Cp and Cpk" 
+                fill
+                sizes="(max-width: 768px) 100vw, 600px"
+                className="w-full h-full object-cover object-center"
+              />
+            </div>
+            <span className="text-xs font-mono text-zinc-400 uppercase tracking-wider text-center sm:text-left">
+              Process capability lab &ndash; histogram against customer limits with Cp and Cpk
             </span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-            {dmaicPhases.map((phase, pIdx) => (
-              <div key={pIdx} className="bg-obsidian-950/80 rounded-lg p-3.5 border border-white/5 flex flex-col gap-2">
-                <div className="flex items-center justify-between">
-                  <span className={`text-xs font-mono font-semibold uppercase tracking-wider ${phase.color}`}>
-                    {phase.phase}
-                  </span>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-900 border border-white/5 text-zinc-300">
-                    {phase.count}
-                  </span>
-                </div>
-                <p className="text-[11px] text-zinc-400 font-light leading-relaxed">
-                  {phase.examples}
-                </p>
-              </div>
-            ))}
+          <div className="flex flex-col gap-3">
+            <div className="w-full aspect-[16/10] rounded-xl overflow-hidden border border-white/[0.08] bg-obsidian-950/80 relative shadow-[0_8px_30px_rgba(0,0,0,0.4)]">
+              <Image 
+                src="/images/projects/dmaic-companion/08-lab-process-flow.png" 
+                alt="The Process flow lab: orders moving through Picking, Packing and Shipping, with lead time and the bottleneck" 
+                fill
+                sizes="(max-width: 768px) 100vw, 600px"
+                className="w-full h-full object-cover object-center"
+              />
+            </div>
+            <span className="text-xs font-mono text-zinc-400 uppercase tracking-wider text-center sm:text-left">
+              Process flow lab &ndash; orders moving through Picking, Packing and Shipping
+            </span>
           </div>
         </div>
 
       </section>
 
-      {/* 7. Current State & Future Roadmap */}
+      {/* 8. Learn Library */}
+      <section className="flex flex-col gap-6">
+        <div className="flex items-center justify-between border-b border-white/5 pb-2.5">
+          <div className="flex items-center gap-2.5">
+            <span className="w-2 h-2 rounded-full bg-accent-cyan" />
+            <h2 className="text-xl md:text-2xl font-semibold text-white font-gothic tracking-wide">
+              Learn Library
+            </h2>
+          </div>
+          <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest font-medium">
+            Knowledge Base
+          </span>
+        </div>
+
+        <div className="w-full aspect-[16/10] rounded-2xl overflow-hidden border border-white/[0.08] bg-obsidian-950/80 relative shadow-[0_12px_40px_rgba(0,0,0,0.5)]">
+          <Image 
+            src="/images/projects/dmaic-companion/05-learn-library.png" 
+            alt="The Learn page with guides, learning paths, &ldquo;Which tool when?&rdquo; and a glossary" 
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1200px"
+            className="w-full h-full object-cover object-center"
+          />
+        </div>
+
+        <div className="rounded-xl border border-white/[0.08] bg-obsidian-950/60 p-6 md:p-8 flex flex-col gap-4">
+          <ul className="flex flex-col gap-3 text-sm md:text-[15px] text-zinc-300 font-light leading-relaxed">
+            <li className="flex items-start gap-2.5">
+              <span className="text-accent-cyan font-mono font-bold">&bull;</span>
+              <span>
+                <strong className="text-white font-medium">50 guides:</strong> one per tool, plus <em>The method</em> (DMAIC, Apollo principles, actions and conditions, roles, which project to choose) and <em>Statistics basics</em>. Each guide: what it is, when to use it, how to do it, common mistakes and a short quiz.
+              </span>
+            </li>
+            <li className="flex items-start gap-2.5">
+              <span className="text-accent-cyan font-mono font-bold">&bull;</span>
+              <span>
+                <strong className="text-white font-medium">Four learning paths</strong>, <strong className="text-white font-medium">&ldquo;Which tool when?&rdquo;</strong> and a <strong className="text-white font-medium">glossary of about 300 terms</strong>.
+              </span>
+            </li>
+            <li className="flex items-start gap-2.5">
+              <span className="text-accent-cyan font-mono font-bold">&bull;</span>
+              <span>
+                <strong className="text-white font-medium">Linked both ways:</strong> every step&apos;s help panel links to its guide; guides link to the matching labs.
+              </span>
+            </li>
+            <li className="flex items-start gap-2.5">
+              <span className="text-accent-cyan font-mono font-bold">&bull;</span>
+              <span>
+                <strong className="text-white font-medium">All guides as one PDF:</strong> a printable book with cover and contents.
+              </span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      {/* 9. 37 Tools Across the DMAIC Framework */}
+      <section className="flex flex-col gap-6">
+        <div className="flex items-center justify-between border-b border-white/5 pb-2.5">
+          <div className="flex items-center gap-2.5">
+            <span className="w-2 h-2 rounded-full bg-accent-purple" />
+            <h2 className="text-xl md:text-2xl font-semibold text-white font-gothic tracking-wide">
+              37 Tools Across the DMAIC Framework
+            </h2>
+          </div>
+          <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest font-medium">
+            Complete Coverage
+          </span>
+        </div>
+
+        <div className="w-full aspect-[16/10] rounded-2xl overflow-hidden border border-white/[0.08] bg-obsidian-950/80 relative shadow-[0_12px_40px_rgba(0,0,0,0.5)]">
+          <Image 
+            src="/images/projects/dmaic-companion/04-tool-library.png" 
+            alt="The Tool library, every tool grouped by DMAIC phase" 
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1200px"
+            className="w-full h-full object-cover object-center"
+          />
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+          {dmaicPhases.map((phase, pIdx) => (
+            <div key={pIdx} className="bg-obsidian-950/80 rounded-xl p-4 border border-white/[0.08] flex flex-col gap-2.5">
+              <div className="flex items-center justify-between">
+                <span className={`text-xs font-mono font-semibold uppercase tracking-wider ${phase.color}`}>
+                  {phase.phase}
+                </span>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-900 border border-white/5 text-zinc-300">
+                  {phase.count}
+                </span>
+              </div>
+              <p className="text-xs text-zinc-400 font-light leading-relaxed">
+                {phase.examples}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* 10. Current State & Future Roadmap */}
       <section className="flex flex-col gap-6">
         <div className="flex items-center justify-between border-b border-white/5 pb-2.5">
           <div className="flex items-center gap-2.5">
@@ -521,39 +737,42 @@ export default function DmaicCompanionPage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="rounded-xl border border-white/[0.08] bg-obsidian-950/60 p-6 flex flex-col gap-3">
+          <div className="rounded-xl border border-white/[0.08] bg-obsidian-950/60 p-6 flex flex-col gap-4">
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-emerald-400" />
               <h3 className="text-base font-semibold text-white font-mono uppercase tracking-wider">
                 Completed (Current State)
               </h3>
             </div>
-            <ul className="flex flex-col gap-2 text-xs md:text-sm text-zinc-300 font-light list-disc list-inside">
-              <li><strong className="text-white font-normal">Apollo RCA Guide v1:</strong> 12 guided steps, worked examples, and PowerPoint export</li>
-              <li><strong className="text-white font-normal">DMAIC Companion:</strong> All 37 tools built with zero placeholders remaining</li>
-              <li><strong className="text-white font-normal">Export Engine:</strong> Formatted report and PowerPoint export for every project type</li>
-              <li><strong className="text-white font-normal">Learn Library:</strong> Interactive guides for Define tools and six end-to-end worked examples</li>
+            <ul className="flex flex-col gap-2.5 text-xs md:text-sm text-zinc-300 font-light list-disc list-inside">
+              <li><strong className="text-white font-normal">Apollo RCA Guide v1:</strong> 12 guided steps, worked examples and PowerPoint export</li>
+              <li><strong className="text-white font-normal">DMAIC Companion:</strong> All 37 tools built, no placeholders left; report and PowerPoint export for every project type</li>
+              <li><strong className="text-white font-normal">Learn library:</strong> 50 guides, learning paths, glossary and a printable PDF book</li>
+              <li><strong className="text-white font-normal">Labs:</strong> Seven interactive labs with five challenges each</li>
+              <li><strong className="text-white font-normal">Online:</strong> Live at dmaic.vonporat.com with invite-only sign-in, roles, an Admin panel, tool release and in-app feedback</li>
+              <li><strong className="text-white font-normal">11 worked examples, 12 colour themes, installable, usable on a phone</strong></li>
             </ul>
           </div>
 
-          <div className="rounded-xl border border-white/[0.08] bg-obsidian-950/60 p-6 flex flex-col gap-3">
+          <div className="rounded-xl border border-white/[0.08] bg-obsidian-950/60 p-6 flex flex-col gap-4">
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-accent-cyan" />
               <h3 className="text-base font-semibold text-white font-mono uppercase tracking-wider">
-                Roadmap Candidates (Next)
+                Roadmap (Next)
               </h3>
             </div>
-            <ul className="flex flex-col gap-2 text-xs md:text-sm text-zinc-300 font-light list-disc list-inside">
-              <li><strong className="text-white font-normal">Learn Library Expansion:</strong> Guides and quizzes across all remaining tools</li>
-              <li><strong className="text-white font-normal">Comprehensive Self-Test:</strong> End-to-end verification under a written test procedure</li>
-              <li><strong className="text-white font-normal">Colleague Sharing:</strong> Packaged to run locally or as a hosted static web app</li>
-              <li><strong className="text-white font-normal">Swedish Translation:</strong> Localized UI copy (all interface strings centralized)</li>
+            <ul className="flex flex-col gap-2.5 text-xs md:text-sm text-zinc-300 font-light list-disc list-inside">
+              <li><strong className="text-white font-normal">Full self-test</strong> of the app with the written test guide</li>
+              <li><strong className="text-white font-normal">Inviting initial test users</strong> and collecting feedback</li>
+              <li><strong className="text-white font-normal">PowerPoint export for all users</strong> (admin-only online until verified)</li>
+              <li><strong className="text-white font-normal">Phone layout,</strong> the next steps</li>
+              <li><strong className="text-white font-normal">Swedish translation</strong> (all interface text is already kept in one place)</li>
             </ul>
           </div>
         </div>
       </section>
 
-      {/* 8. Bottom Navigation Footer */}
+      {/* 11. Bottom Navigation Footer */}
       <section className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 border-t border-white/5">
         <Link 
           href="/projects" 
