@@ -425,7 +425,7 @@ function createHarmonicNexusMaterials(settings, { coreRadius, haloRadius }) {
       varying float vFamily;
       varying float vColorTone;
       varying float vPluck;
-      varying float vAngle;
+      varying vec2 vDir;
       varying float vRadius;
       varying float vDepth;
 
@@ -486,7 +486,9 @@ function createHarmonicNexusMaterials(settings, { coreRadius, haloRadius }) {
         }
 
         vPluck = clamp(pluckField + uImpulse * 0.6, 0.0, 1.0);
-        vAngle = atan(pos.y, pos.x);
+        // Pass direction, not angle: an interpolated atan() angle wraps from +PI to -PI
+        // on the left horizontal and sweeps a whole revolution across that segment.
+        vDir = pos.xy;
         vRadius = length(pos.xy);
 
         vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
@@ -507,11 +509,13 @@ function createHarmonicNexusMaterials(settings, { coreRadius, haloRadius }) {
       varying float vFamily;
       varying float vColorTone;
       varying float vPluck;
-      varying float vAngle;
+      varying vec2 vDir;
       varying float vRadius;
       varying float vDepth;
 
       void main() {
+        float vAngle = atan(vDir.y, vDir.x);
+
         // Travelling harmonic energy pulses along each string
         float wave1 = fract(vProgress - uTime * 0.24 + vPhase * 0.15915);
         float pulse1 = exp(-pow((wave1 - 0.5) / 0.11, 2.0));
