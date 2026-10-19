@@ -103,6 +103,30 @@ export default function Projects() {
       isExternal: false
     },
     {
+      id: 'home-control-panel',
+      title: 'Home Control Panel',
+      category: 'SMART HOME · INTERFACE DESIGN · AUTOMATION',
+      status: 'IN DEVELOPMENT',
+      statusType: 'development',
+      intro: 'A wall-mounted control panel for the whole house. Lights, heating, the front door, EV charging, solar power, the doorbell camera and even the coffee machine – one calm, glanceable interface instead of a dozen apps.',
+      role: 'Concept · Interface Design · Requirements & Testing · Integration Setup (Claude Code)',
+      scopeLabel: 'Built with',
+      scopeItems: [
+        'Home Assistant',
+        'Raspberry Pi',
+        'JavaScript Web Component',
+        'CSS',
+        '11 integrations'
+      ],
+      evidence: 'One custom Home Assistant card – about 2,200 lines of dependency-free JavaScript – controlling 10 rooms of lights, 8 heating zones, a smart lock, an EV charger, a solar inverter, a doorbell camera and a coffee machine. Adapts from wall tablet to phone with its own mobile layout.',
+      cta: 'View Case Study',
+      link: '/projects/home-control-panel',
+      image: '/images/projects/home-control-panel/00-cover.webp',
+      imageAlt: 'Dark smart-home control panel shown on a large screen and a phone',
+      accent: 'cyan',
+      isExternal: false
+    },
+    {
       id: 'vonporat',
       title: 'vonporat.com',
       category: 'CREATIVE HUB · EDITORIAL SYSTEM · WEB',
@@ -306,7 +330,7 @@ export default function Projects() {
         </div>
       </section>
 
-      {/* 3. Supporting Projects (DMAIC Companion, vonporat.com) */}
+      {/* 3. Supporting Projects (DMAIC Companion, Home Control Panel, vonporat.com) */}
       <section className="flex flex-col gap-6 pt-4 border-t border-white/5">
         <div className="flex items-center justify-between border-b border-white/5 pb-2.5">
           <div className="flex items-center gap-2.5">

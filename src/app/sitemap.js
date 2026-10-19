@@ -37,6 +37,7 @@ export default async function sitemap() {
     '',
     '/projects',
     '/projects/dmaic-companion',
+    '/projects/home-control-panel',
     '/music',
     '/art',
     '/blog',
