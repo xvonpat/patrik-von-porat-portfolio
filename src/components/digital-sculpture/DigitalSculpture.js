@@ -8,8 +8,9 @@ import styles from './DigitalSculpture.module.css';
  * Interactive Digital Sculpture for the homepage hero.
  *
  * Supports selectable themes:
- * - 'digital-eclipse' (Default): Original radial corona
- * - 'digital-eclipse-v2': Atmospheric corona with fine clustered detail
+ * - 'harmonic-nexus' (Default): 3D cymatic strings & attractor field
+ * - 'chladni-plate': Sand settling into the nodal lines of a vibrating plate
+ * - 'ink-in-water': Ink drops blooming in still water (GPU fluid simulation)
  * - 'contour-flow' (Option B): Sweeping S-shaped river valley with rolling ridges
  * - 'alpine-landscape' (Option A): Sharp alpine massifs & arête peaks
  *
@@ -19,11 +20,11 @@ import styles from './DigitalSculpture.module.css';
  *
  * Loads dynamically during idle time to guarantee zero blocking of page text and navigation.
  */
-export default function DigitalSculpture({ className = '', theme = 'digital-eclipse' }) {
+export default function DigitalSculpture({ className = '', theme = 'harmonic-nexus' }) {
   const rootRef = useRef(null);
   const containerRef = useRef(null);
   const [status, setStatus] = useState('loading'); // loading | ready | failed
-  const [resolvedTheme, setResolvedTheme] = useState('digital-eclipse');
+  const [resolvedTheme, setResolvedTheme] = useState('harmonic-nexus');
 
   useEffect(() => {
     const root = rootRef.current;
@@ -81,7 +82,7 @@ export default function DigitalSculpture({ className = '', theme = 'digital-ecli
     // Detect theme from URL query param (?theme=flow / ?theme=alpine / ?bg=...) or prop
     const urlParams = typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : null;
     const urlTheme = urlParams?.get('theme') || urlParams?.get('bg');
-    const activeSettings = getSculptureSettings(urlTheme || theme || 'digital-eclipse');
+    const activeSettings = getSculptureSettings(urlTheme || theme || 'harmonic-nexus');
     setResolvedTheme(activeSettings.id);
 
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -114,8 +115,12 @@ export default function DigitalSculpture({ className = '', theme = 'digital-ecli
         let mountScene;
         if (activeSettings.id === 'harmonic-nexus') {
           mountScene = (await import('./harmonic-nexus/scene')).mountHarmonicNexusScene;
-        } else if (activeSettings.id === 'digital-eclipse-v2') {
-          mountScene = (await import('./eclipse-v2/scene')).mountEclipseV2Scene;
+        } else if (activeSettings.id === 'chladni-plate') {
+          mountScene = (await import('./chladni/scene')).mountChladniScene;
+        } else if (activeSettings.id === 'ink-in-water') {
+          mountScene = (await import('./ink/scene')).mountInkScene;
+        } else if (activeSettings.id === 'contour-flow') {
+          mountScene = (await import('./contour/scene')).mountContourScene;
         } else {
           mountScene = (await import('./scene')).mountSculptureScene;
         }

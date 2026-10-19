@@ -84,7 +84,9 @@ Perceived speed, immediate response, and minimal layout shift are essential to a
 ## Background and atmosphere
 
 The homepage hero employs a multi-theme interactive 3D WebGL sculpture engine (`DigitalSculpture`) positioned as a non-intrusive backdrop:
-- **Digital Eclipse** (Default): High-contrast cosmic ring beside the hero text with dual electric cyan flares (featuring a brilliant diamond flare at the lower-right arc), vivid magenta/pink clusters along the right and lower arcs, hair-thin stardust filaments, and a soft scattering corona bloom.
+- **Harmonic Nexus** (Default): 3D cymatic guitar strings and a particle attractor around an obsidian core beside the hero text.
+- **Chladni Plate**: Sand settling into vibration figures on a plate; bone-white resting grains with cyan/violet accents.
+- **Ink in Water**: Violet, cyan and rose ink drops blooming and dissolving in still water.
 - **Contour Flow**: High-angle topographic landscape with broad rolling ridges, constant-elevation contour lines, and an illuminated S-shaped river valley.
 - **Alpine Landscape**: Sharp alpine survey with arête ridges, peaks, and cirque valleys.
 - **Readability & Text Protection**: A smoothly feathered darkening veil (`readabilityMask`) keeps the left-hand text column clear and legible.

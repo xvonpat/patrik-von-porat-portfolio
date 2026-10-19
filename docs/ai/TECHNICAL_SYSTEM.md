@@ -62,7 +62,7 @@ Before performing technical work, inspect the repository rather than relying on 
 - **`posts` collection**: Blog articles, titles, slugs, excerpts, rich-text body, categories, published status, publish dates, and cover media.
 - **`media` collection**: Uploaded images and media records.
 - **`users` collection**: Authenticated administrative users.
-- **`site-settings` global**: Configurable site-wide settings including `backgroundTheme` (`digital-eclipse`, `contour-flow`, `alpine-landscape`) with 1-click dashboard controls.
+- **`site-settings` global**: Configurable site-wide settings including `homepageBackground` (`harmonic-nexus`, `chladni-plate`, `ink-in-water`, `contour-flow`, `alpine-landscape`) with 1-click dashboard controls.
 
 ### Repository-managed (Static code)
 - Homepage structure and copy (`src/app/(app)/page.js`)
@@ -128,10 +128,10 @@ The `site-settings` Global (`src/globals/SiteSettings.ts`) controls site-wide ru
 
 | Field | Type | Options / Purpose |
 | --- | --- | --- |
-| `backgroundTheme` | Select | `digital-eclipse` (Default, Option C), `contour-flow` (Option B), `alpine-landscape` (Option A). Governs the active 3D WebGL background sculpture. |
+| `homepageBackground` | Select | `harmonic-nexus` (Default), `chladni-plate`, `ink-in-water`, `contour-flow`, `alpine-landscape`. Governs the active WebGL background sculpture. |
 
 - An interactive admin dashboard card (`src/components/BackgroundThemeDashboardCard.js`) is mounted in the Payload Admin Dashboard, enabling 1-click theme switching with preview thumbnails without requiring a code deployment or rebuild.
-- The homepage query (`src/app/(app)/page.js`) fetches the active theme via the Payload Local API with a 60-second revalidation window (`revalidate = 60`), with query-parameter overrides supported for immediate testing (`?theme=eclipse`, `?theme=flow`, `?theme=alpine`).
+- The homepage query (`src/app/(app)/page.js`) fetches the active theme via the Payload Local API with a 60-second revalidation window (`revalidate = 60`), with query-parameter overrides supported for immediate testing (`?theme=nexus`, `?theme=chladni`, `?theme=ink`, `?theme=flow`, `?theme=alpine`).
 
 ### Blog query behavior
 - Public queries query only published posts (`where: { status: { equals: 'published' } }`).
@@ -149,8 +149,11 @@ The `site-settings` Global (`src/globals/SiteSettings.ts`) controls site-wide ru
 The hero section background runs a custom Three.js WebGL rendering engine (`src/components/digital-sculpture/`):
 
 - **Theme Registry (`settings.js`)**:
-  - `digital-eclipse` (Default): Large cosmic eclipse beside the intro text with a pure black central void, dual electric cyan flares (with a brilliant diamond flare at the lower-right arc), vivid magenta/pink clusters along the right and lower arcs, delicate multi-scale radial filaments, starlight endpoint beads, and soft scattering corona halo.
-  - `contour-flow`: Sweeping S-shaped river valley with rolling mountain ridges, high-angle camera framing, glowing river stream, and delicate constant-elevation elevation contours.
+  - `harmonic-nexus` (Default): 3D cymatic guitar strings and a particle attractor around an obsidian core (`harmonic-nexus/scene.js`).
+  - `chladni-plate`: Sand on a vibrating plate settling into nodal-line figures, one tone at a time; CPU simulation drawn as three.js points (`chladni/scene.js`).
+  - `ink-in-water`: GPU stable-fluids simulation with ink drops blooming in still water; needs half-float render targets, otherwise the background hides itself (`ink/scene.js`).
+  - `contour-flow`: River-valley survey. Terrain is evaluated in the vertex shader (meandering channel + rolling fbm hills) and contour lines are drawn per pixel from the interpolated height with `fwidth` anti-aliasing, so they stay hair-thin at any density (`contour/scene.js`). Lines drift slowly downhill and a pulse travels along the valley.
+  - `alpine-landscape`: still uses the original marching-squares geometry renderer (`scene.js`, `geometry.js`, `materials.js`).
   - `alpine-landscape`: Sharp high-alpine survey with arête ridges, jagged peaks, and cirque valleys.
 - **Dynamic Idle Loading**: Loads asynchronously via `requestIdleCallback` (with 200ms fallback) to guarantee zero blocking of page text, typography, and navigation.
 - **Shaders & Blending**: Custom GLSL vertex and fragment shaders using `vertexColors: true`, per-vertex alpha (`aAlpha`), and `THREE.AdditiveBlending` without clipping into white.

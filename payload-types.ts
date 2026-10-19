@@ -762,7 +762,7 @@ export interface SiteSetting {
   /**
    * Select the interactive 3D background theme displayed on the homepage hero.
    */
-  homepageBackground: 'harmonic-nexus' | 'digital-eclipse-v2' | 'digital-eclipse' | 'contour-flow' | 'alpine-landscape';
+  homepageBackground: 'harmonic-nexus' | 'chladni-plate' | 'ink-in-water' | 'contour-flow' | 'alpine-landscape';
   updatedAt?: string | null;
   createdAt?: string | null;
 }

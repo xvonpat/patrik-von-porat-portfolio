@@ -445,3 +445,26 @@ Motion is capped at 30 fps on desktop and 24 fps on narrow screens, with pixel-r
 Compared and refined the actual localhost render against the supplied 1536×1024 reference; inspected desktop, tablet and mobile layouts. Tested mobile scrolling, About and Projects navigation, route cleanup and pointer input. Full lint and production build passed, plus nine Node lifecycle tests (`node --test tests/eclipse-v2-lifecycle.test.mjs`). The restricted build stalled at compilation; the unrestricted build completed successfully.
 
 The result retains a softer, less dense outer sparkle field than the supplied reference. Existing typography, logo, content, buttons and page structure are preserved. After applying the user-approved migration, an actual database update to `digital-eclipse-v2` succeeded in a rolled-back verification transaction, and the saved selection was confirmed unchanged. No commit, push or deployment was performed.
+
+*Superseded by D-031: both eclipse themes have been removed.*
+
+---
+
+## D-031 — Chladni Plate and Ink in Water added; Digital Eclipse themes removed
+
+**Status:** Implemented; database options enabled
+
+**Decision date:** 2026-10-19
+
+### Decision
+
+Two new homepage background themes, each a separate module so existing themes are untouched:
+
+- `chladni-plate` (`/?theme=chladni`): sand on a vibrating plate. Eight square-plate modes (calm to intricate) change every 9 s; grains are thrown by vibration amplitude and drift to nodal lines, so a figure forms out of noise — the Observe → Structure → Create → Refine idea made visible through sound. Pointer stirs the sand, a background click plays the next tone, reduced motion draws one finished figure.
+- `ink-in-water` (`/?theme=ink`): GPU stable-fluids simulation (half-float targets) with ink drops released every few seconds on the right. Pointer drags the water, a background click releases a drop, reduced motion draws one still frame. Without half-float render targets the theme reports failure and the background hides.
+
+Both pause in hidden tabs and below the hero, and cap at 60 fps (30 fps on narrow/touch screens).
+
+`contour-flow` was rebuilt as a shader-based renderer (`contour/scene.js`) to match the approved river-valley reference: per-pixel contour lines on GPU-evaluated terrain, teal lines brightening to cyan along the river and on lit slopes, sparse rose contours, slow downhill drift and a travelling pulse. Its theme id is unchanged, so no migration was needed. `alpine-landscape` keeps the original geometry renderer.
+
+`digital-eclipse` and `digital-eclipse-v2` were removed from code, CMS options and the dashboard card. Harmonic Nexus remains the default. The PostgreSQL enum still contains the two old values (enum values cannot be dropped without recreating the type); they are unused. The additive enum migrations for the new themes were applied with explicit user approval.

@@ -49,7 +49,7 @@ Home · Projects · Music · Art · Gallery · Blog · About · Contact
 
 | Page / Route | Status | Notes |
 | --- | --- | --- |
-| **Home** (`/`) | Approved & locked | Hero with interactive 3D Digital Sculpture (`digital-eclipse` default), The Impulse, 3 Expressions, 4-stage Process, Selected Work, Now, Journal preview, Contact exit. |
+| **Home** (`/`) | Approved & locked | Hero with interactive 3D Digital Sculpture (`harmonic-nexus` default), The Impulse, 3 Expressions, 4-stage Process, Selected Work, Now, Journal preview, Contact exit. |
 | **Projects** (`/projects`) | Approved & locked | Curated Selected Work (Realmforged, Ashwrithe, Visual Practice, vonporat.com, Systems & Improvement). Publicly visible. |
 | **Music** (`/music`) | Approved & locked | Realmforged & Ashwrithe priority, verified discography, Freternia/Cromonic legacy history. |
 | **Art** (`/art`) | Approved & locked | Curated Traditional Studies, Tattoo Practice, Miniatures & 3D Prints, Generative Visuals, full lightbox. |
@@ -64,7 +64,7 @@ Home · Projects · Music · Art · Gallery · Blog · About · Contact
 ## Content Ownership
 
 - **Blog** is the primary CMS-driven public section (`posts` collection).
-- **Site Settings** (`site-settings` Global) allows 1-click switching of background theme (`digital-eclipse`, `contour-flow`, `alpine-landscape`) from the Payload Admin Dashboard.
+- **Site Settings** (`site-settings` Global) allows 1-click switching of background theme (`harmonic-nexus`, `chladni-plate`, `ink-in-water`, `contour-flow`, `alpine-landscape`) from the Payload Admin Dashboard.
 - **Home, Music, Art, Gallery, Projects, About, and Contact** remain repository-managed by default.
 - New Payload collections or broader CMS migrations require an observed maintenance need and explicit approval.
 - Draft and private content must never be exposed publicly.

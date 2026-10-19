@@ -23,12 +23,12 @@ export const SiteSettings: GlobalConfig = {
           value: 'harmonic-nexus',
         },
         {
-          label: 'Digital Eclipse II (Atmospheric Corona — Particle Data Ring)',
-          value: 'digital-eclipse-v2',
+          label: 'Chladni Plate (Sand Settling into Vibration Patterns)',
+          value: 'chladni-plate',
         },
         {
-          label: 'Digital Eclipse (Radial Corona & Cosmic Filaments)',
-          value: 'digital-eclipse',
+          label: 'Ink in Water (Ink Drops Blooming in Still Water — Fluid Simulation)',
+          value: 'ink-in-water',
         },
         {
           label: 'Contour Flow (S-Valley River & Rolling Ridges — Option B)',

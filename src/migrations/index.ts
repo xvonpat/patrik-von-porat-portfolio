@@ -23,6 +23,8 @@ import * as migration_20261017_200000_add_gallery_image_to_posts from './2026101
 import * as migration_20261017_223000_add_harmonic_nexus from './20261017_223000_add_harmonic_nexus';
 import * as migration_20261017_232500_add_trousers_painting_eddie_image from './20261017_232500_add_trousers_painting_eddie_image';
 import * as migration_20261019_192000_add_nameplate_and_torso_eddie_images from './20261019_192000_add_nameplate_and_torso_eddie_images';
+import * as migration_20261019_210000_add_chladni_plate from './20261019_210000_add_chladni_plate';
+import * as migration_20261019_220000_add_ink_in_water from './20261019_220000_add_ink_in_water';
 
 export const migrations = [
   {
@@ -149,5 +151,15 @@ export const migrations = [
     up: migration_20261019_192000_add_nameplate_and_torso_eddie_images.up,
     down: migration_20261019_192000_add_nameplate_and_torso_eddie_images.down,
     name: '20261019_192000_add_nameplate_and_torso_eddie_images',
+  },
+  {
+    up: migration_20261019_210000_add_chladni_plate.up,
+    down: migration_20261019_210000_add_chladni_plate.down,
+    name: '20261019_210000_add_chladni_plate',
+  },
+  {
+    up: migration_20261019_220000_add_ink_in_water.up,
+    down: migration_20261019_220000_add_ink_in_water.down,
+    name: '20261019_220000_add_ink_in_water',
   },
 ];

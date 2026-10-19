@@ -19,7 +19,7 @@ This document defines when and how to create an execution plan for significant w
 
 | Page / Feature | Approved Scope | Date Locked |
 | --- | --- | --- |
-| **Home** (`/`) | Hero positioning, interactive 3D WebGL Digital Sculpture (`digital-eclipse` default), The Impulse, 3 Core Expressions, 4-stage Process, Selected Work proof cards, Current Focus, Journal preview, Contact exit. | 2026-10-17 |
+| **Home** (`/`) | Hero positioning, interactive 3D WebGL Digital Sculpture (`harmonic-nexus` default), The Impulse, 3 Core Expressions, 4-stage Process, Selected Work proof cards, Current Focus, Journal preview, Contact exit. | 2026-10-17 |
 | **Projects** (`/projects`) | Publicly active in navigation. Curated Selected Work (Realmforged, Ashwrithe, Visual Practice, vonporat.com, Systems & Improvement). | 2026-08-25 |
 | **Music** (`/music`) | Realmforged and Ashwrithe active showcases, verified discography releases, and Freternia/Cromonic legacy timeline. | 2026-08-25 |
 | **Art** (`/art`) | Curated Traditional Studies, Tattoo Practice, Miniatures & 3D Prints, Generative Visuals, and interactive full-screen lightbox. | 2026-08-25 |
