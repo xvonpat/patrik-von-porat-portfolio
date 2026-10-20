@@ -1,9 +1,38 @@
 "use client";
 
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { track } from '@vercel/analytics';
 
+const EMAIL = 'xvonpat@gmail.com';
+const HANDLE = '@patrikvonporat';
+
 export default function ContactLinks() {
+  const [copied, setCopied] = useState(false);
+  const resetRef = useRef(0);
+
+  useEffect(() => () => clearTimeout(resetRef.current), []);
+
+  // Not everyone has a mail app behind mailto:, so the address is visible and copyable.
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(EMAIL);
+    } catch {
+      const field = document.createElement('textarea');
+      field.value = EMAIL;
+      field.setAttribute('readonly', '');
+      field.style.position = 'absolute';
+      field.style.left = '-9999px';
+      document.body.appendChild(field);
+      field.select();
+      try { document.execCommand('copy'); } catch { /* nothing else to try */ }
+      field.remove();
+    }
+    setCopied(true);
+    clearTimeout(resetRef.current);
+    resetRef.current = setTimeout(() => setCopied(false), 2200);
+    handleLinkClick('Copy Email');
+  };
+
   const socialLinks = [
     {
       name: "LinkedIn",
@@ -37,12 +66,12 @@ export default function ContactLinks() {
   };
 
   return (
-    <div className="flex flex-col items-center gap-10 md:gap-12 w-full max-w-3xl relative z-10">
-      
+    <div className="flex flex-col items-center gap-8 md:gap-9 w-full relative z-10">
+
       {/* 1. Primary Email CTA */}
-      <div className="flex flex-col items-center w-full">
-        <a 
-          href="mailto:xvonpat@gmail.com"
+      <div className="flex flex-col items-center gap-4 w-full">
+        <a
+          href={`mailto:${EMAIL}`}
           onClick={() => handleLinkClick('Primary Email CTA')}
           className="email-cta-btn group relative inline-flex items-center justify-center h-[52px] px-8 sm:px-10 rounded-full text-white font-semibold uppercase tracking-wider text-xs md:text-sm font-mono text-center backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.3)] transition-premium isolate overflow-visible hover:-translate-y-0.5 active:translate-y-0 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-obsidian-950"
           aria-label="Send an email to Patrik von Porat"
@@ -71,6 +100,29 @@ export default function ContactLinks() {
             <span className="email-cta-arrow inline-block" aria-hidden="true">&rarr;</span>
           </div>
         </a>
+
+        {/* Visible address with copy */}
+        <div className="flex items-center gap-2 text-sm font-mono text-zinc-300">
+          <span className="select-all tracking-wide">{EMAIL}</span>
+          <button
+            type="button"
+            onClick={copyEmail}
+            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md border border-white/10 bg-obsidian-950/60 text-[11px] uppercase tracking-widest text-zinc-400 hover:text-white hover:border-white/25 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent-cyan"
+            aria-label={copied ? 'Email address copied' : 'Copy email address'}
+          >
+            {copied ? (
+              <svg className="w-3.5 h-3.5 text-accent-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+              </svg>
+            ) : (
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+              </svg>
+            )}
+            <span>{copied ? 'Copied' : 'Copy'}</span>
+          </button>
+          <span className="sr-only" aria-live="polite">{copied ? 'Email address copied to clipboard' : ''}</span>
+        </div>
       </div>
 
       {/* 2. Restrained Divider & Secondary Section Label */}
@@ -83,7 +135,7 @@ export default function ContactLinks() {
 
       {/* 3. Secondary External Channels (3 Items: LinkedIn, Threads, Instagram) */}
       <div className="w-full">
-        <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 md:gap-10 max-w-sm sm:max-w-none mx-auto">
+        <div className="flex flex-wrap items-center justify-center gap-5 sm:gap-7 max-w-sm sm:max-w-none mx-auto">
           {socialLinks.map((link, idx) => (
             <a 
               key={idx} 
@@ -91,7 +143,7 @@ export default function ContactLinks() {
               onClick={() => handleLinkClick(link.name)}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex flex-col items-center gap-2.5 sm:gap-3 w-[76px] sm:w-20 md:w-24 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-obsidian-950 rounded-xl p-1 min-w-[48px] min-h-[48px]"
+              className="group flex flex-col items-center gap-2.5 sm:gap-3 w-[76px] sm:w-20 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-obsidian-950 rounded-xl p-1 min-w-[48px] min-h-[48px]"
               aria-label={link.ariaLabel}
             >
               <div className="relative flex items-center justify-center w-13 h-13 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full isolate overflow-visible bg-transparent">
@@ -122,6 +174,9 @@ export default function ContactLinks() {
             </a>
           ))}
         </div>
+        <p className="mt-4 text-center text-[11px] font-mono uppercase tracking-[0.25em] text-zinc-500">
+          {HANDLE} on every channel
+        </p>
       </div>
 
     </div>
