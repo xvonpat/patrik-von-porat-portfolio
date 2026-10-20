@@ -74,7 +74,7 @@ export default function Music() {
       title: 'Through Ash and Light',
       artist: 'Realmforged · feat. Mio Jäger',
       type: 'SINGLE · 2025',
-      description: 'A cinematic anthem of fire and ruin—the first signal from the fractured realm.',
+      description: 'A cinematic anthem of fire and ruin. The first signal from the fractured realm.',
       listenUrl: 'https://open.spotify.com/album/7KzqptOEEgGyoicwDYqFID',
       image: '/images/music/cover-through-ash-and-light.webp',
       imageAlt: 'Through Ash and Light single cover artwork by Realmforged',

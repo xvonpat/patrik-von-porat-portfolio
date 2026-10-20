@@ -61,7 +61,7 @@ export default function Contact() {
           </h1>
           <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-accent-purple to-transparent lg:from-accent-purple lg:via-accent-purple/40 mt-1 mb-1" />
           <p className="text-base md:text-lg leading-relaxed md:leading-8 text-zinc-300 font-light max-w-xl text-pretty">
-            If the work here connects with you—through music, visual practice, digital systems or process—email is the best place to start. You can also follow what I’m working on through the channels below.
+            If something here connects with you, whether it’s the music, the visual work, the digital systems or the process behind them, send me an email. That’s the best place to start. You can also follow what I’m working on through the channels below.
           </p>
         </header>
 

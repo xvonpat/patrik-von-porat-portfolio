@@ -8,13 +8,13 @@ const IMG = '/images/projects/home-control-panel';
 
 export const metadata = {
   title: "Home Control Panel | Selected Work | Patrik von Porat",
-  description: "A custom control panel for the whole house, built on Home Assistant. Lights, heating, the front door, EV charging, solar power, the doorbell camera and the coffee machine in one calm, glanceable interface – designed for a wall-mounted tablet and just as usable on a phone.",
+  description: "A custom control panel for the whole house, built on Home Assistant. Lights, heating, the front door, EV charging, solar power, the doorbell camera and the coffee machine in one calm, glanceable interface. Designed for a wall-mounted tablet, and just as usable on a phone.",
   alternates: {
     canonical: '/projects/home-control-panel',
   },
   openGraph: {
     title: "Home Control Panel | Selected Work | Patrik von Porat",
-    description: "A custom control panel for the whole house, built on Home Assistant. Lights, heating, the front door, EV charging, solar power, the doorbell camera and the coffee machine in one calm, glanceable interface – designed for a wall-mounted tablet and just as usable on a phone.",
+    description: "A custom control panel for the whole house, built on Home Assistant. Lights, heating, the front door, EV charging, solar power, the doorbell camera and the coffee machine in one calm, glanceable interface. Designed for a wall-mounted tablet, and just as usable on a phone.",
     url: 'https://vonporat.com/projects/home-control-panel',
     images: [
       {
@@ -52,7 +52,7 @@ export default function HomeControlPanelPage() {
   const metadataFacts = [
     {
       label: "STATUS",
-      value: "In development – running at home; wall tablet next",
+      value: "In development: running at home, wall tablet next",
       accent: "amber"
     },
     {
@@ -61,7 +61,7 @@ export default function HomeControlPanelPage() {
     },
     {
       label: "ROLE",
-      value: "Concept, interface design, requirements, testing and integration setup – built through AI-assisted development (Claude Code)"
+      value: "Concept, interface design, requirements, testing and integration setup, built through AI-assisted development (Claude Code)"
     },
     {
       label: "PLATFORM",
@@ -69,7 +69,7 @@ export default function HomeControlPanelPage() {
     },
     {
       label: "ARCHITECTURE",
-      value: "One custom Lovelace card (a JavaScript Web Component) in a full-screen panel view – no build step, no framework, no extra front-end dependencies"
+      value: "One custom Lovelace card (a JavaScript Web Component) in a full-screen panel view. No build step, no framework, no extra front-end dependencies"
     },
     {
       label: "INTEGRATIONS",
@@ -108,7 +108,7 @@ export default function HomeControlPanelPage() {
       items: [
         {
           name: "Home Assistant on a Raspberry Pi",
-          detail: "The house's local hub – every device and integration runs through it."
+          detail: "The house's local hub. Every device and integration runs through it."
         },
         {
           name: "One Custom Lovelace Card",
@@ -116,7 +116,7 @@ export default function HomeControlPanelPage() {
         },
         {
           name: "Dark “Control Room” Theme",
-          detail: "Frosted cards and accents with fixed meanings – teal = OK, amber = active, blue = info, red = attention – set in Inter."
+          detail: "Frosted cards and accents with fixed meanings (teal = OK, amber = active, blue = info, red = attention), set in Inter."
         },
         {
           name: "Live Camera via WebRTC",
@@ -162,7 +162,7 @@ export default function HomeControlPanelPage() {
         },
         {
           name: "Verified in the Real House",
-          detail: "Every change tested at home before moving on – one device at a time."
+          detail: "Every change tested at home before moving on, one device at a time."
         }
       ]
     }
@@ -200,7 +200,7 @@ export default function HomeControlPanelPage() {
           </h1>
 
           <p className="text-lg md:text-xl text-zinc-300 font-light leading-relaxed max-w-3xl text-balance text-pretty">
-            A custom control panel for the whole house, built on Home Assistant. It brings lights, heating, the front door, EV charging, solar power, the doorbell camera and the coffee machine into one calm, glanceable interface – designed for a wall-mounted tablet in the hallway, and just as usable on a phone.
+            A custom control panel for the whole house, built on Home Assistant. It brings lights, heating, the front door, EV charging, solar power, the doorbell camera and the coffee machine into one calm, glanceable interface. It is designed for a wall-mounted tablet in the hallway, and just as usable on a phone.
           </p>
         </div>
       </section>
@@ -232,7 +232,7 @@ export default function HomeControlPanelPage() {
           />
         </div>
         <span className="text-xs font-mono text-zinc-400 uppercase tracking-wider text-center sm:text-left">
-          The panel on a wall-tablet layout and on a phone &ndash; all screenshots use the panel&apos;s demo mode
+          The panel on a wall-tablet layout and on a phone. All screenshots use the panel&apos;s demo mode
         </span>
       </section>
 
@@ -259,7 +259,7 @@ export default function HomeControlPanelPage() {
               Every device in the house came with its own app: one for the lights, one for the heating, one for the lock, the charger, the solar inverter, the doorbell and the coffee machine.
             </p>
             <p className="text-sm md:text-[15px] text-zinc-300 leading-relaxed font-light text-pretty">
-              Each one works – but nothing works <em>together</em>, and none of them answers the simple question at the front door: <em>is everything okay before I leave?</em>
+              Each one works, but nothing works <em>together</em>, and none of them answers the simple question at the front door: <em>is everything okay before I leave?</em>
             </p>
           </GlassCard>
 
@@ -280,7 +280,7 @@ export default function HomeControlPanelPage() {
               Personal Project
             </h3>
             <p className="text-sm md:text-[15px] text-zinc-300 leading-relaxed font-light text-pretty">
-              An ongoing personal project and learning vehicle – not a product.
+              An ongoing personal project and learning vehicle, not a product.
             </p>
             <p className="text-sm md:text-[15px] text-zinc-300 leading-relaxed font-light text-pretty">
               As with <Link href="/projects/dmaic-companion" className="text-accent-cyan hover:text-white transition-colors underline underline-offset-2">DMAIC Companion</Link>, I write the requirements and test every step, while an AI coding assistant writes the code under clear working rules. The project grows one device at a time.
@@ -329,7 +329,7 @@ export default function HomeControlPanelPage() {
             />
           </div>
           <span className="text-xs font-mono text-zinc-400 uppercase tracking-wider text-center sm:text-left">
-            Everything important above the fold &ndash; status bar, clock and forecast, room lighting and the doorbell
+            Everything important above the fold: status bar, clock and forecast, room lighting and the doorbell
           </span>
         </div>
       </section>
@@ -370,7 +370,7 @@ export default function HomeControlPanelPage() {
               />
             </div>
             <span className="text-xs font-mono text-zinc-400 uppercase tracking-wider text-center sm:text-left">
-              Room detail &ndash; each lamp&apos;s slider takes the colour of the light itself
+              Room detail: each lamp&apos;s slider takes the colour of the light itself
             </span>
           </div>
         </GlassCard>
@@ -411,7 +411,7 @@ export default function HomeControlPanelPage() {
               <span className="text-[10px] font-mono uppercase text-zinc-400">Yale · Nest</span>
             </div>
             <p className="text-sm text-zinc-300 leading-relaxed font-light text-pretty">
-              The Yale lock shows locked/unlocked, door open/closed and who used it last – unlocking always needs confirmation. The Nest doorbell shows the last ring and the last person at the door; live video starts only on request, to spare the battery.
+              The Yale lock shows locked/unlocked, door open/closed and who used it last. Unlocking always needs confirmation. The Nest doorbell shows the last ring and the last person at the door; live video starts only on request, to spare the battery.
             </p>
             <p className="text-sm text-zinc-300 leading-relaxed font-light text-pretty">
               <strong className="text-white font-medium">When someone rings, the live view opens full-screen on every open panel</strong>, with an &ldquo;Unlock front door&rdquo; button, and a notification with live video reaches the phone.
@@ -454,7 +454,7 @@ export default function HomeControlPanelPage() {
               <span className="text-[10px] font-mono uppercase text-zinc-400">Siemens Home Connect</span>
             </div>
             <p className="text-sm text-zinc-300 leading-relaxed font-light text-pretty">
-              The Siemens EQ.9 can be started from the panel – including personal presets with their own strength, volume and milk ratio, sent to the machine with every brew.
+              The Siemens EQ.9 can be started from the panel, including personal presets with their own strength, volume and milk ratio, sent to the machine with every brew.
             </p>
             <div className="grid grid-cols-2 gap-4 mt-auto">
               <PhoneShot
@@ -513,7 +513,7 @@ export default function HomeControlPanelPage() {
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-6 lg:gap-10">
           <div className="flex flex-col gap-6">
             <p className="text-sm md:text-[15px] text-zinc-300 font-light leading-relaxed text-pretty">
-              The panel measures its own width rather than the screen&apos;s. <strong className="text-white font-medium">Wide:</strong> three columns for the wall tablet and desktop. <strong className="text-white font-medium">Medium:</strong> two columns. <strong className="text-white font-medium">Narrow:</strong> a phone layout with bottom tabs (Home · Lights · Climate · Energy · Media), a swipeable status bar and compact cards. Small badges on the tabs show what is happening elsewhere – lights on, rooms heating, car charging, music playing.
+              The panel measures its own width rather than the screen&apos;s. <strong className="text-white font-medium">Wide:</strong> three columns for the wall tablet and desktop. <strong className="text-white font-medium">Medium:</strong> two columns. <strong className="text-white font-medium">Narrow:</strong> a phone layout with bottom tabs (Home · Lights · Climate · Energy · Media), a swipeable status bar and compact cards. Small badges on the tabs show what is happening elsewhere: lights on, rooms heating, car charging, music playing.
             </p>
 
             <div className="grid grid-cols-2 gap-4 sm:gap-6 max-w-md">
@@ -543,7 +543,7 @@ export default function HomeControlPanelPage() {
                 <li className="flex items-start gap-2.5">
                   <span className="text-accent-cyan font-mono font-bold">&bull;</span>
                   <span>
-                    <strong className="text-white font-medium">Demo mode</strong> (<code className="text-accent-cyan font-mono text-xs px-1 py-0.5 rounded bg-zinc-900/90 border border-white/5">?demo</code>) replaces names and calendar entries with neutral placeholders – used for every screenshot on this page.
+                    <strong className="text-white font-medium">Demo mode</strong> (<code className="text-accent-cyan font-mono text-xs px-1 py-0.5 rounded bg-zinc-900/90 border border-white/5">?demo</code>) replaces names and calendar entries with neutral placeholders. It was used for every screenshot on this page.
                   </span>
                 </li>
                 <li className="flex items-start gap-2.5">
@@ -662,7 +662,7 @@ export default function HomeControlPanelPage() {
             </div>
             <ul className="flex flex-col gap-2.5 text-xs md:text-sm text-zinc-300 font-light list-disc list-inside">
               <li><strong className="text-white font-normal">Wall tablet</strong> mounted in the hallway, with its own account, screen wake on motion and kiosk mode</li>
-              <li><strong className="text-white font-normal">A dedicated energy page</strong> with an illustrated house and live flows – once an electricity meter is connected</li>
+              <li><strong className="text-white font-normal">A dedicated energy page</strong> with an illustrated house and live flows, once an electricity meter is connected</li>
               <li><strong className="text-white font-normal">Alarm system and robot vacuum</strong></li>
               <li><strong className="text-white font-normal">Automations</strong> that use the panel&apos;s knowledge: lights that follow presence, heating that follows the calendar</li>
             </ul>

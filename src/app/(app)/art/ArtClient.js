@@ -247,7 +247,7 @@ export default function ArtClient() {
                     Graphite &amp; Charcoal
                   </h3>
                   <p className="text-base md:text-[17px] leading-relaxed md:leading-8 text-zinc-300 font-light text-pretty">
-                    The work moves between detailed graphite pieces, smaller observational studies and early charcoal exploration—using each drawing to better understand light, structure and controlled transitions.
+                    The work moves between detailed graphite pieces, smaller observational studies and early charcoal exploration. Each drawing is a way to better understand light, structure and controlled transitions.
                   </p>
                 </div>
 
@@ -278,7 +278,7 @@ export default function ArtClient() {
             </h2>
             <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-accent-purple to-transparent mt-1" />
             <p className="text-base md:text-lg text-zinc-300 font-light max-w-2xl leading-relaxed md:leading-8 mt-1 text-balance text-pretty">
-              After first learning tattooing more than two decades ago, I have returned to the practice through synthetic-skin studies—rebuilding control in linework, black-and-grey shading and composition.
+              After first learning tattooing more than two decades ago, I have returned to the practice through synthetic-skin studies, rebuilding control in linework, black-and-grey shading and composition.
             </p>
           </div>
 

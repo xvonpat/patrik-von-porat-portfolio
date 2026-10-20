@@ -147,7 +147,7 @@ export default async function Home() {
       category: 'WEB · IMPROVEMENT TOOLS',
       description: 'A local-first, guided web app for Lean Six Sigma improvement work and Apollo root cause analysis, replacing static templates with guided workflows.',
       image: '/images/projects/dmaic-companion/01-hero-promo.png',
-      imageAlt: 'DMAIC Companion – "Every Lean Six Sigma tool. One guided flow." with a wall of real tool screens: Cause & Effect Tree, Pareto, control chart, capability, Fishbone, boxplot and more',
+      imageAlt: 'DMAIC Companion: "Every Lean Six Sigma tool. One guided flow." with a wall of real tool screens: Cause & Effect Tree, Pareto, control chart, capability, Fishbone, boxplot and more',
       link: '/projects/dmaic-companion',
       ctaText: 'Explore DMAIC Companion',
       accent: 'cyan'
@@ -197,7 +197,7 @@ export default async function Home() {
             
             {/* Body Copy */}
             <p className="text-lg md:text-xl leading-relaxed md:leading-9 text-zinc-300 font-light max-w-3xl lg:max-w-2xl mt-1 text-balance text-pretty">
-              I’m Patrik von Porat. I make heavy music, draw by hand, and build digital tools for creative work. This is where I share the projects—and the thinking that shapes them.
+              I’m Patrik von Porat. I make heavy music, draw by hand, and build digital tools for creative work. This is where I share the projects, and the thinking that shapes them.
             </p>
 
             {/* Identity Line */}

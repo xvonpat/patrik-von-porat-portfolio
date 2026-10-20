@@ -65,7 +65,7 @@ export default function About() {
       title: "DMAIC Companion",
       caption: "A guided web app for Lean Six Sigma improvement work and Apollo root cause analysis.",
       image: "/images/projects/dmaic-companion/01-hero-promo.png",
-      alt: "DMAIC Companion – “Every Lean Six Sigma tool. One guided flow.” with a wall of real tool screens",
+      alt: "DMAIC Companion: “Every Lean Six Sigma tool. One guided flow.” with a wall of real tool screens",
       link: "/projects/dmaic-companion",
       accent: "cyan",
       position: "left center",
@@ -196,7 +196,7 @@ export default function About() {
         </div>
 
         <p className="lg:col-span-7 lg:row-start-2 text-lg md:text-xl text-zinc-300 font-light max-w-2xl leading-relaxed md:leading-9 text-pretty">
-          I am Patrik von Porat—a guitarist, visual artist and systems-minded creator based in Sweden. Across music, images and digital work, I am drawn to the same challenge: taking something unformed and giving it clarity, character and structure.
+          I am Patrik von Porat, a guitarist, visual artist and systems-minded creator based in Sweden. Across music, images and digital work, I am drawn to the same challenge: taking something unformed and giving it clarity, character and structure.
         </p>
       </section>
 
@@ -243,7 +243,7 @@ export default function About() {
             Over time, these stopped feeling like separate interests. They became different applications of the same way of thinking.
           </p>
           <p className="text-pretty text-zinc-200">
-            A riff, a drawing, a visual identity, a website or a workflow may begin in different ways, but each starts with uncertainty. What interests me is finding the pattern within it—then developing that pattern until the result feels deliberate and holds together.
+            A riff, a drawing, a visual identity, a website or a workflow may begin in different ways, but each starts with uncertainty. What interests me is finding the pattern within it, then developing that pattern until the result feels deliberate and holds together.
           </p>
         </div>
       </section>
@@ -271,7 +271,7 @@ export default function About() {
             </h2>
           </div>
           <p className="text-sm md:text-base text-zinc-400 font-light max-w-sm text-pretty">
-            Sound, graphite and software—three surfaces for the same way of working.
+            Sound, graphite and software: three surfaces for the same way of working.
           </p>
         </div>
 

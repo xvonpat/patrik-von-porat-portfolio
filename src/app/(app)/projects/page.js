@@ -96,7 +96,7 @@ export default function Projects() {
       cta: 'View Case Study',
       link: '/projects/dmaic-companion',
       image: '/images/projects/dmaic-companion/01-hero-promo.png',
-      imageAlt: 'DMAIC Companion – "Every Lean Six Sigma tool. One guided flow." with a wall of real tool screens: Cause & Effect Tree, Pareto, control chart, capability, Fishbone, boxplot and more',
+      imageAlt: 'DMAIC Companion: "Every Lean Six Sigma tool. One guided flow." with a wall of real tool screens: Cause & Effect Tree, Pareto, control chart, capability, Fishbone, boxplot and more',
       fallbackBadge: 'Improvement Tool',
       fallbackDesc: 'Local-first guided web app for Lean Six Sigma projects and Apollo root cause analysis.',
       accent: 'cyan',
@@ -108,7 +108,7 @@ export default function Projects() {
       category: 'SMART HOME · INTERFACE DESIGN · AUTOMATION',
       status: 'IN DEVELOPMENT',
       statusType: 'development',
-      intro: 'A wall-mounted control panel for the whole house. Lights, heating, the front door, EV charging, solar power, the doorbell camera and even the coffee machine – one calm, glanceable interface instead of a dozen apps.',
+      intro: 'A wall-mounted control panel for the whole house. Lights, heating, the front door, EV charging, solar power, the doorbell camera and even the coffee machine. One calm, glanceable interface instead of a dozen apps.',
       role: 'Concept · Interface Design · Requirements & Testing · Integration Setup (Claude Code)',
       scopeLabel: 'Built with',
       scopeItems: [
@@ -118,7 +118,7 @@ export default function Projects() {
         'CSS',
         '11 integrations'
       ],
-      evidence: 'One custom Home Assistant card – about 2,200 lines of dependency-free JavaScript – controlling 10 rooms of lights, 8 heating zones, a smart lock, an EV charger, a solar inverter, a doorbell camera and a coffee machine. Adapts from wall tablet to phone with its own mobile layout.',
+      evidence: 'One custom Home Assistant card (about 2,200 lines of dependency-free JavaScript) controlling 10 rooms of lights, 8 heating zones, a smart lock, an EV charger, a solar inverter, a doorbell camera and a coffee machine. Adapts from wall tablet to phone with its own mobile layout.',
       cta: 'View Case Study',
       link: '/projects/home-control-panel',
       image: '/images/projects/home-control-panel/00-cover.webp',
@@ -199,7 +199,7 @@ export default function Projects() {
           Active music releases, visual craft, and custom tools. Each project connects sound, image, story, or software into something deliberate, functional, and finished.
         </p>
         <p className="text-sm md:text-[15px] text-zinc-400 leading-relaxed font-light max-w-xl text-balance text-pretty">
-          Built across multidisciplinary craft—from heavy guitar arrangements and hand drawing to local-first client-side systems.
+          Built across multidisciplinary craft, from heavy guitar arrangements and hand drawing to local-first client-side systems.
         </p>
       </section>
 

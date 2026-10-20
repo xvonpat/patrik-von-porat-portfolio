@@ -6,20 +6,20 @@ import CtaButton from '@/components/CtaButton';
 
 export const metadata = {
   title: "DMAIC Companion | Selected Work | Patrik von Porat",
-  description: "A guided web app for Lean Six Sigma improvement work and Apollo root cause analysis. It teaches the method while you use it – with guides, interactive labs and gentle checks – and replaces PowerPoint and Excel/Minitab templates with guided workflows that end in a PowerPoint report.",
+  description: "A guided web app for Lean Six Sigma improvement work and Apollo root cause analysis. It teaches the method while you use it, with guides, interactive labs and gentle checks, and replaces PowerPoint and Excel/Minitab templates with guided workflows that end in a PowerPoint report.",
   alternates: {
     canonical: '/projects/dmaic-companion',
   },
   openGraph: {
     title: "DMAIC Companion | Selected Work | Patrik von Porat",
-    description: "A guided web app for Lean Six Sigma improvement work and Apollo root cause analysis. It teaches the method while you use it – with guides, interactive labs and gentle checks – and replaces PowerPoint and Excel/Minitab templates with guided workflows that end in a PowerPoint report.",
+    description: "A guided web app for Lean Six Sigma improvement work and Apollo root cause analysis. It teaches the method while you use it, with guides, interactive labs and gentle checks, and replaces PowerPoint and Excel/Minitab templates with guided workflows that end in a PowerPoint report.",
     url: 'https://vonporat.com/projects/dmaic-companion',
     images: [
       {
         url: '/images/projects/dmaic-companion/01-hero-promo.png',
         width: 1600,
         height: 1000,
-        alt: 'DMAIC Companion – "Every Lean Six Sigma tool. One guided flow." with a wall of real tool screens: Cause & Effect Tree, Pareto, control chart, capability, Fishbone, boxplot and more',
+        alt: 'DMAIC Companion: "Every Lean Six Sigma tool. One guided flow." with a wall of real tool screens: Cause & Effect Tree, Pareto, control chart, capability, Fishbone, boxplot and more',
       },
     ],
   }
@@ -29,7 +29,7 @@ export default function DmaicCompanionPage() {
   const metadataFacts = [
     { 
       label: "STATUS", 
-      value: "Live at dmaic.vonporat.com (invite only) – all 37 tools built; self-testing and initial user invites", 
+      value: "Live at dmaic.vonporat.com (invite only). All 37 tools built; self-testing and initial user invites", 
       accent: "cyan" 
     },
     { 
@@ -38,7 +38,7 @@ export default function DmaicCompanionPage() {
     },
     { 
       label: "ROLE", 
-      value: "Product idea, method design, specification and testing – built through AI-assisted development (Claude Code)" 
+      value: "Product idea, method design, specification and testing, built through AI-assisted development (Claude Code)" 
     },
     { 
       label: "ARCHITECTURE", 
@@ -93,11 +93,11 @@ export default function DmaicCompanionPage() {
         },
         {
           name: "Statistics in Plain TypeScript",
-          detail: "Mean, standard deviation, histograms, normal/t/F distributions, normality test – no maths library."
+          detail: "Mean, standard deviation, histograms, normal/t/F distributions, normality test. No maths library."
         },
         {
           name: "Quality & Process Control",
-          detail: "Capability (Cp/Cpk), control charts, hypothesis tests and ANOVA, regression and Gage R&R – no Minitab needed. Data is pasted straight from Excel."
+          detail: "Capability (Cp/Cpk), control charts, hypothesis tests and ANOVA, regression and Gage R&R. No Minitab needed. Data is pasted straight from Excel."
         }
       ]
     },
@@ -230,7 +230,7 @@ export default function DmaicCompanionPage() {
           </h1>
 
           <p className="text-lg md:text-xl text-zinc-300 font-light leading-relaxed max-w-3xl text-balance text-pretty">
-            A guided web app for Lean Six Sigma improvement work and Apollo root cause analysis. It teaches the method while you use it – with guides, interactive labs and gentle checks – and replaces PowerPoint and Excel/Minitab templates with guided workflows that end in a PowerPoint report.
+            A guided web app for Lean Six Sigma improvement work and Apollo root cause analysis. It teaches the method while you use it, with guides, interactive labs and gentle checks, and replaces PowerPoint and Excel/Minitab templates with guided workflows that end in a PowerPoint report.
           </p>
         </div>
       </section>
@@ -254,7 +254,7 @@ export default function DmaicCompanionPage() {
         <div className="w-full aspect-[16/10] rounded-2xl overflow-hidden border border-white/[0.08] bg-obsidian-950/80 relative shadow-[0_12px_40px_rgba(0,0,0,0.5)]">
           <Image 
             src="/images/projects/dmaic-companion/01-hero-promo.png" 
-            alt="DMAIC Companion – &ldquo;Every Lean Six Sigma tool. One guided flow.&rdquo; with a wall of real tool screens: Cause &amp; Effect Tree, Pareto, control chart, capability, Fishbone, boxplot and more" 
+            alt="DMAIC Companion: &ldquo;Every Lean Six Sigma tool. One guided flow.&rdquo; with a wall of real tool screens: Cause &amp; Effect Tree, Pareto, control chart, capability, Fishbone, boxplot and more" 
             fill
             priority
             sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1200px"
@@ -295,10 +295,10 @@ export default function DmaicCompanionPage() {
               From One Method to a Toolbox
             </h3>
             <p className="text-sm md:text-[15px] text-zinc-300 leading-relaxed font-light text-pretty">
-              It started as the <em>Apollo RCA Guide</em> – 12 guided steps from problem definition to lessons learned, structured by DMAIC.
+              It started as the <em>Apollo RCA Guide</em>: 12 guided steps from problem definition to lessons learned, structured by DMAIC.
             </p>
             <p className="text-sm md:text-[15px] text-zinc-300 leading-relaxed font-light text-pretty">
-              It grew into DMAIC Companion: full DMAIC improvement projects, Apollo RCAs and single Lean Six Sigma tools in one format – and then into a place to learn: a library of 50 guides and seven hands-on labs.
+              It grew into DMAIC Companion: full DMAIC improvement projects, Apollo RCAs and single Lean Six Sigma tools in one format. Then it became a place to learn, with a library of 50 guides and seven hands-on labs.
             </p>
           </GlassCard>
 
@@ -307,7 +307,7 @@ export default function DmaicCompanionPage() {
               Personal Project
             </h3>
             <p className="text-sm md:text-[15px] text-zinc-300 leading-relaxed font-light text-pretty">
-              An ongoing personal project and learning vehicle – not a commercial product or SaaS.
+              An ongoing personal project and learning vehicle, not a commercial product or SaaS.
             </p>
             <p className="text-sm md:text-[15px] text-zinc-300 leading-relaxed font-light text-pretty">
               Built without a formal coding background: I write the requirements, test every step, and let an AI coding assistant write the code under a written method guide and strict working rules. Since October 2026 it is online for invited test users.
@@ -340,7 +340,7 @@ export default function DmaicCompanionPage() {
                 <span>Projects Never Leave Your Machine</span>
               </div>
               <p className="text-xs md:text-sm text-zinc-300 font-light leading-relaxed">
-                Improvement work often holds confidential information, so project data is never sent to a server – not even when the app runs online. The server only knows who may sign in (names, e-mails, roles), feedback messages and which tools are released. On a laptop the app also runs fully offline, without sign-in.
+                Improvement work often holds confidential information, so project data is never sent to a server, not even when the app runs online. The server only knows who may sign in (names, e-mails, roles), feedback messages and which tools are released. On a laptop the app also runs fully offline, without sign-in.
               </p>
             </div>
 
@@ -352,7 +352,7 @@ export default function DmaicCompanionPage() {
                 <span>Files Are the Real Save</span>
               </div>
               <p className="text-xs md:text-sm text-zinc-300 font-light leading-relaxed">
-                Every change is autosaved in the browser as a safety net. The real save is a versioned <code className="text-accent-cyan font-mono text-xs px-1 py-0.5 rounded bg-zinc-900/90 border border-white/5">.dmaic.json</code> project file that can be kept, backed up and shared. Older files – including the original RCA files – still open.
+                Every change is autosaved in the browser as a safety net. The real save is a versioned <code className="text-accent-cyan font-mono text-xs px-1 py-0.5 rounded bg-zinc-900/90 border border-white/5">.dmaic.json</code> project file that can be kept, backed up and shared. Older files, including the original RCA files, still open.
               </p>
             </div>
 
@@ -364,7 +364,7 @@ export default function DmaicCompanionPage() {
                 <span>Guidance, Not Blockers</span>
               </div>
               <p className="text-xs md:text-sm text-zinc-300 font-light leading-relaxed">
-                Every tool checks the input against the method (for example, &ldquo;this looks like a cause – describe only what happened&rdquo;) and explains why. The user can always continue.
+                Every tool checks the input against the method (for example, &ldquo;this looks like a cause; describe only what happened&rdquo;) and explains why. The user can always continue.
               </p>
             </div>
           </div>
@@ -430,7 +430,7 @@ export default function DmaicCompanionPage() {
             />
           </div>
           <span className="text-xs font-mono text-zinc-400 uppercase tracking-wider text-center sm:text-left">
-            Responsive architecture &ndash; Learn page, control chart, and interactive lab running on phone width
+            Responsive architecture: Learn page, control chart, and interactive lab running on phone width
           </span>
         </div>
       </section>
@@ -523,15 +523,15 @@ export default function DmaicCompanionPage() {
               </div>
               <div className="flex flex-col gap-0.5">
                 <span className="font-mono font-semibold uppercase tracking-wider text-accent-cyan">Evidence driven</span>
-                <span className="text-zinc-400 font-light leading-relaxed">Every cause needs evidence &ndash; a cause without it is marked with a &ldquo;?&rdquo;.</span>
+                <span className="text-zinc-400 font-light leading-relaxed">Every cause needs evidence. A cause without it is marked with a &ldquo;?&rdquo;.</span>
               </div>
               <div className="flex flex-col gap-0.5">
                 <span className="font-mono font-semibold uppercase tracking-wider text-emerald-400">Blame free</span>
-                <span className="text-zinc-400 font-light leading-relaxed">&ldquo;Don&apos;t blame people &ndash; blame the process.&rdquo;</span>
+                <span className="text-zinc-400 font-light leading-relaxed">&ldquo;Don&apos;t blame people. Blame the process.&rdquo;</span>
               </div>
               <div className="flex flex-col gap-0.5">
                 <span className="font-mono font-semibold uppercase tracking-wider text-amber-400">Worked examples</span>
-                <span className="text-zinc-400 font-light leading-relaxed">11 complete examples, small to large – from the Titanic and a hot-coffee burn to a full manufacturing DMAIC project with Gage R&amp;R, ANOVA, regression, control charts and capability – including a practice case to solve yourself first.</span>
+                <span className="text-zinc-400 font-light leading-relaxed">11 complete examples, small to large: from the Titanic and a hot-coffee burn to a full manufacturing DMAIC project with Gage R&amp;R, ANOVA, regression, control charts and capability. One is a practice case to solve yourself first.</span>
               </div>
             </div>
           </GlassCard>
@@ -554,7 +554,7 @@ export default function DmaicCompanionPage() {
         </div>
 
         <p className="text-sm md:text-[15px] text-zinc-300 font-light leading-relaxed max-w-4xl text-pretty">
-          Learn is for reading; Labs is for trying. Seven interactive experiments with the charts and numbers of improvement work. Drag a data point, change the process, draw a new sample – and watch the chart and the numbers respond. Each lab has five challenges: guess what will happen, try it, then see why it happened and what it means in a project. The data is made up – nothing touches your projects.
+          Learn is for reading; Labs is for trying. Seven interactive experiments with the charts and numbers of improvement work. Drag a data point, change the process, draw a new sample, and watch the chart and the numbers respond. Each lab has five challenges: guess what will happen, try it, then see why it happened and what it means in a project. The data is made up, so nothing touches your projects.
         </p>
 
         {/* First image: 06-labs.png */}
@@ -603,7 +603,7 @@ export default function DmaicCompanionPage() {
               />
             </div>
             <span className="text-xs font-mono text-zinc-400 uppercase tracking-wider text-center sm:text-left">
-              Process capability lab &ndash; histogram against customer limits with Cp and Cpk
+              Process capability lab: histogram against customer limits with Cp and Cpk
             </span>
           </div>
 
@@ -618,7 +618,7 @@ export default function DmaicCompanionPage() {
               />
             </div>
             <span className="text-xs font-mono text-zinc-400 uppercase tracking-wider text-center sm:text-left">
-              Process flow lab &ndash; orders moving through Picking, Packing and Shipping
+              Process flow lab: orders moving through Picking, Packing and Shipping
             </span>
           </div>
         </div>

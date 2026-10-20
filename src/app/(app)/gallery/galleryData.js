@@ -269,7 +269,7 @@ export const eddieTheTrooperPhotos = [
   {
     id: "IMG_0513",
     filename: "IMG_0513.webp",
-    title: "Eddie the Trooper — Wash & Cure",
+    title: "Eddie the Trooper: Wash & Cure",
     src: "/images/art/eddie-the-trooper/IMG_0513.webp",
     thumb: "/images/art/eddie-the-trooper/thumbnails/IMG_0513.webp",
     width: 2048,
@@ -284,7 +284,7 @@ export const eddieTheTrooperPhotos = [
   {
     id: "IMG_0522",
     filename: "IMG_0522.webp",
-    title: "Eddie the Trooper — Resin Vat Sheet",
+    title: "Eddie the Trooper: Resin Vat Sheet",
     src: "/images/art/eddie-the-trooper/IMG_0522.webp",
     thumb: "/images/art/eddie-the-trooper/thumbnails/IMG_0522.webp",
     width: 2048,
@@ -299,7 +299,7 @@ export const eddieTheTrooperPhotos = [
   {
     id: "IMG_0560",
     filename: "IMG_0560.webp",
-    title: "Eddie the Trooper — Torso & Leg Printing",
+    title: "Eddie the Trooper: Torso & Leg Printing",
     src: "/images/art/eddie-the-trooper/IMG_0560.webp",
     thumb: "/images/art/eddie-the-trooper/thumbnails/IMG_0560.webp",
     width: 1536,
@@ -314,7 +314,7 @@ export const eddieTheTrooperPhotos = [
   {
     id: "IMG_0572",
     filename: "IMG_0572.webp",
-    title: "Eddie the Trooper — Bust Assembly Test",
+    title: "Eddie the Trooper: Bust Assembly Test",
     src: "/images/art/eddie-the-trooper/IMG_0572.webp",
     thumb: "/images/art/eddie-the-trooper/thumbnails/IMG_0572.webp",
     width: 1536,
@@ -329,7 +329,7 @@ export const eddieTheTrooperPhotos = [
   {
     id: "IMG_0578",
     filename: "IMG_0578.webp",
-    title: "Eddie the Trooper — Head & Teeth Detail",
+    title: "Eddie the Trooper: Head & Teeth Detail",
     src: "/images/art/eddie-the-trooper/IMG_0578.webp",
     thumb: "/images/art/eddie-the-trooper/thumbnails/IMG_0578.webp",
     width: 1536,
@@ -344,7 +344,7 @@ export const eddieTheTrooperPhotos = [
   {
     id: "IMG_0607",
     filename: "IMG_0607.webp",
-    title: "Eddie the Trooper — Vat Cleaning Procedure",
+    title: "Eddie the Trooper: Vat Cleaning Procedure",
     src: "/images/art/eddie-the-trooper/IMG_0607.webp",
     thumb: "/images/art/eddie-the-trooper/thumbnails/IMG_0607.webp",
     width: 1536,
@@ -359,7 +359,7 @@ export const eddieTheTrooperPhotos = [
   {
     id: "IMG_0612",
     filename: "IMG_0612.webp",
-    title: "Eddie the Trooper — Arm & Sleeve on Build Plate",
+    title: "Eddie the Trooper: Arm & Sleeve on Build Plate",
     src: "/images/art/eddie-the-trooper/IMG_0612.webp",
     thumb: "/images/art/eddie-the-trooper/thumbnails/IMG_0612.webp",
     width: 1536,
@@ -374,7 +374,7 @@ export const eddieTheTrooperPhotos = [
   {
     id: "IMG_0617",
     filename: "IMG_0617.webp",
-    title: "Eddie the Trooper — Support Failure Inspection",
+    title: "Eddie the Trooper: Support Failure Inspection",
     src: "/images/art/eddie-the-trooper/IMG_0617.webp",
     thumb: "/images/art/eddie-the-trooper/thumbnails/IMG_0617.webp",
     width: 1536,
@@ -389,7 +389,7 @@ export const eddieTheTrooperPhotos = [
   {
     id: "IMG_0686",
     filename: "IMG_0686.webp",
-    title: "Eddie the Trooper — Heavy Support Structure",
+    title: "Eddie the Trooper: Heavy Support Structure",
     src: "/images/art/eddie-the-trooper/IMG_0686.webp",
     thumb: "/images/art/eddie-the-trooper/thumbnails/IMG_0686.webp",
     width: 1536,
@@ -404,7 +404,7 @@ export const eddieTheTrooperPhotos = [
   {
     id: "IMG_0690",
     filename: "IMG_0690.webp",
-    title: "Eddie the Trooper — Diorama Base Lattice",
+    title: "Eddie the Trooper: Diorama Base Lattice",
     src: "/images/art/eddie-the-trooper/IMG_0690.webp",
     thumb: "/images/art/eddie-the-trooper/thumbnails/IMG_0690.webp",
     width: 1536,
@@ -419,7 +419,7 @@ export const eddieTheTrooperPhotos = [
   {
     id: "IMG_0693",
     filename: "IMG_0693.webp",
-    title: "Eddie the Trooper — Full Component Breakdown",
+    title: "Eddie the Trooper: Full Component Breakdown",
     src: "/images/art/eddie-the-trooper/IMG_0693.webp",
     thumb: "/images/art/eddie-the-trooper/thumbnails/IMG_0693.webp",
     width: 1080,
@@ -434,7 +434,7 @@ export const eddieTheTrooperPhotos = [
   {
     id: "IMG_0838",
     filename: "IMG_0838.webp",
-    title: "Eddie the Trooper — Workbench Kit Flat Lay",
+    title: "Eddie the Trooper: Workbench Kit Flat Lay",
     src: "/images/art/eddie-the-trooper/IMG_0838.webp",
     thumb: "/images/art/eddie-the-trooper/thumbnails/IMG_0838.webp",
     width: 2048,
@@ -449,7 +449,7 @@ export const eddieTheTrooperPhotos = [
   {
     id: "IMG_0949",
     filename: "IMG_0949.webp",
-    title: "Eddie the Trooper — Hollow Torso on Build Plate",
+    title: "Eddie the Trooper: Hollow Torso on Build Plate",
     src: "/images/art/eddie-the-trooper/IMG_0949.webp",
     thumb: "/images/art/eddie-the-trooper/thumbnails/IMG_0949.webp",
     width: 1536,
@@ -464,7 +464,7 @@ export const eddieTheTrooperPhotos = [
   {
     id: "IMG_0957",
     filename: "IMG_0957.webp",
-    title: "Eddie the Trooper — Scenic Base on Build Plate",
+    title: "Eddie the Trooper: Scenic Base on Build Plate",
     src: "/images/art/eddie-the-trooper/IMG_0957.webp",
     thumb: "/images/art/eddie-the-trooper/thumbnails/IMG_0957.webp",
     width: 2048,
@@ -479,7 +479,7 @@ export const eddieTheTrooperPhotos = [
   {
     id: "IMG_0967",
     filename: "IMG_0967.webp",
-    title: "Eddie the Trooper — Complete Diorama Parts Set",
+    title: "Eddie the Trooper: Complete Diorama Parts Set",
     src: "/images/art/eddie-the-trooper/IMG_0967.webp",
     thumb: "/images/art/eddie-the-trooper/thumbnails/IMG_0967.webp",
     width: 2048,
@@ -494,7 +494,7 @@ export const eddieTheTrooperPhotos = [
   {
     id: "IMG_0971",
     filename: "IMG_0971.webp",
-    title: "Eddie the Trooper — Torso & Legs Assembly Check",
+    title: "Eddie the Trooper: Torso & Legs Assembly Check",
     src: "/images/art/eddie-the-trooper/IMG_0971.webp",
     thumb: "/images/art/eddie-the-trooper/thumbnails/IMG_0971.webp",
     width: 2048,
@@ -509,7 +509,7 @@ export const eddieTheTrooperPhotos = [
   {
     id: "IMG_0985",
     filename: "IMG_0985.webp",
-    title: "Eddie the Trooper — Priming Prep & Chaos Black",
+    title: "Eddie the Trooper: Priming Prep & Chaos Black",
     src: "/images/art/eddie-the-trooper/IMG_0985.webp",
     thumb: "/images/art/eddie-the-trooper/thumbnails/IMG_0985.webp",
     width: 2048,
@@ -524,7 +524,7 @@ export const eddieTheTrooperPhotos = [
   {
     id: "IMG_0986",
     filename: "IMG_0986.webp",
-    title: "Eddie the Trooper — Chaos Black Undercoat",
+    title: "Eddie the Trooper: Chaos Black Undercoat",
     src: "/images/art/eddie-the-trooper/IMG_0986.webp",
     thumb: "/images/art/eddie-the-trooper/thumbnails/IMG_0986.webp",
     width: 2048,
