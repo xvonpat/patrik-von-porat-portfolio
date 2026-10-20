@@ -138,10 +138,13 @@ Prefer a curated selection over a complete archive. Each image must have descrip
 
 The About page connects music, visual craft, technology, and systems thinking into one coherent personal narrative.
 
-- **Hero**: *“The work changes. The underlying impulse does not.”*
-- **Background Section**: Spacious 2-column desktop layout (narrative + authentic studio portrait) with a horizontal Core Facts band underneath (`Based in Sweden`, `Playing guitar 35+ years`, `Process Lean Six Sigma Green Belt`, `Current projects Realmforged & Ashwrithe`).
-- **How I Work**: Natural, content-aware typography measure (`max-w-3xl md:max-w-4xl text-pretty`).
-- **Capabilities**: Grouped by mode (`Music & Audio`, `Visual Practice`, `Systems & Improvement`, `Web & Digital Systems`).
+- **Hero**: Editorial split — *“The work changes. The underlying impulse does not.”* and the introduction beside the studio portrait (portrait directly under the heading on mobile). No hero buttons.
+- **Core Facts band** directly under the hero (`Based in Sweden`, `Playing guitar 35+ years`, `Process Lean Six Sigma Green Belt`, `Current projects Realmforged & Ashwrithe`); 2×2 on mobile.
+- **Background**: sticky heading beside the narrative, followed by the pull quote *“Structure does not replace instinct. It gives instinct somewhere to go.”*
+- **Same hands, different materials**: Realmforged, Eye Study and DMAIC Companion as a linked image triptych.
+- **How I Work**: the four steps as a matrix with one concrete example each for Music, Visual and Systems.
+- **Capabilities**: Grouped by mode (`Music & Audio`, `Visual Practice`, `Systems & Improvement`, `Web & Digital Systems`), equal-height cards linking onward.
+- **Closing**: Current chapter combined with the final calls to action.
 - Uses tools contextually rather than as a logo wall.
 
 ### Contact (`/contact`)
