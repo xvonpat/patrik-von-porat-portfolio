@@ -14,7 +14,7 @@ export default function Footer() {
               PATRIK VON PORAT
             </p>
           </Link>
-          <p className="text-xs font-mono text-zinc-400 mt-1 uppercase tracking-widest">Guitarist &middot; Artist &middot; Optimizer</p>
+          <p className="text-xs font-mono text-zinc-400 mt-1 uppercase tracking-widest">Guitarist &middot; Visual Artist &middot; Systems-Minded Creator</p>
         </div>
 
         {/* Center line decoration */}

@@ -4,6 +4,7 @@ import Image from 'next/image';
 import GlassCard from '@/components/GlassCard';
 import CtaButton from '@/components/CtaButton';
 import DigitalSculpture from '@/components/digital-sculpture/DigitalSculpture';
+import SelectedWorkCarousel from '@/components/SelectedWorkCarousel';
 import { getPayload } from 'payload';
 import configPromise from '../../../payload.config.ts';
 
@@ -84,18 +85,18 @@ export default async function Home() {
     {
       number: '03',
       name: 'CREATE',
-      desc: 'Tracking layered guitars, rendering physical ink studies, or building client-side tools without cloud bloat.',
+      desc: 'Tracking layered guitars, rendering physical ink studies, or building focused tools that run right in the browser.',
       accent: 'cyan'
     },
     {
       number: '04',
       name: 'REFINE',
-      desc: 'Trimming arrangement clutter, balancing drawing contrast, and writing automated tests that verify durability.',
+      desc: 'Trimming arrangement clutter, balancing drawing contrast, and testing tools until they hold up in real use.',
       accent: 'cyan'
     }
   ];
 
-  // 3. Curated Selected Work Entries (Music, Digital Tools)
+  // 3. Curated Selected Work Entries (Music, Visual Art, Digital Tools)
   const selectedWork = [
     {
       title: 'Realmforged',
@@ -103,7 +104,8 @@ export default async function Home() {
       description: 'A cinematic power metal project developed across music, dark-fantasy storytelling, visual direction, release design and a dedicated digital home.',
       image: '/images/projects/proof/realmforged-showcase1.webp',
       imageAlt: 'Realmforged cinematic music and worldbuilding showcase',
-      link: '/music',
+      link: 'https://realmforgedofficial.com',
+      isExternal: true,
       ctaText: 'Explore Realmforged',
       accent: 'purple'
     },
@@ -113,8 +115,31 @@ export default async function Home() {
       description: 'An evolving dark extreme metal project built through sound, restraint, ritual atmosphere and a deliberately controlled visual identity.',
       image: '/images/projects/proof/proof-ashwrithe-showcase.webp',
       imageAlt: 'Ashwrithe dark extreme metal visual identity showcase',
-      link: '/music',
+      link: 'https://ashwrithe.com',
+      isExternal: true,
       ctaText: 'Explore Ashwrithe',
+      accent: 'purple'
+    },
+    {
+      title: 'The Butcher Bust',
+      category: 'VISUAL ART · MINIATURES · PAINTING',
+      description: 'A resin-printed bust painted by hand with layered acrylic washes, custom skin-tone blending, a copper harness and weathering.',
+      image: '/images/art/butcher/The_Butcher-1.webp',
+      imageAlt: 'Painted resin bust of The Butcher showing layered skin tones, copper harness, and acrylic weathering.',
+      imagePosition: 'center 30%',
+      link: '/art#other-forms',
+      ctaText: 'Explore Physical Craft',
+      accent: 'purple'
+    },
+    {
+      title: 'Conan the Barbarian',
+      category: 'VISUAL ART · MINIATURES · PAINTING',
+      description: 'A resin print painted with flesh-tone transitions, metallic drybrushing, leather straps and a hand-finished stone terrain base.',
+      image: '/images/art/conan/Conan-2.webp',
+      imageAlt: 'Painted resin miniature of Conan the Barbarian holding a sword, with shaded skin, leather straps and a stone terrain base.',
+      imagePosition: 'center 16%',
+      link: '/art#other-forms',
+      ctaText: 'Explore Physical Craft',
       accent: 'purple'
     },
     {
@@ -126,14 +151,24 @@ export default async function Home() {
       link: '/projects/dmaic-companion',
       ctaText: 'Explore DMAIC Companion',
       accent: 'cyan'
+    },
+    {
+      title: 'Home Control Panel',
+      category: 'SMART HOME · INTERFACE DESIGN',
+      description: 'A wall-mounted control panel for the whole house: lights, heating, the front door, EV charging and solar power in one calm, glanceable interface.',
+      image: '/images/projects/home-control-panel/00-cover.webp',
+      imageAlt: 'Dark smart-home control panel shown on a large screen and a phone',
+      link: '/projects/home-control-panel',
+      ctaText: 'Explore Home Control Panel',
+      accent: 'cyan'
     }
   ];
 
   // 4. Current Focus Items
   const currentFocusItems = [
-    'Developing the first official Ashwrithe material',
-    'Building the next phase of Realmforged',
-    'Studying charcoal, drawing and tattoo technique'
+    { text: 'Developing the first official Ashwrithe material', link: '/music#current-projects' },
+    { text: 'Building the next phase of Realmforged', link: '/music#current-projects' },
+    { text: 'Studying charcoal, drawing and tattoo technique', link: '/art' }
   ];
 
   return (
@@ -205,58 +240,11 @@ export default async function Home() {
           </h2>
           <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-accent-purple to-transparent mt-1" />
           <p className="text-base md:text-lg text-zinc-300 font-light max-w-2xl leading-relaxed md:leading-8 mt-1 text-balance text-pretty">
-            Active music releases and personal tools currently in development.
+            Active music releases, hands-on craft and personal tools in development.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-7">
-          {selectedWork.map((card, idx) => {
-            const isPurple = card.accent === 'purple';
-            const accentClass = isPurple ? 'text-accent-purple' : 'text-accent-cyan';
-
-            return (
-              <GlassCard key={idx} accent={card.accent} className="p-5 md:p-6 flex flex-col justify-between h-full group">
-                <div className="flex flex-col gap-4">
-                  {/* Visual Showcase Banner */}
-                  <div className="w-full aspect-[16/10] rounded-xl overflow-hidden border border-white/[0.08] bg-obsidian-950/80 relative shadow-md group-hover:border-white/20 transition-all duration-500">
-                    <Image 
-                      src={card.image} 
-                      alt={card.imageAlt} 
-                      fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
-                      className="w-full h-full object-cover object-center grayscale group-hover:grayscale-0 transition-all duration-700 ease-out scale-100 group-hover:scale-[1.03]"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-obsidian-950/70 via-transparent to-transparent opacity-60 pointer-events-none" />
-                  </div>
-
-                  {/* Category & Title */}
-                  <div className="flex flex-col gap-1.5 pb-2.5 border-b border-white/5">
-                    <span className={`text-[10px] md:text-[11px] font-mono uppercase tracking-wider font-semibold ${accentClass}`}>
-                      {card.category}
-                    </span>
-                    <h3 className="text-2xl md:text-3xl font-semibold tracking-tight text-white font-gothic">
-                      {card.title}
-                    </h3>
-                  </div>
-
-                  {/* Description */}
-                  <p className="text-sm md:text-[15px] text-zinc-300 font-light leading-relaxed text-pretty">
-                    {card.description}
-                  </p>
-                </div>
-
-                <div className="mt-6 pt-3.5 border-t border-white/5 flex justify-end">
-                  <Link 
-                    href={card.link}
-                    className={`text-xs font-mono uppercase tracking-widest ${accentClass} group-hover:text-white transition-colors flex items-center gap-1 font-semibold`}
-                  >
-                    {card.ctaText} &rarr;
-                  </Link>
-                </div>
-              </GlassCard>
-            );
-          })}
-        </div>
+        <SelectedWorkCarousel cards={selectedWork} initialIndex={2} />
 
         {/* Understated link beneath section */}
         <div className="flex justify-center pt-2">
@@ -392,13 +380,16 @@ export default async function Home() {
           </div>
 
           <ul className="grid grid-cols-1 md:grid-cols-3 gap-3.5 pt-2 border-t border-white/5">
-            {currentFocusItems.map((item, idx) => (
-              <li 
-                key={idx}
-                className="flex items-start gap-2.5 text-sm md:text-[15px] text-zinc-300 font-light leading-relaxed bg-obsidian-950/50 border border-white/[0.05] p-3.5 rounded-lg"
-              >
-                <span className="text-accent-purple font-mono text-xs mt-0.5 select-none">&bull;</span>
-                <span className="text-pretty">{item}</span>
+            {currentFocusItems.map((item) => (
+              <li key={item.text}>
+                <Link
+                  href={item.link}
+                  className="group flex items-start gap-2.5 h-full text-sm md:text-[15px] text-zinc-300 hover:text-white font-light leading-relaxed bg-obsidian-950/50 border border-white/[0.05] hover:border-white/15 p-3.5 rounded-lg transition-colors"
+                >
+                  <span className="text-accent-purple font-mono text-xs mt-0.5 select-none">&bull;</span>
+                  <span className="text-pretty flex-1">{item.text}</span>
+                  <span className="text-accent-purple text-xs mt-0.5 opacity-0 group-hover:opacity-100 transition-opacity" aria-hidden="true">&rarr;</span>
+                </Link>
               </li>
             ))}
           </ul>
@@ -448,7 +439,7 @@ export default async function Home() {
                       </span>
                       <span>{formattedDate}</span>
                     </div>
-                    <h3 className="blog-card-title text-xl md:text-2xl font-semibold font-gothic line-clamp-2">
+                    <h3 className="blog-card-title text-xl md:text-2xl font-semibold font-gothic line-clamp-3">
                       {post.title}
                     </h3>
                     {post.excerpt && (
@@ -503,6 +494,11 @@ export default async function Home() {
           >
             Get in Touch
           </CtaButton>
+        </div>
+        <div className="flex items-center gap-5 mt-1 text-xs font-mono uppercase tracking-widest text-zinc-400">
+          <a href="https://www.instagram.com/patrikvonporat/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Instagram</a>
+          <span className="text-zinc-600" aria-hidden="true">&middot;</span>
+          <a href="https://www.threads.com/@patrikvonporat" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Threads</a>
         </div>
       </section>
 

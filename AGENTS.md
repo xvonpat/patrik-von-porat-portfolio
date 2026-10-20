@@ -99,7 +99,7 @@ Section order:
 2. Short introduction (`The Impulse`)
 3. Three Core Expressions (`Music & Worlds`, `Visual Practice`, `Systems & Digital Work`)
 4. Process (`Observe → Structure → Create → Refine`)
-5. Selected Work proof cards (`Realmforged`, `Ashwrithe`, `Visual Practice`)
+5. Selected Work proof cards — a desktop carousel with the centre card in focus (`Realmforged`, `Ashwrithe`, `The Butcher Bust`, `Conan the Barbarian`, `DMAIC Companion`, `Home Control Panel`); stacked on mobile
 6. Current Focus (`Music`, `Visual Art`, `Digital & Systems`)
 7. Latest Journal entry points (CMS-driven with fallback)
 8. Restrained contact / link exit

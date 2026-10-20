@@ -1145,3 +1145,20 @@ button:not(.aurora-cta-btn):not(.email-cta-btn)[class*="rounded-full"][class*="b
     background: linear-gradient(90deg, rgba(224, 98, 181, 0.70) 0%, rgba(109, 231, 228, 0.50) 100%) !important;
   }
 }
+
+/* Homepage Selected Work: desktop carousel (see SelectedWorkCarousel) */
+@media (min-width: 1024px) {
+  .selected-work-track {
+    scrollbar-width: none;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%);
+  }
+
+  .selected-work-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .selected-work-item[data-focused] .selected-work-image {
+    filter: grayscale(0);
+  }
+}
