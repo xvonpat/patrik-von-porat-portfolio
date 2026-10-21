@@ -26,6 +26,7 @@ import * as migration_20261019_192000_add_nameplate_and_torso_eddie_images from 
 import * as migration_20261019_210000_add_chladni_plate from './20261019_210000_add_chladni_plate';
 import * as migration_20261019_220000_add_ink_in_water from './20261019_220000_add_ink_in_water';
 import * as migration_20261020_195500_add_head_painting_eddie_image from './20261020_195500_add_head_painting_eddie_image';
+import * as migration_20261021_223500_add_head_and_torso_eddie_image from './20261021_223500_add_head_and_torso_eddie_image';
 
 export const migrations = [
   {
@@ -167,5 +168,10 @@ export const migrations = [
     up: migration_20261020_195500_add_head_painting_eddie_image.up,
     down: migration_20261020_195500_add_head_painting_eddie_image.down,
     name: '20261020_195500_add_head_painting_eddie_image',
+  },
+  {
+    up: migration_20261021_223500_add_head_and_torso_eddie_image.up,
+    down: migration_20261021_223500_add_head_and_torso_eddie_image.down,
+    name: '20261021_223500_add_head_and_torso_eddie_image',
   },
 ];
