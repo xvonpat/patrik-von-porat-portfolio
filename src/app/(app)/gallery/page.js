@@ -8,7 +8,7 @@ export const revalidate = 60; // Revalidate every 60 seconds
 
 export const metadata = {
   title: "Photo Gallery | Patrik von Porat",
-  description: "Curated photography collection and Lightroom web gallery.",
+  description: "Photo gallery of miniatures, resin prints and photography: build progress from Eddie the Trooper and curated albums shot on 35mm film and digital.",
   robots: {
     index: false,
     follow: false,
@@ -18,7 +18,7 @@ export const metadata = {
   },
   openGraph: {
     title: "Photo Gallery | Patrik von Porat",
-    description: "Curated photography collection and Lightroom web gallery.",
+    description: "Photo gallery of miniatures, resin prints and photography: build progress from Eddie the Trooper and curated albums shot on 35mm film and digital.",
     url: 'https://vonporat.com/gallery',
   }
 };

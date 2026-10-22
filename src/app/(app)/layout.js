@@ -28,7 +28,7 @@ const dmMono = DM_Mono({
 export const metadata = {
   metadataBase: new URL('https://vonporat.com'),
   title: "Patrik von Porat | Creative Hub",
-  description: "A creative hub for music, visual art, AI experiments, and process improvement.",
+  description: "Patrik von Porat is a guitarist, visual artist and systems-minded creator in Sweden. Music, drawing, miniatures, digital tools and process work in one place.",
   alternates: {
     canonical: '/',
   },
@@ -37,7 +37,7 @@ export const metadata = {
   },
   openGraph: {
     title: "Patrik von Porat | Creative Hub",
-    description: "A creative hub for music, visual art, AI experiments, and process improvement.",
+    description: "Patrik von Porat is a guitarist, visual artist and systems-minded creator in Sweden. Music, drawing, miniatures, digital tools and process work in one place.",
     url: 'https://vonporat.com',
     siteName: 'Patrik von Porat',
     images: [
@@ -54,7 +54,7 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
     title: "Patrik von Porat | Creative Hub",
-    description: "A creative hub for music, visual art, AI experiments, and process improvement.",
+    description: "Patrik von Porat is a guitarist, visual artist and systems-minded creator in Sweden. Music, drawing, miniatures, digital tools and process work in one place.",
     images: ['/images/PvP2.png'],
   },
 };
@@ -71,10 +71,11 @@ export default function RootLayout({ children }) {
       "https://www.youtube.com/@creativeoverdrive",
       "https://realmforged.bandcamp.com/",
       "https://www.instagram.com/patrikvonporat/",
+      "https://www.threads.com/@patrikvonporat",
       "https://www.patreon.com/c/realmforgedguild",
       "https://www.linkedin.com/in/patrikvonporat/"
     ],
-    "jobTitle": "Lead Guitarist, Visual Artist & Process Engineer",
+    "jobTitle": "Guitarist, visual artist and systems-minded creator",
     "knowsAbout": [
       "Symphonic Power Metal",
       "Guitar Orchestration",

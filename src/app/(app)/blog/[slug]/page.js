@@ -298,7 +298,8 @@ export async function generateMetadata({ params }) {
   const resolvedImgUrl = rawImgUrl ? getMediaUrl(rawImgUrl) : (postImg?.url || 'https://vonporat.com/images/PvP2.png');
 
   return {
-    title: `${seoTitle} | Chronicles`,
+    // Some SEO titles already end with the site name; avoid repeating it.
+    title: `${seoTitle.replace(/\s*\|\s*Patrik von Porat\s*$/i, '')} | Journal | Patrik von Porat`,
     description: seoDescription,
     alternates: {
       canonical: canonicalUrl,
@@ -486,7 +487,7 @@ export default async function BlogPostPage({ params }) {
           className="inline-flex items-center gap-2 text-xs md:text-sm font-mono tracking-widest uppercase text-zinc-400 hover:text-accent-purple mb-6 transition-colors group font-medium"
         >
           <span className="transform group-hover:-translate-x-1 transition-transform inline-block">&larr;</span> 
-          Back to Chronicles
+          Back to Journal
         </Link>
 
         {/* Article Header */}
@@ -560,7 +561,7 @@ export default async function BlogPostPage({ params }) {
         {/* Share Section */}
         <BlogShare title={post.title} url={canonicalUrl} />
 
-        {/* Adjacent Chronicles Navigation */}
+        {/* Adjacent Journal Navigation */}
         {(prevPost || nextPost) && (
           <section className="flex flex-col gap-6 mt-12 pt-8 border-t border-white/5">
             <div className="flex items-center justify-between border-b border-white/5 pb-2.5">
@@ -646,7 +647,7 @@ export default async function BlogPostPage({ params }) {
                       <div className="mt-0.5">
                         <h3 className="text-2xl md:text-3xl font-semibold text-white tracking-tight font-gothic group-hover:text-accent-purple transition-colors">
                           <Link href="/blog" className="no-underline focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent-purple">
-                            All Chronicles
+                            All Notes
                           </Link>
                         </h3>
                       </div>
@@ -740,7 +741,7 @@ export default async function BlogPostPage({ params }) {
                       <div className="mt-0.5">
                         <h3 className="text-2xl md:text-3xl font-semibold text-white tracking-tight font-gothic group-hover:text-accent-cyan transition-colors">
                           <Link href="/blog" className="no-underline focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent-cyan">
-                            All Chronicles
+                            All Notes
                           </Link>
                         </h3>
                       </div>

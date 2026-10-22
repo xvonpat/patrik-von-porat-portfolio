@@ -8,13 +8,13 @@ const IMG = '/images/projects/home-control-panel';
 
 export const metadata = {
   title: "Home Control Panel | Selected Work | Patrik von Porat",
-  description: "A custom control panel for the whole house, built on Home Assistant. Lights, heating, the front door, EV charging, solar power, the doorbell camera and the coffee machine in one calm, glanceable interface. Designed for a wall-mounted tablet, and just as usable on a phone.",
+  description: "A custom Home Assistant control panel for the whole house: lights, heating, the front door, EV charging and solar power in one calm, glanceable interface.",
   alternates: {
     canonical: '/projects/home-control-panel',
   },
   openGraph: {
     title: "Home Control Panel | Selected Work | Patrik von Porat",
-    description: "A custom control panel for the whole house, built on Home Assistant. Lights, heating, the front door, EV charging, solar power, the doorbell camera and the coffee machine in one calm, glanceable interface. Designed for a wall-mounted tablet, and just as usable on a phone.",
+    description: "A custom Home Assistant control panel for the whole house: lights, heating, the front door, EV charging and solar power in one calm, glanceable interface.",
     url: 'https://vonporat.com/projects/home-control-panel',
     images: [
       {

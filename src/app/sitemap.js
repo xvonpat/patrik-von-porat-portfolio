@@ -40,6 +40,7 @@ export default async function sitemap() {
     '/projects/home-control-panel',
     '/music',
     '/art',
+    '/gallery',
     '/blog',
     '/about',
     '/contact',

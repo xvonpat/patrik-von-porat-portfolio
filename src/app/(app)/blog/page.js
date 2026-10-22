@@ -7,13 +7,13 @@ export const revalidate = 60; // Revalidate every 60 seconds
 
 export const metadata = {
   title: "Journal | Patrik von Porat",
-  description: "Notes on music, visual practice, technology, learning and the systems behind the projects.",
+  description: "Journal notes by Patrik von Porat on music, drawing, miniatures, making, technology and process, written from the work as it develops.",
   alternates: {
     canonical: '/blog',
   },
   openGraph: {
     title: "Journal | Patrik von Porat",
-    description: "Notes on music, visual practice, technology, learning and the systems behind the projects.",
+    description: "Journal notes by Patrik von Porat on music, drawing, miniatures, making, technology and process, written from the work as it develops.",
     url: 'https://vonporat.com/blog',
     images: [
       {

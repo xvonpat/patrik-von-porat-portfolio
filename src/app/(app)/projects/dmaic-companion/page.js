@@ -6,13 +6,13 @@ import CtaButton from '@/components/CtaButton';
 
 export const metadata = {
   title: "DMAIC Companion | Selected Work | Patrik von Porat",
-  description: "A guided web app for Lean Six Sigma improvement work and Apollo root cause analysis. It teaches the method while you use it, with guides, interactive labs and gentle checks, and replaces PowerPoint and Excel/Minitab templates with guided workflows that end in a PowerPoint report.",
+  description: "A guided web app for Lean Six Sigma improvement work and Apollo root cause analysis. It teaches the method as you work and ends in a ready PowerPoint report.",
   alternates: {
     canonical: '/projects/dmaic-companion',
   },
   openGraph: {
     title: "DMAIC Companion | Selected Work | Patrik von Porat",
-    description: "A guided web app for Lean Six Sigma improvement work and Apollo root cause analysis. It teaches the method while you use it, with guides, interactive labs and gentle checks, and replaces PowerPoint and Excel/Minitab templates with guided workflows that end in a PowerPoint report.",
+    description: "A guided web app for Lean Six Sigma improvement work and Apollo root cause analysis. It teaches the method as you work and ends in a ready PowerPoint report.",
     url: 'https://vonporat.com/projects/dmaic-companion',
     images: [
       {
