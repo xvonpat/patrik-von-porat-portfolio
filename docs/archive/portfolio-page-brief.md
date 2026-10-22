@@ -1,5 +1,8 @@
 # Brief for Antigravity: update the "DMAIC Companion" page on vonporat.com
 
+> [!NOTE]
+> **Archival Notice**: This one-off brief was completed on 2026-10-18 and is kept for reference only. The live page is `src/app/(app)/projects/dmaic-companion/page.js`; its lasting rules (never name the employer, no links to private repositories) now live in [`docs/ai/CONTENT_GUIDE.md`](../ai/CONTENT_GUIDE.md).
+
 **Task:** Update the existing page `/projects/dmaic-companion` with the latest state of the app
 (as of 2026-10-18). Keep the page's current layout, components, styling and section order. Replace
 the text with the content below, add one new section (**Labs**, section 6) and add the images listed

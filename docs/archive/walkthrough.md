@@ -1,7 +1,7 @@
 # Site-Wide Visual Consistency Walkthrough
 
 > [!NOTE]
-> **Archival Notice**: This document is a historical implementation walkthrough from an earlier visual consistency pass. It is preserved for historical reference and does not override canonical project documentation. Current canonical project rules and status live in [`AGENTS.md`](../../AGENTS.md) and [`docs/ai/`](./).
+> **Archival Notice**: This document is a historical implementation walkthrough from an earlier visual consistency pass. It is preserved for historical reference and does not override canonical project documentation. Current canonical project rules and status live in [`AGENTS.md`](../../AGENTS.md) and [`docs/ai/`](../ai/).
 
 A complete visual consistency pass was applied across public pages and shared components on **vonporat.com**, aligning the site with the enhanced scale, density, and readability established on the homepage.
 
