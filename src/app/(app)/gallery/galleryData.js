@@ -538,6 +538,144 @@ export const eddieTheTrooperPhotos = [
   }
 ];
 
+export const darthVaderDioramaPhotos = [
+  {
+    id: "IMG_1125",
+    filename: "IMG_1125.webp",
+    title: "Darth Vader Diorama: Full Assembly Dry Fit",
+    src: "/images/art/darth-vader-diorama/IMG_1125.webp",
+    thumb: "/images/art/darth-vader-diorama/thumbnails/IMG_1125.webp",
+    width: 1152,
+    height: 2048,
+    orientation: "portrait",
+    aspectRatio: "9/16",
+    categorySlug: "3d-prints",
+    project: "Darth Vader Diorama",
+    albumSlug: "darth-vader-diorama",
+    order: 1
+  },
+  {
+    id: "IMG_1127",
+    filename: "IMG_1127.webp",
+    title: "Darth Vader Diorama: Scenic Base & Stormtrooper Squad",
+    src: "/images/art/darth-vader-diorama/IMG_1127.webp",
+    thumb: "/images/art/darth-vader-diorama/thumbnails/IMG_1127.webp",
+    width: 2048,
+    height: 1152,
+    orientation: "landscape",
+    aspectRatio: "16/9",
+    categorySlug: "3d-prints",
+    project: "Darth Vader Diorama",
+    albumSlug: "darth-vader-diorama",
+    order: 2
+  },
+  {
+    id: "IMG_1131",
+    filename: "IMG_1131.webp",
+    title: "Darth Vader Diorama: Torso & Armor Detail",
+    src: "/images/art/darth-vader-diorama/IMG_1131.webp",
+    thumb: "/images/art/darth-vader-diorama/thumbnails/IMG_1131.webp",
+    width: 2048,
+    height: 1152,
+    orientation: "landscape",
+    aspectRatio: "16/9",
+    categorySlug: "3d-prints",
+    project: "Darth Vader Diorama",
+    albumSlug: "darth-vader-diorama",
+    order: 3
+  },
+  {
+    id: "IMG_1132",
+    filename: "IMG_1132.webp",
+    title: "Darth Vader Diorama: Force Reach Gauntlet",
+    src: "/images/art/darth-vader-diorama/IMG_1132.webp",
+    thumb: "/images/art/darth-vader-diorama/thumbnails/IMG_1132.webp",
+    width: 2048,
+    height: 1152,
+    orientation: "landscape",
+    aspectRatio: "16/9",
+    categorySlug: "3d-prints",
+    project: "Darth Vader Diorama",
+    albumSlug: "darth-vader-diorama",
+    order: 4
+  },
+  {
+    id: "IMG_1134",
+    filename: "IMG_1134.webp",
+    title: "Darth Vader Diorama: Lower Body & Quilted Trousers",
+    src: "/images/art/darth-vader-diorama/IMG_1134.webp",
+    thumb: "/images/art/darth-vader-diorama/thumbnails/IMG_1134.webp",
+    width: 2048,
+    height: 1152,
+    orientation: "landscape",
+    aspectRatio: "16/9",
+    categorySlug: "3d-prints",
+    project: "Darth Vader Diorama",
+    albumSlug: "darth-vader-diorama",
+    order: 5
+  },
+  {
+    id: "IMG_1136",
+    filename: "IMG_1136.webp",
+    title: "Darth Vader Diorama: Rock Terrain Texture & Drybrushing",
+    src: "/images/art/darth-vader-diorama/IMG_1136.webp",
+    thumb: "/images/art/darth-vader-diorama/thumbnails/IMG_1136.webp",
+    width: 2048,
+    height: 1152,
+    orientation: "landscape",
+    aspectRatio: "16/9",
+    categorySlug: "3d-prints",
+    project: "Darth Vader Diorama",
+    albumSlug: "darth-vader-diorama",
+    order: 6
+  },
+  {
+    id: "IMG_1137",
+    filename: "IMG_1137.webp",
+    title: "Darth Vader Diorama: Base Assembly & Workbench Layout",
+    src: "/images/art/darth-vader-diorama/IMG_1137.webp",
+    thumb: "/images/art/darth-vader-diorama/thumbnails/IMG_1137.webp",
+    width: 2048,
+    height: 1152,
+    orientation: "landscape",
+    aspectRatio: "16/9",
+    categorySlug: "3d-prints",
+    project: "Darth Vader Diorama",
+    albumSlug: "darth-vader-diorama",
+    order: 7
+  },
+  {
+    id: "IMG_1140",
+    filename: "IMG_1140.webp",
+    title: "Darth Vader Diorama: Resin E-11 Blaster & Hands",
+    src: "/images/art/darth-vader-diorama/IMG_1140.webp",
+    thumb: "/images/art/darth-vader-diorama/thumbnails/IMG_1140.webp",
+    width: 2048,
+    height: 1152,
+    orientation: "landscape",
+    aspectRatio: "16/9",
+    categorySlug: "3d-prints",
+    project: "Darth Vader Diorama",
+    albumSlug: "darth-vader-diorama",
+    order: 8
+  },
+  {
+    id: "IMG_1143",
+    filename: "IMG_1143.webp",
+    title: "Darth Vader Diorama: Upper Body Assembly & Priming Prep",
+    src: "/images/art/darth-vader-diorama/IMG_1143.webp",
+    thumb: "/images/art/darth-vader-diorama/thumbnails/IMG_1143.webp",
+    width: 2048,
+    height: 1152,
+    orientation: "landscape",
+    aspectRatio: "16/9",
+    categorySlug: "3d-prints",
+    project: "Darth Vader Diorama",
+    albumSlug: "darth-vader-diorama",
+    order: 9
+  }
+];
+
 export const galleryAlbums = [
   {
     id: "eddie-the-trooper",
@@ -547,6 +685,15 @@ export const galleryAlbums = [
     coverUrl: "/images/art/eddie-the-trooper/thumbnails/IMG_0693.webp",
     description: "Resin 3D print project breakdown",
     order: 1,
+  },
+  {
+    id: "darth-vader-diorama",
+    title: "Darth Vader Diorama",
+    slug: "darth-vader-diorama",
+    collectionSlug: "3d-prints",
+    coverUrl: "/images/art/darth-vader-diorama/thumbnails/IMG_1125.webp",
+    description: "Resin 3D print and diorama build featuring Darth Vader and Stormtroopers",
+    order: 2,
   },
 ];
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { getPayload } from 'payload';
 import configPromise from '../../../../payload.config.ts';
 import GalleryClient from './GalleryClient';
-import { galleryPhotos as fallbackPhotos, eddieTheTrooperPhotos, galleryAlbums as fallbackAlbums } from './galleryData';
+import { galleryPhotos as fallbackPhotos, eddieTheTrooperPhotos, darthVaderDioramaPhotos, galleryAlbums as fallbackAlbums } from './galleryData';
 
 export const revalidate = 60; // Revalidate every 60 seconds
 
@@ -148,6 +148,7 @@ export default async function GalleryPage() {
         order: index + 1,
       })),
       ...eddieTheTrooperPhotos,
+      ...darthVaderDioramaPhotos,
     ];
   }
 

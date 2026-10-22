@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import Image from 'next/image';
-import { galleryPhotos as fallbackPhotos, eddieTheTrooperPhotos, galleryAlbums as fallbackAlbums } from './galleryData';
+import { galleryPhotos as fallbackPhotos, eddieTheTrooperPhotos, darthVaderDioramaPhotos, galleryAlbums as fallbackAlbums } from './galleryData';
 
 export default function GalleryClient({ initialCategories = [], initialAlbums = [], initialImages = [] }) {
   // Ensure default categories, albums and images fallback if not provided
@@ -43,6 +43,7 @@ export default function GalleryClient({ initialCategories = [], initialAlbums = 
         order: index + 1,
       })),
       ...eddieTheTrooperPhotos,
+      ...darthVaderDioramaPhotos,
     ];
   }, [initialImages]);
 
@@ -59,14 +60,16 @@ export default function GalleryClient({ initialCategories = [], initialAlbums = 
     return categories[0]?.slug || 'all-collections';
   });
 
-  // Selected album within the active category: 'all-images' by default
+  // Selected album within the active category: 'eddie-the-trooper' by default when on 3d-prints
   const [selectedAlbum, setSelectedAlbum] = useState(() => {
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
       const albParam = params.get('album') || params.get('project');
       if (albParam) return albParam;
+      const catParam = params.get('category') || params.get('collection');
+      if (catParam && catParam !== '3d-prints') return 'all-images';
     }
-    return 'all-images';
+    return 'eddie-the-trooper';
   });
 
   const [filter, setFilter] = useState('all'); // 'all' | 'landscape' | 'portrait'
@@ -102,7 +105,7 @@ export default function GalleryClient({ initialCategories = [], initialAlbums = 
           ? '3d-prints'
           : (categories[0]?.slug || 'all-collections');
         setSelectedCategory(defaultCat);
-        setSelectedAlbum('all-images');
+        setSelectedAlbum(defaultCat === '3d-prints' ? 'eddie-the-trooper' : 'all-images');
         setActiveLoupeIndex(null);
         setIsPlaying(false);
         setIsZoomed(false);
@@ -136,12 +139,16 @@ export default function GalleryClient({ initialCategories = [], initialAlbums = 
     }
 
     const albumParam = params.get('album') || params.get('project');
-    let activeAlb = 'all-images';
+    let activeAlb = activeCat === '3d-prints' ? 'eddie-the-trooper' : 'all-images';
     if (albumParam) {
       requestAnimationFrame(() => {
         setSelectedAlbum(albumParam);
       });
       activeAlb = albumParam;
+    } else if (activeCat !== '3d-prints') {
+      requestAnimationFrame(() => {
+        setSelectedAlbum('all-images');
+      });
     }
 
     const photoParam = params.get('photo') || params.get('loupe');
@@ -280,11 +287,11 @@ export default function GalleryClient({ initialCategories = [], initialAlbums = 
     };
   }, [selectedCategory, selectedAlbum, categories, visibleAlbums, categoryPhotos.length, albumPhotos.length, allPhotos.length]);
 
-  // Switch category safely without stale indices, resetting album to 'all-images'
+  // Switch category safely without stale indices, selecting default album
   const handleCategoryChange = useCallback((catSlug) => {
     if (catSlug === selectedCategory) return;
     setSelectedCategory(catSlug);
-    setSelectedAlbum('all-images');
+    setSelectedAlbum(catSlug === '3d-prints' ? 'eddie-the-trooper' : 'all-images');
     setActiveLoupeIndex(null);
     setIsPlaying(false);
     setIsZoomed(false);
