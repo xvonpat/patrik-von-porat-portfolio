@@ -1,6 +1,6 @@
 # vonporat.com — Content Guide
 
-Last reviewed: 2026-08-25
+Last reviewed: 2026-10-22
 
 ## Purpose
 
@@ -72,6 +72,7 @@ Use technical terms when they add accuracy, explaining their role in context:
 - **Controlled sentences**: Balance short and medium sentences; avoid fragments used only to imitate luxury advertising.
 - **One paragraph, one job**: Each paragraph develops one clear thought and transitions naturally.
 - **Remove repetition**: Give each section a distinct job rather than repeating the same biographical summary.
+- **No dashes as punctuation**: Do not use em dashes (—) or spaced en dashes ( – ) in public copy, alt text or metadata. Patrik reads them as a sign of AI-written text. Rephrase with a comma, colon, full stop or parentheses. En dashes in number ranges (`1998–2023`) are fine.
 
 ## Preferred language
 
@@ -101,25 +102,20 @@ Useful recurring concepts:
 ### Home (`/`) — Approved & Locked
 
 - **Hero**:
-  - Eyebrow: `PATRIK VON PORAT`
-  - Heading: `Guitarist, visual artist and systems-minded creator.`
-  - Subheading: `One identity. Many expressions.`
-  - Narrative: *“I work across music, visual practice and digital systems—bringing the same focus on observation, structure and iterative refinement to everything I build.”*
-  - CTAs: `Explore Selected Work` (`#selected-work`), `Start a Conversation` (`/contact`).
-- **The Impulse (Introduction)**: *“Different mediums. One way of thinking.”*
-- **Three Core Expressions**:
+  - Eyebrow: `PATRIK VON PORAT · CREATIVE HUB`
+  - Heading: `Creative instinct, given structure.`
+  - Narrative: *“I’m Patrik von Porat. I make heavy music, draw by hand, and build digital tools for creative work. This is where I share the projects, and the thinking that shapes them.”*
+  - Identity line: `Guitarist · Visual Artist · Systems-Minded Creator`
+  - CTAs: `Explore Selected Work` (`#selected-work`), `About the Process` (`/about`).
+- **Selected Work**: `Concrete projects across sound, image and code.` / *“Active music releases, hands-on craft and personal tools in development.”* Carousel cards: `Realmforged`, `Ashwrithe`, `The Butcher Bust`, `Conan the Barbarian`, `DMAIC Companion`, `Home Control Panel`.
+- **Explore by discipline**:
   - `Music & Worlds` (`/music`): *“Composition, guitar and interconnected creative worlds built through sound, story and visual direction.”*
   - `Visual Practice` (`/art`): *“Drawing, tattoo practice, physical models and digital experimentation grounded in observation and craft.”*
   - `Systems & Digital Work` (`/projects`): *“Websites, workflows and improvement systems that turn complexity into something clearer and more useful.”*
-- **How I Work (Process)**:
-  - `01 OBSERVE`: *“Find the pattern, tension or possibility.”*
-  - `02 STRUCTURE`: *“Give the idea constraints, hierarchy and direction.”*
-  - `03 CREATE`: *“Turn the concept into sound, image or system.”*
-  - `04 REFINE`: *“Remove noise and strengthen what remains.”*
-- **Selected Work**: Proof cards for `Realmforged`, `Ashwrithe`, and `Visual Practice`.
-- **Current Focus**: Snapshots across `Music`, `Visual Art`, and `Digital & Systems`.
-- **Journal**: Latest published posts from Payload CMS.
-- **Get in Touch**: *“Start a conversation.”* (`Send an Email`, `Explore More Work`).
+- **How I Work**: `From raw instinct to deliberate execution.` with `01 OBSERVE`, `02 STRUCTURE`, `03 CREATE`, `04 REFINE`, each with concrete examples from Realmforged, drawing and DMAIC Companion.
+- **Currently**: `What I am building and learning now.` with three linked items (Ashwrithe material, the next phase of Realmforged, charcoal, drawing and tattoo technique).
+- **Journal**: `Notes from the process.` Latest published posts from Payload CMS.
+- **Closing**: *“Follow the work as it develops.”* (`Read the Journal`, `Get in Touch`, Instagram, Threads).
 
 ### Projects (`/projects`) — Approved & Public
 
@@ -127,10 +123,11 @@ Curated **Selected Work** showcase:
 - **Featured**:
   - `Realmforged` (Active): *“A cinematic power metal project developed across music, dark-fantasy storytelling, visual direction, release design and a dedicated digital home.”*
   - `Ashwrithe` (In Development): *“An evolving dark extreme metal project built through sound, restraint, ritual atmosphere and a deliberately controlled visual identity.”*
-- **Supporting**:
-  - `Visual Practice` (Ongoing Practice): *“An ongoing exploration of observation, material and controlled technique across traditional and physical forms.”*
-  - `vonporat.com` (Live · Evolving): *“A personal creative hub designed to connect music, visual practice, writing and systems thinking within one coherent identity.”*
-  - `Systems & Improvement` (Professional Practice): *“Structured problem-solving used to make complex work clearer, more reliable and easier to navigate.”*
+- **Broader Practice**:
+  - `DMAIC Companion` (Live · Invite only): *“A local-first, guided web app for Lean Six Sigma improvement work.”* Case study at `/projects/dmaic-companion`.
+  - `Home Control Panel` (In Development): *“A wall-mounted control panel for the whole house.”* Case study at `/projects/home-control-panel`.
+  - `vonporat.com` (Live): *“A personal creative hub designed to connect music, visual practice, writing and systems thinking within one coherent identity.”*
+- Case studies never name Patrik's employer and never link to private repositories.
 
 ### Music (`/music`) — Approved & Locked
 
@@ -150,31 +147,34 @@ Curated **Selected Work** showcase:
 - **Sections**:
   - `Traditional Studies`: Graphite eye studies and charcoal value control.
   - `Tattoo Practice`: Reelskin practice skin studies (Skull & Flow, Mario shading).
-  - `Miniatures & 3D Prints`: Painted resin figures (The Butcher bust, Conan).
-  - `Generative Visuals`: AI-assisted moodboards, visual development, and cover concepts.
+  - `Physical Craft` (`Dimensional form and surface.`): painted resin figures (The Butcher bust, Conan).
+- AI-generated imagery is not shown on the site.
 
 ### About (`/about`) — Approved & Locked
 
-- **Hero**: *“The work changes. The underlying impulse does not.”*
-- **Background Section**:
-  - Narrative connecting music, visual practice, technology, and operations.
-  - Authentic studio portrait of Patrik.
-  - Core Facts band: `Based in Sweden`, `Playing guitar 35+ years`, `Process Lean Six Sigma Green Belt`, `Current projects Realmforged & Ashwrithe`.
-- **How I Work**: *“From ambiguity to intention.”* (`Observe → Structure → Create → Refine`).
+- **Hero**: *“The work changes. The underlying impulse does not.”* with the introduction beside the studio portrait.
+- **Core Facts band**: `Based in Sweden`, `Playing guitar 35+ years`, `Process Lean Six Sigma Green Belt`, `Current projects Realmforged & Ashwrithe`.
+- **Background**: `One practice, developed through different disciplines.` Narrative connecting music, visual practice, operations and improvement.
+- **Pull quote**: *“Structure does not replace instinct. It gives instinct somewhere to go.”*
+- **Same hands, different materials**: Realmforged, Eye Study, DMAIC Companion.
+- **How I Work**: *“From ambiguity to intention.”* (`Observe → Structure → Create → Refine`, with Music, Visual and Systems examples).
 - **Capabilities**: `Music & Audio`, `Visual Practice`, `Systems & Improvement`, `Web & Digital Systems`.
+- **Closing**: `Still building. Still learning.` (`Explore Selected Work`, `Get in Touch`).
 
 ### Contact (`/contact`) — Approved & Locked
 
 - **Hero**: `CONTACT` / `Start a conversation.`
-- **Body**: *“If the work here connects with you—through music, visual practice, digital systems or process—email is the best place to start. You can also follow what I’m working on through the channels below.”*
-- **Primary Action**: Send an Email button targeting the configured `mailto:` destination.
-- **Elsewhere Channels**: LinkedIn, Threads, Instagram.
+- **Body**: *“If something here connects with you, whether it’s the music, the visual work, the digital systems or the process behind them, send me an email. That’s the best place to start. You can also follow what I’m working on through the channels below.”*
+- **Reasons to write**: `Creative collaborations`, `Music & visual art`, `Systems & process work`.
+- **Direct line**: Send an Email button (configured `mailto:`), the visible address with `Copy`, LinkedIn, Threads, Instagram, and `@patrikvonporat on every channel`.
+- **Sign-off**: signature and `Patrik von Porat · Sweden`.
 - **No contact form**.
 
 ### Blog (`/blog`) — Under Review
 
 - **Hero**: `JOURNAL` / `Notes from the work as it develops.`
-- **Active Categories**: `Music`, `Visual Art`, `Making`, `Technology`, `Process`, `Personal`.
+- **Active Categories**: `Music`, `Visual Art`, `Making`, `Technology`, `Process`, `Personal`, `Projects`.
+- **Post titles**: `<Post title> | Journal | Patrik von Porat`; article navigation uses `Back to Journal` and `All Notes`.
 - **Lead Entry**: Dynamic `LATEST NOTE`.
 - **Archive**: Dynamic archive headings (`Latest notes.` or `[Category] notes.`) and text-led cards for posts without images.
 

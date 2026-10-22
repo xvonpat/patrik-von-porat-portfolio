@@ -1,6 +1,6 @@
 # vonporat.com — Design System
 
-Last reviewed: 2026-10-17
+Last reviewed: 2026-10-22
 
 ## Purpose
 
@@ -87,7 +87,7 @@ The homepage hero employs a multi-theme interactive 3D WebGL sculpture engine (`
 - **Harmonic Nexus** (Default): 3D cymatic guitar strings and a particle attractor around an obsidian core beside the hero text.
 - **Chladni Plate**: Sand settling into vibration figures on a plate; bone-white resting grains with cyan/violet accents.
 - **Ink in Water**: Violet, cyan and rose ink drops blooming and dissolving in still water.
-- **Contour Flow**: High-angle topographic landscape with broad rolling ridges, constant-elevation contour lines, and an illuminated S-shaped river valley.
+- **Contour Flow**: Dark river-valley survey drawn as hundreds of hair-thin elevation lines; deep teal hills, a luminous cyan river, sparse rose contours, slow downhill drift and a soft pulse along the valley.
 - **Alpine Landscape**: Sharp alpine survey with arête ridges, peaks, and cirque valleys.
 - **Readability & Text Protection**: A smoothly feathered darkening veil (`readabilityMask`) keeps the left-hand text column clear and legible.
 - **Scroll Alignment**: A `--section-calm` CSS property dynamically softens contrast and brightness as the visitor scrolls towards *Selected Work*.
@@ -175,7 +175,9 @@ Preferred sources:
 - Tattoo practice pieces on synthetic skin
 - Project artwork and album covers
 - Miniatures and physical objects
-- Carefully selected generative concept visuals
+- Screenshots of Patrik's own tools (case studies)
+
+AI-generated imagery is not used as content on the site.
 
 Image treatment:
 - Preserve focal subject when cropping across breakpoints.
@@ -221,10 +223,10 @@ Mobile is a first-class layout, not a compressed desktop view:
 ## Page-specific visual patterns
 
 ### Home (`/`)
-Strongest brand impression: hero ambient glow, 3 Core Expressions, 4-stage Process, Selected Work proof cards, Current Focus snapshots, Journal preview.
+Strongest brand impression: hero over the selectable WebGL background, then the Selected Work carousel (snap scrolling, arrow buttons, centre card scaled up and in colour, edges faded; stacked below 1024px), 3 Core Expressions, 4-stage Process, Currently, Journal preview.
 
 ### Projects (`/projects`)
-Curated showcase: 2 Featured Work cards (`Realmforged`, `Ashwrithe`) with status badges and evidence bullets + 3 Supporting Work cards (`Visual Practice`, `vonporat.com`, `Systems & Improvement`).
+Curated showcase: 2 Featured Work cards (`Realmforged`, `Ashwrithe`) with status badges and evidence + 3 Broader Practice cards (`DMAIC Companion`, `Home Control Panel`, `vonporat.com`). Case studies use a metadata grid, wide screenshots, phone screenshots in portrait frames, technology layers and a status/roadmap pair.
 
 ### Music (`/music`)
 Active project showcases, discography release cards with high-contrast cover art, and legacy band timeline.
@@ -232,14 +234,17 @@ Active project showcases, discography release cards with high-contrast cover art
 ### Art (`/art`)
 Curated practice showcases with interactive full-screen lightbox zoom.
 
+### Art (`/art`) note
+No AI-generated imagery; the page shows hand-made work only.
+
 ### About (`/about`)
-2-column Background section (narrative + authentic studio portrait), horizontal Core Facts band, natural How I Work measure, contextual capability grid.
+Editorial rhythm instead of repeated centred sections: split hero with the portrait, large-value Core Facts band, sticky Background heading beside the narrative, oversized pull quote, linked image triptych (grayscale until hover), How I Work matrix (subgrid rows aligned across the four steps), equal-height capability cards, merged closing.
 
 ### Contact (`/contact`)
-Calm minimal composition: primary email CTA + 6 external channels in a 1-row (desktop) / 3×2 grid (mobile) layout.
+Short personal note: left column with heading, intro, three numbered reasons and the signature; right column "Direct line" panel with the email CTA, visible address with Copy, and LinkedIn, Threads and Instagram. Email comes first on mobile.
 
 ### Blog (`/blog`)
-Editorial journal: `JOURNAL` eyebrow, category filters (`Music`, `Visual Art`, `Making`, `Technology`, `Process`, `Personal`), dynamic `LATEST NOTE` featuring the Clean Sans heading treatment (`font-sans font-medium text-2xl sm:text-3xl md:text-4xl`), and text-led fallback cards.
+Editorial journal: `JOURNAL` eyebrow, category filters (`Music`, `Visual Art`, `Making`, `Technology`, `Process`, `Personal`, `Projects`), dynamic `LATEST NOTE` featuring the Clean Sans heading treatment (`font-sans font-medium text-2xl sm:text-3xl md:text-4xl`), and text-led fallback cards.
 
 ## Accessibility
 

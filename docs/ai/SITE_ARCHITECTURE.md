@@ -1,6 +1,6 @@
 # vonporat.com — Site Architecture
 
-Last reviewed: 2026-10-17
+Last reviewed: 2026-10-22
 
 ## Purpose
 
@@ -25,7 +25,7 @@ It is an architectural map grounded in the actual codebase implementation.
 
 ## System summary
 
-vonporat.com is a Next.js (App Router, Turbopack) application deployed on Vercel. Payload CMS provides administration, site settings globals, and structured publishing. Supabase/PostgreSQL provides persistent data, settings, and media storage. Three.js powers the high-performance interactive 3D background sculpture engine (`DigitalSculpture`). GitHub is the version-controlled deployment source. Google Search Console and Vercel Analytics support visibility and performance review.
+vonporat.com is a Next.js (App Router, Turbopack) application deployed on Vercel. Payload CMS provides administration, the blog, the gallery, the site settings global, and structured publishing. Supabase/PostgreSQL provides persistent data, settings, and media storage. Three.js powers the interactive homepage background engine (`DigitalSculpture`) with selectable themes. GitHub is the version-controlled deployment source. Google Search Console and Vercel Analytics support visibility and performance review.
 
 High-level system shape:
 
@@ -64,29 +64,31 @@ Projects and Gallery are approved and active in public navigation.
 | --- | --- | --- | --- | --- |
 | `/` | Public | Approved & locked | Static composition + SiteSettings background + dynamic latest blog query | Position Patrik and orient visitors through the conceptual journey. |
 | `/projects` | Public | Approved & locked | Static composition | Present curated proof cards connecting creative work and systems thinking. |
+| `/projects/dmaic-companion` | Public | Approved | Static composition | Case study for the DMAIC Companion web app. |
+| `/projects/home-control-panel` | Public | Approved | Static composition | Case study for the Home Assistant control panel. |
 | `/music` | Public | Approved & locked | Static composition | Present active music projects, verified discography, roles, and legacy bands. |
-| `/art` | Public | Approved & locked | Static composition + interactive client lightbox | Present curated visual and physical practice (graphite, tattoo, miniatures, digital). |
-| `/gallery` | Public | Approved & locked | Static composition | Present curated visual practice works in an art gallery format. |
+| `/art` | Public | Approved & locked | Static composition + interactive client lightbox | Present curated visual and physical practice (graphite, tattoo, miniatures). |
+| `/gallery` | Public | Approved & locked | Payload CMS (`gallery-images`, `gallery-albums`, `gallery-categories`) with static fallback (`galleryData.js`) | Present photo albums and build progress in a gallery format. |
 | `/blog` | Public | Under review | Payload CMS (`posts` collection) | List published posts with category filters, dynamic lead entry, and text-led cards. |
 | `/blog/[slug]` | Public (published) | Outside recent review | Payload CMS (`posts` collection) | Render individual published articles with rich text, media, and metadata. |
 | `/about` | Public | Approved & locked | Static composition | Connect music, visual craft, technology, and systems into one personal narrative. |
 | `/contact` | Public | Approved & locked | Static composition | Provide direct primary email action and verified external channels. |
-| `/admin` | Private | Operational | Payload CMS | Authenticate editors and manage CMS collections and site settings globals. |
+| `/admin` | Private | Operational | Payload CMS | Authenticate editors (password or Google sign-in) and manage collections, site settings, the Workbench drafting tool and the analytics dashboard. |
+| `/api/*` | Private | Operational | Route handlers | Draft preview (`/api/preview`, `/api/exit-preview`), Google OAuth (`/api/oauth/google`), Workbench AI drafting (`/api/workbench/*`). Disallowed in `robots`. |
 
 ## Homepage architecture
 
 The homepage follows the conceptual journey:
-**Why → Expressions → How → Proof → Now → Journal → Contact**
+**Why → Proof → Expressions → How → Now → Journal → Contact**
 
 Section breakdown:
-1. **Hero** — Name, canonical positioning (`Guitarist, visual artist and systems-minded creator`), supporting line (`One identity. Many expressions`), and CTAs (`Explore Selected Work`, `Start a Conversation`).
-2. **The Impulse (Introduction)** — Explains the single mindset across different mediums.
-3. **Three Core Expressions** — `Music & Worlds` (`/music`), `Visual Practice` (`/art`), `Systems & Digital Work` (`/projects`).
-4. **How I Work (Process)** — 4-stage process: `01 OBSERVE`, `02 STRUCTURE`, `03 CREATE`, `04 REFINE`.
-5. **Selected Work (Proof)** — Curated cards for `Realmforged`, `Ashwrithe`, and `Visual Practice`.
-6. **Current Focus (Now)** — Time-sensitive snapshots across `Music`, `Visual Art`, and `Digital & Systems`.
-7. **Journal** — Dynamic query of the latest 3 published blog posts with graceful fallback.
-8. **Get in Touch** — Closing exit with direct actions (`Send an Email`, `Explore More Work`).
+1. **Hero (Why)**: eyebrow `PATRIK VON PORAT · CREATIVE HUB`, heading `Creative instinct, given structure.`, short introduction, identity line `Guitarist · Visual Artist · Systems-Minded Creator`, CTAs `Explore Selected Work` (`#selected-work`) and `About the Process` (`/about`). Rendered over the Site Settings background theme.
+2. **Selected Work (Proof)**: desktop carousel with the centre card in focus (`Realmforged`, `Ashwrithe`, `The Butcher Bust`, `Conan the Barbarian`, `DMAIC Companion`, `Home Control Panel`); stacked on mobile.
+3. **Explore by discipline (Expressions)**: `Music & Worlds` (`/music`), `Visual Practice` (`/art`), `Systems & Digital Work` (`/projects`).
+4. **How I Work**: `01 OBSERVE`, `02 STRUCTURE`, `03 CREATE`, `04 REFINE`, each with a concrete example.
+5. **Currently (Now)**: three linked current-focus items.
+6. **Journal**: dynamic query of the latest 3 published posts with graceful fallback.
+7. **Closing**: `Follow the work as it develops.` with `Read the Journal`, `Get in Touch`, Instagram and Threads.
 
 ### Homepage composition rules
 - The hero establishes identity without explaining every individual discipline.
@@ -102,12 +104,12 @@ Section breakdown:
 ### Projects (`/projects`)
 Curated **Selected Work** showcase:
 - **Featured Work**:
-  - `Realmforged` (Active) — Music, worldbuilding, digital experience.
-  - `Ashwrithe` (In Development) — Dark extreme metal, atmosphere, visual identity.
-- **Supporting Work**:
-  - `Visual Practice` (Ongoing Practice) — Graphite, tattoo studies, physical craft.
-  - `vonporat.com` (Live · Evolving) — Creative hub platform, Next.js, Payload CMS.
-  - `Systems & Improvement` (Professional Practice) — Lean Six Sigma, DMAIC, Power BI.
+  - `Realmforged` (Active): music, worldbuilding, digital experience.
+  - `Ashwrithe` (In Development): dark extreme metal, atmosphere, visual identity.
+- **Broader Practice**:
+  - `DMAIC Companion` (Live · Invite only): guided Lean Six Sigma web app, with case study at `/projects/dmaic-companion`.
+  - `Home Control Panel` (In Development): Home Assistant control panel, with case study at `/projects/home-control-panel`.
+  - `vonporat.com` (Live): creative hub platform, Next.js, Payload CMS.
 
 ### Music (`/music`)
 - **Current Projects**: `Realmforged` (Active) and `Ashwrithe` (In Development).
@@ -119,31 +121,34 @@ Curated **Selected Work** showcase:
 Curated visual and physical practice with full-screen lightbox:
 - **Traditional Studies**: High-contrast graphite and charcoal studies (e.g. Eye Study).
 - **Tattoo Practice**: Reelskin synthetic practice (Skull & Flow, Mario shading).
-- **Miniatures & 3D Prints**: Painted resin busts (The Butcher, Conan).
-- **Generative Visuals**: AI-assisted concept development and moodboards.
+- **Physical Craft (Miniatures & 3D Prints)**: Painted resin busts (The Butcher, Conan).
+- AI-generated imagery is intentionally not shown.
+
+### Gallery (`/gallery`)
+Photo gallery driven by Payload CMS (`gallery-categories`, `gallery-albums`, `gallery-images`), including build-progress albums such as Eddie the Trooper. `galleryData.js` provides static fallback data if the CMS is unavailable.
 
 ### About (`/about`)
 Complete personal narrative connecting creative craft and analytical problem-solving:
-- **Hero**: *“The work changes. The underlying impulse does not.”*
-- **Background Section**: 2-column desktop composition (narrative + authentic studio portrait) with a horizontal Core Facts band underneath:
-  - `Based in Sweden`
-  - `Playing guitar 35+ years`
-  - `Process Lean Six Sigma Green Belt`
-  - `Current projects Realmforged & Ashwrithe`
-- **How I Work**: *“From ambiguity to intention.”* (`Observe → Structure → Create → Refine`) with natural desktop measure.
-- **Capabilities**: Contextual modes (`Music & Audio`, `Visual Practice`, `Systems & Improvement`, `Web & Digital Systems`) with tool stack.
+- **Hero**: editorial split with *“The work changes. The underlying impulse does not.”* and the introduction beside the studio portrait (portrait under the heading on mobile). No hero buttons.
+- **Core Facts band**: `Based in Sweden`, `Playing guitar 35+ years`, `Process Lean Six Sigma Green Belt`, `Current projects Realmforged & Ashwrithe`; 2×2 on mobile.
+- **Background**: sticky heading beside the narrative, then the pull quote *“Structure does not replace instinct. It gives instinct somewhere to go.”*
+- **Same hands, different materials**: linked triptych (Realmforged, Eye Study, DMAIC Companion).
+- **How I Work**: *“From ambiguity to intention.”* as a matrix of the four steps with Music, Visual and Systems examples.
+- **Capabilities**: `Music & Audio`, `Visual Practice`, `Systems & Improvement`, `Web & Digital Systems`, equal-height cards linking onward.
+- **Closing**: Current chapter with the final calls to action.
 
 ### Contact (`/contact`)
-Deliberately minimal link-exit page:
+Deliberately minimal page laid out as a short personal note:
 - **Hero**: `CONTACT` / `Start a conversation.`
-- **Introductory copy**: Explaining collaboration across music, art, systems, and process.
-- **Primary action**: Send an Email button targeting the configured `mailto:` destination.
-- **Elsewhere channels**: LinkedIn, Threads, Instagram.
+- **Introductory copy**: personal and direct.
+- **Reasons to write**: Creative collaborations, Music & visual art, Systems & process work.
+- **Direct line panel**: Send an Email button (configured `mailto:`), the visible address with a copy button, LinkedIn, Threads and Instagram with the shared handle.
+- **Sign-off**: Patrik's signature.
 - **No contact form**: Intentionally form-free.
 
 ### Blog (`/blog` & `/blog/[slug]`)
 Primary CMS-driven journal:
-- **Active Categories**: `Music`, `Visual Art`, `Making`, `Technology`, `Process`, `Personal`.
+- **Active Categories** (`categories` collection): `Music`, `Visual Art`, `Making`, `Technology`, `Process`, `Personal`, `Projects`.
 - **Listing**: Lead entry (`LATEST NOTE`), dynamic category archive headings, and text-led fallback cards for posts without images.
 - **Publishing boundary**: Only published posts are publicly rendered; drafts remain protected.
 
@@ -152,11 +157,13 @@ Primary CMS-driven journal:
 | Content | Current owner | Storage / Source | Notes |
 | --- | --- | --- | --- |
 | Page layout and static copy | Repository | React components (`src/app/(app)/`) | Home, Music, Art, Projects, About, Contact. |
-| Blog posts | Payload CMS | Supabase / PostgreSQL (`posts` collection) | Only published records are rendered publicly. |
+| Blog posts | Payload CMS | Supabase / PostgreSQL (`posts`, `categories`) | Only published records are rendered publicly. |
+| Gallery | Payload CMS | Supabase / PostgreSQL (`gallery-images`, `gallery-albums`, `gallery-categories`) | `galleryData.js` is a static fallback only. |
+| Homepage background | Payload CMS | `site-settings` global | Selected in admin; `?theme=` overrides for preview. |
 | Blog media | Payload CMS | Configured storage | Uploaded via Payload admin. |
 | Project logos and static imagery | Repository | `public/images/` | Optimized WebP/AVIF/SVG assets. |
 | Site metadata | Repository | Next.js Metadata API | Route-specific titles, descriptions, and canonicals. |
-| Social/contact channels | Repository | `src/components/ContactLinks.js` | 6 verified external destinations + email CTA. |
+| Social/contact channels | Repository | `src/components/ContactLinks.js` | Email CTA and copyable address, plus LinkedIn, Threads and Instagram. |
 | Secrets and credentials | Environment | Local `.env` / Vercel Environment Variables | Never tracked in Git or Markdown. |
 
 ## CMS boundary
@@ -165,16 +172,17 @@ Primary CMS-driven journal:
 - Payload CMS is integrated into the Next.js App Router application.
 - Supabase/PostgreSQL stores CMS data.
 - Blog is the primary CMS-driven public section.
+- Gallery is CMS-driven with a static fallback.
+- The `site-settings` global selects the homepage background theme.
 - Admin authentication protects editorial access (`/admin`).
 
 ### Static by default
-- Home, Music, Art, Projects, About, and Contact.
+- Home, Music, Art, Projects (including case studies), About, and Contact.
 
 ### Planned, not automatically approved
 - Bands collection
 - Artwork collection
 - Projects collection
-- Site Settings global
 - Contact Links collection
 
 ## Blog publishing flow
@@ -260,7 +268,8 @@ Before changing a route, identify:
 
 The site links to verified destinations:
 - Streaming & Music: Spotify, YouTube, Bandcamp, Patreon
-- Social & Professional: Instagram, LinkedIn
+- Social & Professional: Instagram, Threads, LinkedIn
+- Tools: DMAIC Companion (`dmaic.vonporat.com`, invite only)
 - Project hubs: Realmforged (`realmforgedofficial.com`), Ashwrithe (`ashwrithe.com`)
 
 These remain external systems. The personal site links to them without duplicating their full internal functionality.

@@ -10,7 +10,7 @@ The site brings together:
 - Active projects: Realmforged and Ashwrithe
 - Graphite drawing and visual art
 - Tattoo practice
-- Generative visuals, miniatures, and 3D printing
+- Miniatures and 3D printing
 - Websites and digital experiments
 - Lean Six Sigma, Power BI, process improvement, and systems thinking
 - Long-form writing and behind-the-scenes documentation
@@ -63,8 +63,9 @@ Do not rewrite an entire page or system when a focused change will solve the pro
 | Projects | Approved and locked | Publicly visible in navigation; curated Selected Work composition locked. |
 | Music | Approved and locked | Realmforged/Ashwrithe priority and discography locked. |
 | Art | Approved and locked | Curated visual-practice sections and lightbox locked. |
-| About | Approved and locked | Background narrative, studio portrait, and core facts locked. |
-| Contact | Approved and locked | Email-led, form-free layout and verified channels locked. |
+| Gallery | Approved and locked | CMS-driven photo gallery (albums and categories) with a static fallback. |
+| About | Approved and locked | Editorial layout, studio portrait, core facts and process matrix locked. |
+| Contact | Approved and locked | Email-led, form-free personal-note layout and verified channels locked. |
 | Blog index | Under review | Redesigned journal layout implemented; pending final user review. |
 | Individual blog articles | Outside scope | Individual post route templates outside recent index redesign. |
 | Global consistency audit | Pending | Cross-page alignment, typography, and footer review pending. |
@@ -91,18 +92,17 @@ Projects is approved and active in public navigation. Do not hide or remove it.
 
 ### Home (`/`)
 
-The homepage orientates visitors quickly and guides them toward the strongest work through the conceptual journey:
-**Why → Expressions → How → Proof → Now → Journal → Contact**.
+The homepage orientates visitors quickly and puts proof early, through the conceptual journey:
+**Why → Proof → Expressions → How → Now → Journal → Contact**.
 
 Section order:
-1. Hero with concise positioning (`Patrik von Porat — Guitarist, visual artist and systems-minded creator`)
-2. Short introduction (`The Impulse`)
-3. Three Core Expressions (`Music & Worlds`, `Visual Practice`, `Systems & Digital Work`)
-4. Process (`Observe → Structure → Create → Refine`)
-5. Selected Work proof cards — a desktop carousel with the centre card in focus (`Realmforged`, `Ashwrithe`, `The Butcher Bust`, `Conan the Barbarian`, `DMAIC Companion`, `Home Control Panel`); stacked on mobile
-6. Current Focus (`Music`, `Visual Art`, `Digital & Systems`)
-7. Latest Journal entry points (CMS-driven with fallback)
-8. Restrained contact / link exit
+1. Hero over the selectable WebGL background: eyebrow `PATRIK VON PORAT · CREATIVE HUB`, heading `Creative instinct, given structure.`, short introduction, identity line `Guitarist · Visual Artist · Systems-Minded Creator`, CTAs `Explore Selected Work` (`#selected-work`) and `About the Process` (`/about`)
+2. Selected Work proof cards, a desktop carousel with the centre card in focus (`Realmforged`, `Ashwrithe`, `The Butcher Bust`, `Conan the Barbarian`, `DMAIC Companion`, `Home Control Panel`); stacked on mobile
+3. Explore by discipline: three Core Expressions (`Music & Worlds`, `Visual Practice`, `Systems & Digital Work`)
+4. How I Work: `Observe → Structure → Create → Refine` with one concrete example per step
+5. Currently: three linked current-focus items
+6. Latest Journal entry points (CMS-driven with fallback)
+7. Closing exit: `Read the Journal`, `Get in Touch`, Instagram and Threads
 
 Avoid repeating biography across multiple sections. Avoid restoring large tool-stack or software-logo walls.
 
@@ -111,8 +111,9 @@ Avoid repeating biography across multiple sections. Avoid restoring large tool-s
 Projects is a curated **Selected Work** showcase connecting creative output with systems thinking.
 
 Current project set:
-- **Featured**: `Realmforged` (Active), `Ashwrithe` (In Development)
-- **Supporting**: `Visual Practice` (Ongoing Practice), `vonporat.com` (Live · Evolving)
+- **Featured Work**: `Realmforged` (Active), `Ashwrithe` (In Development)
+- **Broader Practice**: `DMAIC Companion` (Live · Invite only), `Home Control Panel` (In Development), `vonporat.com` (Live)
+- **Case studies**: `/projects/dmaic-companion` and `/projects/home-control-panel`
 
 Each card must answer: What is it? Why does it exist? What was Patrik's role? What is the proof/current state? Where can the visitor continue? Do not use invented results, fake metrics, or generic placeholder case studies.
 
@@ -129,8 +130,9 @@ Each card must answer: What is it? Why does it exist? What was Patrik's role? Wh
 Curated visual and physical practice:
 - Traditional Studies (Graphite and charcoal)
 - Tattoo Practice (Reelskin studies and linework/shading)
-- Miniatures & 3D Prints (Resin printing, acrylic painting)
-- Generative Visuals (Visual development and moodboards)
+- Physical Craft: Miniatures & 3D Prints (Resin printing, acrylic painting)
+
+AI-generated imagery is intentionally not shown on the site.
 
 Prefer a curated selection over a complete archive. Each image must have descriptive alt text, title, medium, and concise caption.
 
@@ -149,17 +151,18 @@ The About page connects music, visual craft, technology, and systems thinking in
 
 ### Contact (`/contact`)
 
-Deliberately minimal link-exit page:
+Deliberately minimal page laid out as a short personal note:
 - **Hero**: `CONTACT` / `Start a conversation.`
 - **Introductory copy**: Personal and direct.
-- **Primary action**: Send an Email button targeting the configured `mailto:` destination.
-- **Elsewhere channels**: LinkedIn, Threads, Instagram.
+- **Reasons to write**: Creative collaborations, Music & visual art, Systems & process work.
+- **Direct line panel**: Send an Email button targeting the configured `mailto:` destination, the visible address with a copy button, and the elsewhere channels (LinkedIn, Threads, Instagram) with the shared handle.
+- **Sign-off**: Patrik's signature.
 - **No contact form**: Do not add forms, fields, Calendly, or booking widgets.
 
 ### Blog (`/blog` & `/blog/[slug]`)
 
 Personal editorial journal:
-- **Active Categories**: `Music`, `Visual Art`, `Making`, `Technology`, `Process`, `Personal`.
+- **Active Categories** (`categories` collection): `Music`, `Visual Art`, `Making`, `Technology`, `Process`, `Personal`, `Projects`.
 - **Listing**: Lead entry (`LATEST NOTE`), dynamic category archive headings, text-led card fallbacks for posts without images.
 - **Publishing boundary**: Only published posts are public; draft content remains strictly protected.
 - Status: Blog index is under review; individual article routes remain outside recent redesign.
@@ -198,6 +201,7 @@ Copy should be:
 - Personal, calm, confident, specific, and proof-led
 - Concise enough to scan
 - Grounded in real work and verified facts
+- Free of em and en dashes used as punctuation (rephrase with commas, colons, full stops or parentheses)
 
 Preserve official names: **Patrik von Porat**, **vonporat.com**, **Realmforged**, **Ashwrithe**.
 
@@ -215,6 +219,8 @@ Realmforged and Ashwrithe have independent identities. Do not transfer Ashwrithe
 ### CMS boundary
 
 - **Blog** is the primary CMS-driven section.
+- **Gallery** is CMS-driven (`gallery-images`, `gallery-albums`, `gallery-categories`) with static fallback data.
+- **Site Settings** global selects the homepage background theme.
 - **Home, Music, Art, Projects, About, Contact** remain static by default.
 - Do not create dual ownership of content between code and CMS without an explicit synchronization plan.
 - Preserve draft/published behavior and do not expose draft content.

@@ -1,6 +1,6 @@
 # vonporat.com — Project Context
 
-Last reviewed: 2026-08-25
+Last reviewed: 2026-10-22
 
 ## Purpose of this document
 
@@ -23,7 +23,6 @@ The site brings together several areas that might initially appear separate:
 - Music and guitar (35+ years)
 - Visual art and traditional craft
 - Tattoo practice
-- Generative and AI-assisted visuals
 - Miniatures and 3D printing
 - Websites and digital experiments
 - Writing and documentation
@@ -59,7 +58,7 @@ Patrik is a Swedish guitarist, visual artist, creator, and process-improvement p
 
 He has played guitar for more than 35 years and has a long background in metal music. His musical history includes Freternia (1998–2023), Cromonic (2014–2017), and other projects, while his current creative focus includes Realmforged (Active) and Ashwrithe (In Development).
 
-His visual practice includes graphite drawing, tattoo practice, generative visuals, dark illustration, miniatures, and 3D-printed figures. Traditional craft matters because it creates a physical counterweight to digital and AI-assisted work.
+His visual practice includes graphite drawing, tattoo practice, dark illustration, miniatures, and 3D-printed figures. Traditional craft matters because it creates a physical counterweight to digital work, which is why AI-generated imagery is not shown on the site.
 
 Professionally, Patrik works with logistics, distribution, warehouse operations, structured problem-solving, and continuous improvement. He is Lean Six Sigma Green Belt certified and works with tools and methods such as DMAIC, process mapping, Power BI, Minitab, and workflow design.
 
@@ -79,7 +78,6 @@ The site does not force Patrik into one narrow title. It reveals a coherent syst
 - Graphite and charcoal drawing studies
 - Tattoo linework and shading practice on synthetic skin
 - Dark illustration and concept art
-- Generative and AI-assisted imagery
 - Miniatures, 3D printing (resin/FDM), and acrylic painting
 
 ### Digital Systems
@@ -112,7 +110,7 @@ The site should:
 
 - **Music listeners**: Quickly discover active projects (Realmforged, Ashwrithe), releases, and streaming links.
 - **Musicians and collaborators**: Understand Patrik's musical background, roles, current projects, and direction.
-- **Artists and creators**: Explore selected graphite studies, tattoo practice, generative visuals, miniatures, and the craft behind them.
+- **Artists and creators**: Explore selected graphite studies, tattoo practice, miniatures, and the craft behind them.
 - **Professional contacts**: Understand that Patrik works with systems, continuous improvement, Power BI, and structured problem-solving.
 - **Curious visitors**: Receive a clean, understandable overview without needing to know Patrik beforehand.
 
@@ -127,34 +125,38 @@ The site should:
 ### Art (`/art`)
 - **Traditional Studies** — graphite eye studies and drawing exercises.
 - **Tattoo Practice** — synthetic reelskin studies (skull & flow, Mario linework/shading).
-- **Miniatures & 3D Prints** — painted resin busts (The Butcher, Conan).
-- **Generative Visuals** — AI-assisted concept imagery and visual development.
+- **Physical Craft (Miniatures & 3D Prints)**: painted resin busts (The Butcher, Conan).
+
+### Gallery (`/gallery`)
+Photo albums and build progress (for example Eddie the Trooper), managed in Payload CMS.
 
 ### Projects (`/projects`)
 Curated **Selected Work** showcase:
-- **Realmforged** (Music · Worldbuilding · Digital Experience) — Active
-- **Ashwrithe** (Music · Atmosphere · Visual Identity) — In Development
-- **Visual Practice** (Drawing · Tattoo Practice · Physical Craft) — Ongoing Practice
-- **vonporat.com** (Creative Hub · Editorial System · Web) — Live · Evolving
-- **Systems & Improvement** (Process · Data · Continuous Improvement) — Professional Practice
+- **Featured Work**: Realmforged (Active), Ashwrithe (In Development)
+- **Broader Practice**: DMAIC Companion (Live · Invite only), Home Control Panel (In Development), vonporat.com (Live)
+- **Case studies**: `/projects/dmaic-companion`, `/projects/home-control-panel`
 
 ### Blog (`/blog`)
 Creative journal for reflections, behind-the-scenes work, and documentation across the active categories:
 - `Music`
 - `Visual Art`
+- `Making`
 - `Technology`
 - `Process`
 - `Personal`
+- `Projects`
 
 ### About (`/about`)
 Complete personal narrative connecting music, visual practice, digital systems, and process improvement:
-- Background section with authentic studio portrait and Core Facts band.
-- How I Work: `From ambiguity to intention.` (`Observe → Structure → Create → Refine`).
-- Contextual capability areas and tool stack.
+- Editorial hero beside the studio portrait, Core Facts band, background narrative and pull quote.
+- Same hands, different materials: Realmforged, Eye Study, DMAIC Companion.
+- How I Work: `From ambiguity to intention.` as a matrix of the four steps across Music, Visual and Systems.
+- Contextual capability areas linking onward.
 
 ### Contact (`/contact`)
 Deliberately minimal link-exit page:
-- Direct primary email action targeting the configured `mailto:` destination.
+- Laid out as a short personal note: reasons to write, a direct-line panel and a signature.
+- Direct primary email action targeting the configured `mailto:` destination, plus the visible, copyable address.
 - Verified external channels: LinkedIn, Threads, Instagram.
 - Form-free layout without clutter or sales funnels.
 
@@ -173,10 +175,10 @@ Selected work is chosen because it:
 
 Current implemented navigation order:
 
-> **Home · Projects · Music · Art · Blog · About · Contact**
+> **Home · Projects · Music · Art · Gallery · Blog · About · Contact**
 
 The site follows the conceptual journey:
-**Why → Expressions → How → Proof → Now → Journal → Contact**
+**Why → Proof → Expressions → How → Now → Journal → Contact**
 
 | Page | Status | Description |
 | --- | --- | --- |
@@ -184,6 +186,7 @@ The site follows the conceptual journey:
 | Projects | Approved & locked | Curated Selected Work cards; visible in public navigation. |
 | Music | Approved & locked | Active projects, verified releases, and legacy bands. |
 | Art | Approved & locked | Curated visual/physical craft sections and lightbox. |
+| Gallery | Approved & locked | CMS-driven photo albums and build progress. |
 | About | Approved & locked | Narrative, studio portrait, and verified core facts. |
 | Contact | Approved & locked | Email CTA, verified social channels, form-free. |
 | Blog index | Under review | Redesigned journal layout implemented; pending final review. |

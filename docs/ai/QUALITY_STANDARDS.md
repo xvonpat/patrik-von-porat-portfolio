@@ -1,6 +1,6 @@
 # vonporat.com — Quality Standards
 
-Last reviewed: 2026-08-25
+Last reviewed: 2026-10-22
 
 ## Purpose
 
@@ -158,23 +158,27 @@ Visual verification is risk-based (see `AGENTS.md`):
 - Personal, calm, confident, and specific voice without inflated superlatives.
 - Brand boundaries respected (no Ashwrithe ritual lore on general personal pages).
 - Official project names spelled accurately (`vonporat.com`, `Realmforged`, `Ashwrithe`).
+- No em dashes or spaced en dashes used as punctuation in copy, alt text or metadata.
+- Meta descriptions are 120–160 characters and match the page.
 
 ## Page-specific quality criteria
 
 ### Home (`/`) — Approved & Locked
-- [ ] Conceptual journey: `Why → Expressions → How → Proof → Now → Journal → Contact`.
-- [ ] Hero positioning: *“Guitarist, visual artist and systems-minded creator.”*
+- [ ] Conceptual journey: `Why → Proof → Expressions → How → Now → Journal → Contact`.
+- [ ] Hero: `Creative instinct, given structure.` with identity line `Guitarist · Visual Artist · Systems-Minded Creator`.
+- [ ] Selected Work: desktop carousel (snap scroll, arrows, centre card in focus) with six cards; stacked on mobile; no horizontal page scroll.
 - [ ] Three Core Expressions link to `/music`, `/art`, and `/projects`.
 - [ ] Process section uses `01 Observe → 02 Structure → 03 Create → 04 Refine`.
-- [ ] Selected Work proof cards for Realmforged, Ashwrithe, and Visual Practice.
+- [ ] Currently items link to their projects.
 - [ ] Journal preview renders latest published notes with fallback.
 
 ### Projects (`/projects`) — Approved & Locked
 - [ ] Publicly visible in navigation (`Navbar.js`).
-- [ ] Featured Projects: `Realmforged` (Active) and `Ashwrithe` (In Development).
-- [ ] Supporting Projects: `Visual Practice`, `vonporat.com`, `Systems & Improvement`.
+- [ ] Featured Work: `Realmforged` (Active) and `Ashwrithe` (In Development).
+- [ ] Broader Practice: `DMAIC Companion`, `Home Control Panel`, `vonporat.com`.
+- [ ] Case studies (`/projects/dmaic-companion`, `/projects/home-control-panel`) load, are in the sitemap, and work at phone width.
 - [ ] Proof cards state purpose, role, evidence, and valid destination.
-- [ ] No invented case studies or placeholder metrics.
+- [ ] No invented case studies or placeholder metrics; no employer name; no private repository links.
 
 ### Music (`/music`) — Approved & Locked
 - [ ] Realmforged and Ashwrithe receive active priority.
@@ -183,25 +187,30 @@ Visual verification is risk-based (see `AGENTS.md`):
 - [ ] Patrik's role and 35+ years guitar timeline are clear.
 
 ### Art (`/art`) — Approved & Locked
-- [ ] Curated showcases: Traditional Studies, Tattoo Practice, Miniatures & 3D Prints, Generative Visuals.
+- [ ] Curated showcases: Traditional Studies, Tattoo Practice, Physical Craft (Miniatures & 3D Prints). No AI-generated imagery.
 - [ ] Synthetic skin practice pieces identified honestly.
 - [ ] Interactive lightbox modal functions with zoom, captions, and keyboard navigation.
 
+### Gallery (`/gallery`) — Approved & Locked
+- [ ] Albums and images load from Payload CMS; the static fallback renders if the CMS is unavailable.
+- [ ] Listed in `sitemap.xml`.
+
 ### About (`/about`) — Approved & Locked
-- [ ] Background section features 2-column layout (narrative + authentic studio portrait).
-- [ ] Horizontal Core Facts band underneath: `Sweden`, `35+ years`, `Lean Six Sigma Green Belt`, `Realmforged & Ashwrithe`.
-- [ ] How I Work container uses natural readable measure (`max-w-3xl md:max-w-4xl text-pretty`).
-- [ ] Contextual capability modes without software-logo walls.
+- [ ] Editorial hero with the studio portrait beside the heading (under it on mobile); no hero buttons.
+- [ ] Core Facts band: `Sweden`, `35+ years`, `Lean Six Sigma Green Belt`, `Realmforged & Ashwrithe`; 2×2 on mobile.
+- [ ] Pull quote, linked image triptych, and How I Work matrix render at every reference viewport.
+- [ ] Contextual capability modes with equal-height cards, without software-logo walls.
 
 ### Contact (`/contact`) — Approved & Locked
-- [ ] Minimal email-led CTA targeting the configured `mailto:` destination with comfortable touch target.
-- [ ] 6 verified external channels (Spotify, YouTube, Instagram, Patreon, Bandcamp, LinkedIn).
-- [ ] Responsive channel layout: 1 row on desktop/tablet, 3 × 2 grid on mobile.
+- [ ] Email-led: Send an Email CTA (configured `mailto:`) with comfortable touch target, plus the visible address and a working Copy button.
+- [ ] Three verified channels: LinkedIn, Threads, Instagram (fit on one row inside the panel at every viewport).
+- [ ] Reasons to write and signature present; email comes before the reasons on mobile.
 - [ ] Form-free layout without fields or booking widgets.
 
 ### Blog (`/blog` & `/blog/[slug]`) — Under Review
 - [ ] Journal listing with `JOURNAL` eyebrow, category filters, and dynamic `LATEST NOTE`.
-- [ ] Active categories: `Music`, `Visual Art`, `Making`, `Technology`, `Process`, `Personal`.
+- [ ] Active categories: `Music`, `Visual Art`, `Making`, `Technology`, `Process`, `Personal`, `Projects`.
+- [ ] Post titles follow `<Title> | Journal | Patrik von Porat`; each article has exactly one `<h1>` (body headings start at H2).
 - [ ] Clean text-led card fallbacks for posts without featured images.
 - [ ] Published/draft boundary intact (draft posts never exposed publicly).
 - [ ] Lexical rich-text body renders with clean typography.

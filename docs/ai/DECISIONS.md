@@ -468,3 +468,53 @@ Both pause in hidden tabs and below the hero, and cap at 60 fps (30 fps on narro
 `contour-flow` was rebuilt as a shader-based renderer (`contour/scene.js`) to match the approved river-valley reference: per-pixel contour lines on GPU-evaluated terrain, teal lines brightening to cyan along the river and on lit slopes, sparse rose contours, slow downhill drift and a travelling pulse. Its theme id is unchanged, so no migration was needed. `alpine-landscape` keeps the original geometry renderer.
 
 `digital-eclipse` and `digital-eclipse-v2` were removed from code, CMS options and the dashboard card. Harmonic Nexus remains the default. The PostgreSQL enum still contains the two old values (enum values cannot be dropped without recreating the type); they are unused. The additive enum migrations for the new themes were applied with explicit user approval.
+
+Related fix (2026-10-19): the Harmonic Nexus strings showed a flickering horizontal seam left of the core because an `atan()` angle was interpolated across the ±π wrap. The vertex shader now passes the direction vector and the angle is computed per fragment.
+
+---
+
+## D-032 — Home Control Panel project and case study
+
+**Status:** Implemented and live
+
+**Decision date:** 2026-10-19
+
+`Home Control Panel` (In Development) joins Broader Practice on `/projects`, with a case study at `/projects/home-control-panel` built from Patrik's own material. Screenshots use the panel's demo mode (no real names, calendar entries, cameras or addresses) and are served as resized WebP. The source zip is not kept in the repository.
+
+---
+
+## D-033 — Homepage Selected Work carousel and homepage polish
+
+**Status:** Implemented and live
+
+**Decision date:** 2026-10-20
+
+On desktop, Selected Work is a horizontal snap-scrolling carousel with arrow buttons; the card nearest the centre scales up and shows its image in colour. Below 1024px the cards stack as before. Cards: Realmforged and Ashwrithe (linking to their official sites), The Butcher Bust and Conan the Barbarian (linking to Physical Craft on `/art`), DMAIC Companion and Home Control Panel. The carousel opens on The Butcher Bust.
+
+In the same pass: footer tagline aligned with the canonical positioning, Currently items made clickable, journal titles allowed three lines, process copy made less technical, and Instagram and Threads added to the closing section. Removing "Explore by discipline" and adding an art image strip were considered and left for a later decision.
+
+---
+
+## D-034 — About and Contact redesigns
+
+**Status:** Implemented and live
+
+**Decision date:** 2026-10-20
+
+About moved from repeated centred sections to an editorial rhythm: split hero with the portrait, Core Facts band, sticky background heading, a large pull quote, a "Same hands, different materials" triptych, a How I Work matrix with concrete examples, linked capability cards and a merged closing. Existing copy and facts were kept; duplicate headings were removed.
+
+Contact became a short personal note: reasons to write, a direct-line panel (email CTA, visible address with a Copy button for visitors without a mail app, LinkedIn, Threads, Instagram) and Patrik's signature. It stays email-led and form-free. A domain email address and a stated reply time were proposed but not adopted.
+
+---
+
+## D-035 — Copy without dashes; no AI-generated imagery
+
+**Status:** Implemented
+
+**Decision date:** 2026-10-22
+
+Public copy, alt text and metadata no longer use em dashes or spaced en dashes as punctuation; Patrik reads them as a sign of AI-written text. All repository copy was rewritten (2026-10-20). Dashes in CMS content (blog posts, gallery titles) are cleaned up by Patrik in Payload.
+
+The planned "Generative Visuals" section of `/art` was dropped: AI-generated imagery is not shown on the site, so the visual practice reads as hand-made work.
+
+The 2026-10-22 audit also added `/gallery` to the sitemap, aligned the site description and JSON-LD with the canonical positioning (adding Threads), brought meta descriptions to 134–157 characters, renamed blog post titles to `<Title> | Journal | Patrik von Porat`, and documented the `Projects` blog category.

@@ -1,6 +1,6 @@
 # vonporat.com — Execution Plans & Roadmap
 
-Last reviewed: 2026-10-17
+Last reviewed: 2026-10-22
 
 ## Purpose
 
@@ -19,14 +19,15 @@ This document defines when and how to create an execution plan for significant w
 
 | Page / Feature | Approved Scope | Date Locked |
 | --- | --- | --- |
-| **Home** (`/`) | Hero positioning, interactive 3D WebGL Digital Sculpture (`harmonic-nexus` default), The Impulse, 3 Core Expressions, 4-stage Process, Selected Work proof cards, Current Focus, Journal preview, Contact exit. | 2026-10-17 |
-| **Projects** (`/projects`) | Publicly active in navigation. Curated Selected Work (Realmforged, Ashwrithe, Visual Practice, vonporat.com, Systems & Improvement). | 2026-08-25 |
+| **Home** (`/`) | Hero over the selectable WebGL background (`harmonic-nexus` default), Selected Work carousel (6 cards), Explore by discipline, How I Work, Currently, Journal preview, closing exit. | 2026-10-20 |
+| **Projects** (`/projects`) | Publicly active in navigation. Featured Work (Realmforged, Ashwrithe) and Broader Practice (DMAIC Companion, Home Control Panel, vonporat.com). | 2026-10-19 |
+| **Case studies** | `/projects/dmaic-companion`, `/projects/home-control-panel`. | 2026-10-19 |
 | **Music** (`/music`) | Realmforged and Ashwrithe active showcases, verified discography releases, and Freternia/Cromonic legacy timeline. | 2026-08-25 |
-| **Art** (`/art`) | Curated Traditional Studies, Tattoo Practice, Miniatures & 3D Prints, Generative Visuals, and interactive full-screen lightbox. | 2026-08-25 |
-| **Gallery** (`/gallery`) | Curated visual practice works presented in an art gallery showcase format. | 2026-10-11 |
-| **About** (`/about`) | Personal narrative, studio portrait + Core Facts band in Background, How I Work natural typography measure, contextual capability modes. | 2026-08-25 |
-| **Contact** (`/contact`) | Direct email CTA targeting the configured `mailto:` destination, form-free layout, 6 verified external channels (Spotify, YouTube, Instagram, Patreon, Bandcamp, LinkedIn). | 2026-08-25 |
-| **Theme Selector** | Payload CMS SiteSettings Global + Admin Dashboard card for 1-click background theme selection with preview thumbnails. | 2026-10-17 |
+| **Art** (`/art`) | Curated Traditional Studies, Tattoo Practice, Physical Craft (Miniatures & 3D Prints), and interactive full-screen lightbox. No AI-generated imagery. | 2026-10-22 |
+| **Gallery** (`/gallery`) | CMS-driven photo albums and build progress with static fallback. | 2026-10-11 |
+| **About** (`/about`) | Editorial hero with portrait, Core Facts, background and pull quote, image triptych, How I Work matrix, capabilities, closing. | 2026-10-20 |
+| **Contact** (`/contact`) | Personal-note layout: reasons to write, direct-line panel (email CTA, copyable address, LinkedIn, Threads, Instagram), signature. Form-free. | 2026-10-20 |
+| **Theme Selector** | Payload CMS SiteSettings Global + Admin Dashboard card for 1-click background theme selection (Harmonic Nexus, Chladni Plate, Ink in Water, Contour Flow, Alpine Landscape). | 2026-10-19 |
 
 ### 2. In Progress / Under Review
 
@@ -38,7 +39,8 @@ This document defines when and how to create an execution plan for significant w
 
 | Task | Scope & Objectives | Status |
 | --- | --- | --- |
-| **Global Consistency Audit** | • **Footer Tagline Review**: Review whether `GUITARIST · ARTIST · OPTIMIZER` in `Footer.js` should align with canonical `Guitarist · Visual Artist · Systems-Minded Creator`.<br>• **Navigation Consistency**: Verify desktop and mobile navigation across all routes.<br>• **Typography Audit**: Verify heading scales, line heights, and container widths across all pages.<br>• **Link Audit**: Test all internal and external links site-wide. | Pending |
+| **Global Consistency Audit** | • ~~Footer tagline~~: done 2026-10-20 (`Guitarist · Visual Artist · Systems-Minded Creator`).<br>• ~~Link audit~~: done 2026-10-22 (all internal/external links and images OK).<br>• **Navigation Consistency**: Verify desktop and mobile navigation across all routes.<br>• **Typography Audit**: Verify heading scales, line heights, and container widths across all pages. | In progress |
+| **CMS content cleanup** (Patrik) | • Replace dashes in 9 blog posts and 29 gallery titles.<br>• Change body H1 headings to H2 in three posts (Eddie printing, Eddie the Trooper, Growing Tobacco). | Pending |
 | **Final SEO & Accessibility Audit** | • Comprehensive check of semantic landmarks, ARIA labels, focus states, keyboard navigation, Open Graph tags, canonicals, sitemap, and robots directives. | Pending |
 | **Final Performance & Mobile QA** | • Mobile audits on image assets, layout shifts (CLS < 0.1), CSS backdrop-filters, and page load times. | Pending |
 | **Final Production Verification** | • Final live production verification on `vonporat.com` after all pending items are resolved. | Pending |

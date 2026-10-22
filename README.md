@@ -12,7 +12,7 @@ vonporat.com brings Patrik's creative and analytical work together in one place:
 - Active projects: Realmforged and Ashwrithe
 - Graphite drawing and visual practice
 - Tattoo practice
-- Generative visuals, miniatures, and 3D printing
+- Miniatures and 3D printing
 - Websites and digital experiments
 - Lean Six Sigma, Power BI, process improvement, and systems thinking
 - Long-form writing and behind-the-scenes documentation
@@ -49,23 +49,25 @@ Home · Projects · Music · Art · Gallery · Blog · About · Contact
 
 | Page / Route | Status | Notes |
 | --- | --- | --- |
-| **Home** (`/`) | Approved & locked | Hero with interactive 3D Digital Sculpture (`harmonic-nexus` default), The Impulse, 3 Expressions, 4-stage Process, Selected Work, Now, Journal preview, Contact exit. |
-| **Projects** (`/projects`) | Approved & locked | Curated Selected Work (Realmforged, Ashwrithe, Visual Practice, vonporat.com, Systems & Improvement). Publicly visible. |
+| **Home** (`/`) | Approved & locked | Hero over the selectable WebGL background (`harmonic-nexus` default), Selected Work carousel, Explore by discipline, How I Work, Currently, Journal preview, closing exit. |
+| **Projects** (`/projects`) | Approved & locked | Featured Work (Realmforged, Ashwrithe) and Broader Practice (DMAIC Companion, Home Control Panel, vonporat.com). Publicly visible. |
+| **Case studies** (`/projects/dmaic-companion`, `/projects/home-control-panel`) | Approved | Full project pages linked from the Projects cards. |
 | **Music** (`/music`) | Approved & locked | Realmforged & Ashwrithe priority, verified discography, Freternia/Cromonic legacy history. |
-| **Art** (`/art`) | Approved & locked | Curated Traditional Studies, Tattoo Practice, Miniatures & 3D Prints, Generative Visuals, full lightbox. |
-| **Gallery** (`/gallery`) | Approved & locked | Visual art showcase with curated visual practice sections. |
-| **About** (`/about`) | Approved & locked | Personal narrative, studio portrait + Core Facts band in Background, How I Work measure, contextual capabilities. |
-| **Contact** (`/contact`) | Approved & locked | Email-led CTA targeting the configured `mailto:` destination, form-free layout, 6 external channels (Spotify, YouTube, Instagram, Patreon, Bandcamp, LinkedIn). |
-| **Blog index** (`/blog`) | Under review | Redesigned editorial journal with category filters (`Music`, `Visual Art`, `Making`, `Technology`, `Process`, `Personal`) and text-led cards implemented; awaiting final review. |
+| **Art** (`/art`) | Approved & locked | Curated Traditional Studies, Tattoo Practice and Physical Craft (Miniatures & 3D Prints), full lightbox. |
+| **Gallery** (`/gallery`) | Approved & locked | CMS-driven photo gallery with albums and categories, static fallback data. |
+| **About** (`/about`) | Approved & locked | Editorial hero with portrait, Core Facts, background and pull quote, image triptych, How I Work matrix, capabilities, closing. |
+| **Contact** (`/contact`) | Approved & locked | Personal-note layout: reasons to write, direct-line panel (email CTA, copyable address, LinkedIn, Threads, Instagram), signature. Form-free. |
+| **Blog index** (`/blog`) | Under review | Redesigned editorial journal with category filters (`Music`, `Visual Art`, `Making`, `Technology`, `Process`, `Personal`, `Projects`) and text-led cards implemented; awaiting final review. |
 | **Blog post** (`/blog/[slug]`) | Outside review | Individual article rendering templates. |
-| **Global consistency audit** | Pending | Footer positioning tagline review, cross-page typography, and link consistency audit. |
+| **Global consistency audit** | Pending | Cross-page typography and navigation review (footer tagline and link audit done 2026-10-22). |
 | **Final QA & performance audit** | Pending | Comprehensive site-wide accessibility, SEO, and mobile performance audit. |
 
 ## Content Ownership
 
-- **Blog** is the primary CMS-driven public section (`posts` collection).
+- **Blog** is the primary CMS-driven public section (`posts` and `categories` collections).
+- **Gallery** is CMS-driven (`gallery-images`, `gallery-albums`, `gallery-categories`) with static fallback data in the repository.
 - **Site Settings** (`site-settings` Global) allows 1-click switching of background theme (`harmonic-nexus`, `chladni-plate`, `ink-in-water`, `contour-flow`, `alpine-landscape`) from the Payload Admin Dashboard.
-- **Home, Music, Art, Gallery, Projects, About, and Contact** remain repository-managed by default.
+- **Home, Music, Art, Projects, About, and Contact** remain repository-managed by default.
 - New Payload collections or broader CMS migrations require an observed maintenance need and explicit approval.
 - Draft and private content must never be exposed publicly.
 
