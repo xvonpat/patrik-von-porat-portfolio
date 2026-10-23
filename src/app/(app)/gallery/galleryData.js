@@ -673,6 +673,66 @@ export const darthVaderDioramaPhotos = [
     project: "Darth Vader Diorama",
     albumSlug: "darth-vader-diorama",
     order: 9
+  },
+  {
+    id: "IMG_1155",
+    filename: "IMG_1155.webp",
+    title: "Darth Vader Diorama: Stormtrooper Upper Torso & Blaster",
+    src: "/images/art/darth-vader-diorama/IMG_1155.webp",
+    thumb: "/images/art/darth-vader-diorama/thumbnails/IMG_1155.webp",
+    width: 2048,
+    height: 1152,
+    orientation: "landscape",
+    aspectRatio: "16/9",
+    categorySlug: "3d-prints",
+    project: "Darth Vader Diorama",
+    albumSlug: "darth-vader-diorama",
+    order: 10
+  },
+  {
+    id: "IMG_1158",
+    filename: "IMG_1158.webp",
+    title: "Darth Vader Diorama: Full Stormtrooper Assembly",
+    src: "/images/art/darth-vader-diorama/IMG_1158.webp",
+    thumb: "/images/art/darth-vader-diorama/thumbnails/IMG_1158.webp",
+    width: 1536,
+    height: 2048,
+    orientation: "portrait",
+    aspectRatio: "3/4",
+    categorySlug: "3d-prints",
+    project: "Darth Vader Diorama",
+    albumSlug: "darth-vader-diorama",
+    order: 11
+  },
+  {
+    id: "IMG_1160",
+    filename: "IMG_1160.webp",
+    title: "Darth Vader Diorama: Assembled Stormtrooper Escort",
+    src: "/images/art/darth-vader-diorama/IMG_1160.webp",
+    thumb: "/images/art/darth-vader-diorama/thumbnails/IMG_1160.webp",
+    width: 2048,
+    height: 1152,
+    orientation: "landscape",
+    aspectRatio: "16/9",
+    categorySlug: "3d-prints",
+    project: "Darth Vader Diorama",
+    albumSlug: "darth-vader-diorama",
+    order: 12
+  },
+  {
+    id: "IMG_1161",
+    filename: "IMG_1161.webp",
+    title: "Darth Vader Diorama: Full Composition Dry Fit with Squad",
+    src: "/images/art/darth-vader-diorama/IMG_1161.webp",
+    thumb: "/images/art/darth-vader-diorama/thumbnails/IMG_1161.webp",
+    width: 1152,
+    height: 2048,
+    orientation: "portrait",
+    aspectRatio: "9/16",
+    categorySlug: "3d-prints",
+    project: "Darth Vader Diorama",
+    albumSlug: "darth-vader-diorama",
+    order: 13
   }
 ];
 

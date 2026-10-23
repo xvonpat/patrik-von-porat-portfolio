@@ -28,6 +28,7 @@ import * as migration_20261019_220000_add_ink_in_water from './20261019_220000_a
 import * as migration_20261020_195500_add_head_painting_eddie_image from './20261020_195500_add_head_painting_eddie_image';
 import * as migration_20261021_223500_add_head_and_torso_eddie_image from './20261021_223500_add_head_and_torso_eddie_image';
 import * as migration_20261022_201500_add_darth_vader_diorama_album from './20261022_201500_add_darth_vader_diorama_album';
+import * as migration_20261023_180000_add_more_darth_vader_images from './20261023_180000_add_more_darth_vader_images';
 
 export const migrations = [
   {
@@ -179,5 +180,10 @@ export const migrations = [
     up: migration_20261022_201500_add_darth_vader_diorama_album.up,
     down: migration_20261022_201500_add_darth_vader_diorama_album.down,
     name: '20261022_201500_add_darth_vader_diorama_album',
+  },
+  {
+    up: migration_20261023_180000_add_more_darth_vader_images.up,
+    down: migration_20261023_180000_add_more_darth_vader_images.down,
+    name: '20261023_180000_add_more_darth_vader_images',
   },
 ];
