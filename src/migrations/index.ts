@@ -29,6 +29,7 @@ import * as migration_20261020_195500_add_head_painting_eddie_image from './2026
 import * as migration_20261021_223500_add_head_and_torso_eddie_image from './20261021_223500_add_head_and_torso_eddie_image';
 import * as migration_20261022_201500_add_darth_vader_diorama_album from './20261022_201500_add_darth_vader_diorama_album';
 import * as migration_20261023_180000_add_more_darth_vader_images from './20261023_180000_add_more_darth_vader_images';
+import * as migration_20261024_221500_add_stormtrooper_detailing_image from './20261024_221500_add_stormtrooper_detailing_image';
 
 export const migrations = [
   {
@@ -185,5 +186,10 @@ export const migrations = [
     up: migration_20261023_180000_add_more_darth_vader_images.up,
     down: migration_20261023_180000_add_more_darth_vader_images.down,
     name: '20261023_180000_add_more_darth_vader_images',
+  },
+  {
+    up: migration_20261024_221500_add_stormtrooper_detailing_image.up,
+    down: migration_20261024_221500_add_stormtrooper_detailing_image.down,
+    name: '20261024_221500_add_stormtrooper_detailing_image',
   },
 ];

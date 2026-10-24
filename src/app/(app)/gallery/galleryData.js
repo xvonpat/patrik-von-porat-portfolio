@@ -733,6 +733,21 @@ export const darthVaderDioramaPhotos = [
     project: "Darth Vader Diorama",
     albumSlug: "darth-vader-diorama",
     order: 13
+  },
+  {
+    id: "IMG_1179",
+    filename: "IMG_1179.webp",
+    title: "Darth Vader Diorama: Stormtrooper Helmet & Armor Detailing",
+    src: "/images/art/darth-vader-diorama/IMG_1179.webp",
+    thumb: "/images/art/darth-vader-diorama/thumbnails/IMG_1179.webp",
+    width: 2048,
+    height: 1152,
+    orientation: "landscape",
+    aspectRatio: "16/9",
+    categorySlug: "3d-prints",
+    project: "Darth Vader Diorama",
+    albumSlug: "darth-vader-diorama",
+    order: 14
   }
 ];
 
