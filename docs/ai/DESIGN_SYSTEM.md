@@ -203,8 +203,10 @@ All rectangular CTA buttons use the **Aurora Orbit** interaction:
 - Standard component: `<CtaButton>` (`@/components/CtaButton`) with `variant="primary"` (default) or `variant="secondary"`.
 - Canonical classes: `.btn-primary` and `.btn-secondary`. Automatic CSS rules in `src/app/globals.css` also cover raw button/link elements using standard Tailwind classes (`bg-white/10` and `bg-zinc-950/60` with `rounded-full`), preventing future additions from missing the styling.
 
-### Monogram logo hover state
-- The navbar monogram logo uses the same background glow as the rest of the navigation pills on hover, ensuring unified navigation feedback without recoloring the logo artwork itself.
+### Navigation and monogram
+- The navbar monogram is filled with the aurora gradient (`#a855f7` → `#5ee6e6`, top left to bottom right), the same as the favicon. On hover it brightens slightly; there is no glow behind it.
+- Desktop nav items have no glow. The current page is marked by a thin 2px aurora underline under the label, which glides to the hovered or focused item and back.
+- In the mobile menu the current page is shown in aurora gradient text.
 
 ## Responsive behavior
 

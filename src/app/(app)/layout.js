@@ -57,6 +57,12 @@ export const metadata = {
     description: "Patrik von Porat is a guitarist, visual artist and systems-minded creator in Sweden. Music, drawing, miniatures, digital tools and process work in one place.",
     images: ['/images/PvP2.png'],
   },
+  // Favicons and touch icons come from the file conventions (favicon.ico, icon.png, apple-icon.png).
+  manifest: '/manifest.webmanifest',
+};
+
+export const viewport = {
+  themeColor: '#0b0c10',
 };
 
 export default function RootLayout({ children }) {

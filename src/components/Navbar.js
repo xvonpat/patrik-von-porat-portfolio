@@ -48,22 +48,18 @@ export default function Navbar() {
     const targetEl = linkRefs.current[targetIdx];
     const containerRect = container.getBoundingClientRect();
     const linkRect = targetEl.getBoundingClientRect();
+    const styles = window.getComputedStyle(targetEl);
+    const padLeft = parseFloat(styles.paddingLeft) || 0;
+    const padRight = parseFloat(styles.paddingRight) || 0;
+    const padBottom = parseFloat(styles.paddingBottom) || 0;
+    // Letter-spacing adds trailing space after the last letter; trim it so the line matches the word.
+    const tracking = parseFloat(styles.letterSpacing) || 0;
 
-    const targetLeft = linkRect.left - containerRect.left;
-    const targetTop = linkRect.top - containerRect.top;
-    const targetWidth = linkRect.width;
-    const targetHeight = linkRect.height;
+    // A thin underline under the label text, just below the baseline.
+    const left = linkRect.left - containerRect.left + padLeft;
+    const width = Math.max(0, linkRect.width - padLeft - padRight - tracking);
+    const top = linkRect.top - containerRect.top + linkRect.height - padBottom + 3;
 
-    // Tightened: Extend 16px on each side (width + 32px), centered vertically at 28px height
-    const left = targetLeft - 16;
-    const width = targetWidth + 32;
-    const auraHeight = 28;
-    const top = targetTop + (targetHeight - auraHeight) / 2;
-
-    const prevIndex = currentPosIndexRef.current;
-    if (prevIndex !== -1 && prevIndex !== null && prevIndex !== targetIdx) {
-      aurora.setAttribute('data-direction', targetIdx > prevIndex ? 'right' : 'left');
-    }
     currentPosIndexRef.current = targetIdx;
 
     if (skipTransition) {
@@ -72,8 +68,8 @@ export default function Navbar() {
 
     aurora.style.transform = `translate3d(${left}px, ${top}px, 0)`;
     aurora.style.width = `${width}px`;
-    aurora.style.height = `${auraHeight}px`;
-    aurora.style.opacity = isInteracting ? '0.82' : '0.22';
+    // Full strength on the item being hovered or focused; a little quieter when it simply marks the current page.
+    aurora.style.opacity = isInteracting ? '1' : '0.85';
 
     if (skipTransition) {
       requestAnimationFrame(() => {
@@ -185,11 +181,6 @@ export default function Navbar() {
               className="brand-link" 
               aria-label="Go to homepage"
             >
-              <div className="brand-aurora" aria-hidden="true">
-                <div className="nav-aurora-bloom" />
-                <div className="nav-aurora-aura" />
-                <div className="nav-aurora-core" />
-              </div>
               <span className="brand-mark" aria-hidden="true" />
             </Link>
           </div>
@@ -200,23 +191,17 @@ export default function Navbar() {
             onMouseLeave={handleMouseLeave}
             className="relative hidden md:flex items-center space-x-1 p-1.5 isolate overflow-visible"
           >
-            {/* Shared B2 Light Sweep Aurora Layer */}
-            <div 
+            {/* Shared indicator: thin aurora underline that glides to the hovered or current item */}
+            <div
               ref={auroraRef}
-              data-direction="right"
-              className="nav-aurora-sweep"
+              className="nav-indicator"
               style={{
                 transform: 'translate3d(0, 0, 0)',
                 width: 0,
-                height: 0,
                 opacity: 0,
               }}
               aria-hidden="true"
-            >
-              <div className="nav-aurora-bloom" />
-              <div className="nav-aurora-aura" />
-              <div className="nav-aurora-core" />
-            </div>
+            />
 
             {navLinks.map((link, index) => (
               <Link 
@@ -277,7 +262,7 @@ export default function Navbar() {
                 href={link.href}
                 onClick={() => setIsOpen(false)}
                 className={`text-base tracking-[0.2em] uppercase font-gothic py-2 transition-colors duration-200 ${
-                  isLinkActive ? 'text-accent-purple font-semibold' : 'text-zinc-400 hover:text-white'
+                  isLinkActive ? 'self-start bg-gradient-to-r from-[#a855f7] to-[#5ee6e6] bg-clip-text text-transparent font-semibold' : 'text-zinc-400 hover:text-white'
                 }`}
               >
                 {link.name}
