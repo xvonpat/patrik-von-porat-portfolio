@@ -108,21 +108,21 @@ export default function Projects() {
       category: 'SMART HOME · INTERFACE DESIGN · AUTOMATION',
       status: 'IN DEVELOPMENT',
       statusType: 'development',
-      intro: 'A wall-mounted control panel for the whole house. Lights, heating, the front door, EV charging, solar power, the doorbell camera and even the coffee machine. One calm, glanceable interface instead of a dozen apps.',
+      intro: 'A home full of different devices, and one interface made my way. Lights, heating, energy, coffee and media, organised by room: a quick overview first, deeper controls when I need them.',
       role: 'Concept · Interface Design · Requirements & Testing · Integration Setup (Claude Code)',
       scopeLabel: 'Built with',
       scopeItems: [
         'Home Assistant',
-        'Raspberry Pi',
-        'JavaScript Web Component',
+        'Raspberry Pi 4',
+        'JavaScript Web Components',
         'CSS',
-        '11 integrations'
+        'WebSocket API'
       ],
-      evidence: 'One custom Home Assistant card (about 2,200 lines of dependency-free JavaScript) controlling 10 rooms of lights, 8 heating zones, a smart lock, an EV charger, a solar inverter, a doorbell camera and a coffee machine. Adapts from wall tablet to phone with its own mobile layout.',
+      evidence: 'In daily use on my phone and computer, and the default view for everyone at home. Includes a dedicated hobby-room page, a live energy flow, an air-comfort indicator and a weekday coffee routine that respects Swedish holidays. Version 0.39, ten days after the first version.',
       cta: 'View Case Study',
       link: '/projects/home-control-panel',
-      image: '/images/projects/home-control-panel/00-cover.webp',
-      imageAlt: 'Dark smart-home control panel shown on a large screen and a phone',
+      image: '/images/projects/home-control-panel/overview-desktop.webp',
+      imageAlt: 'Desktop control panel with illuminated room tiles, weather, agenda, air quality, coffee and energy cards',
       accent: 'cyan',
       isExternal: false
     },

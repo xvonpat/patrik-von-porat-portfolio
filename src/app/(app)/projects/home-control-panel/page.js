@@ -1,46 +1,56 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import GlassCard from '@/components/GlassCard';
 import CtaButton from '@/components/CtaButton';
 
 const IMG = '/images/projects/home-control-panel';
 
+const description = 'A personal Home Assistant control panel, designed around everyday life at home: rooms first, deeper controls when I need them, on the phone and the computer.';
+
 export const metadata = {
-  title: "Home Control Panel | Selected Work | Patrik von Porat",
-  description: "A custom Home Assistant control panel for the whole house: lights, heating, the front door, EV charging and solar power in one calm, glanceable interface.",
+  title: 'Home Control Panel | Selected Work | Patrik von Porat',
+  description,
   alternates: {
     canonical: '/projects/home-control-panel',
   },
   openGraph: {
-    title: "Home Control Panel | Selected Work | Patrik von Porat",
-    description: "A custom Home Assistant control panel for the whole house: lights, heating, the front door, EV charging and solar power in one calm, glanceable interface.",
+    title: 'Home Control Panel | Selected Work | Patrik von Porat',
+    description,
     url: 'https://vonporat.com/projects/home-control-panel',
     images: [
       {
-        url: `${IMG}/00-cover.webp`,
-        width: 1600,
-        height: 1000,
-        alt: 'Dark smart-home control panel shown on a large screen and a phone',
+        url: `${IMG}/overview-desktop.webp`,
+        width: 2880,
+        height: 1800,
+        alt: 'Desktop control panel with illuminated room tiles, weather, agenda, air quality, coffee and energy cards',
       },
     ],
-  }
+  },
 };
 
-function PhoneShot({ src, alt, caption }) {
+/* A screenshot with its caption. The image opens full size in a new tab. */
+function Shot({ src, alt, caption, phone = false, priority = false, sizes, className = '' }) {
   return (
-    <figure className="flex flex-col gap-2.5 w-full">
-      <div className="w-full aspect-[780/1688] rounded-[1.5rem] overflow-hidden border border-white/[0.1] bg-obsidian-950/80 relative shadow-[0_8px_30px_rgba(0,0,0,0.45)]">
+    <figure className={`flex flex-col gap-3 min-w-0 ${phone ? 'w-full max-w-[280px] mx-auto' : 'w-full'} ${className}`}>
+      <a
+        href={`${IMG}/${src}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`group block overflow-hidden border border-white/[0.08] bg-obsidian-950/80 shadow-[0_12px_40px_rgba(0,0,0,0.45)] transition-colors hover:border-accent-purple/40 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent-purple focus-visible:ring-offset-4 focus-visible:ring-offset-obsidian-950 ${phone ? 'rounded-[1.75rem]' : 'rounded-xl md:rounded-2xl'}`}
+      >
         <Image
-          src={src}
+          src={`${IMG}/${src}`}
           alt={alt}
-          fill
-          sizes="(max-width: 640px) 45vw, 260px"
-          className="w-full h-full object-cover object-top"
+          width={phone ? 1170 : 2880}
+          height={phone ? 2532 : 1800}
+          priority={priority}
+          sizes={sizes || (phone ? '280px' : '(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1200px')}
+          className="w-full h-auto block"
         />
-      </div>
+        <span className="sr-only">(opens full size in a new tab)</span>
+      </a>
       {caption && (
-        <figcaption className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider leading-relaxed text-pretty">
+        <figcaption className="text-xs md:text-[13px] text-zinc-400 leading-relaxed text-pretty">
           {caption}
         </figcaption>
       )}
@@ -48,645 +58,467 @@ function PhoneShot({ src, alt, caption }) {
   );
 }
 
-export default function HomeControlPanelPage() {
-  const metadataFacts = [
-    {
-      label: "STATUS",
-      value: "In development: running at home, wall tablet next",
-      accent: "amber"
-    },
-    {
-      label: "CATEGORY",
-      value: "Smart Home / Interface Design"
-    },
-    {
-      label: "ROLE",
-      value: "Concept, interface design, requirements, testing and integration setup, built through AI-assisted development (Claude Code)"
-    },
-    {
-      label: "PLATFORM",
-      value: "Home Assistant on a Raspberry Pi"
-    },
-    {
-      label: "ARCHITECTURE",
-      value: "One custom Lovelace card (a JavaScript Web Component) in a full-screen panel view. No build step, no framework, no extra front-end dependencies"
-    },
-    {
-      label: "INTEGRATIONS",
-      value: "Philips Hue, tado, Yale, Easee, Sungrow, Siemens Home Connect, Google Nest, Sonos, Google Cast, iCloud Calendar, Met.no"
-    },
-  ];
-
-  const principles = [
-    {
-      title: "Glanceable First",
-      color: "text-accent-cyan",
-      text: "The status bar answers the important questions in one line: who is home, is the door locked, is anything heating, is the sun producing, is the car charging. Details live one tap deeper."
-    },
-    {
-      title: "The Interface Reflects the House",
-      color: "text-accent-purple",
-      text: "Room tiles glow in the actual colour and brightness of their lights. Heating zones glow warm while the radiator is working. The energy flow animates only when power is actually flowing."
-    },
-    {
-      title: "Safe by Default",
-      color: "text-amber-400",
-      text: "Anything with consequences asks first: unlocking the front door, starting a coffee (“place a cup under the spout first”). Slow devices are protected against double taps."
-    },
-    {
-      title: "Local Where It Matters",
-      color: "text-emerald-400",
-      text: "The front-door lock runs over Bluetooth and the solar inverter over the local network, so both keep working without the internet. Cloud services are used only where the manufacturer offers nothing else."
-    }
-  ];
-
-  const techStackLayers = [
-    {
-      layer: "RUNTIME & INTERFACE",
-      badge: "UI Layer",
-      accent: "cyan",
-      items: [
-        {
-          name: "Home Assistant on a Raspberry Pi",
-          detail: "The house's local hub. Every device and integration runs through it."
-        },
-        {
-          name: "One Custom Lovelace Card",
-          detail: "A dependency-free JavaScript Web Component (~2,200 lines) with Shadow DOM and CSS Grid."
-        },
-        {
-          name: "Dark “Control Room” Theme",
-          detail: "Frosted cards and accents with fixed meanings (teal = OK, amber = active, blue = info, red = attention), set in Inter."
-        },
-        {
-          name: "Live Camera via WebRTC",
-          detail: "Home Assistant's own live-camera element, reused for the doorbell video."
-        }
-      ]
-    },
-    {
-      layer: "DEVICES & DATA",
-      badge: "Integrations",
-      accent: "purple",
-      items: [
-        {
-          name: "Lights & Climate",
-          detail: "Philips Hue lights and scenes; tado heating (cloud) plus a HomeKit bridge."
-        },
-        {
-          name: "Lock & Doorbell",
-          detail: "Yale lock over Bluetooth (local); Google Nest doorbell via the SDM API with Pub/Sub events."
-        },
-        {
-          name: "Energy & EV",
-          detail: "Sungrow SG8.0RT inverter over local Modbus; Easee EV charger."
-        },
-        {
-          name: "Appliances, Media & Calendar",
-          detail: "Siemens Home Connect, Sonos and Google Cast, iCloud via CalDAV, Met.no weather; presence and push via the Home Assistant Companion app."
-        }
-      ]
-    },
-    {
-      layer: "HOW IT WAS BUILT",
-      badge: "Process",
-      accent: "cyan",
-      items: [
-        {
-          name: "Requirements, Design & Testing",
-          detail: "Requirements, design direction and testing by me; code written by an AI coding assistant (Claude Code)."
-        },
-        {
-          name: "Structure Before Interface",
-          detail: "Device names and rooms cleaned up first, so the interface could rely on a consistent structure."
-        },
-        {
-          name: "Verified in the Real House",
-          detail: "Every change tested at home before moving on, one device at a time."
-        }
-      ]
-    }
-  ];
-
+function SectionHeading({ number, label, title, children }) {
   return (
-    <div className="max-w-5xl xl:max-w-6xl 2xl:max-w-[1240px] mx-auto px-6 lg:px-8 py-8 md:py-14 flex flex-col gap-14 md:gap-20 relative z-10">
+    <div className="flex flex-col gap-4 max-w-3xl">
+      <span className="text-xs font-mono uppercase tracking-[0.2em] text-zinc-400">
+        <span className="text-accent-cyan">{number}</span>
+        <span className="mx-2 text-zinc-600" aria-hidden="true">/</span>
+        {label}
+      </span>
+      <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-white font-gothic text-balance">
+        {title}
+      </h2>
+      {children && (
+        <p className="text-base md:text-lg text-zinc-300 font-light leading-relaxed text-pretty">
+          {children}
+        </p>
+      )}
+    </div>
+  );
+}
 
-      {/* 1. Header & Breadcrumb */}
-      <section className="flex flex-col gap-6 pt-2">
+const facts = [
+  { label: 'Role', value: 'Concept, interface design, requirements and testing' },
+  { label: 'Platform', value: 'Home Assistant on a Raspberry Pi 4' },
+  { label: 'Used on', value: 'Phone and computer, every day' },
+  { label: 'Started', value: 'October 2026, now at version 0.39' },
+];
+
+const systemParts = [
+  {
+    title: 'My interface',
+    text: 'The layout, room tiles, detail panels and visual feedback. It runs in the browser on a phone or computer.',
+    link: 'Reads status, sends commands',
+  },
+  {
+    title: 'Home Assistant',
+    text: 'Open-source software that connects devices from different brands. It provides device states, history, accounts and the automation engine.',
+    link: 'Connects through integrations',
+  },
+  {
+    title: 'Raspberry Pi',
+    text: 'A small computer, about the size of a deck of cards. Mine runs Home Assistant OS and serves the panel’s code.',
+    link: 'The computer behind it all',
+  },
+  {
+    title: 'The devices',
+    text: 'Lights, heating, coffee, energy and media. Some are reached on the local network, others through their manufacturers’ online services.',
+    link: 'Local network and cloud',
+  },
+];
+
+const designPoints = [
+  {
+    title: 'Rooms first',
+    text: 'Each room tile combines temperature, lighting status and brightness. A power button controls the room; dragging across the tile adjusts the light level.',
+  },
+  {
+    title: 'Details on demand',
+    text: 'Opening a room reveals heating and individual lamps. Other cards follow the same pattern: everyday actions on the front, settings and statistics behind them.',
+  },
+  {
+    title: 'A layout that adapts',
+    text: 'On a phone, compact cards and bottom tabs make space for one topic at a time. The panel remembers the selected tab on each device.',
+  },
+];
+
+const coffeeFlow = [
+  { when: '06:30', what: 'Monday to Friday' },
+  { when: 'Check', what: 'Workday confirms a working day' },
+  { when: 'Check', what: 'The machine is off' },
+  { when: 'Action', what: 'Switch on, warm up and rinse' },
+];
+
+const signalChain = ['My panel', 'Home Assistant', 'Integration', 'Device or cloud service'];
+
+export default function HomeControlPanelPage() {
+  return (
+    <div className="max-w-5xl xl:max-w-6xl 2xl:max-w-[1240px] mx-auto px-6 lg:px-8 py-8 md:py-14 flex flex-col gap-20 md:gap-28 relative z-10">
+
+      {/* Hero */}
+      <header className="flex flex-col gap-10 md:gap-12 pt-2">
         <Link
           href="/projects"
-          className="inline-flex items-center gap-2 text-xs md:text-sm font-mono uppercase tracking-widest text-zinc-400 hover:text-white transition-colors self-start group"
+          className="inline-flex items-center gap-2 py-2 text-xs md:text-sm font-mono uppercase tracking-widest text-zinc-400 hover:text-white transition-colors self-start group"
         >
-          <span className="group-hover:-translate-x-0.5 transition-transform">&larr;</span>
+          <span className="group-hover:-translate-x-0.5 transition-transform" aria-hidden="true">&larr;</span>
           <span>Back to Selected Work</span>
         </Link>
 
-        <div className="flex flex-col gap-4">
-          <div className="flex flex-wrap items-center gap-3">
-            <span className="text-xs md:text-sm font-mono uppercase tracking-widest text-accent-cyan font-semibold">
-              SMART HOME · INTERFACE DESIGN · AUTOMATION
+        <div className="flex flex-col gap-6">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+            <span className="text-xs md:text-sm font-mono uppercase tracking-[0.2em] text-accent-purple font-semibold">
+              Personal project · Home Assistant
             </span>
-            <span className="text-zinc-600 font-mono text-xs">&bull;</span>
-            <div className="flex items-center gap-1.5">
-              <span className="h-2 w-2 rounded-full bg-amber-400" />
-              <span className="text-xs font-mono uppercase tracking-wider text-amber-400 font-semibold">
-                IN DEVELOPMENT
-              </span>
-            </div>
+            <span className="text-zinc-600 font-mono text-xs" aria-hidden="true">&bull;</span>
+            <span className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-accent-cyan">
+              <span className="h-1.5 w-1.5 rounded-full bg-accent-cyan" aria-hidden="true" />
+              In daily use · In development
+            </span>
           </div>
 
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-white font-gothic text-balance">
             Home Control Panel
           </h1>
 
-          <p className="text-lg md:text-xl text-zinc-300 font-light leading-relaxed max-w-3xl text-balance text-pretty">
-            A custom control panel for the whole house, built on Home Assistant. It brings lights, heating, the front door, EV charging, solar power, the doorbell camera and the coffee machine into one calm, glanceable interface. It is designed for a wall-mounted tablet in the hallway, and just as usable on a phone.
+          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-6 lg:gap-16 lg:items-end">
+            <p className="text-2xl md:text-3xl text-white font-light leading-snug tracking-tight text-balance">
+              A home full of different devices. <span className="text-zinc-400">One interface, made my way.</span>
+            </p>
+            <p className="text-base md:text-lg text-zinc-300 font-light leading-relaxed text-pretty">
+              I designed a control panel that brings everyday adjustments into one place. A quick overview first, with deeper controls when I need them.
+            </p>
+          </div>
+        </div>
+
+        <Shot
+          src="overview-desktop.webp"
+          alt="Desktop control panel with illuminated room tiles, weather, agenda, air quality, and the upper parts of the coffee and energy cards."
+          caption="The desktop overview. Rooms, everyday controls and the state of the home, brought together."
+          priority
+        />
+
+        <dl className="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-6 border-y border-white/[0.08] py-6 md:py-8">
+          {facts.map((fact) => (
+            <div key={fact.label} className="flex flex-col gap-1.5">
+              <dt className="text-[11px] font-mono uppercase tracking-[0.2em] text-zinc-500">{fact.label}</dt>
+              <dd className="text-sm md:text-[15px] text-zinc-200 leading-relaxed text-pretty">{fact.value}</dd>
+            </div>
+          ))}
+        </dl>
+      </header>
+
+      {/* 01 The idea */}
+      <section className="grid grid-cols-1 lg:grid-cols-[1fr_1.25fr] gap-8 lg:gap-20">
+        <div className="lg:sticky lg:top-28 self-start">
+          <SectionHeading number="01" label="The idea" title="Fewer apps for the small things." />
+        </div>
+        <div className="flex flex-col gap-5 text-base md:text-lg text-zinc-300 font-light leading-relaxed text-pretty max-w-2xl">
+          <p>
+            Changing the lights, adjusting the heating or checking the coffee machine meant opening separate apps. Each worked in its own way, but none gave me the whole picture.
+          </p>
+          <p>
+            I installed Home Assistant on a Raspberry Pi and built my own interface on top of it. I wanted the controls to look and behave the way I use the home: organised by room, easy to scan and ready to go deeper.
+          </p>
+          <p>
+            It now handles my everyday control on the phone and computer. Using it is also how I find the next thing to improve.
           </p>
         </div>
       </section>
 
-      {/* 2. Metadata Grid */}
-      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 p-5 md:p-6 rounded-2xl bg-obsidian-950/60 border border-white/[0.08] backdrop-blur-md">
-        {metadataFacts.map((fact, idx) => (
-          <div key={idx} className="flex flex-col gap-1">
-            <span className="text-[10px] md:text-xs font-mono uppercase tracking-widest text-zinc-400 font-medium">
-              {fact.label}
-            </span>
-            <span className={`text-sm md:text-[15px] font-sans text-zinc-200 ${fact.accent === 'amber' ? 'text-amber-400 font-medium' : ''}`}>
-              {fact.value}
-            </span>
-          </div>
-        ))}
-      </section>
-
-      {/* Visual Showcase Banner */}
-      <section className="flex flex-col gap-3">
-        <div className="w-full aspect-[16/10] rounded-2xl overflow-hidden border border-white/[0.08] bg-obsidian-950/80 relative shadow-[0_12px_40px_rgba(0,0,0,0.5)]">
-          <Image
-            src={`${IMG}/00-cover.webp`}
-            alt="Dark smart-home control panel shown on a large screen and a phone"
-            fill
-            priority
-            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1200px"
-            className="w-full h-full object-cover object-center"
+      {/* At hand: the phone */}
+      <section className="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-10 md:gap-16 items-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-[480px] w-full mx-auto md:mx-0 md:w-[480px]">
+          <Shot
+            src="home-mobile.webp"
+            phone
+            className="hidden sm:flex"
+            sizes="230px"
+            alt="Phone screen with a swipeable status line, the time, weather with a five-day forecast, and an agenda with sample events. Tabs along the bottom."
+            caption="Home, with tabs along the bottom."
+          />
+          <Shot
+            src="lights-mobile.webp"
+            phone
+            sizes="(max-width: 640px) 280px, 230px"
+            alt="Mobile lighting tab with homecoming and bedtime moods above a grid of glowing room tiles with brightness bars and power buttons."
+            caption="Lights: moods and every room as a tile."
           />
         </div>
-        <span className="text-xs font-mono text-zinc-400 uppercase tracking-wider text-center sm:text-left">
-          The panel on a wall-tablet layout and on a phone. All screenshots use the panel&apos;s demo mode
-        </span>
-      </section>
-
-      {/* 3. Context & Purpose */}
-      <section className="flex flex-col gap-6">
-        <div className="flex items-center justify-between border-b border-white/5 pb-2.5">
-          <div className="flex items-center gap-2.5">
-            <span className="w-2 h-2 rounded-full bg-accent-purple" />
-            <h2 className="text-xl md:text-2xl font-semibold text-white font-gothic tracking-wide">
-              Context &amp; Purpose
-            </h2>
-          </div>
-          <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest font-medium">
-            Smart Home
-          </span>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <GlassCard accent="purple" className="p-6 flex flex-col gap-4">
-            <h3 className="text-lg md:text-xl font-semibold text-white font-gothic">
-              Too Many Apps for One Home
-            </h3>
-            <p className="text-sm md:text-[15px] text-zinc-300 leading-relaxed font-light text-pretty">
-              Every device in the house came with its own app: one for the lights, one for the heating, one for the lock, the charger, the solar inverter, the doorbell and the coffee machine.
-            </p>
-            <p className="text-sm md:text-[15px] text-zinc-300 leading-relaxed font-light text-pretty">
-              Each one works, but nothing works <em>together</em>, and none of them answers the simple question at the front door: <em>is everything okay before I leave?</em>
-            </p>
-          </GlassCard>
-
-          <GlassCard accent="cyan" className="p-6 flex flex-col gap-4">
-            <h3 className="text-lg md:text-xl font-semibold text-white font-gothic">
-              One Surface, Many Systems
-            </h3>
-            <p className="text-sm md:text-[15px] text-zinc-300 leading-relaxed font-light text-pretty">
-              Home Assistant already connects the devices. What was missing was an interface worth looking at every day.
-            </p>
-            <p className="text-sm md:text-[15px] text-zinc-300 leading-relaxed font-light text-pretty">
-              Something that reads at a glance from across the hallway, behaves well under a thumb, and feels designed rather than assembled from default cards.
-            </p>
-          </GlassCard>
-
-          <GlassCard accent="purple" className="p-6 flex flex-col gap-4">
-            <h3 className="text-lg md:text-xl font-semibold text-white font-gothic">
-              Personal Project
-            </h3>
-            <p className="text-sm md:text-[15px] text-zinc-300 leading-relaxed font-light text-pretty">
-              An ongoing personal project and learning vehicle, not a product.
-            </p>
-            <p className="text-sm md:text-[15px] text-zinc-300 leading-relaxed font-light text-pretty">
-              As with <Link href="/projects/dmaic-companion" className="text-accent-cyan hover:text-white transition-colors underline underline-offset-2">DMAIC Companion</Link>, I write the requirements and test every step, while an AI coding assistant writes the code under clear working rules. The project grows one device at a time.
-            </p>
-          </GlassCard>
-        </div>
-      </section>
-
-      {/* 4. Design Principles */}
-      <section className="flex flex-col gap-6">
-        <div className="flex items-center justify-between border-b border-white/5 pb-2.5">
-          <div className="flex items-center gap-2.5">
-            <span className="w-2 h-2 rounded-full bg-accent-cyan" />
-            <h2 className="text-xl md:text-2xl font-semibold text-white font-gothic tracking-wide">
-              Design Principles
-            </h2>
-          </div>
-          <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest font-medium">
-            Interface Design
-          </span>
-        </div>
-
-        <div className="rounded-xl border border-white/[0.08] bg-obsidian-950/60 p-6 md:p-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
-            {principles.map((p) => (
-              <div key={p.title} className="flex flex-col gap-2">
-                <span className={`font-mono text-xs uppercase tracking-wider font-semibold ${p.color}`}>
-                  {p.title}
-                </span>
-                <p className="text-xs md:text-sm text-zinc-300 font-light leading-relaxed text-pretty">
-                  {p.text}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="flex flex-col gap-3">
-          <div className="w-full aspect-[1600/1111] rounded-2xl overflow-hidden border border-white/[0.08] bg-obsidian-950/80 relative shadow-[0_12px_40px_rgba(0,0,0,0.5)]">
-            <Image
-              src={`${IMG}/01-desktop-overview.webp`}
-              alt="Control panel with status pills, a large clock, glowing room tiles and a doorbell card"
-              fill
-              sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1200px"
-              className="w-full h-full object-cover object-top"
-            />
-          </div>
-          <span className="text-xs font-mono text-zinc-400 uppercase tracking-wider text-center sm:text-left">
-            Everything important above the fold: status bar, clock and forecast, room lighting and the doorbell
-          </span>
-        </div>
-      </section>
-
-      {/* 5. What It Does */}
-      <section className="flex flex-col gap-6">
-        <div className="flex items-center justify-between border-b border-white/5 pb-2.5">
-          <div className="flex items-center gap-2.5">
-            <span className="w-2 h-2 rounded-full bg-accent-purple" />
-            <h2 className="text-xl md:text-2xl font-semibold text-white font-gothic tracking-wide">
-              What It Does
-            </h2>
-          </div>
-          <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest font-medium">
-            Features
-          </span>
-        </div>
-
-        {/* Lights & scenes – wide desktop image */}
-        <GlassCard accent="purple" className="p-6 md:p-8 flex flex-col gap-5">
-          <div className="flex items-center justify-between">
-            <h3 className="text-lg md:text-xl font-semibold text-white font-gothic">
-              Lights &amp; Scenes
-            </h3>
-            <span className="text-[10px] font-mono uppercase text-zinc-400">Philips Hue</span>
-          </div>
-          <p className="text-sm md:text-[15px] text-zinc-300 leading-relaxed font-light max-w-3xl text-pretty">
-            Ten rooms as tiles that toggle with one tap. A room pop-up shows every lamp with its own colour-matched dimmer, plus the room&apos;s Hue scenes. One &ldquo;All off&rdquo; for leaving the house.
+        <div className="flex flex-col gap-5 max-w-xl">
+          <span className="text-xs font-mono uppercase tracking-[0.2em] text-accent-purple">At hand</span>
+          <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-white font-gothic text-balance">
+            A small adjustment. A single place to make it.
+          </h2>
+          <p className="text-base md:text-lg text-zinc-300 font-light leading-relaxed text-pretty">
+            Turn a room on, adjust its brightness or open the individual lights. On the phone the same panel becomes one column, with each topic behind its own tab.
           </p>
-          <div className="flex flex-col gap-3">
-            <div className="w-full aspect-[1600/1111] rounded-xl overflow-hidden border border-white/[0.08] bg-obsidian-950/80 relative shadow-[0_8px_30px_rgba(0,0,0,0.4)]">
-              <Image
-                src={`${IMG}/03-desktop-room-popup.webp`}
-                alt="Pop-up listing lamps in a hobby room with coloured brightness sliders"
-                fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1280px) 85vw, 1100px"
-                className="w-full h-full object-cover object-center"
-              />
-            </div>
-            <span className="text-xs font-mono text-zinc-400 uppercase tracking-wider text-center sm:text-left">
-              Room detail: each lamp&apos;s slider takes the colour of the light itself
-            </span>
-          </div>
-        </GlassCard>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-          {/* Climate */}
-          <GlassCard accent="cyan" className="p-6 flex flex-col gap-5">
-            <div className="flex items-center justify-between">
-              <h3 className="text-lg font-semibold text-white font-gothic">
-                Climate
-              </h3>
-              <span className="text-[10px] font-mono uppercase text-zinc-400">tado</span>
-            </div>
-            <p className="text-sm text-zinc-300 leading-relaxed font-light text-pretty">
-              Eight tado heating zones with current temperature, target, humidity and how hard each radiator is working. Tap a zone to adjust in half degrees or switch between schedule, manual and off. Open windows are flagged.
-            </p>
-            <div className="grid grid-cols-2 gap-4 mt-auto">
-              <PhoneShot
-                src={`${IMG}/07-mobile-climate.webp`}
-                alt="Grid of room temperatures with heating indicators"
-                caption="Rooms that are heating glow warm"
-              />
-              <PhoneShot
-                src={`${IMG}/10-mobile-climate-popup.webp`}
-                alt="Thermostat pop-up with current and target temperature"
-                caption="Adjusting a zone in half degrees"
-              />
-            </div>
-          </GlassCard>
-
-          {/* Front door & doorbell */}
-          <GlassCard accent="purple" className="p-6 flex flex-col gap-5">
-            <div className="flex items-center justify-between">
-              <h3 className="text-lg font-semibold text-white font-gothic">
-                Front Door &amp; Doorbell
-              </h3>
-              <span className="text-[10px] font-mono uppercase text-zinc-400">Yale · Nest</span>
-            </div>
-            <p className="text-sm text-zinc-300 leading-relaxed font-light text-pretty">
-              The Yale lock shows locked/unlocked, door open/closed and who used it last. Unlocking always needs confirmation. The Nest doorbell shows the last ring and the last person at the door; live video starts only on request, to spare the battery.
-            </p>
-            <p className="text-sm text-zinc-300 leading-relaxed font-light text-pretty">
-              <strong className="text-white font-medium">When someone rings, the live view opens full-screen on every open panel</strong>, with an &ldquo;Unlock front door&rdquo; button, and a notification with live video reaches the phone.
-            </p>
-            <div className="grid grid-cols-2 gap-4 mt-auto">
-              <PhoneShot
-                src={`${IMG}/05-mobile-home-security.webp`}
-                alt="Phone view of the doorbell card and a locked front door"
-                caption="Doorbell and lock on the phone"
-              />
-            </div>
-          </GlassCard>
-
-          {/* Energy & EV */}
-          <GlassCard accent="cyan" className="p-6 flex flex-col gap-5">
-            <div className="flex items-center justify-between">
-              <h3 className="text-lg font-semibold text-white font-gothic">
-                Energy &amp; EV Charging
-              </h3>
-              <span className="text-[10px] font-mono uppercase text-zinc-400">Sungrow · Easee</span>
-            </div>
-            <p className="text-sm text-zinc-300 leading-relaxed font-light text-pretty">
-              Live solar production from the Sungrow inverter with share of peak, today&apos;s yield and lifetime total, and an animated flow from sun to house to charger. The Easee charger shows status, power, session energy and monthly cost, with start/pause and smart charging.
-            </p>
-            <div className="grid grid-cols-2 gap-4 mt-auto">
-              <PhoneShot
-                src={`${IMG}/08-mobile-energy.webp`}
-                alt="Solar output of 4.62 kW and an EV charger charging at 7.4 kW"
-                caption="Live solar production and EV charging"
-              />
-            </div>
-          </GlassCard>
-
-          {/* Coffee */}
-          <GlassCard accent="purple" className="p-6 flex flex-col gap-5">
-            <div className="flex items-center justify-between">
-              <h3 className="text-lg font-semibold text-white font-gothic">
-                Coffee
-              </h3>
-              <span className="text-[10px] font-mono uppercase text-zinc-400">Siemens Home Connect</span>
-            </div>
-            <p className="text-sm text-zinc-300 leading-relaxed font-light text-pretty">
-              The Siemens EQ.9 can be started from the panel, including personal presets with their own strength, volume and milk ratio, sent to the machine with every brew.
-            </p>
-            <div className="grid grid-cols-2 gap-4 mt-auto">
-              <PhoneShot
-                src={`${IMG}/11-mobile-coffee.webp`}
-                alt="Coffee card with two personal presets and six drink buttons"
-                caption="Personal presets and standard drinks"
-              />
-              <PhoneShot
-                src={`${IMG}/12-mobile-coffee-confirm.webp`}
-                alt="Confirmation dialog for brewing a cappuccino"
-                caption="Every brew asks first"
-              />
-            </div>
-          </GlassCard>
         </div>
-
-        {/* Calendar, media & shopping list */}
-        <GlassCard accent="cyan" className="p-6 md:p-8">
-          <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto] gap-6 md:gap-10 items-center">
-            <div className="flex flex-col gap-4">
-              <div className="flex items-center justify-between gap-3">
-                <h3 className="text-lg md:text-xl font-semibold text-white font-gothic">
-                  Calendar, Media &amp; Shopping List
-                </h3>
-                <span className="text-[10px] font-mono uppercase text-zinc-400">iCloud · Sonos · Cast</span>
-              </div>
-              <p className="text-sm md:text-[15px] text-zinc-300 leading-relaxed font-light text-pretty">
-                The shared family calendar from iCloud with colour per person and a &ldquo;coming up&rdquo; countdown for birthdays and holidays. Sonos and Google speakers with artwork, controls and volume. A shopping list that anyone can add to from the hallway.
-              </p>
-            </div>
-            <div className="w-full max-w-[220px] mx-auto sm:mx-0">
-              <PhoneShot
-                src={`${IMG}/09-mobile-media.webp`}
-                alt="Now-playing card with controls and a shopping list"
-                caption="Music, speakers and the shopping list"
-              />
-            </div>
-          </div>
-        </GlassCard>
       </section>
 
-      {/* 6. Responsive Architecture */}
-      <section className="flex flex-col gap-6">
-        <div className="flex items-center justify-between border-b border-white/5 pb-2.5">
-          <div className="flex items-center gap-2.5">
-            <span className="w-2 h-2 rounded-full bg-accent-cyan" />
-            <h2 className="text-xl md:text-2xl font-semibold text-white font-gothic tracking-wide">
-              Responsive Architecture
-            </h2>
-          </div>
-          <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest font-medium">
-            One Card, Three Layouts
-          </span>
-        </div>
+      {/* 02 The system */}
+      <section className="flex flex-col gap-10 md:gap-12">
+        <SectionHeading number="02" label="The system" title="Four parts, working together.">
+          Home Assistant provides the foundation. My work is the interface and the way the system is set up around our home.
+        </SectionHeading>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-6 lg:gap-10">
-          <div className="flex flex-col gap-6">
+        <ol className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px rounded-2xl overflow-hidden border border-white/[0.08] bg-white/[0.08]">
+          {systemParts.map((part, idx) => (
+            <li key={part.title} className="flex flex-col gap-3 p-6 md:p-7 bg-obsidian-950">
+              <span className="font-mono text-xs text-accent-cyan">0{idx + 1}</span>
+              <h3 className="text-xl font-semibold text-white font-gothic">{part.title}</h3>
+              <p className="text-sm text-zinc-300 font-light leading-relaxed text-pretty">{part.text}</p>
+              <span className="mt-auto pt-3 text-[11px] font-mono uppercase tracking-wider text-zinc-500">{part.link}</span>
+            </li>
+          ))}
+        </ol>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+          <div className="flex flex-col gap-3 border-l border-accent-purple/50 pl-5">
+            <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-accent-purple">What I built</h3>
             <p className="text-sm md:text-[15px] text-zinc-300 font-light leading-relaxed text-pretty">
-              The panel measures its own width rather than the screen&apos;s. <strong className="text-white font-medium">Wide:</strong> three columns for the wall tablet and desktop. <strong className="text-white font-medium">Medium:</strong> two columns. <strong className="text-white font-medium">Narrow:</strong> a phone layout with bottom tabs (Home · Lights · Climate · Energy · Media), a swipeable status bar and compact cards. Small badges on the tabs show what is happening elsewhere: lights on, rooms heating, car charging, music playing.
+              The interface, the hobby-room page, the energy diagram, the air-comfort indicator and the way it all behaves. I also connected and organised the devices, configured the routines and created the lighting scenes. As with <Link href="/projects/dmaic-companion" className="text-white underline decoration-accent-purple/60 underline-offset-4 hover:text-accent-purple transition-colors">DMAIC Companion</Link>, I set the direction and test every step at home, while an AI coding assistant (Claude Code) writes the code.
             </p>
-
-            <div className="grid grid-cols-2 gap-4 sm:gap-6 max-w-md">
-              <PhoneShot
-                src={`${IMG}/04-mobile-home.webp`}
-                alt="Phone view with clock, forecast, scene buttons and tab bar"
-                caption="The home tab with bottom navigation"
-              />
-              <PhoneShot
-                src={`${IMG}/06-mobile-lights.webp`}
-                alt="Grid of room tiles in warm, pink and violet light"
-                caption="Room tiles glow in the colour of their lights"
-              />
-            </div>
-
-            <div className="rounded-xl border border-white/[0.08] bg-obsidian-950/60 p-6 flex flex-col gap-4">
-              <h3 className="text-base font-semibold text-white font-mono uppercase tracking-wider">
-                Built for Real Use
-              </h3>
-              <ul className="flex flex-col gap-3 text-sm text-zinc-300 font-light leading-relaxed">
-                <li className="flex items-start gap-2.5">
-                  <span className="text-accent-cyan font-mono font-bold">&bull;</span>
-                  <span>
-                    <strong className="text-white font-medium">Kiosk mode</strong> (<code className="text-accent-cyan font-mono text-xs px-1 py-0.5 rounded bg-zinc-900/90 border border-white/5">?kiosk</code>) hides Home Assistant&apos;s own header and sidebar for the wall tablet.
-                  </span>
-                </li>
-                <li className="flex items-start gap-2.5">
-                  <span className="text-accent-cyan font-mono font-bold">&bull;</span>
-                  <span>
-                    <strong className="text-white font-medium">Demo mode</strong> (<code className="text-accent-cyan font-mono text-xs px-1 py-0.5 rounded bg-zinc-900/90 border border-white/5">?demo</code>) replaces names and calendar entries with neutral placeholders. It was used for every screenshot on this page.
-                  </span>
-                </li>
-                <li className="flex items-start gap-2.5">
-                  <span className="text-accent-cyan font-mono font-bold">&bull;</span>
-                  <span>Greets whoever is signed in; presence for each household member via the Home Assistant phone app.</span>
-                </li>
-                <li className="flex items-start gap-2.5">
-                  <span className="text-accent-cyan font-mono font-bold">&bull;</span>
-                  <span>Renders only what changed, so the panel stays smooth on modest tablets.</span>
-                </li>
-              </ul>
-            </div>
           </div>
-
-          <figure className="flex flex-col gap-3 w-full max-w-[340px] mx-auto lg:mx-0">
-            <div className="w-full aspect-[1440/2760] rounded-xl overflow-hidden border border-white/[0.08] bg-obsidian-950/80 relative shadow-[0_8px_30px_rgba(0,0,0,0.4)]">
-              <Image
-                src={`${IMG}/02-desktop-full.webp`}
-                alt="Full-length view of the three-column control panel"
-                fill
-                sizes="340px"
-                className="w-full h-full object-cover object-top"
-              />
-            </div>
-            <figcaption className="text-xs font-mono text-zinc-400 uppercase tracking-wider text-center lg:text-left">
-              The complete wall-tablet layout, from status bar to shopping list
-            </figcaption>
-          </figure>
+          <div className="flex flex-col gap-3 border-l border-white/15 pl-5">
+            <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-zinc-400">What I build on</h3>
+            <p className="text-sm md:text-[15px] text-zinc-300 font-light leading-relaxed text-pretty">
+              Home Assistant and its community provide the platform and the integrations. My panel sends requests to Home Assistant; it never talks to the devices directly.
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* 7. Complete Technology Overview */}
-      <section className="flex flex-col gap-6">
-        <div className="flex items-center justify-between border-b border-white/5 pb-2.5">
-          <div className="flex items-center gap-2.5">
-            <span className="w-2 h-2 rounded-full bg-accent-purple" />
-            <h2 className="text-xl md:text-2xl font-semibold text-white font-gothic tracking-wide">
-              Complete Technology Overview
-            </h2>
-          </div>
-          <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest font-medium">
-            Specification
-          </span>
-        </div>
+      {/* 03 The interface */}
+      <section className="flex flex-col gap-12 md:gap-16">
+        <SectionHeading number="03" label="The interface" title="An overview, with room to go deeper.">
+          I wanted the first view to make sense quickly. More detailed controls belong one step further in.
+        </SectionHeading>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {techStackLayers.map((layer, lIdx) => (
-            <div
-              key={lIdx}
-              className="rounded-xl border border-white/[0.08] bg-obsidian-950/70 p-5 md:p-6 flex flex-col gap-4"
-            >
-              <div className="flex items-center justify-between pb-3 border-b border-white/5">
-                <span className={`text-[10px] md:text-xs font-mono uppercase tracking-wider font-semibold ${layer.accent === 'purple' ? 'text-accent-purple' : 'text-accent-cyan'}`}>
-                  {layer.layer}
-                </span>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-900 border border-white/5 text-zinc-400 uppercase">
-                  {layer.badge}
-                </span>
-              </div>
-
-              <div className="flex flex-col gap-3.5">
-                {layer.items.map((item, iIdx) => (
-                  <div key={iIdx} className="flex flex-col gap-1">
-                    <h4 className="text-sm font-semibold text-white font-mono">
-                      {item.name}
-                    </h4>
-                    <p className="text-xs text-zinc-400 font-light leading-relaxed">
-                      {item.detail}
-                    </p>
-                  </div>
-                ))}
-              </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
+          {designPoints.map((point) => (
+            <div key={point.title} className="flex flex-col gap-3 border-t border-white/[0.1] pt-5">
+              <h3 className="text-lg font-semibold text-white font-gothic">{point.title}</h3>
+              <p className="text-sm md:text-[15px] text-zinc-300 font-light leading-relaxed text-pretty">{point.text}</p>
             </div>
           ))}
         </div>
+
+        <Shot
+          src="room-detail-desktop.webp"
+          alt="Open living-room panel showing room brightness, current and target temperature with schedule, manual and off modes, and individual lamp controls."
+          caption="Open a room to reach heating, individual lights and more detailed adjustments."
+        />
+
+        {/* Making information readable */}
+        <div className="grid grid-cols-1 md:grid-cols-[280px_1fr] gap-10 md:gap-16 items-center rounded-2xl border border-white/[0.08] bg-obsidian-950/60 p-6 md:p-10">
+          <Shot
+            src="air-comfort-mobile.webp"
+            phone
+            alt="Living-room detail with temperature and humidity plotted as a dot towards humid, and a short tip to air the room."
+            caption="Temperature and humidity become a position, a description and a practical tip."
+          />
+          <div className="flex flex-col gap-5">
+            <span className="text-xs font-mono uppercase tracking-[0.2em] text-accent-cyan">Making information readable</span>
+            <h3 className="text-2xl md:text-3xl font-semibold tracking-tight text-white font-gothic">More than a number.</h3>
+            <p className="text-base text-zinc-300 font-light leading-relaxed text-pretty">
+              A temperature or humidity reading is useful, but it still needs interpretation. I built an air-comfort indicator that places a dot between warm, cold, dry and humid, with a short explanation alongside it.
+            </p>
+            <p className="text-base text-zinc-300 font-light leading-relaxed text-pretty">
+              The air purifier works the same way. Its values get plain names such as fine particles, stuffiness or odours, each with a word and a colour: good, OK or poor.
+            </p>
+          </div>
+        </div>
+
+        {/* Energy */}
+        <div className="flex flex-col gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.25fr] gap-6 lg:gap-20">
+            <h3 className="text-2xl md:text-3xl font-semibold tracking-tight text-white font-gothic text-balance">
+              Where the electricity is going.
+            </h3>
+            <p className="text-base text-zinc-300 font-light leading-relaxed text-pretty max-w-2xl">
+              The energy view shows the flow between the solar panels, the house, the grid and the car charger, with today’s totals underneath. The price card compares the current price with the rest of the day and marks the cheapest three hours in a row.
+            </p>
+          </div>
+          <Shot
+            src="energy-desktop.webp"
+            className="hidden md:flex"
+            alt="Energy tab showing the house drawing from the grid at night, solar production at zero, today's totals and the current electricity price marked expensive."
+            caption="An evening snapshot: the house is drawing from the grid and solar production is zero."
+          />
+          <Shot
+            src="energy-mobile.webp"
+            phone
+            className="md:hidden"
+            alt="Phone energy view with a flow diagram from grid to house, solar at zero, today's totals and the current electricity price marked expensive."
+            caption="An evening snapshot: the house is drawing from the grid and solar production is zero."
+          />
+        </div>
       </section>
 
-      {/* 8. Current State & What's Next */}
-      <section className="flex flex-col gap-6">
-        <div className="flex items-center justify-between border-b border-white/5 pb-2.5">
-          <div className="flex items-center gap-2.5">
-            <span className="w-2 h-2 rounded-full bg-amber-400" />
-            <h2 className="text-xl md:text-2xl font-semibold text-white font-gothic tracking-wide">
-              Status &amp; What&apos;s Next
-            </h2>
+      {/* 04 Everyday routines */}
+      <section className="flex flex-col gap-14 md:gap-20">
+        <SectionHeading number="04" label="Everyday routines" title="Small routines. Fewer separate steps.">
+          Some things happen on a schedule. Others bring several changes together at the press of a button.
+        </SectionHeading>
+
+        {/* Coffee */}
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.15fr] gap-10 lg:gap-14 items-center">
+          <div className="flex flex-col gap-5">
+            <span className="text-xs font-mono uppercase tracking-[0.2em] text-accent-purple">A weekday morning</span>
+            <h3 className="text-2xl md:text-3xl font-semibold tracking-tight text-white font-gothic">Warm before I get there.</h3>
+            <p className="text-base text-zinc-300 font-light leading-relaxed text-pretty">
+              At 06:30 on working days, Home Assistant switches on the coffee machine if it is off. The machine warms up and rinses itself. Brewing is still something I choose.
+            </p>
+            <p className="text-base text-zinc-300 font-light leading-relaxed text-pretty">
+              The Workday integration knows the Swedish public holidays, and I added Christmas Eve, New Year’s Eve and Midsummer Eve as days off. My personal calendar is separate and only supplies the panel’s agenda.
+            </p>
+            <ol className="mt-2 flex flex-col">
+              {coffeeFlow.map((step, idx) => (
+                <li key={step.what} className="grid grid-cols-[64px_1fr] gap-4 py-3 border-t border-white/[0.08] last:border-b">
+                  <span className={`font-mono text-xs uppercase tracking-wider pt-0.5 ${idx === coffeeFlow.length - 1 ? 'text-accent-cyan' : 'text-zinc-500'}`}>{step.when}</span>
+                  <span className="text-sm text-zinc-200">{step.what}</span>
+                </li>
+              ))}
+            </ol>
           </div>
-          <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest font-medium">
-            Evolution
-          </span>
+          <Shot
+            src="coffee-settings-desktop.webp"
+            alt="Coffee machine detail panel with drink choices, cup statistics, maintenance status and child lock."
+            caption="The coffee card’s deeper controls. The morning routine itself runs in Home Assistant."
+          />
         </div>
+
+        {/* Hobby room */}
+        <div className="flex flex-col gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.25fr] gap-6 lg:gap-20">
+            <div className="flex flex-col gap-4">
+              <span className="text-xs font-mono uppercase tracking-[0.2em] text-accent-purple">A room for different kinds of making</span>
+              <h3 className="text-2xl md:text-3xl font-semibold tracking-tight text-white font-gothic text-balance">Set the room for what comes next.</h3>
+            </div>
+            <div className="flex flex-col gap-4 text-base text-zinc-300 font-light leading-relaxed text-pretty max-w-2xl">
+              <p>
+                My hobby room has its own page, with lighting modes for work, building, drawing and gaming. The drawing mode also turns on the TV and opens YouTube, all in one action.
+              </p>
+              <p>
+                Lighting zones and individual controls stay available for fine-tuning. Temperature and humidity graphs show the room’s conditions, with a reference band for what suits my instruments.
+              </p>
+            </div>
+          </div>
+          <Shot
+            src="hobby-room-desktop.webp"
+            alt="Hobby-room page with five lighting modes, coloured lighting zones, a TV remote, and temperature and humidity graphs."
+            caption="The hobby room: one space, with different settings for the things I do here. The same modes are also set up as scripts for a Stream Deck+ on my desk."
+          />
+        </div>
+      </section>
+
+      {/* 05 Under the surface */}
+      <section className="flex flex-col gap-10 md:gap-12">
+        <SectionHeading number="05" label="Under the surface" title="What happens after a tap?">
+          An API is a defined way for software to exchange information and commands. My panel uses Home Assistant’s interfaces to request actions and receive updates.
+        </SectionHeading>
+
+        <ol className="flex flex-col md:flex-row md:items-stretch gap-2 md:gap-0" aria-label="How a command travels">
+          {signalChain.map((node, idx) => (
+            <li key={node} className="flex flex-col md:flex-row md:flex-1 items-center gap-2 md:gap-0">
+              <span className={`w-full md:flex-1 text-center rounded-xl border px-4 py-4 text-sm ${idx === 0 ? 'border-accent-purple/50 text-white bg-accent-purple/[0.06]' : 'border-white/[0.1] text-zinc-200 bg-obsidian-950/60'}`}>
+                {node}
+              </span>
+              {idx < signalChain.length - 1 && (
+                <span className="text-accent-cyan font-mono text-sm md:px-3 rotate-90 md:rotate-0" aria-hidden="true">&harr;</span>
+              )}
+            </li>
+          ))}
+        </ol>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14">
+          <div className="flex flex-col gap-4">
+            <h3 className="text-lg font-semibold text-white font-gothic">A connection that stays open</h3>
+            <p className="text-sm md:text-[15px] text-zinc-300 font-light leading-relaxed text-pretty">
+              A WebSocket lets the browser and Home Assistant exchange messages over a connection that stays open. The panel shares the Home Assistant frontend’s connection for live state, commands and extra data such as history and energy statistics.
+            </p>
+            <p className="text-sm md:text-[15px] text-zinc-300 font-light leading-relaxed text-pretty">
+              When I tap a light, the panel calls <code className="font-mono text-[13px] text-accent-cyan">hass.callService</code>. Home Assistant passes the command to the integration, and the updated device state flows back to the panel.
+            </p>
+          </div>
+          <div className="flex flex-col gap-4">
+            <h3 className="text-lg font-semibold text-white font-gothic">Some requests work differently</h3>
+            <p className="text-sm md:text-[15px] text-zinc-300 font-light leading-relaxed text-pretty">
+              Calendar events use Home Assistant’s REST API: one request, one response. It is the panel’s only REST call. Weather forecasts arrive through a WebSocket subscription.
+            </p>
+            <p className="text-sm md:text-[15px] text-zinc-300 font-light leading-relaxed text-pretty">
+              The Hue bridge, the HomeWizard meter and the Sungrow inverter (over Modbus TCP) are reached locally. Heating through tado and coffee through Home Connect depend on their cloud services.
+            </p>
+          </div>
+        </div>
+
+        <details className="group border-y border-white/[0.1]">
+          <summary className="flex items-center justify-between gap-4 py-5 cursor-pointer list-none [&::-webkit-details-marker]:hidden text-sm font-mono uppercase tracking-[0.2em] text-zinc-300 hover:text-white transition-colors focus-visible:outline-none focus-visible:text-white">
+            Implementation notes
+            <span className="text-accent-purple text-lg leading-none transition-transform group-open:rotate-45" aria-hidden="true">+</span>
+          </summary>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-14 pb-8 pt-2">
+            <div className="flex flex-col gap-6">
+              <div className="flex flex-col gap-2">
+                <h3 className="text-base font-semibold text-white">A custom dashboard component</h3>
+                <p className="text-sm text-zinc-300 font-light leading-relaxed text-pretty">
+                  Plain JavaScript, HTML and CSS in one file, registered as Web Components inside Home Assistant’s dashboard. The code is served from the Raspberry Pi and runs in the browser, with no framework or build step.
+                </p>
+              </div>
+              <div className="flex flex-col gap-2">
+                <h3 className="text-base font-semibold text-white">Responsive to its own space</h3>
+                <p className="text-sm text-zinc-300 font-light leading-relaxed text-pretty">
+                  A <code className="font-mono text-[13px] text-accent-cyan">ResizeObserver</code> watches the panel’s own width rather than the screen. Below 700 pixels it switches to the mobile layout.
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-col gap-6">
+              <div className="flex flex-col gap-2">
+                <h3 className="text-base font-semibold text-white">Small details in daily use</h3>
+                <p className="text-sm text-zinc-300 font-light leading-relaxed text-pretty">
+                  Each card’s HTML is compared with its previous version before the page is touched. Open detail panels keep their scroll position. Drag and long-press gestures are kept apart from taps, so a room is not switched off by mistake.
+                </p>
+              </div>
+              <div className="flex flex-col gap-2">
+                <h3 className="text-base font-semibold text-white">Real devices have limitations</h3>
+                <p className="text-sm text-zinc-300 font-light leading-relaxed text-pretty">
+                  The charger can respond slowly, so its toggle pauses for 20 seconds after a press. Live charger power may lag, and some device controls still need more testing.
+                </p>
+              </div>
+            </div>
+          </div>
+        </details>
+      </section>
+
+      {/* 06 Still taking shape */}
+      <section className="flex flex-col gap-10">
+        <SectionHeading number="06" label="Still taking shape" title="Built through daily use." />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="rounded-xl border border-white/[0.08] bg-obsidian-950/60 p-6 flex flex-col gap-4">
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-400" />
-              <h3 className="text-base font-semibold text-white font-mono uppercase tracking-wider">
-                Running Today
-              </h3>
-            </div>
-            <ul className="flex flex-col gap-2.5 text-xs md:text-sm text-zinc-300 font-light list-disc list-inside">
-              <li><strong className="text-white font-normal">Lights:</strong> 10 rooms with per-lamp dimmers and Hue scenes</li>
-              <li><strong className="text-white font-normal">Climate:</strong> 8 tado heating zones</li>
-              <li><strong className="text-white font-normal">Security:</strong> Yale lock and Nest doorbell with full-screen live view on ring</li>
-              <li><strong className="text-white font-normal">Energy:</strong> Sungrow solar production and Easee EV charging</li>
-              <li><strong className="text-white font-normal">Everyday:</strong> coffee presets, family calendar, speakers and a shared shopping list</li>
-              <li><strong className="text-white font-normal">Layouts:</strong> wall tablet, desktop and a dedicated phone layout</li>
-            </ul>
+          <div className="rounded-xl border border-white/[0.08] bg-obsidian-950/60 p-6 md:p-7 flex flex-col gap-4">
+            <span className="text-xs font-mono uppercase tracking-[0.2em] text-accent-cyan">Now</span>
+            <p className="text-sm md:text-[15px] text-zinc-300 font-light leading-relaxed text-pretty">
+              I use the panel every day on my phone and computer, and it is the default view for everyone at home. The first version ran on 18 October 2026; ten days later it is at version 0.39.
+            </p>
+            <p className="text-sm md:text-[15px] text-zinc-300 font-light leading-relaxed text-pretty">
+              Daily use gives me small, specific things to refine: how a control responds, what deserves space and what can stay one step further in.
+            </p>
           </div>
-
-          <div className="rounded-xl border border-white/[0.08] bg-obsidian-950/60 p-6 flex flex-col gap-4">
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-accent-cyan" />
-              <h3 className="text-base font-semibold text-white font-mono uppercase tracking-wider">
-                Roadmap (Next)
-              </h3>
-            </div>
-            <ul className="flex flex-col gap-2.5 text-xs md:text-sm text-zinc-300 font-light list-disc list-inside">
-              <li><strong className="text-white font-normal">Wall tablet</strong> mounted in the hallway, with its own account, screen wake on motion and kiosk mode</li>
-              <li><strong className="text-white font-normal">A dedicated energy page</strong> with an illustrated house and live flows, once an electricity meter is connected</li>
-              <li><strong className="text-white font-normal">Alarm system and robot vacuum</strong></li>
-              <li><strong className="text-white font-normal">Automations</strong> that use the panel&apos;s knowledge: lights that follow presence, heating that follows the calendar</li>
+          <div className="rounded-xl border border-white/[0.08] bg-obsidian-950/60 p-6 md:p-7 flex flex-col gap-4">
+            <span className="text-xs font-mono uppercase tracking-[0.2em] text-accent-purple">Next</span>
+            <ul className="flex flex-col gap-3 text-sm md:text-[15px] text-zinc-300 font-light leading-relaxed">
+              <li className="flex gap-3"><span className="text-accent-purple" aria-hidden="true">&bull;</span><span>A wall-mounted tablet in the hallway. Kiosk mode is ready, but the tablet is not installed yet.</span></li>
+              <li className="flex gap-3"><span className="text-accent-purple" aria-hidden="true">&bull;</span><span>Charging the car during the cheapest hours of the day.</span></li>
+              <li className="flex gap-3"><span className="text-accent-purple" aria-hidden="true">&bull;</span><span>Household consumption hour by hour, next to the price chart.</span></li>
             </ul>
           </div>
         </div>
+
+        <p className="text-xs text-zinc-500 leading-relaxed max-w-3xl text-pretty">
+          About the screenshots: real captures of the running panel, taken on 28 October 2026 in its own demo mode. Names are anonymised, calendar events are sample data, and the alarm, lock and doorbell are hidden. Phone views were captured with phone emulation. The air purifier’s filter value has been unavailable since its integration was re-added, so the overview shows it as a warning.
+        </p>
       </section>
 
-      {/* 9. Bottom Navigation Footer */}
-      <section className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 border-t border-white/5">
-        <Link
-          href="/projects"
-          className="inline-flex items-center gap-2 text-xs md:text-sm font-mono uppercase tracking-widest text-zinc-400 hover:text-white transition-colors"
-        >
-          <span>&larr;</span>
-          <span>Back to All Projects</span>
-        </Link>
-        <div className="flex items-center gap-4">
-          <CtaButton
-            href="/about"
-            className="px-6 py-2.5 text-xs md:text-sm"
-          >
+      {/* Closing */}
+      <section className="flex flex-col gap-8 pt-10 border-t border-white/[0.08]">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+          <CtaButton href="/about" className="px-6 py-3 text-xs md:text-sm">
             <span>How I Work</span>
             <span className="aurora-cta-arrow inline-block" aria-hidden="true">&rarr;</span>
           </CtaButton>
+          <CtaButton href="/projects" variant="secondary" className="px-6 py-3 text-xs md:text-sm">
+            Back to Selected Work
+          </CtaButton>
+        </div>
+        <div className="flex flex-col sm:flex-row flex-wrap gap-x-10 gap-y-1 text-sm text-zinc-400">
+          <Link href="/projects/dmaic-companion" className="py-3 hover:text-white transition-colors">
+            More systems work: <span className="text-zinc-200">DMAIC Companion</span> <span aria-hidden="true">&rarr;</span>
+          </Link>
+          <Link href="/art" className="py-3 hover:text-white transition-colors">
+            Another material: <span className="text-zinc-200">graphite and visual practice</span> <span aria-hidden="true">&rarr;</span>
+          </Link>
         </div>
       </section>
 

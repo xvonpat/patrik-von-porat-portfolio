@@ -155,9 +155,9 @@ export default async function Home() {
     {
       title: 'Home Control Panel',
       category: 'SMART HOME · INTERFACE DESIGN',
-      description: 'A wall-mounted control panel for the whole house: lights, heating, the front door, EV charging and solar power in one calm, glanceable interface.',
-      image: '/images/projects/home-control-panel/00-cover.webp',
-      imageAlt: 'Dark smart-home control panel shown on a large screen and a phone',
+      description: 'A personal Home Assistant interface for the whole house, organised by room: a quick overview first, deeper controls when I need them. In daily use on phone and desktop.',
+      image: '/images/projects/home-control-panel/overview-desktop.webp',
+      imageAlt: 'Desktop control panel with illuminated room tiles, weather, agenda, air quality, coffee and energy cards',
       link: '/projects/home-control-panel',
       ctaText: 'Explore Home Control Panel',
       accent: 'cyan'
