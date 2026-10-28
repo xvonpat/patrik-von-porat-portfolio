@@ -324,11 +324,22 @@ export const Posts: CollectionConfig = {
       },
     },
     {
+      name: 'batchTags',
+      type: 'ui',
+      admin: {
+        position: 'sidebar',
+        components: {
+          Field: '/src/components/BatchTagInput.js',
+        },
+      },
+    },
+    {
       name: 'tags',
       type: 'array',
       label: 'Tags',
       admin: {
         position: 'sidebar',
+        initCollapsed: true,
         description: 'Tags can be suggested automatically if left empty, but remain editable.',
       },
       fields: [
