@@ -535,6 +535,21 @@ export const eddieTheTrooperPhotos = [
     project: "Eddie the Trooper",
     albumSlug: "eddie-the-trooper",
     order: 18
+  },
+  {
+    id: "IMG_1231",
+    filename: "IMG_1231.webp",
+    title: "Eddie the Trooper: Torso & Scenic Base Assembly",
+    src: "/images/art/eddie-the-trooper/IMG_1231.webp",
+    thumb: "/images/art/eddie-the-trooper/thumbnails/IMG_1231.webp",
+    width: 1536,
+    height: 2048,
+    orientation: "portrait",
+    aspectRatio: "3/4",
+    categorySlug: "3d-prints",
+    project: "Eddie the Trooper",
+    albumSlug: "eddie-the-trooper",
+    order: 31
   }
 ];
 
