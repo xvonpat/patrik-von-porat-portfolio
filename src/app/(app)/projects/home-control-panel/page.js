@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import CtaButton from '@/components/CtaButton';
+import { ShotLightbox, Shot } from './ShotLightbox';
 
 const IMG = '/images/projects/home-control-panel';
 
@@ -28,35 +28,67 @@ export const metadata = {
   },
 };
 
-/* A screenshot with its caption. The image opens full size in a new tab. */
-function Shot({ src, alt, caption, phone = false, priority = false, sizes, className = '' }) {
-  return (
-    <figure className={`flex flex-col gap-3 min-w-0 ${phone ? 'w-full max-w-[280px] mx-auto' : 'w-full'} ${className}`}>
-      <a
-        href={`${IMG}/${src}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={`group block overflow-hidden border border-white/[0.08] bg-obsidian-950/80 shadow-[0_12px_40px_rgba(0,0,0,0.45)] transition-colors hover:border-accent-purple/40 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent-purple focus-visible:ring-offset-4 focus-visible:ring-offset-obsidian-950 ${phone ? 'rounded-[1.75rem]' : 'rounded-xl md:rounded-2xl'}`}
-      >
-        <Image
-          src={`${IMG}/${src}`}
-          alt={alt}
-          width={phone ? 1170 : 2880}
-          height={phone ? 2532 : 1800}
-          priority={priority}
-          sizes={sizes || (phone ? '280px' : '(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1200px')}
-          className="w-full h-auto block"
-        />
-        <span className="sr-only">(opens full size in a new tab)</span>
-      </a>
-      {caption && (
-        <figcaption className="text-xs md:text-[13px] text-zinc-400 leading-relaxed text-pretty">
-          {caption}
-        </figcaption>
-      )}
-    </figure>
-  );
-}
+/* Every screenshot on the page, in reading order. The lightbox browses them in this order. */
+const shots = [
+  {
+    src: 'overview-desktop.webp',
+    title: 'Desktop overview',
+    alt: 'Desktop control panel with illuminated room tiles, weather, agenda, air quality, and the upper parts of the coffee and energy cards.',
+    caption: 'The desktop overview. Rooms, everyday controls and the state of the home, brought together.',
+  },
+  {
+    src: 'home-mobile.webp',
+    phone: true,
+    title: 'Home on the phone',
+    alt: 'Phone screen with a swipeable status line, the time, weather with a five-day forecast, and an agenda with sample events. Tabs along the bottom.',
+    caption: 'Home, with tabs along the bottom.',
+  },
+  {
+    src: 'lights-mobile.webp',
+    phone: true,
+    title: 'Lights on the phone',
+    alt: 'Mobile lighting tab with homecoming and bedtime moods above a grid of glowing room tiles with brightness bars and power buttons.',
+    caption: 'Lights: moods and every room as a tile.',
+  },
+  {
+    src: 'room-detail-desktop.webp',
+    title: 'Room detail',
+    alt: 'Open living-room panel showing room brightness, current and target temperature with schedule, manual and off modes, and individual lamp controls.',
+    caption: 'Open a room to reach heating, individual lights and more detailed adjustments.',
+  },
+  {
+    src: 'air-comfort-mobile.webp',
+    phone: true,
+    title: 'Air comfort',
+    alt: 'Living-room detail with temperature and humidity plotted as a dot towards humid, and a short tip to air the room.',
+    caption: 'Temperature and humidity become a position, a description and a practical tip.',
+  },
+  {
+    src: 'energy-desktop.webp',
+    title: 'Energy',
+    alt: "Energy tab showing the house drawing from the grid at night, solar production at zero, today's totals and the current electricity price marked expensive.",
+    caption: 'An evening snapshot: the house is drawing from the grid and solar production is zero.',
+  },
+  {
+    src: 'energy-mobile.webp',
+    phone: true,
+    title: 'Energy on the phone',
+    alt: "Phone energy view with a flow diagram from grid to house, solar at zero, today's totals and the current electricity price marked expensive.",
+    caption: 'The same evening on the phone: live flow, today’s totals and the price right now.',
+  },
+  {
+    src: 'coffee-settings-desktop.webp',
+    title: 'Coffee settings',
+    alt: 'Coffee machine detail panel with drink choices, cup statistics, maintenance status and child lock.',
+    caption: 'The coffee card’s deeper controls. The morning routine itself runs in Home Assistant.',
+  },
+  {
+    src: 'hobby-room-desktop.webp',
+    title: 'Hobby room',
+    alt: 'Hobby-room page with five lighting modes, coloured lighting zones, a TV remote, and temperature and humidity graphs.',
+    caption: 'The hobby room: one space, with different settings for the things I do here. The same modes are also set up as scripts for a Stream Deck+ on my desk.',
+  },
+];
 
 function SectionHeading({ number, label, title, children }) {
   return (
@@ -134,6 +166,7 @@ const signalChain = ['My panel', 'Home Assistant', 'Integration', 'Device or clo
 
 export default function HomeControlPanelPage() {
   return (
+    <ShotLightbox shots={shots}>
     <div className="max-w-5xl xl:max-w-6xl 2xl:max-w-[1240px] mx-auto px-6 lg:px-8 py-8 md:py-14 flex flex-col gap-20 md:gap-28 relative z-10">
 
       {/* Hero */}
@@ -174,8 +207,6 @@ export default function HomeControlPanelPage() {
 
         <Shot
           src="overview-desktop.webp"
-          alt="Desktop control panel with illuminated room tiles, weather, agenda, air quality, and the upper parts of the coffee and energy cards."
-          caption="The desktop overview. Rooms, everyday controls and the state of the home, brought together."
           priority
         />
 
@@ -212,18 +243,12 @@ export default function HomeControlPanelPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-[480px] w-full mx-auto md:mx-0 md:w-[480px]">
           <Shot
             src="home-mobile.webp"
-            phone
             className="hidden sm:flex"
             sizes="230px"
-            alt="Phone screen with a swipeable status line, the time, weather with a five-day forecast, and an agenda with sample events. Tabs along the bottom."
-            caption="Home, with tabs along the bottom."
           />
           <Shot
             src="lights-mobile.webp"
-            phone
             sizes="(max-width: 640px) 280px, 230px"
-            alt="Mobile lighting tab with homecoming and bedtime moods above a grid of glowing room tiles with brightness bars and power buttons."
-            caption="Lights: moods and every room as a tile."
           />
         </div>
         <div className="flex flex-col gap-5 max-w-xl">
@@ -287,17 +312,12 @@ export default function HomeControlPanelPage() {
 
         <Shot
           src="room-detail-desktop.webp"
-          alt="Open living-room panel showing room brightness, current and target temperature with schedule, manual and off modes, and individual lamp controls."
-          caption="Open a room to reach heating, individual lights and more detailed adjustments."
         />
 
         {/* Making information readable */}
         <div className="grid grid-cols-1 md:grid-cols-[280px_1fr] gap-10 md:gap-16 items-center rounded-2xl border border-white/[0.08] bg-obsidian-950/60 p-6 md:p-10">
           <Shot
             src="air-comfort-mobile.webp"
-            phone
-            alt="Living-room detail with temperature and humidity plotted as a dot towards humid, and a short tip to air the room."
-            caption="Temperature and humidity become a position, a description and a practical tip."
           />
           <div className="flex flex-col gap-5">
             <span className="text-xs font-mono uppercase tracking-[0.2em] text-accent-cyan">Making information readable</span>
@@ -324,15 +344,10 @@ export default function HomeControlPanelPage() {
           <Shot
             src="energy-desktop.webp"
             className="hidden md:flex"
-            alt="Energy tab showing the house drawing from the grid at night, solar production at zero, today's totals and the current electricity price marked expensive."
-            caption="An evening snapshot: the house is drawing from the grid and solar production is zero."
           />
           <Shot
             src="energy-mobile.webp"
-            phone
             className="md:hidden"
-            alt="Phone energy view with a flow diagram from grid to house, solar at zero, today's totals and the current electricity price marked expensive."
-            caption="An evening snapshot: the house is drawing from the grid and solar production is zero."
           />
         </div>
       </section>
@@ -365,8 +380,6 @@ export default function HomeControlPanelPage() {
           </div>
           <Shot
             src="coffee-settings-desktop.webp"
-            alt="Coffee machine detail panel with drink choices, cup statistics, maintenance status and child lock."
-            caption="The coffee card’s deeper controls. The morning routine itself runs in Home Assistant."
           />
         </div>
 
@@ -388,8 +401,6 @@ export default function HomeControlPanelPage() {
           </div>
           <Shot
             src="hobby-room-desktop.webp"
-            alt="Hobby-room page with five lighting modes, coloured lighting zones, a TV remote, and temperature and humidity graphs."
-            caption="The hobby room: one space, with different settings for the things I do here. The same modes are also set up as scripts for a Stream Deck+ on my desk."
           />
         </div>
       </section>
@@ -523,5 +534,6 @@ export default function HomeControlPanelPage() {
       </section>
 
     </div>
+    </ShotLightbox>
   );
 }
