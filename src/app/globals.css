@@ -257,22 +257,12 @@ kbd {
   outline-offset: 4px;
 }
 
-/* Monogram hover: a gentle lift in brightness, no glow */
-@media (hover: hover) and (pointer: fine) {
-  .brand-link:hover .brand-mark {
-    filter: brightness(1.2) saturate(1.1);
-  }
-}
-
 .brand-mark {
   position: relative;
   z-index: 1;
   display: block;
   height: 26px;
   aspect-ratio: 878 / 520;
-  background-color: #a855f7;
-  /* Same aurora gradient as the favicon (scripts/generate-icons.mjs) */
-  background-image: linear-gradient(to bottom right, #a855f7 0%, #5ee6e6 100%);
   mask-image: url("/images/brand/pvp-mark.png");
   mask-size: contain;
   mask-repeat: no-repeat;
@@ -281,18 +271,11 @@ kbd {
   -webkit-mask-size: contain;
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-position: center;
-  transition: opacity 200ms ease-out, filter 200ms ease-out;
 }
 
 @media (min-width: 768px) {
   .brand-mark {
     height: 29px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .brand-mark {
-    transition: none !important;
   }
 }
 

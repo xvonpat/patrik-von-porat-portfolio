@@ -178,10 +178,34 @@ export default function Navbar() {
           <div className="flex-shrink-0 flex items-center md:absolute md:left-0">
             <Link 
               href="/" 
-              className="brand-link" 
+              className="brand-link group relative inline-flex items-center justify-center min-w-[48px] min-h-[48px] outline-none focus-visible:outline-2 focus-visible:outline-accent-cyan focus-visible:outline-offset-4" 
               aria-label="Go to homepage"
             >
-              <span className="brand-mark" aria-hidden="true" />
+              <span 
+                className="brand-mark relative z-[1] block h-[26px] md:h-[29px] aspect-[878/520]"
+                style={{
+                  maskImage: 'url("/images/brand/pvp-mark.png")',
+                  WebkitMaskImage: 'url("/images/brand/pvp-mark.png")',
+                  maskSize: 'contain',
+                  WebkitMaskSize: 'contain',
+                  maskRepeat: 'no-repeat',
+                  WebkitMaskRepeat: 'no-repeat',
+                  maskPosition: 'center',
+                  WebkitMaskPosition: 'center',
+                }}
+                aria-hidden="true"
+              >
+                {/* Resting grey state matching navbar links (#b8b9b7) */}
+                <span 
+                  className="absolute inset-0 bg-[#b8b9b7] transition-opacity duration-200 group-hover:opacity-0 group-focus-visible:opacity-0" 
+                  aria-hidden="true" 
+                />
+                {/* Hover aurora gradient state */}
+                <span 
+                  className="absolute inset-0 bg-gradient-to-br from-[#a855f7] to-[#5ee6e6] opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100" 
+                  aria-hidden="true" 
+                />
+              </span>
             </Link>
           </div>
 
