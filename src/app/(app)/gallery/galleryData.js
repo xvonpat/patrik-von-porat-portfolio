@@ -763,6 +763,51 @@ export const darthVaderDioramaPhotos = [
     project: "Darth Vader Diorama",
     albumSlug: "darth-vader-diorama",
     order: 14
+  },
+  {
+    id: "IMG_1250",
+    filename: "IMG_1250.webp",
+    title: "Darth Vader Diorama: Scenic Rock Base Texture & Shading",
+    src: "/images/art/darth-vader-diorama/IMG_1250.webp",
+    thumb: "/images/art/darth-vader-diorama/thumbnails/IMG_1250.webp",
+    width: 2048,
+    height: 1152,
+    orientation: "landscape",
+    aspectRatio: "16/9",
+    categorySlug: "3d-prints",
+    project: "Darth Vader Diorama",
+    albumSlug: "darth-vader-diorama",
+    order: 15
+  },
+  {
+    id: "IMG_1265",
+    filename: "IMG_1265.webp",
+    title: "Darth Vader Diorama: Stormtroopers Mounted on Scenic Base",
+    src: "/images/art/darth-vader-diorama/IMG_1265.webp",
+    thumb: "/images/art/darth-vader-diorama/thumbnails/IMG_1265.webp",
+    width: 2048,
+    height: 1152,
+    orientation: "landscape",
+    aspectRatio: "16/9",
+    categorySlug: "3d-prints",
+    project: "Darth Vader Diorama",
+    albumSlug: "darth-vader-diorama",
+    order: 16
+  },
+  {
+    id: "IMG_1267",
+    filename: "IMG_1267.webp",
+    title: "Darth Vader Diorama: Full Diorama Assembly with Vader & Escort",
+    src: "/images/art/darth-vader-diorama/IMG_1267.webp",
+    thumb: "/images/art/darth-vader-diorama/thumbnails/IMG_1267.webp",
+    width: 1152,
+    height: 2048,
+    orientation: "portrait",
+    aspectRatio: "9/16",
+    categorySlug: "3d-prints",
+    project: "Darth Vader Diorama",
+    albumSlug: "darth-vader-diorama",
+    order: 17
   }
 ];
 
