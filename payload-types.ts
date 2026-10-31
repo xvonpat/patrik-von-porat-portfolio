@@ -167,11 +167,11 @@ export interface Post {
   status: 'draft' | 'published';
   featured?: boolean | null;
   /**
-   * Upload an image from Media, or select an existing photo from the Gallery below.
+   * Option A: Upload a custom image file from your device, or select an asset from the Media library.
    */
   featuredImage?: (number | null) | Media;
   /**
-   * Pick an existing image from your Photo Gallery (e.g. Eddie the Trooper). Used as the featured image if selected.
+   * Option B: Pick an existing image from your Photo Gallery (e.g. 3D House, Eddie the Trooper, Darth Vader). When selected, this is used as the post featured image.
    */
   galleryImage?: (number | null) | GalleryImage;
   /**

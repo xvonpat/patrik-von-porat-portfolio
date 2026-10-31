@@ -32,6 +32,7 @@ import * as migration_20261023_180000_add_more_darth_vader_images from './202610
 import * as migration_20261024_221500_add_stormtrooper_detailing_image from './20261024_221500_add_stormtrooper_detailing_image';
 import * as migration_20261027_222500_add_torso_and_base_assembly_eddie_image from './20261027_222500_add_torso_and_base_assembly_eddie_image';
 import * as migration_20261031_012000_add_scenic_base_and_squad_vader_images from './20261031_012000_add_scenic_base_and_squad_vader_images';
+import * as migration_20261101_003000_add_3d_house_category_and_images from './20261101_003000_add_3d_house_category_and_images';
 
 export const migrations = [
   {
@@ -203,5 +204,10 @@ export const migrations = [
     up: migration_20261031_012000_add_scenic_base_and_squad_vader_images.up,
     down: migration_20261031_012000_add_scenic_base_and_squad_vader_images.down,
     name: '20261031_012000_add_scenic_base_and_squad_vader_images',
+  },
+  {
+    up: migration_20261101_003000_add_3d_house_category_and_images.up,
+    down: migration_20261101_003000_add_3d_house_category_and_images.down,
+    name: '20261101_003000_add_3d_house_category_and_images',
   },
 ];

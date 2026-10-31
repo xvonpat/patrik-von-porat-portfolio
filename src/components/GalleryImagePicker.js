@@ -4,7 +4,11 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useField } from '@payloadcms/ui';
 
 export default function GalleryImagePicker(props) {
-  const { path, label = 'Gallery Image' } = props;
+  const { path } = props;
+  const isFeatured = path === 'galleryImage' || path?.endsWith?.('galleryImage');
+  const label = props.field?.label || props.label || (isFeatured ? 'Featured Image (Choose from Gallery)' : 'Gallery Image');
+  const description = props.field?.admin?.description || (isFeatured ? 'Pick an existing image from your Photo Gallery (e.g. 3D House, Eddie the Trooper, Darth Vader). When selected, this is used as the post featured image.' : null);
+
   const { value, setValue } = useField({ path });
 
   const [isOpen, setIsOpen] = useState(false);
@@ -52,8 +56,13 @@ export default function GalleryImagePicker(props) {
 
   const selectedImage = useMemo(() => {
     if (!selectedId) return null;
-    return images.find((img) => String(img.id) === String(selectedId)) || null;
-  }, [selectedId, images]);
+    const found = images.find((img) => String(img.id) === String(selectedId));
+    if (found) return found;
+    if (value && typeof value === 'object' && (value.imageUrl || value.thumbUrl || value.filename)) {
+      return value;
+    }
+    return null;
+  }, [selectedId, images, value]);
 
   // Extract unique projects/albums for filter pills
   const filterOptions = useMemo(() => {
@@ -174,9 +183,29 @@ export default function GalleryImagePicker(props) {
                     padding: '2px 6px',
                     borderRadius: '4px',
                     marginBottom: '4px',
+                    marginRight: '6px',
                   }}
                 >
                   {selectedImage.project || selectedImage.album?.title}
+                </div>
+              )}
+
+              {isFeatured && (
+                <div
+                  style={{
+                    display: 'inline-block',
+                    fontSize: '10px',
+                    fontWeight: 600,
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.05em',
+                    color: '#4ade80',
+                    backgroundColor: 'rgba(74, 222, 128, 0.12)',
+                    padding: '2px 6px',
+                    borderRadius: '4px',
+                    marginBottom: '4px',
+                  }}
+                >
+                  Active Featured Image
                 </div>
               )}
 
@@ -270,12 +299,18 @@ export default function GalleryImagePicker(props) {
             🖼️
           </div>
           <div style={{ fontSize: '13px', fontWeight: 500, color: '#f4f4f5' }}>
-            Choose from Gallery
+            {isFeatured ? 'Choose Featured Image from Gallery' : 'Choose from Gallery'}
           </div>
           <div style={{ fontSize: '11px', color: '#71717a' }}>
-            Browse {images.length > 0 ? `${images.length} photos with thumbnails` : 'Eddie & gallery images'}
+            {images.length > 0 ? `Browse ${images.length} gallery photos with thumbnails` : 'Browse gallery photos with thumbnails'}
           </div>
         </button>
+      )}
+
+      {description && (
+        <div style={{ fontSize: '12px', color: '#71717a', marginTop: '6px' }}>
+          {description}
+        </div>
       )}
 
       {/* Modal Picker Dialog */}

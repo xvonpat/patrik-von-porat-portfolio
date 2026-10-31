@@ -2,7 +2,7 @@ import React from 'react';
 import { getPayload } from 'payload';
 import configPromise from '../../../../payload.config.ts';
 import GalleryClient from './GalleryClient';
-import { galleryPhotos as fallbackPhotos, eddieTheTrooperPhotos, darthVaderDioramaPhotos, galleryAlbums as fallbackAlbums } from './galleryData';
+import { galleryPhotos as fallbackPhotos, eddieTheTrooperPhotos, darthVaderDioramaPhotos, house3DPhotos, galleryAlbums as fallbackAlbums } from './galleryData';
 
 export const revalidate = 60; // Revalidate every 60 seconds
 
@@ -23,7 +23,12 @@ export const metadata = {
   }
 };
 
-export default async function GalleryPage() {
+export default async function GalleryPage({ searchParams }) {
+  const resolvedSearchParams = searchParams ? await searchParams : {};
+  const initialCategoryParam = resolvedSearchParams?.category || resolvedSearchParams?.collection || null;
+  const initialAlbumParam = resolvedSearchParams?.album || resolvedSearchParams?.project || null;
+  const initialPhotoParam = resolvedSearchParams?.photo || resolvedSearchParams?.loupe || null;
+
   let categories = [];
   let albums = [];
   let images = [];
@@ -138,6 +143,14 @@ export default async function GalleryPage() {
         description: 'Curated Web Album • 35mm & Digital',
         order: 2,
       },
+      {
+        id: '3d-house',
+        name: '3D House',
+        slug: '3d-house',
+        eyebrow: 'Digital Models',
+        description: '3D floor plans and architectural spatial modeling',
+        order: 5,
+      },
     ];
     albums = fallbackAlbums;
     images = [
@@ -149,12 +162,20 @@ export default async function GalleryPage() {
       })),
       ...eddieTheTrooperPhotos,
       ...darthVaderDioramaPhotos,
+      ...house3DPhotos,
     ];
   }
 
   return (
     <main className="min-h-screen bg-obsidian-950 text-zinc-100 selection:bg-accent-purple/30 selection:text-white relative">
-      <GalleryClient initialCategories={categories} initialAlbums={albums} initialImages={images} />
+      <GalleryClient
+        initialCategories={categories}
+        initialAlbums={albums}
+        initialImages={images}
+        initialCategoryParam={initialCategoryParam}
+        initialAlbumParam={initialAlbumParam}
+        initialPhotoParam={initialPhotoParam}
+      />
     </main>
   );
 }

@@ -378,8 +378,9 @@ export const Posts: CollectionConfig = {
       type: 'upload',
       relationTo: 'media',
       required: false,
+      label: 'Featured Image: Upload from Media',
       admin: {
-        description: 'Upload an image from Media, or select an existing photo from the Gallery below.',
+        description: 'Option A: Upload a custom image file from your device, or select an asset from the Media library.',
       },
     },
     {
@@ -387,13 +388,12 @@ export const Posts: CollectionConfig = {
       type: 'relationship',
       relationTo: 'gallery-images',
       hasMany: false,
-      label: 'Or Choose From Gallery',
+      label: 'Featured Image: Choose from Gallery',
       admin: {
-        position: 'sidebar',
         components: {
           Field: '/src/components/GalleryImagePicker.js',
         },
-        description: 'Pick an existing image from your Photo Gallery (e.g. Eddie the Trooper). Used as the featured image if selected.',
+        description: 'Option B: Pick an existing image from your Photo Gallery (e.g. 3D House, Eddie the Trooper, Darth Vader). When selected, this is used as the post featured image.',
       },
     },
     {

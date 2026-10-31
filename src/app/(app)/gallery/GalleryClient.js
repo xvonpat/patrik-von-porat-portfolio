@@ -2,9 +2,16 @@
 
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import Image from 'next/image';
-import { galleryPhotos as fallbackPhotos, eddieTheTrooperPhotos, darthVaderDioramaPhotos, galleryAlbums as fallbackAlbums } from './galleryData';
+import { galleryPhotos as fallbackPhotos, eddieTheTrooperPhotos, darthVaderDioramaPhotos, house3DPhotos, galleryAlbums as fallbackAlbums } from './galleryData';
 
-export default function GalleryClient({ initialCategories = [], initialAlbums = [], initialImages = [] }) {
+export default function GalleryClient({
+  initialCategories = [],
+  initialAlbums = [],
+  initialImages = [],
+  initialCategoryParam = null,
+  initialAlbumParam = null,
+  initialPhotoParam = null,
+}) {
   // Ensure default categories, albums and images fallback if not provided
   const categories = useMemo(() => {
     if (initialCategories.length > 0) return initialCategories;
@@ -25,6 +32,14 @@ export default function GalleryClient({ initialCategories = [], initialAlbums = 
         description: 'Curated Web Album • 35mm & Digital',
         order: 2,
       },
+      {
+        id: '3d-house',
+        name: '3D House',
+        slug: '3d-house',
+        eyebrow: 'Digital Models',
+        description: '3D floor plans and architectural spatial modeling',
+        order: 5,
+      },
     ];
   }, [initialCategories]);
 
@@ -44,37 +59,61 @@ export default function GalleryClient({ initialCategories = [], initialAlbums = 
       })),
       ...eddieTheTrooperPhotos,
       ...darthVaderDioramaPhotos,
+      ...house3DPhotos,
     ];
   }, [initialImages]);
 
-  // Selected category: default to '3d-prints' when entering gallery
-  const [selectedCategory, setSelectedCategory] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const params = new URLSearchParams(window.location.search);
-      const catParam = params.get('category') || params.get('collection');
-      if (catParam === 'all' || catParam === 'all-collections') return 'all-collections';
-      if (catParam && categories.some(c => c.slug === catParam)) return catParam;
+  // Compute initial category deterministically on both server and client
+  const computeInitialCategory = useCallback(() => {
+    if (initialCategoryParam === 'all' || initialCategoryParam === 'all-collections') {
+      return 'all-collections';
+    }
+    if (initialCategoryParam && categories.some(c => c.slug === initialCategoryParam)) {
+      return initialCategoryParam;
     }
     const has3DPrints = categories.some(c => c.slug === '3d-prints');
     if (has3DPrints) return '3d-prints';
     return categories[0]?.slug || 'all-collections';
-  });
+  }, [initialCategoryParam, categories]);
 
-  // Selected album within the active category: 'eddie-the-trooper' by default when on 3d-prints
-  const [selectedAlbum, setSelectedAlbum] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const params = new URLSearchParams(window.location.search);
-      const albParam = params.get('album') || params.get('project');
-      if (albParam) return albParam;
-      const catParam = params.get('category') || params.get('collection');
-      if (catParam && catParam !== '3d-prints') return 'all-images';
-    }
+  const [selectedCategory, setSelectedCategory] = useState(computeInitialCategory);
+
+  // Compute initial album deterministically on both server and client
+  const computeInitialAlbum = useCallback(() => {
+    const activeCat = computeInitialCategory();
+    if (initialAlbumParam) return initialAlbumParam;
+    if (activeCat !== '3d-prints') return 'all-images';
     return 'eddie-the-trooper';
-  });
+  }, [computeInitialCategory, initialAlbumParam]);
+
+  const [selectedAlbum, setSelectedAlbum] = useState(computeInitialAlbum);
+
+  const computeInitialPhotoIndex = useCallback(() => {
+    if (initialPhotoParam === null) return null;
+    const activeCat = computeInitialCategory();
+    const activeAlb = computeInitialAlbum();
+
+    let targetPool = activeCat === 'all-collections'
+      ? allPhotos
+      : allPhotos.filter(p => p.categorySlug === activeCat);
+
+    if (activeAlb !== 'all-images') {
+      targetPool = targetPool.filter(p => p.albumSlug === activeAlb);
+    }
+
+    if (!isNaN(Number(initialPhotoParam))) {
+      const idx = parseInt(initialPhotoParam, 10);
+      if (idx >= 0 && idx < targetPool.length) return idx;
+    } else {
+      const foundIdx = targetPool.findIndex(p => p.id === initialPhotoParam || p.filename === initialPhotoParam || p.filename?.startsWith(initialPhotoParam));
+      if (foundIdx !== -1) return foundIdx;
+    }
+    return null;
+  }, [initialPhotoParam, computeInitialCategory, computeInitialAlbum, allPhotos]);
 
   const [filter, setFilter] = useState('all'); // 'all' | 'landscape' | 'portrait'
   const [gridCols, setGridCols] = useState(3); // 2 | 3 | 4
-  const [activeLoupeIndex, setActiveLoupeIndex] = useState(null); // null when closed, 0..N when open
+  const [activeLoupeIndex, setActiveLoupeIndex] = useState(computeInitialPhotoIndex);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isZoomed, setIsZoomed] = useState(false);
   const [showFilmstrip, setShowFilmstrip] = useState(true);
