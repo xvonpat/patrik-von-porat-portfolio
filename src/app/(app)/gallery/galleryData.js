@@ -908,5 +908,20 @@ export const house3DPhotos = [
     albumSlug: null,
     order: 5,
   },
+  {
+    id: "view_plan",
+    filename: "view_plan.webp",
+    title: "3D House: Overhead Floor Plan View",
+    src: "/images/projects/3d-house/view_plan.webp",
+    thumb: "/images/projects/3d-house/thumbnails/view_plan.webp",
+    width: 1920,
+    height: 1080,
+    orientation: "landscape",
+    aspectRatio: "16/9",
+    categorySlug: "3d-house",
+    project: "3D House",
+    albumSlug: null,
+    order: 6,
+  },
 ];
 

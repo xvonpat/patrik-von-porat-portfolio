@@ -33,6 +33,7 @@ import * as migration_20261024_221500_add_stormtrooper_detailing_image from './2
 import * as migration_20261027_222500_add_torso_and_base_assembly_eddie_image from './20261027_222500_add_torso_and_base_assembly_eddie_image';
 import * as migration_20261031_012000_add_scenic_base_and_squad_vader_images from './20261031_012000_add_scenic_base_and_squad_vader_images';
 import * as migration_20261101_003000_add_3d_house_category_and_images from './20261101_003000_add_3d_house_category_and_images';
+import * as migration_20261101_110000_add_view_plan_house_image from './20261101_110000_add_view_plan_house_image';
 
 export const migrations = [
   {
@@ -209,5 +210,10 @@ export const migrations = [
     up: migration_20261101_003000_add_3d_house_category_and_images.up,
     down: migration_20261101_003000_add_3d_house_category_and_images.down,
     name: '20261101_003000_add_3d_house_category_and_images',
+  },
+  {
+    up: migration_20261101_110000_add_view_plan_house_image.up,
+    down: migration_20261101_110000_add_view_plan_house_image.down,
+    name: '20261101_110000_add_view_plan_house_image',
   },
 ];
