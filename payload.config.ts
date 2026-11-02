@@ -31,9 +31,17 @@ export default buildConfig({
             title: 'Workbench Assistant — vonporat.com',
           },
         },
+        sitemap: {
+          Component: '/src/components/SitemapViewWrapper#SitemapViewWrapper',
+          path: '/sitemap',
+          meta: {
+            title: 'Site Architecture & Map — vonporat.com',
+          },
+        },
       },
       beforeDashboard: [
         '/src/components/WorkbenchDashboardCard#WorkbenchDashboardCard',
+        '/src/components/SitemapDashboardCard#SitemapDashboardCard',
       ],
       afterDashboard: [
         '/src/components/BackgroundThemeDashboardCard#BackgroundThemeDashboardCard',
