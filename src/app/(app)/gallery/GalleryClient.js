@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import Image from 'next/image';
-import { galleryPhotos as fallbackPhotos, eddieTheTrooperPhotos, darthVaderDioramaPhotos, house3DPhotos, galleryAlbums as fallbackAlbums } from './galleryData';
+import { galleryPhotos as fallbackPhotos, eddieTheTrooperPhotos, darthVaderDioramaPhotos, leatherfacePhotos, house3DPhotos, galleryAlbums as fallbackAlbums } from './galleryData';
 
 export default function GalleryClient({
   initialCategories = [],
@@ -59,6 +59,7 @@ export default function GalleryClient({
       })),
       ...eddieTheTrooperPhotos,
       ...darthVaderDioramaPhotos,
+      ...leatherfacePhotos,
       ...house3DPhotos,
     ];
   }, [initialImages]);
