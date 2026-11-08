@@ -149,11 +149,76 @@ export default function GalleryClient({
         setActiveLoupeIndex(null);
         setIsPlaying(false);
         setIsZoomed(false);
+        if (typeof window !== 'undefined' && window.location.search) {
+          window.history.pushState(null, '', '/gallery');
+        }
       }
     };
 
     window.addEventListener('click', handleGalleryLinkClick);
     return () => window.removeEventListener('click', handleGalleryLinkClick);
+  }, [categories]);
+
+  // Synchronize category and album to the URL so browser refresh and deep-linking preserve the active view
+  const updateUrl = useCallback((catSlug, albSlug) => {
+    if (typeof window === 'undefined') return;
+
+    const params = new URLSearchParams();
+
+    // Default is category: '3d-prints' and album: 'eddie-the-trooper'
+    const isDefault = catSlug === '3d-prints' && (albSlug === 'eddie-the-trooper' || !albSlug);
+
+    if (!isDefault) {
+      if (catSlug && catSlug !== 'all-collections') {
+        params.set('category', catSlug);
+      } else if (catSlug === 'all-collections') {
+        params.set('category', 'all-collections');
+      }
+
+      if (albSlug && albSlug !== 'all-images') {
+        params.set('album', albSlug);
+      } else if (albSlug === 'all-images' && catSlug === '3d-prints') {
+        params.set('album', 'all-images');
+      }
+    }
+
+    const queryString = params.toString();
+    const newUrl = queryString ? `/gallery?${queryString}` : '/gallery';
+    const currentUrl = window.location.pathname + window.location.search;
+
+    if (currentUrl !== newUrl) {
+      window.history.pushState({ category: catSlug, album: albSlug }, '', newUrl);
+    }
+  }, []);
+
+  // Listen for browser back / forward navigation to sync category and album
+  useEffect(() => {
+    const handlePopState = () => {
+      const params = new URLSearchParams(window.location.search);
+      const catParam = params.get('category') || params.get('collection');
+      const albumParam = params.get('album') || params.get('project');
+
+      let targetCat = '3d-prints';
+      if (catParam === 'all' || catParam === 'all-collections') {
+        targetCat = 'all-collections';
+      } else if (catParam && categories.some(c => c.slug === catParam)) {
+        targetCat = catParam;
+      }
+
+      let targetAlb = targetCat === '3d-prints' ? 'eddie-the-trooper' : 'all-images';
+      if (albumParam) {
+        targetAlb = albumParam;
+      }
+
+      setSelectedCategory(targetCat);
+      setSelectedAlbum(targetAlb);
+      setActiveLoupeIndex(null);
+      setIsPlaying(false);
+      setIsZoomed(false);
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
   }, [categories]);
 
   // Check URL query parameters on mount for direct deep-linking
@@ -162,7 +227,7 @@ export default function GalleryClient({
     const params = new URLSearchParams(window.location.search);
 
     const catParam = params.get('category') || params.get('collection');
-    let activeCat = selectedCategory;
+    let activeCat = computeInitialCategory();
     if (catParam) {
       if (catParam === 'all' || catParam === 'all-collections') {
         requestAnimationFrame(() => {
@@ -219,7 +284,7 @@ export default function GalleryClient({
         });
       }
     }
-  }, [allPhotos, categories, selectedCategory]);
+  }, [allPhotos, categories, computeInitialCategory]);
 
   const filmstripRef = useRef(null);
   const touchStartRef = useRef(null);
@@ -330,12 +395,14 @@ export default function GalleryClient({
   // Switch category safely without stale indices, selecting default album
   const handleCategoryChange = useCallback((catSlug) => {
     if (catSlug === selectedCategory) return;
+    const nextAlb = catSlug === '3d-prints' ? 'eddie-the-trooper' : 'all-images';
     setSelectedCategory(catSlug);
-    setSelectedAlbum(catSlug === '3d-prints' ? 'eddie-the-trooper' : 'all-images');
+    setSelectedAlbum(nextAlb);
     setActiveLoupeIndex(null);
     setIsPlaying(false);
     setIsZoomed(false);
-  }, [selectedCategory]);
+    updateUrl(catSlug, nextAlb);
+  }, [selectedCategory, updateUrl]);
 
   // Switch album safely without stale indices
   const handleAlbumChange = useCallback((albumSlug) => {
@@ -344,7 +411,8 @@ export default function GalleryClient({
     setActiveLoupeIndex(null);
     setIsPlaying(false);
     setIsZoomed(false);
-  }, [selectedAlbum]);
+    updateUrl(selectedCategory, albumSlug);
+  }, [selectedAlbum, selectedCategory, updateUrl]);
 
   // Switch orientation filter safely without stale indices
   const handleFilterChange = useCallback((newFilter) => {

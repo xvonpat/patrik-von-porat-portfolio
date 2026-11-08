@@ -36,6 +36,7 @@ import * as migration_20261101_003000_add_3d_house_category_and_images from './2
 import * as migration_20261101_110000_add_view_plan_house_image from './20261101_110000_add_view_plan_house_image';
 import * as migration_20261105_221000_add_leatherface_album_and_images from './20261105_221000_add_leatherface_album_and_images';
 import * as migration_20261105_231000_add_more_3d_house_images from './20261105_231000_add_more_3d_house_images';
+import * as migration_20261108_013000_add_more_leatherface_images from './20261108_013000_add_more_leatherface_images';
 
 export const migrations = [
   {
@@ -227,5 +228,10 @@ export const migrations = [
     up: migration_20261105_231000_add_more_3d_house_images.up,
     down: migration_20261105_231000_add_more_3d_house_images.down,
     name: '20261105_231000_add_more_3d_house_images',
+  },
+  {
+    up: migration_20261108_013000_add_more_leatherface_images.up,
+    down: migration_20261108_013000_add_more_leatherface_images.down,
+    name: '20261108_013000_add_more_leatherface_images',
   },
 ];
