@@ -299,10 +299,10 @@ export default function GalleryClient({
     return allPhotos.filter(photo => photo.categorySlug === selectedCategory);
   }, [allPhotos, selectedCategory]);
 
-  // Albums belonging to the currently active collection
+  // Albums belonging to the currently active collection (or all albums when viewing All Collections)
   const currentCategoryAlbums = useMemo(() => {
     if (selectedCategory === 'all-collections') {
-      return [];
+      return albums;
     }
     return albums.filter(alb => alb.collectionSlug === selectedCategory);
   }, [albums, selectedCategory]);
@@ -310,13 +310,14 @@ export default function GalleryClient({
   // Derived counts per album within this collection
   const albumCounts = useMemo(() => {
     const counts = {};
-    for (const photo of categoryPhotos) {
+    const sourcePhotos = selectedCategory === 'all-collections' ? allPhotos : categoryPhotos;
+    for (const photo of sourcePhotos) {
       if (photo.albumSlug) {
         counts[photo.albumSlug] = (counts[photo.albumSlug] || 0) + 1;
       }
     }
     return counts;
-  }, [categoryPhotos]);
+  }, [allPhotos, categoryPhotos, selectedCategory]);
 
   // Hide empty albums from the public selector
   const visibleAlbums = useMemo(() => {
@@ -346,16 +347,16 @@ export default function GalleryClient({
     return albumPhotos;
   }, [albumPhotos, filter]);
 
-  // Active collection metadata with dynamic "Images" count
+  // Active collection metadata with dynamic album title and "Images" count
   const collectionMeta = useMemo(() => {
     const count = categoryPhotos.length;
     const countStr = `${count} ${count === 1 ? 'Image' : 'Images'}`;
 
     if (selectedCategory === 'all-collections') {
       return {
-        eyebrow: 'All Collections',
-        title: 'Gallery',
-        description: `${allPhotos.length} ${allPhotos.length === 1 ? 'Image' : 'Images'} • All collections`,
+        eyebrow: 'Gallery · All Collections',
+        title: 'All Collections',
+        description: `${allPhotos.length} ${allPhotos.length === 1 ? 'Image' : 'Images'} • Complete visual archive across all categories`,
       };
     }
 
@@ -369,23 +370,25 @@ export default function GalleryClient({
       };
     }
 
-    // When an album is actively selected, show album context in the description while retaining main collection title
+    // When an album is actively selected, display the album title as the primary heading
     if (selectedAlbum && selectedAlbum !== 'all-images') {
       const activeAlb = visibleAlbums.find(a => a.slug === selectedAlbum);
       const albCount = albumPhotos.length;
       const albCountStr = `${albCount} ${albCount === 1 ? 'Image' : 'Images'}`;
-      if (activeAlb?.description) {
+      if (activeAlb) {
         return {
-          eyebrow: currentCat?.eyebrow || 'Curated Collection',
-          title: currentCat?.name || 'Collection',
-          description: `${albCountStr} • ${activeAlb.description}`,
+          eyebrow: `${currentCat?.name || 'Collection'} · Album`,
+          title: activeAlb.title,
+          description: activeAlb.description
+            ? `${albCountStr} • ${activeAlb.description}`
+            : `${albCountStr} • ${currentCat?.description || 'Curated Album'}`,
         };
       }
     }
 
     return {
       eyebrow: currentCat?.eyebrow || 'Curated Collection',
-      title: currentCat?.name || 'Collection',
+      title: visibleAlbums.length > 0 ? `${currentCat?.name || 'Collection'} — All Albums` : (currentCat?.name || 'Collection'),
       description: currentCat?.description
         ? `${countStr} • ${currentCat.description}`
         : `${countStr} • Curated Collection`,
@@ -404,14 +407,22 @@ export default function GalleryClient({
     updateUrl(catSlug, nextAlb);
   }, [selectedCategory, updateUrl]);
 
-  // Switch album safely without stale indices
-  const handleAlbumChange = useCallback((albumSlug) => {
-    if (albumSlug === selectedAlbum) return;
+  // Switch album safely without stale indices (and switch category if clicked from All Collections)
+  const handleAlbumChange = useCallback((albumSlug, albumCollectionSlug = null) => {
+    const targetCategory = (selectedCategory === 'all-collections' && albumCollectionSlug)
+      ? albumCollectionSlug
+      : selectedCategory;
+
+    if (albumSlug === selectedAlbum && targetCategory === selectedCategory) return;
+
+    if (targetCategory !== selectedCategory) {
+      setSelectedCategory(targetCategory);
+    }
     setSelectedAlbum(albumSlug);
     setActiveLoupeIndex(null);
     setIsPlaying(false);
     setIsZoomed(false);
-    updateUrl(selectedCategory, albumSlug);
+    updateUrl(targetCategory, albumSlug);
   }, [selectedAlbum, selectedCategory, updateUrl]);
 
   // Switch orientation filter safely without stale indices
@@ -536,66 +547,208 @@ export default function GalleryClient({
   return (
     <div className="w-full min-h-screen relative pb-20 pt-6">
       
-      {/* 1. Lightroom Studio Header */}
+      {/* 1. Gallery Navigation & Studio Header */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8 border-b border-white/[0.08] pb-6 flex flex-col gap-6">
         
-        {/* Compact Category Selector above collection heading */}
-        <div className="flex flex-col sm:flex-row sm:items-center gap-2 pt-1">
-          <span className="text-[10px] font-mono tracking-widest text-zinc-500 uppercase flex-shrink-0">
-            Collection:
-          </span>
-          <div 
-            role="tablist" 
-            aria-label="Filter gallery by collection"
-            className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 scrollbar-none"
-          >
-            {/* All collections Pill */}
-            <button
-              role="tab"
-              aria-selected={selectedCategory === 'all-collections'}
-              onClick={() => handleCategoryChange('all-collections')}
-              className={`px-3 py-1.5 text-xs font-mono rounded transition-all duration-200 flex items-center gap-1.5 flex-shrink-0 cursor-pointer ${
-                selectedCategory === 'all-collections'
-                  ? 'bg-accent-purple/15 text-accent-purple border border-accent-purple/40 shadow-[0_0_12px_rgba(224,98,181,0.2)] font-semibold'
-                  : 'bg-obsidian-950/80 text-zinc-400 hover:text-zinc-200 border border-white/[0.08] hover:border-white/20'
-              }`}
-            >
-              <span>All collections</span>
-              <span className={`text-[10px] font-mono ${selectedCategory === 'all-collections' ? 'text-accent-purple/80' : 'text-zinc-500'}`}>
-                ({allPhotos.length})
+        {/* Unified Category & Album Navigation Panel */}
+        <div className="rounded-2xl bg-zinc-950/60 border border-white/[0.08] p-4 sm:p-5 flex flex-col gap-5 backdrop-blur-sm">
+          
+          {/* Step 1: Category Selector */}
+          <div className="flex flex-col gap-2.5">
+            <div className="flex items-center justify-between">
+              <span className="text-[11px] font-mono tracking-[0.2em] text-zinc-400 uppercase font-semibold">
+                1. Category
               </span>
-            </button>
+              <span className="text-[11px] font-mono text-zinc-500">
+                {visibleCategories.length} collections • {allPhotos.length} total images
+              </span>
+            </div>
+            <div 
+              role="tablist" 
+              aria-label="Filter gallery by collection"
+              className="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 scrollbar-none flex-wrap"
+            >
+              {/* Non-empty Category Tabs */}
+              {visibleCategories.map(cat => {
+                const isSelected = selectedCategory === cat.slug;
+                const count = categoryCounts[cat.slug] || 0;
+                return (
+                  <button
+                    key={cat.slug}
+                    type="button"
+                    role="tab"
+                    aria-selected={isSelected}
+                    onClick={() => handleCategoryChange(cat.slug)}
+                    className={`px-4 py-2.5 text-xs sm:text-sm font-mono rounded-xl transition-all duration-200 flex items-center gap-2.5 flex-shrink-0 cursor-pointer ${
+                      isSelected
+                        ? 'bg-accent-purple/20 text-white border border-accent-purple/60 shadow-[0_0_20px_rgba(139,92,246,0.22)] font-semibold'
+                        : 'bg-obsidian-950/90 text-zinc-300 hover:text-white border border-white/[0.08] hover:border-white/25 hover:bg-white/[0.04]'
+                    }`}
+                  >
+                    <span className={`w-2 h-2 rounded-full transition-colors ${
+                      isSelected ? 'bg-accent-purple shadow-[0_0_8px_rgba(139,92,246,0.9)]' : 'bg-zinc-600'
+                    }`} />
+                    <span>{cat.name}</span>
+                    <span className={`px-1.5 py-0.5 text-[10px] rounded-md font-mono ${
+                      isSelected ? 'bg-accent-purple/30 text-white' : 'bg-white/[0.06] text-zinc-400'
+                    }`}>
+                      {count}
+                    </span>
+                  </button>
+                );
+              })}
 
-            {/* Non-empty Category Pills */}
-            {visibleCategories.map(cat => {
-              const isSelected = selectedCategory === cat.slug;
-              const count = categoryCounts[cat.slug] || 0;
-              return (
-                <button
-                  key={cat.slug}
-                  role="tab"
-                  aria-selected={isSelected}
-                  onClick={() => handleCategoryChange(cat.slug)}
-                  className={`px-3 py-1.5 text-xs font-mono rounded transition-all duration-200 flex items-center gap-1.5 flex-shrink-0 cursor-pointer ${
-                    isSelected
-                      ? 'bg-accent-purple/15 text-accent-purple border border-accent-purple/40 shadow-[0_0_12px_rgba(224,98,181,0.2)] font-semibold'
-                      : 'bg-obsidian-950/80 text-zinc-400 hover:text-zinc-200 border border-white/[0.08] hover:border-white/20'
-                  }`}
-                >
-                  <span>{cat.name}</span>
-                  <span className={`text-[10px] font-mono ${isSelected ? 'text-accent-purple/80' : 'text-zinc-500'}`}>
-                    ({count})
-                  </span>
-                </button>
-              );
-            })}
+              {/* All collections Tab */}
+              <button
+                type="button"
+                role="tab"
+                aria-selected={selectedCategory === 'all-collections'}
+                onClick={() => handleCategoryChange('all-collections')}
+                className={`px-4 py-2.5 text-xs sm:text-sm font-mono rounded-xl transition-all duration-200 flex items-center gap-2.5 flex-shrink-0 cursor-pointer ${
+                  selectedCategory === 'all-collections'
+                    ? 'bg-accent-purple/20 text-white border border-accent-purple/60 shadow-[0_0_20px_rgba(139,92,246,0.22)] font-semibold'
+                    : 'bg-obsidian-950/90 text-zinc-300 hover:text-white border border-white/[0.08] hover:border-white/25 hover:bg-white/[0.04]'
+                }`}
+              >
+                <span className={`w-2 h-2 rounded-full transition-colors ${
+                  selectedCategory === 'all-collections' ? 'bg-accent-purple shadow-[0_0_8px_rgba(139,92,246,0.9)]' : 'bg-zinc-600'
+                }`} />
+                <span>All Collections</span>
+                <span className={`px-1.5 py-0.5 text-[10px] rounded-md font-mono ${
+                  selectedCategory === 'all-collections' ? 'bg-accent-purple/30 text-white' : 'bg-white/[0.06] text-zinc-400'
+                }`}>
+                  {allPhotos.length}
+                </span>
+              </button>
+            </div>
           </div>
+
+          {/* Step 2: Visual Album Cards (Rendered when active selection has published albums) */}
+          {visibleAlbums.length > 0 && (
+            <div className="pt-4 border-t border-white/[0.08] flex flex-col gap-3">
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-mono tracking-[0.2em] text-zinc-400 uppercase font-semibold">
+                  2. Select Album / Project
+                </span>
+                <span className="text-[11px] font-mono text-zinc-500">
+                  {visibleAlbums.length} {visibleAlbums.length === 1 ? 'album' : 'albums'} available
+                </span>
+              </div>
+              <div 
+                role="tablist"
+                aria-label="Filter by album"
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5"
+              >
+                {/* Published Album Cards */}
+                {visibleAlbums.map(alb => {
+                  const isSelected = selectedAlbum === alb.slug && selectedCategory !== 'all-collections';
+                  const count = albumCounts[alb.slug] || 0;
+                  const sourcePool = selectedCategory === 'all-collections' ? allPhotos : categoryPhotos;
+                  const cover = alb.coverUrl || (sourcePool.find(p => p.albumSlug === alb.slug)?.thumb || sourcePool.find(p => p.albumSlug === alb.slug)?.src);
+
+                  return (
+                    <button
+                      key={alb.slug}
+                      type="button"
+                      role="tab"
+                      aria-selected={isSelected}
+                      onClick={() => handleAlbumChange(alb.slug, alb.collectionSlug)}
+                      className={`group p-2.5 rounded-xl transition-all duration-200 flex items-center gap-3.5 text-left cursor-pointer ${
+                        isSelected
+                          ? 'bg-accent-purple/20 text-white border border-accent-purple/60 shadow-[0_0_24px_rgba(139,92,246,0.2)]'
+                          : 'bg-obsidian-950/90 text-zinc-300 hover:text-white border border-white/[0.08] hover:border-white/25 hover:bg-white/[0.04]'
+                      }`}
+                    >
+                      {cover ? (
+                        <span className={`relative w-12 h-12 sm:w-14 sm:h-14 rounded-lg overflow-hidden flex-shrink-0 border transition-transform duration-300 group-hover:scale-105 ${
+                          isSelected ? 'border-accent-purple/60 shadow-md' : 'border-white/10'
+                        } bg-black/60`}>
+                          <Image
+                            src={cover}
+                            alt={alb.title}
+                            fill
+                            sizes="56px"
+                            className="object-cover object-center"
+                          />
+                        </span>
+                      ) : (
+                        <span className={`w-12 h-12 sm:w-14 sm:h-14 rounded-lg flex items-center justify-center border text-sm font-mono flex-shrink-0 ${
+                          isSelected ? 'border-accent-purple/50 bg-accent-purple/20 text-accent-purple' : 'border-white/10 bg-white/5 text-zinc-400'
+                        }`}>
+                          #
+                        </span>
+                      )}
+                      <div className="flex flex-col min-w-0 flex-1">
+                        <div className="flex items-center justify-between gap-2">
+                          <span className={`text-sm font-semibold truncate ${
+                            isSelected ? 'text-white' : 'text-zinc-200 group-hover:text-white'
+                          }`}>
+                            {alb.title}
+                          </span>
+                          {isSelected && (
+                            <span className="w-2 h-2 rounded-full bg-accent-purple flex-shrink-0 shadow-[0_0_8px_rgba(139,92,246,0.9)]" />
+                          )}
+                        </div>
+                        <span className={`text-[11px] font-mono mt-0.5 ${
+                          isSelected ? 'text-accent-purple' : 'text-zinc-400'
+                        }`}>
+                          {count} {count === 1 ? 'image' : 'images'}
+                        </span>
+                      </div>
+                    </button>
+                  );
+                })}
+
+                {/* Show All in Category Card */}
+                {selectedCategory !== 'all-collections' && (
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-selected={selectedAlbum === 'all-images'}
+                    onClick={() => handleAlbumChange('all-images')}
+                    className={`group p-2.5 rounded-xl transition-all duration-200 flex items-center gap-3.5 text-left cursor-pointer ${
+                      selectedAlbum === 'all-images'
+                        ? 'bg-accent-purple/20 text-white border border-accent-purple/60 shadow-[0_0_24px_rgba(139,92,246,0.2)]'
+                        : 'bg-obsidian-950/90 text-zinc-300 hover:text-white border border-white/[0.08] hover:border-white/25 hover:bg-white/[0.04]'
+                    }`}
+                  >
+                    <span className={`w-12 h-12 sm:w-14 sm:h-14 rounded-lg flex items-center justify-center border transition-colors flex-shrink-0 ${
+                      selectedAlbum === 'all-images' 
+                        ? 'border-accent-purple/50 bg-accent-purple/25 text-white' 
+                        : 'border-white/10 bg-white/[0.04] text-zinc-400 group-hover:text-zinc-200'
+                    }`}>
+                      <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                        <path d="M4 4h7v7H4zm0 9h7v7H4zm9-9h7v7h-7zm0 9h7v7h-7z" />
+                      </svg>
+                    </span>
+                    <div className="flex flex-col min-w-0 flex-1">
+                      <div className="flex items-center justify-between gap-2">
+                        <span className={`text-sm font-semibold truncate ${
+                          selectedAlbum === 'all-images' ? 'text-white' : 'text-zinc-200 group-hover:text-white'
+                        }`}>
+                          All {categories.find(c => c.slug === selectedCategory)?.name || 'Images'}
+                        </span>
+                        {selectedAlbum === 'all-images' && (
+                          <span className="w-2 h-2 rounded-full bg-accent-purple flex-shrink-0 shadow-[0_0_8px_rgba(139,92,246,0.9)]" />
+                        )}
+                      </div>
+                      <span className={`text-[11px] font-mono mt-0.5 ${
+                        selectedAlbum === 'all-images' ? 'text-accent-purple' : 'text-zinc-400'
+                      }`}>
+                        {categoryPhotos.length} images total
+                      </span>
+                    </div>
+                  </button>
+                )}
+              </div>
+            </div>
+          )}
         </div>
 
-        {/* Collection Details & Controls Toolbar */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+        {/* Active View Heading & Secondary View Controls */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pt-1">
           
-          {/* Left: Collection Details */}
+          {/* Left: Active Album / Collection Details */}
           <div className="flex flex-col gap-1.5">
             <div className="flex items-center gap-2.5">
               <span className="w-2 h-2 rounded-full bg-accent-purple animate-pulse" />
@@ -611,7 +764,7 @@ export default function GalleryClient({
             </p>
           </div>
 
-          {/* Right: Controls Toolbar */}
+          {/* Right: Secondary View Controls Toolbar */}
           <div className="flex flex-wrap items-center gap-3 sm:gap-4">
             
             {/* Orientation Filter Tabs */}
@@ -699,94 +852,6 @@ export default function GalleryClient({
 
           </div>
         </div>
-
-        {/* Compact Album Selector (Rendered ONLY when active collection has non-empty published albums) */}
-        {visibleAlbums.length > 0 && (
-          <div className="pt-4 border-t border-white/[0.06] flex flex-col sm:flex-row sm:items-center gap-2.5">
-            <span className="text-[10px] font-mono tracking-widest text-zinc-500 uppercase flex-shrink-0">
-              Album:
-            </span>
-            <div 
-              role="tablist"
-              aria-label="Filter by album"
-              className="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 scrollbar-none flex-wrap"
-            >
-              {/* All images Button */}
-              <button
-                type="button"
-                role="tab"
-                aria-selected={selectedAlbum === 'all-images'}
-                onClick={() => handleAlbumChange('all-images')}
-                className={`group px-3 py-1.5 text-xs font-mono rounded transition-all duration-200 flex items-center gap-2 flex-shrink-0 cursor-pointer ${
-                  selectedAlbum === 'all-images'
-                    ? 'bg-accent-purple/15 text-accent-purple border border-accent-purple/40 shadow-[0_0_12px_rgba(224,98,181,0.2)] font-semibold'
-                    : 'bg-obsidian-950/80 text-zinc-400 hover:text-zinc-200 border border-white/[0.08] hover:border-white/20'
-                }`}
-              >
-                <span className={`w-5 h-5 rounded flex items-center justify-center border text-[10px] transition-colors ${
-                  selectedAlbum === 'all-images' 
-                    ? 'border-accent-purple/40 bg-accent-purple/20 text-accent-purple' 
-                    : 'border-white/10 bg-white/5 text-zinc-400 group-hover:text-zinc-200'
-                }`}>
-                  <svg className="w-3 h-3 fill-current" viewBox="0 0 24 24">
-                    <path d="M4 4h7v7H4zm0 9h7v7H4zm9-9h7v7h-7zm0 9h7v7h-7z" />
-                  </svg>
-                </span>
-                <span>All images</span>
-                <span className={`text-[10px] font-mono ${selectedAlbum === 'all-images' ? 'text-accent-purple/80' : 'text-zinc-500'}`}>
-                  ({categoryPhotos.length})
-                </span>
-              </button>
-
-              {/* Published Albums */}
-              {visibleAlbums.map(alb => {
-                const isSelected = selectedAlbum === alb.slug;
-                const count = albumCounts[alb.slug] || 0;
-                // Fallback to first eligible image thumbnail if no coverUrl specified
-                const cover = alb.coverUrl || (categoryPhotos.find(p => p.albumSlug === alb.slug)?.thumb || categoryPhotos.find(p => p.albumSlug === alb.slug)?.src);
-
-                return (
-                  <button
-                    key={alb.slug}
-                    type="button"
-                    role="tab"
-                    aria-selected={isSelected}
-                    onClick={() => handleAlbumChange(alb.slug)}
-                    className={`group px-3 py-1.5 text-xs font-mono rounded transition-all duration-200 flex items-center gap-2 flex-shrink-0 cursor-pointer ${
-                      isSelected
-                        ? 'bg-accent-purple/15 text-accent-purple border border-accent-purple/40 shadow-[0_0_12px_rgba(224,98,181,0.2)] font-semibold'
-                        : 'bg-obsidian-950/80 text-zinc-400 hover:text-zinc-200 border border-white/[0.08] hover:border-white/20'
-                    }`}
-                  >
-                    {cover ? (
-                      <span className={`relative w-5 h-5 rounded overflow-hidden flex-shrink-0 border ${
-                        isSelected ? 'border-accent-purple/50' : 'border-white/10'
-                      } bg-black/50`}>
-                        <Image
-                          src={cover}
-                          alt=""
-                          fill
-                          sizes="20px"
-                          className="object-cover object-center"
-                        />
-                      </span>
-                    ) : (
-                      <span className={`w-5 h-5 rounded flex items-center justify-center border text-[10px] ${
-                        isSelected ? 'border-accent-purple/40 bg-accent-purple/20 text-accent-purple' : 'border-white/10 bg-white/5 text-zinc-400'
-                      }`}>
-                        #
-                      </span>
-                    )}
-                    <span>{alb.title}</span>
-                    <span className={`text-[10px] font-mono ${isSelected ? 'text-accent-purple/80' : 'text-zinc-500'}`}>
-                      ({count})
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-        )}
 
       </div>
 
