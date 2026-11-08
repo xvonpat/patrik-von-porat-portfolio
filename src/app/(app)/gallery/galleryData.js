@@ -947,6 +947,21 @@ export const leatherfacePhotos = [
     albumSlug: "leatherface",
     order: 7,
   },
+  {
+    id: "IMG_1427",
+    filename: "IMG_1427.webp",
+    title: "Leatherface: Zenithal Highlighting & Apron Fit",
+    src: "/images/art/leatherface/IMG_1427.webp",
+    thumb: "/images/art/leatherface/thumbnails/IMG_1427.webp",
+    width: 1330,
+    height: 2364,
+    orientation: "portrait",
+    aspectRatio: "9/16",
+    categorySlug: "3d-prints",
+    project: "Leatherface",
+    albumSlug: "leatherface",
+    order: 8,
+  },
 ];
 
 export const house3DPhotos = [
