@@ -38,6 +38,11 @@ import * as migration_20261105_221000_add_leatherface_album_and_images from './2
 import * as migration_20261105_231000_add_more_3d_house_images from './20261105_231000_add_more_3d_house_images';
 import * as migration_20261108_013000_add_more_leatherface_images from './20261108_013000_add_more_leatherface_images';
 import * as migration_20261108_221000_add_zenithal_leatherface_image from './20261108_221000_add_zenithal_leatherface_image';
+import * as migration_20261109_203500_add_base_and_apron_leatherface_image from './20261109_203500_add_base_and_apron_leatherface_image';
+import * as migration_20261109_230500_rename_leatherface_images from './20261109_230500_rename_leatherface_images';
+import * as migration_20261109_231500_rename_eddie_and_vader_images from './20261109_231500_rename_eddie_and_vader_images';
+import * as migration_20261109_234000_rename_summer_2026_images from './20261109_234000_rename_summer_2026_images';
+import * as migration_20261109_234500_remove_girls_posing_image from './20261109_234500_remove_girls_posing_image';
 
 export const migrations = [
   {
@@ -239,5 +244,30 @@ export const migrations = [
     up: migration_20261108_221000_add_zenithal_leatherface_image.up,
     down: migration_20261108_221000_add_zenithal_leatherface_image.down,
     name: '20261108_221000_add_zenithal_leatherface_image',
+  },
+  {
+    up: migration_20261109_203500_add_base_and_apron_leatherface_image.up,
+    down: migration_20261109_203500_add_base_and_apron_leatherface_image.down,
+    name: '20261109_203500_add_base_and_apron_leatherface_image',
+  },
+  {
+    up: migration_20261109_230500_rename_leatherface_images.up,
+    down: migration_20261109_230500_rename_leatherface_images.down,
+    name: '20261109_230500_rename_leatherface_images',
+  },
+  {
+    up: migration_20261109_231500_rename_eddie_and_vader_images.up,
+    down: migration_20261109_231500_rename_eddie_and_vader_images.down,
+    name: '20261109_231500_rename_eddie_and_vader_images',
+  },
+  {
+    up: migration_20261109_234000_rename_summer_2026_images.up,
+    down: migration_20261109_234000_rename_summer_2026_images.down,
+    name: '20261109_234000_rename_summer_2026_images',
+  },
+  {
+    up: migration_20261109_234500_remove_girls_posing_image.up,
+    down: migration_20261109_234500_remove_girls_posing_image.down,
+    name: '20261109_234500_remove_girls_posing_image',
   },
 ];
