@@ -43,6 +43,7 @@ import * as migration_20261109_230500_rename_leatherface_images from './20261109
 import * as migration_20261109_231500_rename_eddie_and_vader_images from './20261109_231500_rename_eddie_and_vader_images';
 import * as migration_20261109_234000_rename_summer_2026_images from './20261109_234000_rename_summer_2026_images';
 import * as migration_20261109_234500_remove_girls_posing_image from './20261109_234500_remove_girls_posing_image';
+import * as migration_20261110_230500_add_chainsaw_overhead_leatherface_image from './20261110_230500_add_chainsaw_overhead_leatherface_image';
 
 export const migrations = [
   {
@@ -269,5 +270,10 @@ export const migrations = [
     up: migration_20261109_234500_remove_girls_posing_image.up,
     down: migration_20261109_234500_remove_girls_posing_image.down,
     name: '20261109_234500_remove_girls_posing_image',
+  },
+  {
+    up: migration_20261110_230500_add_chainsaw_overhead_leatherface_image.up,
+    down: migration_20261110_230500_add_chainsaw_overhead_leatherface_image.down,
+    name: '20261110_230500_add_chainsaw_overhead_leatherface_image',
   },
 ];

@@ -1146,6 +1146,21 @@ export const leatherfacePhotos = [
     albumSlug: "leatherface",
     order: 9,
   },
+  {
+    id: "chainsaw_overhead_pose",
+    filename: "chainsaw_overhead_pose.webp",
+    title: "Leatherface: Chainsaw Overhead Pose",
+    src: "/images/art/leatherface/chainsaw_overhead_pose.webp",
+    thumb: "/images/art/leatherface/thumbnails/chainsaw_overhead_pose.webp",
+    width: 1330,
+    height: 2364,
+    orientation: "portrait",
+    aspectRatio: "9/16",
+    categorySlug: "3d-prints",
+    project: "Leatherface",
+    albumSlug: "leatherface",
+    order: 10,
+  },
 ];
 
 export const house3DPhotos = [
