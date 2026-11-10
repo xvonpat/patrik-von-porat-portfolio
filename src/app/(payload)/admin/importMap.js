@@ -32,11 +32,13 @@ import { VercelAnalyticsDashboard as VercelAnalyticsDashboard_19f65a3270e228b580
 import { LogoutButton as LogoutButton_b3d295ab4b1039e6e155cc89ff4f9f01 } from '../../../../src/components/LogoutButton'
 import { WorkbenchDashboardCard as WorkbenchDashboardCard_63c577506efa285dcccf2fd49b9a8ec3 } from '../../../../src/components/WorkbenchDashboardCard'
 import { SitemapDashboardCard as SitemapDashboardCard_1042a03420985194880b475fcd96c650 } from '../../../../src/components/SitemapDashboardCard'
+import { GalleryMetricsDashboardCard as GalleryMetricsDashboardCard_b0b15f7aeed3717876a5b0cb0e8e695b } from '../../../../src/components/GalleryMetricsDashboardCard'
 import { GoogleLoginButton as GoogleLoginButton_14c52b3cb0a4315d4a1f982df6bd4d2d } from '../../../../src/components/GoogleLoginButton'
 import { WorkbenchNavLink as WorkbenchNavLink_ddb71291b4f2a1f85a67adacfef9b598 } from '../../../../src/components/WorkbenchNavLink'
 import { S3ClientUploadHandler as S3ClientUploadHandler_f97aa6c64367fa259c5bc0567239ef24 } from '@payloadcms/storage-s3/client'
 import { WorkbenchViewWrapper as WorkbenchViewWrapper_443ec717033def8ca2085b0c6ec8f422 } from '../../../../src/components/WorkbenchViewWrapper'
 import { SitemapViewWrapper as SitemapViewWrapper_81222db00bd06530bae7e34b4066783e } from '../../../../src/components/SitemapViewWrapper'
+import { GalleryMetricsViewWrapper as GalleryMetricsViewWrapper_c0a06dd68446e6c885e7040414f58725 } from '../../../../src/components/GalleryMetricsViewWrapper'
 import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
 
 /** @type import('payload').ImportMap */
@@ -75,10 +77,12 @@ export const importMap = {
   "/src/components/LogoutButton#LogoutButton": LogoutButton_b3d295ab4b1039e6e155cc89ff4f9f01,
   "/src/components/WorkbenchDashboardCard#WorkbenchDashboardCard": WorkbenchDashboardCard_63c577506efa285dcccf2fd49b9a8ec3,
   "/src/components/SitemapDashboardCard#SitemapDashboardCard": SitemapDashboardCard_1042a03420985194880b475fcd96c650,
+  "/src/components/GalleryMetricsDashboardCard#GalleryMetricsDashboardCard": GalleryMetricsDashboardCard_b0b15f7aeed3717876a5b0cb0e8e695b,
   "/src/components/GoogleLoginButton#GoogleLoginButton": GoogleLoginButton_14c52b3cb0a4315d4a1f982df6bd4d2d,
   "/src/components/WorkbenchNavLink#WorkbenchNavLink": WorkbenchNavLink_ddb71291b4f2a1f85a67adacfef9b598,
   "@payloadcms/storage-s3/client#S3ClientUploadHandler": S3ClientUploadHandler_f97aa6c64367fa259c5bc0567239ef24,
   "/src/components/WorkbenchViewWrapper#WorkbenchViewWrapper": WorkbenchViewWrapper_443ec717033def8ca2085b0c6ec8f422,
   "/src/components/SitemapViewWrapper#SitemapViewWrapper": SitemapViewWrapper_81222db00bd06530bae7e34b4066783e,
+  "/src/components/GalleryMetricsViewWrapper#GalleryMetricsViewWrapper": GalleryMetricsViewWrapper_c0a06dd68446e6c885e7040414f58725,
   "@payloadcms/next/rsc#CollectionCards": CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1
 }

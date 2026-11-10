@@ -8,6 +8,7 @@ export function WorkbenchNavLink() {
   const pathname = usePathname() || '';
   const isDashboard = pathname === '/admin' || pathname === '/admin/';
   const isSitemap = pathname.startsWith('/admin/sitemap');
+  const isMetrics = pathname.startsWith('/admin/gallery-metrics');
   const isWorkbench = pathname.startsWith('/admin/workbench');
 
   return (
@@ -67,6 +68,36 @@ export function WorkbenchNavLink() {
           <line x1="16" y1="6" x2="16" y2="22" />
         </svg>
         <span>Visual Sitemap</span>
+      </Link>
+
+      <Link
+        href="/admin/gallery-metrics"
+        className={`pvp-nav-overview-btn ${isMetrics ? 'is-active' : ''}`}
+        style={
+          isMetrics
+            ? {
+                background: 'rgba(167, 139, 250, 0.15)',
+                borderColor: 'rgba(167, 139, 250, 0.45)',
+                color: '#f5f3ff',
+              }
+            : {}
+        }
+      >
+        <svg
+          width="15"
+          height="15"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <line x1="18" y1="20" x2="18" y2="10" />
+          <line x1="12" y1="20" x2="12" y2="4" />
+          <line x1="6" y1="20" x2="6" y2="14" />
+        </svg>
+        <span>Gallery Metrics</span>
       </Link>
 
       <Link

@@ -38,10 +38,18 @@ export default buildConfig({
             title: 'Site Architecture & Map — vonporat.com',
           },
         },
+        galleryMetrics: {
+          Component: '/src/components/GalleryMetricsViewWrapper#GalleryMetricsViewWrapper',
+          path: '/gallery-metrics',
+          meta: {
+            title: 'Gallery Storage Metrics — vonporat.com',
+          },
+        },
       },
       beforeDashboard: [
         '/src/components/WorkbenchDashboardCard#WorkbenchDashboardCard',
         '/src/components/SitemapDashboardCard#SitemapDashboardCard',
+        '/src/components/GalleryMetricsDashboardCard#GalleryMetricsDashboardCard',
       ],
       afterDashboard: [
         '/src/components/BackgroundThemeDashboardCard#BackgroundThemeDashboardCard',
