@@ -1161,6 +1161,21 @@ export const leatherfacePhotos = [
     albumSlug: "leatherface",
     order: 10,
   },
+  {
+    id: "weathering_and_blood_splatter",
+    filename: "weathering_and_blood_splatter.webp",
+    title: "Leatherface: Weathering, Skin Tones & Blood Splatter",
+    src: "/images/art/leatherface/weathering_and_blood_splatter.webp",
+    thumb: "/images/art/leatherface/thumbnails/weathering_and_blood_splatter.webp",
+    width: 1330,
+    height: 2364,
+    orientation: "portrait",
+    aspectRatio: "9/16",
+    categorySlug: "3d-prints",
+    project: "Leatherface",
+    albumSlug: "leatherface",
+    order: 11,
+  },
 ];
 
 export const house3DPhotos = [
