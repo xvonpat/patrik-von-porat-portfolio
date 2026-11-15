@@ -1176,6 +1176,21 @@ export const leatherfacePhotos = [
     albumSlug: "leatherface",
     order: 11,
   },
+  {
+    id: "eyes_teeth_and_mask_details",
+    filename: "eyes_teeth_and_mask_details.webp",
+    title: "Leatherface: Eyes, Teeth & Mask Detailing",
+    src: "/images/art/leatherface/eyes_teeth_and_mask_details.webp",
+    thumb: "/images/art/leatherface/thumbnails/eyes_teeth_and_mask_details.webp",
+    width: 1330,
+    height: 2364,
+    orientation: "portrait",
+    aspectRatio: "9/16",
+    categorySlug: "3d-prints",
+    project: "Leatherface",
+    albumSlug: "leatherface",
+    order: 12,
+  },
 ];
 
 export const house3DPhotos = [
