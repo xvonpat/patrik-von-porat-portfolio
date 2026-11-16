@@ -23,6 +23,10 @@ export const SiteSettings: GlobalConfig = {
           value: 'harmonic-nexus',
         },
         {
+          label: 'Ferrofluid Pickup (Magnetic Fluid over Six Pole Pieces)',
+          value: 'ferrofluid-pickup',
+        },
+        {
           label: 'Chladni Plate (Sand Settling into Vibration Patterns)',
           value: 'chladni-plate',
         },

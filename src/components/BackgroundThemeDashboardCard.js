@@ -22,6 +22,16 @@ const THEMES = [
     previewQuery: 'harmonic-nexus',
   },
   {
+    id: 'ferrofluid-pickup',
+    title: 'Ferrofluid Pickup',
+    subtitle: 'Option H: Magnetic Fluid over Six Pole Pieces',
+    badge: 'Ferrofluid',
+    description:
+      'A pool of gloss-black magnetic fluid over the six pole pieces of a guitar pickup. Each pole raises its own crown of spikes, lit only by violet, cyan and bone reflections. The poles breathe, a slow strum travels across the row, and the pointer acts as a seventh magnet.',
+    features: ['Six spike crowns', 'Studio softbox reflections', 'Pointer as a magnet', 'Still frame for reduced motion'],
+    previewQuery: 'ferrofluid',
+  },
+  {
     id: 'chladni-plate',
     title: 'Chladni Plate',
     subtitle: 'Option F — Sand on a Vibrating Plate',

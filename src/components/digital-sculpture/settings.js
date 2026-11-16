@@ -302,7 +302,153 @@ export const INK_IN_WATER_SETTINGS = {
   },
 };
 
+/**
+ * Ferrofluid Pickup (prototype): gloss-black magnetic fluid rising in spikes over the six
+ * pole pieces of a guitar pickup. Selectable in Site Settings; preview via `?theme=ferrofluid`.
+ */
+export const FERROFLUID_PICKUP_SETTINGS = {
+  id: 'ferrofluid-pickup',
+  label: 'Ferrofluid Pickup (Magnetic Fluid over Six Pole Pieces)',
+
+  pickup: {
+    spacing: 0.84,             // Distance between pole pieces
+    angle: -0.6,               // Slant of the pole row on the fluid plane (radians)
+    centreDesktop: [2.35, 0.1], // Row centre (x, z)
+    centreMobile: [0, 0.4],
+    poleRadius: 0.3,           // Reach of each pole's field
+    strength: 1.0,
+    breath: 0.14,              // Each pole swells and relaxes at its own rate
+    breathSpeed: 0.5,
+    strumEvery: 11,            // Seconds between strums travelling across the row
+    strumSeconds: 1.5,
+    strumStrength: 0.55,
+  },
+
+  fluid: {
+    moundHeight: 0.36,
+    spikeHeight: 0.7,
+    spikeSharpness: 1.7,       // Higher = more concave, needle-like spikes
+    spikeThreshold: 0.2,       // Field strength at which the surface breaks into spikes
+    latticeSpacing: 0.23,
+    planeSize: [13, 9],
+    segmentsDesktop: [680, 470],
+    segmentsMobile: [340, 240],
+    poolRadius: [6, 4.2],      // The pool fades to black inside the mesh edge
+  },
+
+  pointer: {
+    radius: 0.5,
+    strength: 0.95,
+    follow: 6,                 // How quickly the fluid follows the mouse
+    height: 0.15,
+  },
+
+  palette: {
+    violet: '#a855f7',
+    cyan: '#00f0ff',
+    bone: '#efe6d8',
+  },
+
+  /** Softbox intensities (HDR) and exposure for the reflections. */
+  lights: {
+    violet: 9,
+    cyan: 7,
+    bone: 6,
+    horizon: 1.5,            // Glow mirrored in the flat pool
+    reflectance: 0.13,       // Mirror strength when the fluid is seen head-on
+    exposure: 1.0,
+  },
+
+  camera: {
+    fovDesktop: 36,
+    fovMobile: 44,
+    positionDesktop: [0, 2.6, 7.2],
+    targetDesktop: [0, 0.55, 0],
+    positionMobile: [0, 5, 12.5],
+    targetMobile: [0, 2.2, 0],
+    parallax: [0.35, 0.2],
+  },
+
+  rendering: {
+    maxPixelRatioDesktop: 1.5,
+    maxPixelRatioMobile: 1.25,
+    desktopFps: 60,
+    mobileFps: 30,
+  },
+};
+
+/**
+ * Obsidian Shard (prototype): one piece of volcanic glass lit like a product photograph.
+ * Not selectable in Site Settings yet; preview via `?theme=obsidian`.
+ */
+export const OBSIDIAN_SHARD_SETTINGS = {
+  id: 'obsidian-shard',
+  label: 'Obsidian Shard (Volcanic Glass)',
+
+  shard: {
+    seed: 7,
+    width: [0.62, 1.0],         // Distance from the axis to each side face
+    flatten: 0.42,              // How much thinner the blade is front to back
+    lean: [0.26, 0.48],         // How strongly every other side face leans in towards the tip
+    tip: 2.9,
+    base: 1.55,
+    boundingRadius: 3.0,
+    tilt: [0.18, 0.5, 0.3],     // Resting pose (radians)
+    centreDesktop: [1.85, 0.25, 0],
+    centreMobile: [0.35, -0.9, 0],
+  },
+
+  glass: {
+    ripple: 0.15,               // Depth of the conchoidal ripples
+    rippleFrequency: 11,
+    absorption: 2.8,            // Higher = blacker glass, light only through thin edges
+    edgeHighlight: 0.85,
+  },
+
+  palette: {
+    violet: '#a855f7',
+    cyan: '#00f0ff',
+    bone: '#efe6d8',
+  },
+
+  lights: {
+    key: 10,
+    violet: 8,
+    cyan: 7,
+    exposure: 1.0,
+    keyDir: [-0.25, 0.7, 0.6],
+    keyReach: [0.6, 0.3],       // How far the mouse carries the key light
+    lampReach: 0.2,
+  },
+
+  camera: {
+    fovDesktop: 34,
+    fovMobile: 42,
+    distanceDesktop: 7.6,
+    distanceMobile: 12.5,
+    parallax: [0.25, 0.15],
+  },
+
+  motion: {
+    turnSpeed: 0.05,            // Radians per second
+    pointerTurn: 0.22,
+    pointerTilt: 0.1,
+    pointerEase: 2.5,
+  },
+
+  rendering: {
+    maxPixelRatioDesktop: 1.5,
+    maxPixelRatioMobile: 1.25,
+    samplesDesktop: 2,          // Anti-aliasing: samples per pixel side
+    samplesMobile: 1,
+    desktopFps: 60,
+    mobileFps: 30,
+  },
+};
+
 export const SCULPTURE_THEMES = {
+  'obsidian-shard': OBSIDIAN_SHARD_SETTINGS,
+  'ferrofluid-pickup': FERROFLUID_PICKUP_SETTINGS,
   'harmonic-nexus': HARMONIC_NEXUS_SETTINGS,
   'chladni-plate': CHLADNI_PLATE_SETTINGS,
   'ink-in-water': INK_IN_WATER_SETTINGS,
@@ -321,6 +467,12 @@ export function getSculptureSettings(themeName) {
   }
   if (key === 'ink' || key === 'ink-in-water' || key === 'g') {
     return INK_IN_WATER_SETTINGS;
+  }
+  if (key === 'ferro' || key === 'ferrofluid' || key === 'pickup' || key === 'ferrofluid-pickup') {
+    return FERROFLUID_PICKUP_SETTINGS;
+  }
+  if (key === 'obsidian' || key === 'shard' || key === 'obsidian-shard') {
+    return OBSIDIAN_SHARD_SETTINGS;
   }
   if (key === 'flow' || key === 'contour-flow' || key === 'b') {
     return CONTOUR_FLOW_SETTINGS;

@@ -27,7 +27,7 @@ This document defines when and how to create an execution plan for significant w
 | **Gallery** (`/gallery`) | CMS-driven photo albums and build progress with static fallback. | 2026-10-11 |
 | **About** (`/about`) | Editorial hero with portrait, Core Facts, background and pull quote, image triptych, How I Work matrix, capabilities, closing. | 2026-10-20 |
 | **Contact** (`/contact`) | Personal-note layout: reasons to write, direct-line panel (email CTA, copyable address, LinkedIn, Threads, Instagram), signature. Form-free. | 2026-10-20 |
-| **Theme Selector** | Payload CMS SiteSettings Global + Admin Dashboard card for 1-click background theme selection (Harmonic Nexus, Chladni Plate, Ink in Water, Contour Flow, Alpine Landscape). | 2026-10-19 |
+| **Theme Selector** | Payload CMS SiteSettings Global + Admin Dashboard card for 1-click background theme selection (Harmonic Nexus, Ferrofluid Pickup, Chladni Plate, Ink in Water, Contour Flow, Alpine Landscape). | 2026-11-16 |
 
 ### 2. In Progress / Under Review
 

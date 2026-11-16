@@ -56,11 +56,15 @@
 }
 
 /* Ink in Water lights itself: any haze would read as murky water. */
-.sculptureBackground[data-theme="ink-in-water"] .haze {
+.sculptureBackground[data-theme="ink-in-water"] .haze,
+.sculptureBackground[data-theme="obsidian-shard"] .haze,
+.sculptureBackground[data-theme="ferrofluid-pickup"] .haze {
   display: none;
 }
 
 /* Right-hand focal themes: keep the text column dark and let the right side breathe. */
+.sculptureBackground[data-theme="obsidian-shard"] .readabilityMask,
+.sculptureBackground[data-theme="ferrofluid-pickup"] .readabilityMask,
 .sculptureBackground[data-theme="chladni-plate"] .readabilityMask,
 .sculptureBackground[data-theme="ink-in-water"] .readabilityMask,
 .sculptureBackground[data-theme="contour-flow"] .readabilityMask {
@@ -152,6 +156,8 @@
 }
 
 @media (max-width: 1023px) {
+  .sculptureBackground[data-theme="obsidian-shard"] .readabilityMask,
+  .sculptureBackground[data-theme="ferrofluid-pickup"] .readabilityMask,
   .sculptureBackground[data-theme="chladni-plate"] .readabilityMask,
   .sculptureBackground[data-theme="ink-in-water"] .readabilityMask,
   .sculptureBackground[data-theme="contour-flow"] .readabilityMask {

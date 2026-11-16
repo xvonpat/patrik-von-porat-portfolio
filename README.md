@@ -66,7 +66,7 @@ Home · Projects · Music · Art · Gallery · Blog · About · Contact
 
 - **Blog** is the primary CMS-driven public section (`posts` and `categories` collections).
 - **Gallery** is CMS-driven (`gallery-images`, `gallery-albums`, `gallery-categories`) with static fallback data in the repository.
-- **Site Settings** (`site-settings` Global) allows 1-click switching of background theme (`harmonic-nexus`, `chladni-plate`, `ink-in-water`, `contour-flow`, `alpine-landscape`) from the Payload Admin Dashboard.
+- **Site Settings** (`site-settings` Global) allows 1-click switching of background theme (`harmonic-nexus`, `ferrofluid-pickup`, `chladni-plate`, `ink-in-water`, `contour-flow`, `alpine-landscape`) from the Payload Admin Dashboard.
 - **Home, Music, Art, Projects, About, and Contact** remain repository-managed by default.
 - New Payload collections or broader CMS migrations require an observed maintenance need and explicit approval.
 - Draft and private content must never be exposed publicly.

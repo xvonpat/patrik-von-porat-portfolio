@@ -1,0 +1,224 @@
+/* Layout experiment for /home-test. Nothing here affects the approved homepage. */
+
+.page {
+  /* Left edge of the content column, so full-bleed rows can line up with it. */
+  --gutter: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .page {
+    --gutter: max(2rem, calc((100vw - 80rem) / 2 + 2rem));
+  }
+}
+
+/* ---------- Background sculpture: bolder in the hero, gone below it ---------- */
+
+.sculpture.sculpture[data-status="ready"] :global(.digital-sculpture__stage) {
+  opacity: calc(1 - var(--section-calm, 0));
+}
+
+@media (min-width: 1024px) {
+  .sculpture :global(.digital-sculpture__stage) {
+    transform: scale(1.14);
+    transform-origin: 80% 55%;
+    filter: brightness(1.25) saturate(1.08);
+  }
+}
+
+/* ---------- Hero ---------- */
+
+.hero {
+  min-height: calc(100svh - 5.6rem);
+}
+
+.scrollCue {
+  width: 1px;
+  height: 3rem;
+  background: linear-gradient(to bottom, rgba(242, 241, 237, 0.55), transparent);
+}
+
+/* ---------- Selected Work: scroll-snap showcase ---------- */
+
+.track {
+  position: relative;
+  display: flex;
+  gap: 1.25rem;
+  overflow-x: auto;
+  padding-inline: var(--gutter);
+  scroll-padding-inline: var(--gutter);
+  /* mandatory so the track always rests on a slide, which the status update relies on */
+  scroll-snap-type: x mandatory;
+  /* only the scrolling axis, so the page still scrolls vertically over the track */
+  overscroll-behavior-x: contain;
+  touch-action: manipulation;
+  scrollbar-width: none;
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+.track > * {
+  flex: none;
+  scroll-snap-align: start;
+}
+
+.track:focus-visible {
+  outline: 1px solid var(--color-accent-cyan);
+  outline-offset: 4px;
+}
+
+.control {
+  touch-action: manipulation;
+}
+
+/* Markers: a thin bar inside a 24px-tall target. The active one is longer, not just brighter. */
+.marker {
+  position: relative;
+  width: 1.5rem;
+  height: 1.5rem;
+  touch-action: manipulation;
+  cursor: pointer;
+}
+
+.marker::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 2px;
+  background: rgba(242, 241, 237, 0.42);
+}
+
+.marker[aria-current="true"] {
+  width: 3.25rem;
+}
+
+.marker[aria-current="true"]::after {
+  background: linear-gradient(90deg, var(--color-accent-purple), var(--color-accent-cyan));
+}
+
+.marker:focus-visible {
+  outline: 1px solid var(--color-accent-cyan);
+  outline-offset: 2px;
+}
+
+/* ---------- How I Work: one connected line ---------- */
+
+.process {
+  view-timeline: --process block;
+}
+
+.processRail {
+  background: rgba(242, 241, 237, 0.1);
+}
+
+.processFill {
+  background: linear-gradient(to bottom, var(--color-accent-purple), var(--color-accent-cyan));
+  transform-origin: 50% 0;
+}
+
+@media (min-width: 1024px) {
+  .processFill {
+    background: linear-gradient(to right, var(--color-accent-purple), var(--color-accent-cyan));
+    transform-origin: 0 50%;
+  }
+}
+
+/* ---------- Motion (decorative, so no script fallback: without support everything is simply visible) ---------- */
+
+@media (prefers-reduced-motion: no-preference) {
+  .track {
+    scroll-behavior: smooth;
+  }
+
+  .marker {
+    transition: width 320ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @keyframes introRise {
+    from {
+      opacity: 0;
+      transform: translateY(1.25rem);
+    }
+  }
+
+  .intro > * {
+    animation: introRise 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: calc(var(--i, 0) * 110ms + 120ms);
+  }
+
+  @supports ((animation-timeline: view()) and (animation-range: entry)) {
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(2.5rem);
+      }
+    }
+
+    .reveal {
+      animation: rise auto linear backwards;
+      animation-timeline: view();
+      animation-range: entry 5% cover 24%;
+    }
+
+    @keyframes fillDown {
+      from {
+        transform: scaleY(0);
+      }
+    }
+
+    @keyframes fillAcross {
+      from {
+        transform: scaleX(0);
+      }
+    }
+
+    @keyframes light {
+      from {
+        opacity: 0.32;
+      }
+    }
+
+    .processFill {
+      animation: fillDown auto linear backwards;
+      animation-timeline: --process;
+      animation-range: cover 18% cover 62%;
+    }
+
+    .step {
+      animation: light auto linear backwards;
+      animation-timeline: view();
+      animation-range: entry 30% cover 38%;
+    }
+
+    @media (min-width: 1024px) {
+      .processFill {
+        animation-name: fillAcross;
+        animation-range: cover 17% cover 50%;
+      }
+
+      /* Side by side on desktop, so the steps share the section timeline and light up in turn. */
+      .step {
+        animation-timeline: --process;
+      }
+
+      .step:nth-child(1) {
+        animation-range: cover 16% cover 22%;
+      }
+
+      .step:nth-child(2) {
+        animation-range: cover 25% cover 31%;
+      }
+
+      .step:nth-child(3) {
+        animation-range: cover 34% cover 40%;
+      }
+
+      .step:nth-child(4) {
+        animation-range: cover 43% cover 49%;
+      }
+    }
+  }
+}

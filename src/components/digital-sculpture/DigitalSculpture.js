@@ -11,6 +11,8 @@ import styles from './DigitalSculpture.module.css';
  * - 'harmonic-nexus' (Default): 3D cymatic strings & attractor field
  * - 'chladni-plate': Sand settling into the nodal lines of a vibrating plate
  * - 'ink-in-water': Ink drops blooming in still water (GPU fluid simulation)
+ * - 'ferrofluid-pickup': Magnetic fluid over six pickup pole pieces
+ * - 'obsidian-shard' (prototype, URL preview only): One piece of volcanic glass
  * - 'contour-flow' (Option B): Sweeping S-shaped river valley with rolling ridges
  * - 'alpine-landscape' (Option A): Sharp alpine massifs & arête peaks
  *
@@ -119,6 +121,10 @@ export default function DigitalSculpture({ className = '', theme = 'harmonic-nex
           mountScene = (await import('./chladni/scene')).mountChladniScene;
         } else if (activeSettings.id === 'ink-in-water') {
           mountScene = (await import('./ink/scene')).mountInkScene;
+        } else if (activeSettings.id === 'ferrofluid-pickup') {
+          mountScene = (await import('./ferrofluid/scene')).mountFerrofluidScene;
+        } else if (activeSettings.id === 'obsidian-shard') {
+          mountScene = (await import('./obsidian/scene')).mountObsidianScene;
         } else if (activeSettings.id === 'contour-flow') {
           mountScene = (await import('./contour/scene')).mountContourScene;
         } else {
