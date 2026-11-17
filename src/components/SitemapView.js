@@ -31,7 +31,7 @@ const BASE_SITE_STRUCTURE = [
         name: 'Site Settings',
         slug: 'site-settings',
         type: 'global',
-        desc: 'Selects the active WebGL background theme (Harmonic Nexus 3D, Ferrofluid Pickup, Chladni Plate, Ink in Water, Contour Flow, Alpine Landscape)',
+        desc: 'Selects the active WebGL background theme (Harmonic Nexus 3D, Ferrofluid Pickup, Obsidian Shard, Chladni Plate, Ink in Water, Contour Flow, Alpine Landscape)',
         link: '/admin/globals/site-settings',
       },
       {
@@ -404,7 +404,7 @@ const BASE_CMS_COLLECTIONS = [
     description: 'Global site configuration selecting the active 3D WebGL background theme for the homepage.',
     routes: ['/'],
     editLink: '/admin/globals/site-settings',
-    scope: 'Switch between Harmonic Nexus 3D, Ferrofluid Pickup, Chladni Plate, Ink in Water, Contour Flow, or Alpine Landscape.',
+    scope: 'Switch between Harmonic Nexus 3D, Ferrofluid Pickup, Obsidian Shard, Chladni Plate, Ink in Water, Contour Flow, or Alpine Landscape.',
   },
   {
     name: 'Admin Links',

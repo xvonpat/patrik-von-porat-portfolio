@@ -47,6 +47,7 @@ import * as migration_20261110_230500_add_chainsaw_overhead_leatherface_image fr
 import * as migration_20261112_204500_add_weathering_blood_leatherface_image from './20261112_204500_add_weathering_blood_leatherface_image';
 import * as migration_20261115_012500_add_eyes_teeth_leatherface_image from './20261115_012500_add_eyes_teeth_leatherface_image';
 import * as migration_20261116_120000_add_ferrofluid_pickup from './20261116_120000_add_ferrofluid_pickup';
+import * as migration_20261117_120000_add_obsidian_shard from './20261117_120000_add_obsidian_shard';
 
 export const migrations = [
   {
@@ -293,5 +294,10 @@ export const migrations = [
     up: migration_20261116_120000_add_ferrofluid_pickup.up,
     down: migration_20261116_120000_add_ferrofluid_pickup.down,
     name: '20261116_120000_add_ferrofluid_pickup',
+  },
+  {
+    up: migration_20261117_120000_add_obsidian_shard.up,
+    down: migration_20261117_120000_add_obsidian_shard.down,
+    name: '20261117_120000_add_obsidian_shard',
   },
 ];

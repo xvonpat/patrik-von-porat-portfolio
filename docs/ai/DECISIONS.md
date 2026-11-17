@@ -545,3 +545,20 @@ The theme shows a pool of gloss-black magnetic fluid over the six pole pieces of
 The additive enum migration `20261116_120000_add_ferrofluid_pickup` was applied with explicit user approval.
 
 Open points: the mobile layout, performance on weaker GPUs and the pointer magnet have not been verified. The theme should not be activated on the public site until the code is deployed and these are checked.
+
+---
+
+## D-038 — Obsidian Shard background theme added
+
+**Status:** Implemented locally (prototype quality)
+
+**Decision date:** 2026-11-17
+
+A seventh homepage background theme, `obsidian-shard` (`/?theme=obsidian`), was added as a selectable option in Site Settings and on the dashboard card. Harmonic Nexus remains the default and signature theme.
+
+The theme shows one tall piece of black volcanic glass beside the hero text, turning very slowly. It is ray traced in the fragment shader, so the fracture edges stay sharp at any size. A bone key light draws the highlights, violet and cyan lamps behind the piece glint through its thin edges, and the pointer carries the key light. Reduced motion draws one still frame.
+
+The additive enum migration `20261117_120000_add_obsidian_shard` was applied at the user's request to make the theme selectable.
+
+Open points: the mobile layout and performance on weaker GPUs have not been verified, and the conchoidal ripples on the fracture faces are barely visible.
+

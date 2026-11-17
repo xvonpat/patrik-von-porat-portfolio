@@ -86,6 +86,7 @@ Perceived speed, immediate response, and minimal layout shift are essential to a
 The homepage hero employs a multi-theme interactive 3D WebGL sculpture engine (`DigitalSculpture`) positioned as a non-intrusive backdrop:
 - **Harmonic Nexus** (Default): 3D cymatic guitar strings and a particle attractor around an obsidian core beside the hero text.
 - **Ferrofluid Pickup**: Gloss-black magnetic fluid rising in six spike crowns over the pole pieces of a guitar pickup; the fluid stays black and is lit only by violet, cyan and bone reflections.
+- **Obsidian Shard**: One tall piece of black volcanic glass with sharp fracture faces, lit like a product photograph; a bone key light draws the highlights and violet and cyan lamps glint through its thin edges.
 - **Chladni Plate**: Sand settling into vibration figures on a plate; bone-white resting grains with cyan/violet accents.
 - **Ink in Water**: Violet, cyan and rose ink drops blooming and dissolving in still water.
 - **Contour Flow**: Dark river-valley survey drawn as hundreds of hair-thin elevation lines; deep teal hills, a luminous cyan river, sparse rose contours, slow downhill drift and a soft pulse along the valley.

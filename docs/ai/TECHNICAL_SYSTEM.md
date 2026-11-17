@@ -65,7 +65,7 @@ Before performing technical work, inspect the repository rather than relying on 
 - **`admin-links` collection**: Shortcut links shown in the admin.
 - **`media` collection**: Uploaded images and media records.
 - **`users` collection**: Authenticated administrative users.
-- **`site-settings` global**: Configurable site-wide settings including `homepageBackground` (`harmonic-nexus`, `ferrofluid-pickup`, `chladni-plate`, `ink-in-water`, `contour-flow`, `alpine-landscape`) with 1-click dashboard controls.
+- **`site-settings` global**: Configurable site-wide settings including `homepageBackground` (`harmonic-nexus`, `ferrofluid-pickup`, `obsidian-shard`, `chladni-plate`, `ink-in-water`, `contour-flow`, `alpine-landscape`) with 1-click dashboard controls.
 
 ### Repository-managed (Static code)
 - Homepage structure and copy (`src/app/(app)/page.js`)
@@ -136,10 +136,10 @@ The `site-settings` Global (`src/globals/SiteSettings.ts`) controls site-wide ru
 
 | Field | Type | Options / Purpose |
 | --- | --- | --- |
-| `homepageBackground` | Select | `harmonic-nexus` (Default), `ferrofluid-pickup`, `chladni-plate`, `ink-in-water`, `contour-flow`, `alpine-landscape`. Governs the active WebGL background sculpture. |
+| `homepageBackground` | Select | `harmonic-nexus` (Default), `ferrofluid-pickup`, `obsidian-shard`, `chladni-plate`, `ink-in-water`, `contour-flow`, `alpine-landscape`. Governs the active WebGL background sculpture. |
 
 - An interactive admin dashboard card (`src/components/BackgroundThemeDashboardCard.js`) is mounted in the Payload Admin Dashboard, enabling 1-click theme switching with preview thumbnails without requiring a code deployment or rebuild.
-- The homepage query (`src/app/(app)/page.js`) fetches the active theme via the Payload Local API with a 60-second revalidation window (`revalidate = 60`), with query-parameter overrides supported for immediate testing (`?theme=nexus`, `?theme=ferrofluid`, `?theme=chladni`, `?theme=ink`, `?theme=flow`, `?theme=alpine`).
+- The homepage query (`src/app/(app)/page.js`) fetches the active theme via the Payload Local API with a 60-second revalidation window (`revalidate = 60`), with query-parameter overrides supported for immediate testing (`?theme=nexus`, `?theme=ferrofluid`, `?theme=obsidian`, `?theme=chladni`, `?theme=ink`, `?theme=flow`, `?theme=alpine`).
 
 ### Blog query behavior
 - Public queries query only published posts (`where: { status: { equals: 'published' } }`).
@@ -159,6 +159,7 @@ The hero section background runs a custom Three.js WebGL rendering engine (`src/
 - **Theme Registry (`settings.js`)**:
   - `harmonic-nexus` (Default): 3D cymatic guitar strings and a particle attractor around an obsidian core (`harmonic-nexus/scene.js`).
   - `ferrofluid-pickup`: Gloss-black magnetic fluid over the six pole pieces of a guitar pickup. The surface is a height field evaluated in the vertex shader (a mound per pole plus a hexagonal crown of spikes centred on each magnet); normals are derived per pixel from the same function and the fluid is shaded purely by reflected softboxes. The pointer acts as a seventh magnet (`ferrofluid/scene.js`). Mobile layout and performance are not yet verified.
+  - `obsidian-shard`: One piece of volcanic glass ray traced per pixel in a full-screen fragment shader (a convex solid cut by sixteen fracture planes, with refraction, one internal bounce and absorption). The pointer carries the key light and turns the piece slightly (`obsidian/scene.js`). Mobile layout and performance are not yet verified.
   - `chladni-plate`: Sand on a vibrating plate settling into nodal-line figures, one tone at a time; CPU simulation drawn as three.js points (`chladni/scene.js`).
   - `ink-in-water`: GPU stable-fluids simulation with ink drops blooming in still water; needs half-float render targets, otherwise the background hides itself (`ink/scene.js`).
   - `contour-flow`: River-valley survey. Terrain is evaluated in the vertex shader (meandering channel + rolling fbm hills) and contour lines are drawn per pixel from the interpolated height with `fwidth` anti-aliasing, so they stay hair-thin at any density (`contour/scene.js`). Lines drift slowly downhill and a pulse travels along the valley.

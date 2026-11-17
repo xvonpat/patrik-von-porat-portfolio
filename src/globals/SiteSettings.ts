@@ -27,6 +27,10 @@ export const SiteSettings: GlobalConfig = {
           value: 'ferrofluid-pickup',
         },
         {
+          label: 'Obsidian Shard (Volcanic Glass)',
+          value: 'obsidian-shard',
+        },
+        {
           label: 'Chladni Plate (Sand Settling into Vibration Patterns)',
           value: 'chladni-plate',
         },

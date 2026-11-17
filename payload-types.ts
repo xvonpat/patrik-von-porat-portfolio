@@ -765,6 +765,7 @@ export interface SiteSetting {
   homepageBackground:
     | 'harmonic-nexus'
     | 'ferrofluid-pickup'
+    | 'obsidian-shard'
     | 'chladni-plate'
     | 'ink-in-water'
     | 'contour-flow'

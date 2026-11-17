@@ -32,6 +32,16 @@ const THEMES = [
     previewQuery: 'ferrofluid',
   },
   {
+    id: 'obsidian-shard',
+    title: 'Obsidian Shard',
+    subtitle: 'Option I: Volcanic Glass, Lit Like a Product Photograph',
+    badge: 'Obsidian',
+    description:
+      'One tall piece of black volcanic glass with sharp fracture faces, turning very slowly beside the hero text. A bone key light draws the highlights while violet and cyan lamps behind the piece glint through its thin edges. The pointer carries the key light.',
+    features: ['Ray-traced glass', 'Violet and cyan edge glints', 'Pointer moves the light', 'Still frame for reduced motion'],
+    previewQuery: 'obsidian',
+  },
+  {
     id: 'chladni-plate',
     title: 'Chladni Plate',
     subtitle: 'Option F — Sand on a Vibrating Plate',
