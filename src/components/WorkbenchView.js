@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import styles from './WorkbenchView.module.css';
+import WorkbenchGalleryModal from './WorkbenchGalleryModal';
 
 export function WorkbenchView() {
   const [config, setConfig] = useState(null);
@@ -14,6 +15,10 @@ export function WorkbenchView() {
   // Input state
   const [note, setNote] = useState('');
   const [image, setImage] = useState(null);
+  const [selectedImages, setSelectedImages] = useState([]);
+  const [isGalleryModalOpen, setIsGalleryModalOpen] = useState(false);
+  const [featuredImageKey, setFeaturedImageKey] = useState(null);
+  const [attachGalleryImage, setAttachGalleryImage] = useState(true);
   const [imageAlt, setImageAlt] = useState('');
   const [customInstructions, setCustomInstructions] = useState('');
   const [showRules, setShowRules] = useState(false);
@@ -34,6 +39,9 @@ export function WorkbenchView() {
   const [draftSeoTitle, setDraftSeoTitle] = useState('');
   const [draftMetaDesc, setDraftMetaDesc] = useState('');
   const [formatAdvice, setFormatAdvice] = useState('');
+  const [socialCaptions, setSocialCaptions] = useState(null);
+  const [clarificationQuestion, setClarificationQuestion] = useState('');
+  const [copiedPlatform, setCopiedPlatform] = useState(null);
   const [attachImage, setAttachImage] = useState(true);
 
   // Status & loading
@@ -65,45 +73,92 @@ export function WorkbenchView() {
     loadConfig();
   }, []);
 
-  // Handle file selection
+  // Handle file selection (from device)
   const handleFileChange = (e) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+    const files = Array.from(e.target.files || []);
+    if (files.length === 0) return;
 
-    if (!file.type.startsWith('image/')) {
-      setError('Please select an image file (JPEG, PNG, WebP).');
+    const validFiles = files.filter((f) => f.type.startsWith('image/'));
+    if (validFiles.length === 0) {
+      setError('Please select valid image files (JPEG, PNG, WebP).');
       return;
     }
 
-    const reader = new FileReader();
-    reader.onload = () => {
-      setImage(reader.result);
-      setError(null);
-      if (!imageAlt) {
-        setImageAlt(file.name.replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' '));
-      }
-    };
-    reader.readAsDataURL(file);
-  };
+    validFiles.forEach((file) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const id = `upload-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`;
+        const title = file.name.replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' ');
+        setSelectedImages((prev) => {
+          const next = [
+            ...prev,
+            {
+              id,
+              source: 'upload',
+              title,
+              filename: file.name,
+              dataUrl: reader.result,
+              thumb: reader.result,
+              alt: title,
+            },
+          ];
+          setFeaturedImageKey((curr) => curr || id);
+          return next;
+        });
+        setImage(reader.result); // backward compatibility
+      };
+      reader.readAsDataURL(file);
+    });
 
-  const handleRemoveImage = () => {
-    setImage(null);
-    setImageAlt('');
+    setError(null);
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
   };
 
+  const handleConfirmGallerySelection = (newGalleryItems) => {
+    setSelectedImages((prev) => {
+      const uploads = prev.filter((img) => img.source === 'upload');
+      const merged = [...uploads, ...newGalleryItems];
+      setFeaturedImageKey((curr) => {
+        if (curr && merged.some((i) => (i.id || i.src) === curr)) return curr;
+        return merged[0]?.id || merged[0]?.src || null;
+      });
+      return merged;
+    });
+  };
+
+  const handleRemoveImage = (imgKey) => {
+    setSelectedImages((prev) => {
+      const filtered = prev.filter((img) => (img.id || img.src) !== imgKey);
+      setFeaturedImageKey((curr) => {
+        if (curr === imgKey) {
+          return filtered[0]?.id || filtered[0]?.src || null;
+        }
+        return curr;
+      });
+      return filtered;
+    });
+  };
+
+  const handleSetFeatured = (imgKey) => {
+    setFeaturedImageKey(imgKey);
+  };
+
   // 1. Get Suggestions
   const handleGetSuggestions = async (e) => {
     e?.preventDefault();
-    if (!note.trim() && !image) {
-      setError('Please add a short note, an image, or both.');
+    if (!note.trim() && selectedImages.length === 0) {
+      setError('Please add a short note, choose photo(s) from the gallery, upload an image, or both.');
       return;
     }
 
     setLoading(true);
-    setLoadingMessage('Analyzing material and generating 3 distinct story angles...');
+    setLoadingMessage(
+      selectedImages.length > 1
+        ? `Analyzing note and ${selectedImages.length} images for 3 story angles...`
+        : 'Analyzing material and generating 3 distinct story angles...'
+    );
     setError(null);
 
     try {
@@ -112,7 +167,7 @@ export function WorkbenchView() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           note,
-          image,
+          images: selectedImages,
           customInstructions,
         }),
       });
@@ -147,7 +202,7 @@ export function WorkbenchView() {
         body: JSON.stringify({
           suggestion,
           note,
-          image,
+          images: selectedImages,
           userClarification,
           customInstructions,
         }),
@@ -167,7 +222,10 @@ export function WorkbenchView() {
       setDraftSeoTitle(d.seoTitle || d.title || suggestion.title);
       setDraftMetaDesc(d.metaDescription || d.excerpt || '');
       setFormatAdvice(d.formatAdvice || '');
-      setAttachImage(false); // Point 3: Unchecked by default
+      setSocialCaptions(d.socialCaptions || null);
+      setClarificationQuestion(d.clarificationQuestion || '');
+      setAttachImage(false); // Unchecked by default
+      setAttachGalleryImage(true); // Default true since gallery image already exists on site
       setStep('draft');
     } catch (err) {
       setError(err.message);
@@ -193,6 +251,12 @@ export function WorkbenchView() {
         .map((t) => t.trim())
         .filter(Boolean);
 
+      // Determine featured gallery image and upload image
+      const featuredImg = selectedImages.find((img) => (img.id || img.src) === featuredImageKey) || selectedImages[0];
+      const isGalleryFeatured = featuredImg?.source === 'gallery';
+      const galleryImg = isGalleryFeatured ? featuredImg : selectedImages.find((i) => i.source === 'gallery');
+      const uploadImg = !isGalleryFeatured && featuredImg?.source === 'upload' ? featuredImg : selectedImages.find((i) => i.source === 'upload');
+
       const res = await fetch('/api/workbench/save-draft', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -204,9 +268,12 @@ export function WorkbenchView() {
           tags: tagsArray,
           seoTitle: draftSeoTitle,
           metaDescription: draftMetaDesc,
-          attachImage: Boolean(attachImage && image),
-          image: attachImage ? image : null,
-          imageAlt,
+          attachImage: Boolean(attachImage && uploadImg?.dataUrl),
+          image: attachImage && uploadImg?.dataUrl ? uploadImg.dataUrl : null,
+          imageAlt: imageAlt || uploadImg?.title || draftTitle,
+          galleryImageId: galleryImg?.payloadId || null,
+          galleryImageSrc: galleryImg?.src || null,
+          attachGalleryImage: Boolean(attachGalleryImage && galleryImg),
         }),
       });
 
@@ -224,13 +291,30 @@ export function WorkbenchView() {
     }
   };
 
+  const handleCopyText = (text, platform) => {
+    if (!text) return;
+    if (typeof navigator !== 'undefined' && navigator.clipboard) {
+      navigator.clipboard.writeText(text);
+      setCopiedPlatform(platform);
+      setTimeout(() => {
+        setCopiedPlatform(null);
+      }, 2000);
+    }
+  };
+
   const handleReset = () => {
     setNote('');
-    handleRemoveImage();
+    setSelectedImages([]);
+    setImage(null);
+    setImageAlt('');
+    setFeaturedImageKey(null);
     setSuggestions([]);
     setSelectedSuggestion(null);
     setUserClarification('');
     setSavedPost(null);
+    setSocialCaptions(null);
+    setClarificationQuestion('');
+    setCopiedPlatform(null);
     setError(null);
     setStep('input');
   };
@@ -391,21 +475,135 @@ export function WorkbenchView() {
           </div>
 
           <div className={styles.formGroup}>
-            <label className={styles.label}>
-              Photo from the workbench
-              <span className={styles.subLabel}>(Optional — private until you explicitly save)</span>
-            </label>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.45rem' }}>
+              <label className={styles.label} style={{ margin: 0 }}>
+                Photos from the Workbench
+                <span className={styles.subLabel}>
+                  ({selectedImages.length} selected — choose from existing gallery, upload, or both)
+                </span>
+              </label>
+            </div>
 
-            {!image ? (
+            {/* Action Buttons: Choose from Gallery & Upload */}
+            <div className={styles.imageActionsRow}>
+              <button
+                type="button"
+                className={styles.galleryBtn}
+                onClick={() => setIsGalleryModalOpen(true)}
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                  <circle cx="8.5" cy="8.5" r="1.5" />
+                  <polyline points="21 15 16 10 5 21" />
+                </svg>
+                Choose from Photo Gallery
+                {selectedImages.filter((i) => i.source === 'gallery').length > 0 && (
+                  <span
+                    style={{
+                      background: '#a855f7',
+                      color: '#ffffff',
+                      fontSize: '11px',
+                      padding: '1px 6px',
+                      borderRadius: '10px',
+                      marginLeft: '2px',
+                    }}
+                  >
+                    {selectedImages.filter((i) => i.source === 'gallery').length}
+                  </span>
+                )}
+              </button>
+
+              <button
+                type="button"
+                className={styles.uploadBtn}
+                onClick={() => fileInputRef.current?.click()}
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="17 8 12 3 7 8" />
+                  <line x1="12" y1="3" x2="12" y2="15" />
+                </svg>
+                Upload from Device
+              </button>
+            </div>
+
+            {/* Selected Images Grid */}
+            {selectedImages.length > 0 && (
+              <div>
+                <div className={styles.selectedImagesGrid}>
+                  {selectedImages.map((img) => {
+                    const key = img.id || img.src;
+                    const isFeatured = featuredImageKey === key;
+
+                    return (
+                      <div
+                        key={key}
+                        className={`${styles.selectedImageCard} ${isFeatured ? styles.isFeatured : ''}`}
+                      >
+                        <button
+                          type="button"
+                          className={styles.removeImageCardBtn}
+                          onClick={() => handleRemoveImage(key)}
+                          title="Remove image"
+                        >
+                          ✕
+                        </button>
+
+                        <div className={styles.selectedImageThumbWrapper}>
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={img.thumb || img.src || img.dataUrl}
+                            alt={img.title || 'Selected photo'}
+                            className={styles.selectedImageThumb}
+                          />
+                        </div>
+
+                        <div className={styles.selectedImageMeta}>
+                          <div className={styles.selectedImageTitle} title={img.title}>
+                            {img.title || 'Photo'}
+                          </div>
+
+                          <div className={styles.selectedImageBadgeRow}>
+                            <span
+                              className={`${styles.sourceBadge} ${
+                                img.source === 'gallery' ? styles.sourceBadgeGallery : styles.sourceBadgeUpload
+                              }`}
+                            >
+                              {img.source === 'gallery' ? 'Gallery' : 'Upload'}
+                            </span>
+
+                            <button
+                              type="button"
+                              onClick={() => handleSetFeatured(key)}
+                              className={`${styles.featuredStarBtn} ${isFeatured ? styles.featuredStarBtnActive : ''}`}
+                              title={isFeatured ? 'Primary featured photo' : 'Click to make this the featured photo'}
+                            >
+                              {isFeatured ? '★ Featured' : '☆ Set featured'}
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                <div style={{ fontSize: '12px', color: '#a1a1aa', marginBottom: '0.75rem' }}>
+                  💡 <em>Click <strong>Set featured</strong> on any image to use it as the main header photo for the resulting post.</em>
+                </div>
+              </div>
+            )}
+
+            {/* Drop Zone fallback when no images selected yet */}
+            {selectedImages.length === 0 && (
               <div
                 className={styles.dropZone}
                 onClick={() => fileInputRef.current?.click()}
                 onDragOver={(e) => e.preventDefault()}
                 onDrop={(e) => {
                   e.preventDefault();
-                  const file = e.dataTransfer.files?.[0];
-                  if (file) {
-                    const fakeEvent = { target: { files: [file] } };
+                  const files = Array.from(e.dataTransfer.files || []);
+                  if (files.length > 0) {
+                    const fakeEvent = { target: { files } };
                     handleFileChange(fakeEvent);
                   }
                 }}
@@ -417,48 +615,22 @@ export function WorkbenchView() {
                     <polyline points="21 15 16 10 5 21" />
                   </svg>
                 </div>
-                <p className={styles.dropZoneText}>Tap to choose a photo or drag and drop</p>
-                <p className={styles.dropZoneSubtext}>Supports camera snapshots from your phone (JPG, PNG, WebP)</p>
-              </div>
-            ) : (
-              <div>
-                <div className={styles.previewContainer}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={image} alt="Preview" className={styles.previewImage} />
-                  <button
-                    type="button"
-                    onClick={handleRemoveImage}
-                    className={styles.removeImageBtn}
-                    title="Remove image"
-                  >
-                    ✕
-                  </button>
-                </div>
-                <div style={{ marginTop: '0.65rem' }}>
-                  <label className={styles.label} htmlFor="img-alt">
-                    Image description / label
-                  </label>
-                  <input
-                    id="img-alt"
-                    type="text"
-                    className={styles.input}
-                    value={imageAlt}
-                    onChange={(e) => setImageAlt(e.target.value)}
-                    placeholder="e.g. Eddie 3D print sanded parts"
-                  />
-                </div>
+                <p className={styles.dropZoneText}>Tap to choose photos from device or drag & drop</p>
+                <p className={styles.dropZoneSubtext}>You can also click &ldquo;Choose from Photo Gallery&rdquo; above to select existing work</p>
               </div>
             )}
+
             <input
               ref={fileInputRef}
               type="file"
+              multiple
               accept="image/*"
               className={styles.hiddenFileInput}
               onChange={handleFileChange}
             />
             <p className={styles.privacyNote}>
               🔒 Privacy notice: Submitted notes and photos are transmitted securely to OpenAI via the server-side API
-              for multimodal analysis. They are NOT saved to website media storage during suggestion generation.
+              for multimodal analysis. Unattached images are NOT published or saved to website media storage.
             </p>
           </div>
 
@@ -469,17 +641,39 @@ export function WorkbenchView() {
               className={styles.accordionHeader}
               onClick={() => setShowRules(!showRules)}
             >
-              <span>Writing Style Directives & Context</span>
+              <span>Writing Editor Context &amp; Voice Preservation</span>
               <span>{showRules ? '▲' : '▼'}</span>
             </button>
             {showRules && (
               <div className={styles.accordionBody}>
+                {config?.voicePreservationPrinciple && (
+                  <div className={styles.principleBanner}>
+                    <div className={styles.principleTitle}>
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                      </svg>
+                      Voice Preservation Principle
+                    </div>
+                    <p className={styles.principleText}>
+                      &ldquo;{config.voicePreservationPrinciple}&rdquo;
+                    </p>
+                  </div>
+                )}
+
+                <div style={{ fontWeight: 600, fontSize: '11px', color: '#a1a1aa', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.45rem' }}>
+                  Global Writing Rules
+                </div>
                 <ul className={styles.ruleList}>
                   {config?.startingRules?.map((rule, idx) => (
                     <li key={idx}>{rule}</li>
                   ))}
                 </ul>
-                <div style={{ marginTop: '0.75rem' }}>
+
+                <p className={styles.priorityNote}>
+                  <strong>Hierarchy:</strong> Source Facts &gt; Voice Preservation &gt; Global Context &gt; Session Directives &gt; Platform Limits
+                </p>
+
+                <div style={{ marginTop: '0.95rem' }}>
                   <label className={styles.label} htmlFor="custom-instructions">
                     Session Directives (Optional override for this prompt)
                   </label>
@@ -487,10 +681,13 @@ export function WorkbenchView() {
                     id="custom-instructions"
                     type="text"
                     className={styles.input}
-                    placeholder="e.g. Focus on the chemical properties of Vallejo primer..."
+                    placeholder="e.g. Adapt as an Instagram caption, focus on why I rebuilt the mesh..."
                     value={customInstructions}
                     onChange={(e) => setCustomInstructions(e.target.value)}
                   />
+                  <p className={styles.directivesHelp}>
+                    Use session directives to specify tone, platform, length, or angle. They complement the global context and cannot override facts or the Voice Preservation Principle.
+                  </p>
                 </div>
               </div>
             )}
@@ -522,6 +719,36 @@ export function WorkbenchView() {
       {/* STEP 2: Suggestions Phase */}
       {step === 'suggestions' && (
         <div>
+          {selectedImages.length > 0 && (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1rem', overflowX: 'auto', paddingBottom: '4px' }}>
+              <span style={{ fontSize: '12px', color: '#a1a1aa', whiteSpace: 'nowrap' }}>
+                Referenced Photos ({selectedImages.length}):
+              </span>
+              {selectedImages.map((img) => (
+                <div
+                  key={img.id || img.src}
+                  style={{
+                    width: '44px',
+                    height: '44px',
+                    borderRadius: '6px',
+                    overflow: 'hidden',
+                    flexShrink: 0,
+                    border: '1px solid rgba(255, 255, 255, 0.15)',
+                    backgroundColor: '#18181b',
+                  }}
+                  title={img.title}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={img.thumb || img.src || img.dataUrl}
+                    alt={img.title || 'Selected photo'}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  />
+                </div>
+              ))}
+            </div>
+          )}
+
           {observations && (
             <div className={styles.card} style={{ marginBottom: '1rem', padding: '1rem 1.25rem' }}>
               <div style={{ fontSize: '12px', textTransform: 'uppercase', color: '#a1a1aa', fontWeight: 600, letterSpacing: '0.05em' }}>
@@ -626,6 +853,22 @@ export function WorkbenchView() {
             </button>
           </div>
 
+          {clarificationQuestion && (
+            <div className={styles.clarificationBanner}>
+              <div className={styles.clarificationHeader}>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                  <line x1="12" y1="9" x2="12" y2="13" />
+                  <line x1="12" y1="17" x2="12.01" y2="17" />
+                </svg>
+                Craft Clarification Note
+              </div>
+              <p style={{ margin: 0 }}>
+                {clarificationQuestion}
+              </p>
+            </div>
+          )}
+
           {formatAdvice && (
             <div className={styles.formatAdviceBox}>
               <strong>Format guidance:</strong> {formatAdvice}
@@ -703,19 +946,129 @@ export function WorkbenchView() {
             />
           </div>
 
-          {image && (
-            <div className={styles.formGroup} style={{ background: 'rgba(255, 255, 255, 0.02)', padding: '0.85rem 1rem', borderRadius: '6px', border: '1px solid rgba(255, 255, 255, 0.08)' }}>
+          {/* Social Media Adaptations */}
+          {socialCaptions && (socialCaptions.instagram || socialCaptions.x) && (
+            <div className={styles.socialSection}>
+              <div className={styles.socialTitle}>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <circle cx="18" cy="5" r="3" />
+                  <circle cx="6" cy="12" r="3" />
+                  <circle cx="18" cy="19" r="3" />
+                  <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+                  <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+                </svg>
+                Platform-Adapted Social Captions
+              </div>
+              <div className={styles.socialGrid}>
+                {socialCaptions.instagram && (
+                  <div className={styles.socialCard}>
+                    <div>
+                      <div className={styles.socialHeader}>
+                        <span className={styles.platformPill}>
+                          <span>📸</span> Instagram
+                        </span>
+                        <span className={styles.charCount}>
+                          {socialCaptions.instagram.length} chars
+                        </span>
+                      </div>
+                      <div className={styles.socialBody}>
+                        {socialCaptions.instagram}
+                      </div>
+                    </div>
+                    <button
+                      type="button"
+                      className={`${styles.copyBtn} ${copiedPlatform === 'instagram' ? styles.copyBtnCopied : ''}`}
+                      onClick={() => handleCopyText(socialCaptions.instagram, 'instagram')}
+                    >
+                      {copiedPlatform === 'instagram' ? '✓ Copied!' : 'Copy Caption'}
+                    </button>
+                  </div>
+                )}
+
+                {socialCaptions.x && (
+                  <div className={styles.socialCard}>
+                    <div>
+                      <div className={styles.socialHeader}>
+                        <span className={styles.platformPill}>
+                          <span>𝕏</span> X (Twitter)
+                        </span>
+                        <span className={`${styles.charCount} ${socialCaptions.x.length <= 280 ? styles.charCountValid : ''}`}>
+                          {socialCaptions.x.length} / 280
+                        </span>
+                      </div>
+                      <div className={styles.socialBody}>
+                        {socialCaptions.x}
+                      </div>
+                    </div>
+                    <button
+                      type="button"
+                      className={`${styles.copyBtn} ${copiedPlatform === 'x' ? styles.copyBtnCopied : ''}`}
+                      onClick={() => handleCopyText(socialCaptions.x, 'x')}
+                    >
+                      {copiedPlatform === 'x' ? '✓ Copied!' : 'Copy Post'}
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* Option A: Gallery Image attachment */}
+          {selectedImages.some((i) => i.source === 'gallery') && (
+            <div
+              className={styles.formGroup}
+              style={{
+                background: 'rgba(168, 85, 247, 0.06)',
+                padding: '0.85rem 1rem',
+                borderRadius: '6px',
+                border: '1px solid rgba(168, 85, 247, 0.25)',
+                marginBottom: '1.25rem',
+              }}
+            >
+              <label className={styles.checkboxLabel}>
+                <input
+                  type="checkbox"
+                  checked={attachGalleryImage}
+                  onChange={(e) => setAttachGalleryImage(e.target.checked)}
+                />
+                <span>
+                  Set photo from gallery as Post Featured Image:{' '}
+                  <strong>
+                    {selectedImages.find((i) => i.source === 'gallery' && (i.id || i.src) === featuredImageKey)?.title ||
+                      selectedImages.find((i) => i.source === 'gallery')?.title ||
+                      'Gallery Image'}
+                  </strong>
+                </span>
+              </label>
+              <div style={{ marginTop: '0.35rem', fontSize: '12px', color: '#a1a1aa', paddingLeft: '1.5rem' }}>
+                ✓ Direct reference to existing photo gallery asset. No duplicate storage upload needed.
+              </div>
+            </div>
+          )}
+
+          {/* Option B: Uploaded Image attachment */}
+          {selectedImages.some((i) => i.source === 'upload') && (
+            <div
+              className={styles.formGroup}
+              style={{
+                background: 'rgba(255, 255, 255, 0.02)',
+                padding: '0.85rem 1rem',
+                borderRadius: '6px',
+                border: '1px solid rgba(255, 255, 255, 0.08)',
+                marginBottom: '1.25rem',
+              }}
+            >
               <label className={styles.checkboxLabel}>
                 <input
                   type="checkbox"
                   checked={attachImage}
                   onChange={(e) => setAttachImage(e.target.checked)}
                 />
-                Attach submitted image as post Featured Image (Unchecked by default)
+                Upload submitted photo from device as post Featured Image (Unchecked by default)
               </label>
 
               <div style={{ marginTop: '0.45rem', fontSize: '13px', color: '#fbbf24', lineHeight: 1.45, paddingLeft: '1.5rem' }}>
-                ⚠️ <strong>Media storage notice:</strong> Attaching this image uploads it to the website&apos;s public media storage (Supabase S3 bucket). The direct image asset URL may be publicly accessible on the web even while this post remains an unpublished draft.
+                ⚠️ <strong>Media storage notice:</strong> Attaching this uploaded image uploads it to the website&apos;s public media storage (Supabase S3 bucket).
               </div>
 
               {attachImage && (
@@ -805,6 +1158,16 @@ export function WorkbenchView() {
             </Link>
           </div>
         </div>
+      )}
+
+      {/* Gallery Modal Picker */}
+      {isGalleryModalOpen && (
+        <WorkbenchGalleryModal
+          isOpen={isGalleryModalOpen}
+          onClose={() => setIsGalleryModalOpen(false)}
+          selectedImages={selectedImages.filter((i) => i.source === 'gallery')}
+          onConfirmSelection={handleConfirmGallerySelection}
+        />
       )}
     </div>
   );

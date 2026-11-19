@@ -31,6 +31,8 @@ export async function POST(req) {
     attachImage = false,
     image = null,
     imageAlt = '',
+    galleryImageId = null,
+    attachGalleryImage = true,
   } = body;
 
   // 3. Validate post title
@@ -148,17 +150,33 @@ export async function POST(req) {
     }
   }
 
-  // 7. Convert Markdown content to Payload Lexical AST
+  // 7. Resolve gallery image relation if attached
+  let resolvedGalleryImageId = null;
+  if (attachGalleryImage && galleryImageId) {
+    try {
+      const found = await payload.findByID({
+        collection: 'gallery-images',
+        id: galleryImageId,
+      });
+      if (found?.id) {
+        resolvedGalleryImageId = found.id;
+      }
+    } catch (gErr) {
+      console.warn('[Workbench SaveDraft] Could not resolve galleryImage by ID:', gErr?.message);
+    }
+  }
+
+  // 8. Convert Markdown content to Payload Lexical AST
   const lexicalContent = markdownToLexical(contentMarkdown);
 
-  // 8. Format tags array
+  // 9. Format tags array
   const formattedTags = Array.isArray(tags)
     ? tags
         .filter((t) => typeof t === 'string' && t.trim() !== '')
         .map((t) => ({ tag: t.trim() }))
     : [];
 
-  // 9. Create the post in Payload CMS with status 'draft'
+  // 10. Create the post in Payload CMS with status 'draft'
   // CRITICAL SECURITY RULE: status is always strictly 'draft'.
   // This project uses status ('draft' | 'published') for publication control.
   // Draft posts are filtered out of all public routes (blog, home, sitemap, slug).
@@ -174,6 +192,7 @@ export async function POST(req) {
         tags: formattedTags,
         status: 'draft', // Strictly 'draft'. Never published automatically.
         featuredImage: featuredImageId || undefined,
+        galleryImage: resolvedGalleryImageId || undefined,
         seo: {
           seoTitle: seoTitle.trim() || cleanTitle,
           metaDescription: metaDescription.trim() || excerpt.trim() || undefined,

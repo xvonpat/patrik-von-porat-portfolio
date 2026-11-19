@@ -35,13 +35,15 @@ export async function GET(req) {
     ];
   }
 
-  const isApiKeyConfigured = Boolean(process.env.OPENAI_API_KEY && process.env.OPENAI_API_KEY.trim() !== '');
+  const resolvedApiKey = process.env.OPENAI_API_KEY || process.env.openai_api_key;
+  const isApiKeyConfigured = Boolean(resolvedApiKey && resolvedApiKey.trim() !== '');
 
   return NextResponse.json({
     status: 'ok',
     isApiKeyConfigured,
     requiredEnvVar: 'OPENAI_API_KEY',
     activeModel: process.env.OPENAI_MODEL || WORKBENCH_DEFAULT_CONFIG.defaultModel,
+    voicePreservationPrinciple: WORKBENCH_DEFAULT_CONFIG.voicePreservationPrinciple,
     startingRules: WORKBENCH_DEFAULT_CONFIG.startingRules,
     projectKnowledge: WORKBENCH_DEFAULT_CONFIG.projectKnowledge,
     fewShotExamples: WORKBENCH_DEFAULT_CONFIG.fewShotExamples,

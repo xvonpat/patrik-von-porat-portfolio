@@ -75,29 +75,52 @@ export async function GET(request) {
 
     // 4. Resolve the user in the Payload database
     const payload = await getPayload({ config: configPromise });
-    const userList = await payload.find({
-      collection: 'users',
-      where: {
-        email: {
-          equals: email,
-        },
-      },
-    });
-
-    let user = userList.docs[0];
-    if (!user) {
-      // Create user if they do not exist
-      user = await payload.create({
+    let user;
+    try {
+      const userList = await payload.find({
         collection: 'users',
-        data: {
-          email: email,
-          password: crypto.randomBytes(32).toString('hex'),
+        where: {
+          email: {
+            equals: email,
+          },
         },
       });
+      user = userList?.docs?.[0];
+    } catch (findErr) {
+      console.error('[Google OAuth] Error searching for user:', findErr);
+    }
+
+    if (!user) {
+      // Create user if they do not exist
+      try {
+        user = await payload.create({
+          collection: 'users',
+          data: {
+            email: email,
+            password: crypto.randomBytes(32).toString('hex'),
+          },
+        });
+      } catch (createErr) {
+        console.warn('[Google OAuth] Failed to create user with password, attempting without password:', createErr?.message);
+        user = await payload.create({
+          collection: 'users',
+          data: {
+            email: email,
+          },
+        });
+      }
+    }
+
+    if (!user || !user.id) {
+      throw new Error(`Failed to resolve or create admin user for email: ${email}`);
     }
 
     // 5. Generate a Payload-compatible authentication token (JWT) using 'jose'
-    const secretKey = new TextEncoder().encode(payload.secret);
+    const secret = payload.secret || payload.config?.secret || process.env.PAYLOAD_SECRET;
+    if (!secret) {
+      throw new Error('Missing Payload JWT secret configuration.');
+    }
+    const secretKey = new TextEncoder().encode(secret);
     const issuedAt = Math.floor(Date.now() / 1000);
     const exp = issuedAt + 60 * 60 * 24 * 7; // 7 days
 

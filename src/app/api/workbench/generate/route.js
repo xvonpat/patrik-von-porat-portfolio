@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server';
 import { verifyAdminAuth } from '@/lib/workbench/auth';
-import { WORKBENCH_DEFAULT_CONFIG } from '@/lib/workbench/styleConfig';
+import { WORKBENCH_DEFAULT_CONFIG, buildWorkbenchPromptInstructions } from '@/lib/workbench/styleConfig';
 import { parseResponsesApiResponse, logWorkbenchDiagnostics } from '@/lib/workbench/responsesParser';
+import { resolveWorkbenchImages } from '@/lib/workbench/imageHelper';
 
 export const maxDuration = 60;
 
@@ -15,7 +16,7 @@ export async function POST(req) {
   }
 
   // 2. Server-side API key check
-  const apiKey = process.env.OPENAI_API_KEY;
+  const apiKey = process.env.OPENAI_API_KEY || process.env.openai_api_key;
   if (!apiKey || apiKey.trim() === '') {
     return NextResponse.json(
       {
@@ -39,6 +40,7 @@ export async function POST(req) {
     suggestion,
     note = '',
     image = null,
+    images = [],
     userClarification = '',
     customInstructions = '',
   } = body;
@@ -54,46 +56,34 @@ export async function POST(req) {
     ? userClarification.trim().slice(0, MAX_CLARIFICATION_LENGTH)
     : '';
 
-  const hasImage = typeof image === 'string' && image.startsWith('data:image/');
+  const resolvedImages = await resolveWorkbenchImages(images, image, 6);
 
-  const instructions = `${WORKBENCH_DEFAULT_CONFIG.systemPrompt}
-
-WRITING STYLE RULES:
-${WORKBENCH_DEFAULT_CONFIG.startingRules.map((r, i) => `${i + 1}. ${r}`).join('\n')}
-
-FEW-SHOT EXAMPLES OF GOOD POSTS ON VONPORAT.COM:
-${WORKBENCH_DEFAULT_CONFIG.fewShotExamples
-  .map(
-    (ex, i) => `Example ${i + 1} (${ex.category}): "${ex.title}"
-Excerpt: ${ex.excerpt}
-Sample Body:
-${ex.bodySample}`
-  )
-  .join('\n\n')}
-
-${customInstructions ? `USER SESSION DIRECTIVES:\n${customInstructions.slice(0, 1000)}\n` : ''}
-
-Generate a complete, publishable draft adhering strictly to the json_schema.
-The content should be 3-6 paragraphs of substantial, authentic, first-person craft writing.
-Use natural paragraph breaks and optional ## subheadings where helpful.
-Do not use marketing superlatives. Ground the text in the observed realities and next steps.`;
+  const instructions = buildWorkbenchPromptInstructions({
+    mode: 'generate',
+    customInstructions,
+    suggestionFormat: suggestion.format,
+  });
 
   let promptText = `Please write the full content draft based on this selected suggestion:
 TITLE: ${suggestion.title}
-FORMAT: ${suggestion.format}
+TARGET FORMAT: ${suggestion.format || 'Blog Post'}
 ANGLE: ${suggestion.angle}
 CATEGORY: ${suggestion.suggestedCategory}
 TAGS: ${(suggestion.suggestedTags || []).join(', ')}
 
-SOURCE NOTE FROM PATRIK:
+SOURCE MATERIAL (OBSERVATIONS / THOUGHTS FROM PATRIK):
 "${note || 'Visual work in progress.'}"
 `;
 
   if (cleanClarification) {
-    promptText += `\nADDITIONAL CONTEXT / CLARIFICATION FROM PATRIK:\n"${cleanClarification}"\n`;
+    promptText += `\nADDITIONAL AUTHOR CLARIFICATION:\n"${cleanClarification}"\n`;
   }
 
-  promptText += `\nDraft the complete text in English. Ensure the tone is calm, personal, and focuses on what was done, what was noticed, and what comes next.`;
+  promptText += `\nDraft the complete text in English strictly following the Voice Preservation Principle:
+"When rewriting rough notes, improve clarity and readability without replacing the author's original thoughts, personality, or perspective. The goal is to make the author easier to understand, not to make them sound like someone else."
+
+Ensure the tone is calm, personal, and grounded. Focus on what was done, what was noticed/learned, and what comes next.
+Include platform-adapted captions for Instagram and X in the socialCaptions field without marketing hype, and note any critical clarification question in clarificationQuestion if essential facts are missing.`;
 
   const contentBlocks = [
     {
@@ -102,10 +92,10 @@ SOURCE NOTE FROM PATRIK:
     },
   ];
 
-  if (hasImage) {
+  for (const img of resolvedImages) {
     contentBlocks.push({
       type: 'input_image',
-      image_url: image,
+      image_url: img.openAiUrl,
     });
   }
 
@@ -130,7 +120,7 @@ SOURCE NOTE FROM PATRIK:
           properties: {
             title: {
               type: 'string',
-              description: 'Refined, polished title for the post or update.',
+              description: 'Natural, clear title for the post or update.',
             },
             excerpt: {
               type: 'string',
@@ -138,7 +128,7 @@ SOURCE NOTE FROM PATRIK:
             },
             contentMarkdown: {
               type: 'string',
-              description: 'The full draft body in markdown format with clear paragraphs and optional ## headings.',
+              description: 'The full draft body in markdown format with clear paragraphs and optional ## headings. Let the source material determine length and structure.',
             },
             suggestedCategory: {
               type: 'string',
@@ -159,7 +149,27 @@ SOURCE NOTE FROM PATRIK:
             },
             formatAdvice: {
               type: 'string',
-              description: 'Actionable note on how to use this draft if used outside the blog.',
+              description: 'Actionable note on format, length, or how to use this draft.',
+            },
+            socialCaptions: {
+              type: 'object',
+              description: 'Platform-adapted captions preserving the same voice and facts without marketing hype.',
+              properties: {
+                instagram: {
+                  type: 'string',
+                  description: 'Conversational caption for Instagram focused on the visual work with minimal tags and no promotional hype.',
+                },
+                x: {
+                  type: 'string',
+                  description: 'Short, direct post for X focusing on one clear observation or learning (within 280 characters).',
+                },
+              },
+              required: ['instagram', 'x'],
+              additionalProperties: false,
+            },
+            clarificationQuestion: {
+              type: 'string',
+              description: 'If essential information was missing that materially affects accuracy, a single focused follow-up question. Otherwise an empty string.',
             },
           },
           required: [
@@ -171,6 +181,8 @@ SOURCE NOTE FROM PATRIK:
             'seoTitle',
             'metaDescription',
             'formatAdvice',
+            'socialCaptions',
+            'clarificationQuestion',
           ],
           additionalProperties: false,
         },
